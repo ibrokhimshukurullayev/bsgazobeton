@@ -1,0 +1,104 @@
+#header {
+  height: 72px;
+  width: 100%;
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  background-color: #fff;
+  transition: 0.5;
+}
+
+// .navbar-shirnk {
+//   height: 70px;
+//   box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.1);
+// }
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  &__link {
+    color: rgb(54, 65, 79);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+  }
+  &__end,
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  &__phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0%;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    padding: 10px 16px 10px 12px;
+    background: rgb(220, 38, 38);
+  }
+  .lang-dropdown {
+    position: relative;
+    .circle-btn {
+      display: flex;
+      align-items: center;
+      padding: 10px 16px;
+      border-radius: 9999px;
+      gap: 8px;
+      background: rgb(244, 244, 245);
+      color: rgb(54, 65, 79);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0%;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .lang-options {
+      position: absolute;
+      top: 110%;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      overflow: hidden;
+      z-index: 20;
+      min-width: 60px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .lang-option {
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s;
+      &:hover {
+        background-color: #f5f5f5;
+      }
+      &.active {
+        font-weight: bold;
+        background-color: #e9e9e9;
+      }
+    }
+  }
+  .circle-btn {
+    color: rgb(54, 65, 79);
+    border-radius: 9999px;
+    padding: 10px;
+    background: rgb(244, 244, 245);
+  }
+}

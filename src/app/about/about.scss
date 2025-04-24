@@ -1,0 +1,99 @@
+#abouts {
+  padding: 70px 0 120px 0;
+  .abouts {
+    padding: 80px 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    &__title {
+      color: rgb(54, 65, 79);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0%;
+      text-align: left;
+      max-width: 927px;
+      span {
+        font-weight: 700;
+      }
+    }
+    .abouts__img {
+      //   max-width: 927px;
+      //   height: 490px;
+      border-radius: 16px;
+      margin: 36px 0 56px 0;
+    }
+    &__title__text {
+      color: rgb(17, 24, 39);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 0%;
+      text-align: left;
+      padding-bottom: 20px;
+    }
+    &__list {
+      max-width: 927px;
+      color: rgb(54, 65, 79);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0%;
+      text-align: left;
+      padding-bottom: 20px;
+    }
+    &__card {
+      padding: 24px;
+      border-radius: 16px;
+      background: rgb(243, 244, 246);
+      max-width: 927px;
+      margin: 56px 0 80px 0;
+    }
+    &__card__title {
+      color: rgb(220, 38, 38);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 0%;
+      text-align: left;
+    }
+    &__card__text {
+      color: rgb(54, 65, 79);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0%;
+      text-align: left;
+      max-width: 879px;
+      padding-top: 20px;
+    }
+  }
+  .abouts__cantact {
+    border-radius: 16px;
+    padding: 24px;
+    background: rgb(54, 65, 79);
+    h3 {
+      color: rgb(255, 255, 255);
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 32px;
+      letter-spacing: 0%;
+      text-align: left;
+      max-width: 880px;
+      padding-bottom: 24px;
+    }
+    button {
+      color: rgb(255, 255, 255);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: 0.4px;
+      text-align: center;
+      text-transform: uppercase;
+      border-radius: 12px;
+      box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1),
+        0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+      background: rgb(220, 38, 38);
+      padding: 16px 32px;
+    }
+  }
+}

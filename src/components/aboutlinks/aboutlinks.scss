@@ -1,0 +1,36 @@
+#aboutlink {
+  background: rgb(245, 245, 245);
+  padding: 48px 0;
+  .aboutlink {
+    &__link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      a,
+      p {
+        color: rgb(113, 113, 122);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: 0%;
+        text-align: left;
+      }
+      span {
+        color: rgb(212, 212, 216);
+        .icon {
+          width: 20px;
+        }
+      }
+    }
+    h2 {
+      color: rgb(39, 39, 42);
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 36px;
+      letter-spacing: 0%;
+      text-align: left;
+      text-transform: uppercase;
+      padding-top: 16px;
+    }
+  }
+}

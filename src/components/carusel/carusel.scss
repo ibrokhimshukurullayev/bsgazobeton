@@ -1,0 +1,61 @@
+.carusel {
+  position: relative;
+
+  .main-image {
+    position: relative;
+    height: 500px;
+
+    .carusel__img1 {
+      object-fit: cover;
+      border-radius: 12px !important;
+    }
+
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 27px;
+      backdrop-filter: blur(4px);
+      background: rgba(220, 38, 38, 0.8);
+      color: #fff;
+      border: none;
+      font-size: 21px;
+      cursor: pointer;
+      z-index: 10;
+      width: 52px;
+      height: 52px;
+      transition: background-color 0.3s ease;
+
+      &.left {
+        left: -22px;
+      }
+
+      &.right {
+        right: -22px;
+      }
+    }
+  }
+
+  .thumbnail-row {
+    display: flex;
+    margin-top: 10px;
+
+    .thumbnail {
+      width: 140px;
+      height: 90px;
+      margin: 5px;
+      cursor: pointer;
+      position: relative;
+      transition: 0.3s ease;
+
+      &.active {
+        opacity: 0.5;
+      }
+
+      .carusel__img2 {
+        border-radius: 8px !important;
+        object-fit: cover;
+      }
+    }
+  }
+}
