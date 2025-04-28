@@ -24,13 +24,16 @@
     }
     h2 {
       color: rgb(39, 39, 42);
-      font-size: 36px;
+      font-size: 28px;
       font-weight: 700;
       line-height: 36px;
       letter-spacing: 0%;
       text-align: left;
       text-transform: uppercase;
       padding-top: 16px;
+      @media (min-width: 700px) {
+        font-size: 36px;
+      }
     }
   }
 }

@@ -1,33 +1,32 @@
 #aboutSifat {
-  padding: 0 0 120px 0;
   .aboutSifat__text {
     color: rgb(54, 65, 79);
     font-size: 16px;
     font-weight: 400;
     line-height: 28px;
-    letter-spacing: 0%;
     text-align: left;
     max-width: 920px;
+
     span {
       font-weight: 700;
     }
   }
+
   .aboutSifat__carusel {
     h3 {
       color: rgb(17, 24, 39);
       font-size: 22px;
       font-weight: 700;
       line-height: 24px;
-      letter-spacing: 0%;
       text-align: left;
       padding-bottom: 20px;
     }
+
     p {
       color: rgb(54, 65, 79);
       font-size: 16px;
       font-weight: 400;
       line-height: 28px;
-      letter-spacing: 0%;
       text-align: left;
       max-width: 920px;
       padding-top: 20px;
@@ -36,7 +35,7 @@
 }
 
 .timeline-wrapper {
-  padding: 30px;
+  padding: 60px 0;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -51,7 +50,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  // gap: 30px;
 }
 
 .timeline-step {
@@ -88,21 +86,23 @@
   width: 2px;
   background-color: red;
   position: absolute;
-  top: 30px; // chiziq doiradan pastda boshlansin
-  height: calc(100% - 30px); // faqat kerakli joygacha cho‘zilsin
+  top: 30px;
+  height: calc(100% - 30px);
   left: 22px;
   z-index: 1;
 }
 
 .timeline-content {
   display: flex;
+  flex-direction: row;
+  // align-items: center;
+  gap: 20px;
 
   h3 {
     color: rgb(17, 24, 39);
     font-size: 16px;
     font-weight: 700;
     line-height: 28px;
-    letter-spacing: 0%;
     text-align: left;
   }
 
@@ -111,11 +111,66 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-    letter-spacing: 0%;
     text-align: left;
     max-width: 350px;
   }
+
   img {
     margin-bottom: 30px;
+  }
+}
+
+/* ========== RESPONSIVE (MOBILE) ========== */
+
+@media (max-width: 768px) {
+  .timeline-wrapper {
+    padding: 20px;
+  }
+
+  .timeline-step {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-bottom: 30px;
+  }
+
+  .timeline-left {
+    flex-direction: row;
+    align-items: center;
+    min-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .circle {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .timeline-content {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h3 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 22px;
+      max-width: 100%;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
   }
 }

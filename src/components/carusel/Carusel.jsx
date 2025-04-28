@@ -4,7 +4,7 @@ import { useState } from "react";
 import hero from "../../assets/images/hero.png";
 import "./carusel.scss";
 
-const images = [hero, hero, hero, hero, hero, hero];
+const images = [hero, hero];
 
 export default function Carusel() {
   const [current, setCurrent] = useState(0);

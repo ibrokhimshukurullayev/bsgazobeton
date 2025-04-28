@@ -10,9 +10,9 @@ const Hero = () => {
       <div className="container hero">
         <h2 className="hero__text">Kelajak uchun yaratilgan</h2>
         <h1 className="hero__title">
-          Gazobeton – Qulay <br />
+          Gazobeton – Ishonchli <br />
           <span>
-            <Image src={blok} /> Qurilish materiali!
+            <Image src={blok} alt="blok" /> Qurilish materiali!
           </span>
         </h1>
         <div className="hero__end">
@@ -24,7 +24,7 @@ const Hero = () => {
           </div>
           <div className="hero__right">
             <button>
-              <Image src={flag} /> Gollandiya texnologiyalari
+              <Image src={flag} alt="flag" /> Gollandiya texnologiyalari
             </button>
           </div>
         </div>

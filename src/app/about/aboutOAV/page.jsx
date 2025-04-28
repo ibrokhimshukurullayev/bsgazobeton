@@ -51,7 +51,7 @@ const AboutOAV = () => {
       <div className="aboutOAV__card">
         {aboutOAV.map((item) => (
           <div key={item.id} className="aboutOAV__box">
-            <Image src={item.img} />
+            <Image className="img" src={item.img} alt="img" />
             <h3>{item.question}</h3>
             <div>
               <Image src={oav} alt="qayd" />

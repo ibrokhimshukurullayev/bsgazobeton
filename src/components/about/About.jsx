@@ -28,7 +28,7 @@ const About = () => {
       </div>
       <div className="about__end container">
         <div className="about__end__left">
-          <Image src={about1} />
+          <Image src={about1} alt="about" />
           <h3>Sifat nazorati va laboratoriya</h3>
           <p>
             Har bir ishlab chiqarilgan mahsulot qat'iy tekshiruvlardan
@@ -37,14 +37,11 @@ const About = () => {
         </div>
         <div className="about__end__right">
           <iframe
-            width="827"
-            height="476"
             src="https://www.youtube.com/embed/G8KEoAb876A?si=NMGmUAex_Aq-3wnD"
             title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
+            // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            // referrerpolicy="strict-origin-when-cross-origin"
+            // allowfullscreen
           ></iframe>
         </div>
       </div>

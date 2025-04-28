@@ -18,8 +18,15 @@
     }
     &__list {
       display: grid;
-      grid-template-columns: repeat(3, 410px);
+      grid-template-columns: repeat(1, 350px);
+      border-radius: 16px;
       gap: 20px;
+      @media (min-width: 700px) {
+        grid-template-columns: repeat(2, 410px);
+      }
+      @media (min-width: 1000px) {
+        grid-template-columns: repeat(3, 410px);
+      }
     }
     &__content {
       position: absolute;
@@ -63,6 +70,15 @@
     }
     img {
       border-radius: 16px;
+      max-width: 350px;
+      height: 560px;
+      object-fit: cover;
+      @media (min-width: 700px) {
+        max-width: 350px;
+      }
+      @media (min-width: 900px) {
+        max-width: 410px;
+      }
     }
   }
 }

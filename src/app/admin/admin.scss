@@ -1,0 +1,107 @@
+#adminGazabeton {
+  padding: 20px 0 120px 0;
+  .adminGazabeton {
+    padding: 80px 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    &__page {
+      &__title {
+        color: rgb(54, 65, 79);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 0%;
+        text-align: left;
+        max-width: 927px;
+        span {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+.admin {
+  &__form {
+    &__header,
+    &__end {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      &__left,
+      &__right {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    &__header,
+    &__end {
+      padding: 24px 0 0 0;
+      &__left,
+      &__right {
+        width: 450px;
+        label {
+          color: rgb(54, 65, 79);
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 28px;
+          letter-spacing: 0%;
+          text-align: left;
+        }
+        input {
+          color: rgb(17, 24, 39);
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 28px;
+          letter-spacing: 2%;
+          text-align: left;
+          border: 1px solid rgb(228, 228, 231);
+          border-radius: 12px;
+          padding: 14px 20px;
+          background: rgb(245, 245, 245);
+          width: 100%;
+        }
+        select {
+          color: rgb(17, 24, 39);
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 28px;
+          letter-spacing: 2%;
+          text-align: left;
+          border: 1px solid rgb(228, 228, 231);
+          border-radius: 12px;
+          padding: 14px 20px;
+          background: rgb(245, 245, 245);
+          width: 100%;
+        }
+      }
+    }
+    &__footer {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 24px 0;
+      label {
+        color: rgb(54, 65, 79);
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 28px;
+        letter-spacing: 0%;
+        text-align: left;
+      }
+      input {
+        color: rgb(17, 24, 39);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 2%;
+        text-align: left;
+        border: 1px solid rgb(228, 228, 231);
+        border-radius: 12px;
+        padding: 14px 20px;
+        background: rgb(245, 245, 245);
+        width: 100%;
+      }
+    }
+  }
+}

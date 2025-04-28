@@ -4,6 +4,11 @@
     padding: 80px 20px 0 20px;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    gap: 60px;
+    @media (min-width: 900px) {
+      flex-direction: row;
+    }
     &__title {
       color: rgb(54, 65, 79);
       font-size: 16px;
@@ -17,10 +22,14 @@
       }
     }
     .abouts__img {
-      //   max-width: 927px;
-      //   height: 490px;
+      width: 100%;
+      object-fit: cover;
+      height: 200px;
       border-radius: 16px;
       margin: 36px 0 56px 0;
+      @media (min-width: 700px) {
+        height: 490px;
+      }
     }
     &__title__text {
       color: rgb(17, 24, 39);
@@ -96,4 +105,8 @@
       padding: 16px 32px;
     }
   }
+}
+
+.abouts__images {
+  max-width: 927px;
 }

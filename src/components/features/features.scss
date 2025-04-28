@@ -14,8 +14,15 @@
 
 .features {
   display: grid;
-  grid-template-columns: repeat(3, 300px);
+  grid-template-columns: repeat(1, 328px);
+  justify-content: center;
   gap: 20px;
+  @media (min-width: 700px) {
+    grid-template-columns: repeat(2, 328px);
+  }
+  @media (min-width: 1000px) {
+    grid-template-columns: repeat(3, 300px);
+  }
 }
 
 .feature {

@@ -11,7 +11,7 @@ const AboutGazabeton = () => {
           "bu yengil, yuqori issiqlik izolyatsiyasiga ega, mustahkam va ekologik toza qurilish materiali bo‘lib, bugungi kunda zamonaviy qurilish sanoatida keng qo‘llanilmoqda. Ushbu material kvars qumi, sement, ohak, alyuminiy kukuni va suv aralashmasidan tashkil topadi. Mustahkamlikka erishish uchun maxsus avtoklav pechlarida yuqori bosim ostida tayyorlanadi."
         }
       />
-      <GazobetonAdvantages />s
+      <GazobetonAdvantages />
     </div>
   );
 };

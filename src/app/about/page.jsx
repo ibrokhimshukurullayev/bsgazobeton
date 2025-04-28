@@ -16,7 +16,9 @@ const About = () => {
           " – O‘zbekiston bozorida yuqori sifatli gazobeton mahsulotlarini ishlab chiqaruvchi yetakchi kompaniyalardan biridir. Ishlab chiqarish zavodi Sirdaryo viloyatida joylashgan. Bizning maqsadimiz qurilish industriyasiga innovatsion, ekologik toza va mustahkam qurilish materiallarini taqdim etishdir."
         }
       />
-      <Image className="abouts__img" width={927} src={hero} />
+      <div className="abouts__images">
+        <Image className="abouts__img" src={hero} alt="hero" />
+      </div>
       <h3 className="abouts__title__text">Bizning tariximiz</h3>
       <p className="abouts__list">
         "BS gazobeton" kompaniyasi o‘z faoliyatini 2023-yil boshida boshlagan.

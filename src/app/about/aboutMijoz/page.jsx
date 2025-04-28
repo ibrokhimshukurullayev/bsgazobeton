@@ -45,7 +45,7 @@ const AboutMijoz = () => {
           <button>Biz bilan bog’lanish</button>
         </div>
         <div className="aboutMijoz__banner__end">
-          <Image src={caricon} />
+          <Image src={caricon} alt="carison" />
           <p>Mahsulotlarni butun O’zbekiston bo’ylab yetkazib beramiz!</p>
         </div>
       </div>

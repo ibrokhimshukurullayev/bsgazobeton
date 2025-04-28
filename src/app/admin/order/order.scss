@@ -1,0 +1,71 @@
+.order {
+  &__card1 {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    padding: 0 200px;
+  }
+  &__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    box-sizing: border-box;
+    border: 1px solid rgb(228, 228, 231);
+    border-radius: 12px;
+    background: rgb(255, 255, 255);
+    max-width: 927px;
+    width: 100%;
+
+    &__header {
+      &__id {
+        color: rgb(17, 24, 39);
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: 0%;
+        text-align: left;
+      }
+      &__price {
+        color: rgb(113, 113, 122);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -2%;
+        text-align: left;
+      }
+    }
+    &__date {
+      color: rgb(113, 113, 122);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0%;
+      text-align: left;
+    }
+    &__text {
+      color: rgb(240, 149, 2);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 28px;
+      letter-spacing: 0%;
+      text-align: left;
+      text-transform: uppercase;
+      padding: 6px;
+      border-radius: 6px;
+      background: rgba(240, 149, 2, 0.1);
+    }
+    button {
+      color: rgb(54, 65, 79);
+      font-size: 14px;
+      border-radius: 9999px;
+      padding: 10px 16px;
+      background: rgb(244, 244, 245);
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0%;
+      text-align: left;
+      text-transform: uppercase;
+    }
+  }
+}

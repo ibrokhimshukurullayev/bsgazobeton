@@ -59,7 +59,7 @@ const FaqAll = () => {
     setOpenId(openId === id ? null : id);
   };
   return (
-    <div className="faqall">
+    <div className="faqalls">
       {faqData.map((item) => (
         <div
           key={item.id}

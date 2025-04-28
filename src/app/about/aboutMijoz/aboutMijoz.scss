@@ -16,7 +16,14 @@
 
 .aboutMijoz__mijzolar {
   display: grid;
-  grid-template-columns: repeat(4, 225px);
+  grid-template-columns: repeat(2, 175px);
+  justify-content: center;
+  @media (min-width: 700px) {
+    grid-template-columns: repeat(3, 225px);
+  }
+  @media (min-width: 1000px) {
+    grid-template-columns: repeat(4, 225px);
+  }
   gap: 8px;
   div {
     display: flex;

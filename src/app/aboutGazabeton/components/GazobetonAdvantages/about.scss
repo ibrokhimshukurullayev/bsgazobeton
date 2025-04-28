@@ -12,10 +12,16 @@
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 8px;
     justify-items: center;
     align-items: center;
+    @media (min-width: 700px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 900px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   &__card {
@@ -24,7 +30,7 @@
     padding: 24px;
     transition: box-shadow 0.2s ease;
     width: 100%;
-    max-width: 300px;
+    // max-width: 300px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -61,5 +67,11 @@
     background: white;
     padding: 16px;
     border-radius: 12px;
+  }
+}
+.advantages__imageWrapper {
+  display: none;
+  @media (min-width: 800px) {
+    display: block;
   }
 }

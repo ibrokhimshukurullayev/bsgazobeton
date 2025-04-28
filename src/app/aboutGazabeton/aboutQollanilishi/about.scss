@@ -1,6 +1,6 @@
 .timeline-wrapper {
   padding: 30px;
-  max-width: 1000px;
+  max-width: 927 px;
   margin: 0 auto;
 }
 
@@ -80,5 +80,58 @@
   }
   img {
     margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-wrapper {
+    padding: 20px;
+  }
+
+  .timeline-step {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-bottom: 30px;
+  }
+
+  .timeline-left {
+    flex-direction: row;
+    align-items: center;
+    min-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .circle {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .timeline-content {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h3 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 22px;
+      max-width: 100%;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
   }
 }
