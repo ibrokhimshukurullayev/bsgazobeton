@@ -3,7 +3,12 @@
   .sotuvGazabeton {
     padding: 80px 20px 0 20px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    gap: 56px;
+    @media (min-width: 800px) {
+      flex-direction: row;
+    }
     &__page {
       &__title {
         color: rgb(54, 65, 79);
@@ -52,8 +57,12 @@
   }
   &__end {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 12px;
+    @media (min-width: 800px) {
+      flex-direction: row;
+    }
   }
   &__end__button {
     color: rgb(255, 255, 255);
@@ -64,9 +73,13 @@
     text-align: left;
     text-transform: uppercase;
     border-radius: 12px;
-    padding: 16px 32px;
+    padding: 16px 65px;
     box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1),
       0px 10px 15px -3px rgba(0, 0, 0, 0.1);
     background: rgb(82, 82, 91);
+    @media (min-width: 800px) {
+      flex-direction: row;
+      padding: 16px 32px;
+    }
   }
 }

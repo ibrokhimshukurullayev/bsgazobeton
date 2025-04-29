@@ -30,7 +30,9 @@ const takliflar = [
 const Gazablokmantaji = () => {
   return (
     <div className="mantaj">
-      <Image src={mantaj} alt="mantak" />
+      <div className="mantaj__img">
+        <Image src={mantaj} alt="mantak" />
+      </div>
       <p className="mantaj__text">
         Gazobloklar bilan qurilish qilayotgan bo‘lsangiz, sifatli montaj – bu
         mustahkam va issiqlikni ushlab turuvchi devorning asosi. Biz sizga faqat

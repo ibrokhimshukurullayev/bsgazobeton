@@ -1,13 +1,17 @@
 import React from "react";
 import Image from "next/image";
 
+import "./services.scss";
+
 import services from "../../assets/images/services.png";
 import Button from "../../components/button/Button";
 
 const Services = () => {
   return (
     <div className="services">
-      <Image src={services} alt="services" />
+      <div className="services__img">
+        <Image src={services} alt="services" />
+      </div>
       <h2>Sizga qanday gazoblok kerak?</h2>
       <h2>Qanday o‘lcham, zichlik yoki miqdorni tanlashni bilmaysizmi?</h2>
       <p>

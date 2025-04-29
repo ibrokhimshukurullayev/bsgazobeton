@@ -43,6 +43,7 @@
 
   .info-section {
     max-width: 522px;
+    max-height: 622px;
     width: 100%;
     background: #f7f7f7;
     padding: 40px;
@@ -171,7 +172,7 @@
 
       .thumbnails {
         flex-wrap: wrap;
-        justify-content: center;
+        // justify-content: center;
       }
     }
 
@@ -184,7 +185,7 @@
 
 @media (max-width: 768px) {
   .product-detail {
-    padding: 40px 0 60px 0;
+    padding: 40px 20px 60px 20px;
 
     .description {
       h3 {
