@@ -20,12 +20,14 @@ export default function Carusel() {
   return (
     <div className="carusel container">
       <div className="main-image">
-        <Image
-          className="carusel__img1"
-          src={images[current]}
-          alt={`Image ${current + 1}`}
-          fill
-        />
+        <div className="carusel__img">
+          <Image
+            className="carusel__img1"
+            src={images[current]}
+            alt={`Image ${current + 1}`}
+            fill
+          />
+        </div>
         <button className="nav-button left" onClick={handlePrev}>
           &lt;
         </button>

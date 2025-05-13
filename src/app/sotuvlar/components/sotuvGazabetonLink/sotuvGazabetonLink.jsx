@@ -9,14 +9,13 @@ import { usePathname } from "next/navigation";
 const links = [
   { href: "/sotuvlar", label: "Buyurtma berish va yetkazib berish tartibi" },
   { href: "/sotuvlar/tolovUsullari", label: "To’lov usullari" },
-  { href: "/sotuvlar/joylashuv", label: "Manzillar" },
+  { href: "/joylashuv", label: "Manzillar" },
 ];
 
 const SotuvGazabetonLink = () => {
   const pathname = usePathname();
 
-  // Agar joylashuv sahifasida bo‘lsak, bu komponent umuman ko‘rinmaydi
-  if (pathname === "/sotuvlar/joylashuv") {
+  if (pathname === "/joylashuv") {
     return null;
   }
 

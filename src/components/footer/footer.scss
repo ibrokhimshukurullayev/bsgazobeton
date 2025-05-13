@@ -16,13 +16,22 @@
     min-width: 200px;
 
     h4 {
-      font-weight: 600;
+      color: rgba(17, 24, 39, 1);
+      font-weight: 700;
       font-size: 16px;
+      line-height: 28px;
+      letter-spacing: 0%;
+      vertical-align: middle;
       margin: 10px 0;
     }
 
     p {
-      font-size: 14px;
+      color: rgba(54, 65, 79, 1);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0%;
+      vertical-align: middle;
       padding: 5px 0;
     }
 
@@ -35,9 +44,13 @@
         padding: 14px 0;
         font-size: 14px;
         cursor: pointer;
-
-        &:hover {
-          text-decoration: underline;
+        a {
+          color: rgba(54, 65, 79, 1);
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: 0%;
+          vertical-align: middle;
         }
       }
     }

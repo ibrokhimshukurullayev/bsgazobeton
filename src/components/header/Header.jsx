@@ -1,13 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import "./header.scss";
-import Image from "next/image";
+import React, { useState } from "react";
 import Link from "next/link";
-import logo from "../../assets/images/logo.png";
+import Image from "next/image";
+import logo from "../../assets/images/logo.svg";
+import menu from "../../assets/images/menu.svg";
+import person from "../../assets/images/header/person.svg";
+import cart from "../../assets/images/header/cart.svg";
+import phone from "../../assets/images/header/phone.svg";
 import { Globe, User, ShoppingCart, Phone } from "lucide-react";
 import Modal from "../mudule/Modal";
-import menu from "../../assets/images/menu.png";
+import dropdownItems from "../../static/index";
+
+import arrov from "../../assets/images/arrov.svg";
+import "./header.scss";
 
 const languages = ["O'Z", "РУ", "EN"];
 
@@ -16,68 +22,73 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
-  const toggleNavbar = () => {
-    setNavbarOpen((prevState) => !prevState);
-  };
-
-  const closeNavbar = () => {
-    setNavbarOpen(false);
-  };
-  const toggleDropdown = () => setOpen(!open);
+  const toggleNavbar = () => setNavbarOpen(!navbarOpen);
+  const closeNavbar = () => setNavbarOpen(false);
   const chooseLang = (l) => {
     setLang(l);
     setOpen(false);
   };
 
+  const toggleDropdown = (key) => {
+    setActiveDropdown((prev) => (prev === key ? null : key));
+  };
   const toggleUserModal = () => setIsUserModalOpen((prev) => !prev);
+
+  const navLinks = [
+    { href: "/katalog", label: "Katalog", key: "katalog" },
+    { href: "/services", label: "Xizmatlar", key: "xizmatlar" },
+    { href: "/sotuvlar", label: "Sotuvlar", key: "sotuvlar" },
+    {
+      href: "/aboutGazabeton",
+      label: "Gazobeton haqida",
+      key: "gazobeton",
+    },
+    { href: "/about", label: "Biz haqimizda", key: "about" },
+    { href: "/joylashuv  ", label: "Aloqa" },
+  ];
 
   return (
     <>
       <header id="header">
         <div className="container nav">
           <div className="nav__logo">
-            <Link href={"/"}>
+            <Link href="/">
               <Image src={logo} alt="Logo" />
             </Link>
           </div>
 
           <ul className="nav__list">
-            <li className="nav__item">
-              <Link href={"/katalog"} className="nav__link">
-                Katalog
-              </Link>
-            </li>
-            <li className="nav__item">
-              <Link href={"/services"} className="nav__link">
-                Xizmatlar
-              </Link>
-            </li>
-            <li className="nav__item">
-              <Link href={"/sotuvlar"} className="nav__link">
-                Sotuvlar
-              </Link>
-            </li>
-            <li className="nav__item">
-              <Link href={"/aboutGazabeton"} className="nav__link">
-                Gazobeton haqida
-              </Link>
-            </li>
-            <li className="nav__item">
-              <Link href={"/about"} className="nav__link">
-                Biz haqimizda
-              </Link>
-            </li>
-            <li className="nav__item">
-              <Link href={"/sotuvlar/joylashuv"} className="nav__link">
-                Aloqa
-              </Link>
-            </li>
+            {navLinks.map((item) => (
+              <li
+                className="nav__item"
+                key={item.label}
+                onMouseEnter={() => setActiveDropdown(item.key)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link href={item.href} className="nav__link">
+                  {item.label}
+                </Link>
+
+                {dropdownItems[item.key] && activeDropdown === item.key && (
+                  <div className="mega-dropdown">
+                    <ul>
+                      {dropdownItems[item.key].map((subItem, i) => (
+                        <li key={i}>
+                          <Link href={subItem.href}>{subItem.label}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </li>
+            ))}
           </ul>
 
           <div className="nav__end">
             <a className="nav__phone" href="tel:+998991502222">
-              <Phone />
+              <Image src={phone} alt="phone" />
               <span>(99) 150-22-22</span>
             </a>
             <div className="nav__actions">
@@ -102,11 +113,11 @@ const Header = () => {
               </div>
 
               <button className="circle-btn" onClick={toggleUserModal}>
-                <User size={18} />
+                <Image src={person} alt="person" />
               </button>
-              <a href="/karzinka" className="circle-btns">
-                <ShoppingCart size={18} />
-              </a>
+              <Link href="/karzinka" className="circle-btns">
+                <Image src={cart} alt="cart" />
+              </Link>
               <button
                 id="navbar-open"
                 onClick={toggleNavbar}
@@ -118,54 +129,62 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div id="navbar-responsive" style={{ left: navbarOpen ? "0" : "-100%" }}>
+
+      <div id="navbar-responsive" style={{ top: navbarOpen ? "0" : "-100%" }}>
         <ul className="nav__lists">
-          <li className="nav__item">
-            <Link href={"/katalog"} className="nav__link">
-              Katalog
-            </Link>
-          </li>
-          <li className="nav__item">
-            <Link href={"/services"} className="nav__link">
-              Xizmatlar
-            </Link>
-          </li>
-          <li className="nav__item">
-            <Link href={"/sotuvlar"} className="nav__link">
-              Sotuvlar
-            </Link>
-          </li>
-          <li className="nav__item">
-            <Link href={"/aboutGazabeton"} className="nav__link">
-              Gazobeton haqida
-            </Link>
-          </li>
-          <li className="nav__item">
-            <Link href={"/about"} className="nav__link">
-              Biz haqimizda
-            </Link>
-          </li>
-          <li className="nav__item">
-            <Link href={"/sotuvlar/joylashuv"} className="nav__link">
-              Aloqa
-            </Link>
-          </li>
+          {navLinks.map((item) => (
+            <li key={item.label} className="nav__item">
+              <div
+                className="nav__link"
+                onClick={() => toggleDropdown(item.key)}
+              >
+                {item.label}
+                {dropdownItems[item.key] && <Image src={arrov} alt="arrow" />}
+              </div>
+
+              {activeDropdown === item.key && dropdownItems[item.key] && (
+                <ul className="dropdown__list">
+                  {dropdownItems[item.key].map((subItem, i) => (
+                    <li key={i}>
+                      <Link
+                        href={subItem.href}
+                        className="dropdown__link"
+                        onClick={() => setNavbarOpen(false)}
+                      >
+                        {subItem.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
         </ul>
-        <button id="navbar-close" onClick={closeNavbar}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="30"
-            width="30"
-            viewBox="0 0 512 512"
-          >
-            <path
-              fill="#000000"
-              d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"
-            />
-          </svg>
-        </button>
+        <div className="nav__res">
+          <div className="lang-dropdown">
+            <button onClick={toggleDropdown} className="circle__btn">
+              <Globe size={18} />
+              <span>{lang}</span>
+            </button>
+            {open && (
+              <div className="lang-options">
+                {languages.map((l) => (
+                  <div
+                    key={l}
+                    className={`lang-option ${lang === l ? "active" : ""}`}
+                    onClick={() => chooseLang(l)}
+                  >
+                    {l}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <button className="circle__btn" onClick={toggleUserModal}>
+            <Image src={person} alt="person" />
+          </button>
+        </div>
       </div>
-      <div id="main" onClick={closeNavbar}></div>
 
       {isUserModalOpen && (
         <Modal

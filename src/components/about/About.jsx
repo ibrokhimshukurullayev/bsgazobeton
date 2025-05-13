@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import about1 from "../../assets/images/about1.png";
+import about1 from "../../assets/images/about1.svg";
 import "./about.scss";
 
 const About = () => {
@@ -28,12 +28,16 @@ const About = () => {
       </div>
       <div className="about__end container">
         <div className="about__end__left">
-          <Image src={about1} alt="about" />
-          <h3>Sifat nazorati va laboratoriya</h3>
-          <p>
-            Har bir ishlab chiqarilgan mahsulot qat'iy tekshiruvlardan
-            o‘tkaziladi va standartlarga mos kelishini kafolatlaydi.
-          </p>
+          <div>
+            <Image src={about1} alt="about" />
+          </div>
+          <div>
+            <h3>Sifat nazorati va laboratoriya</h3>
+            <p>
+              Har bir ishlab chiqarilgan mahsulot qat'iy tekshiruvlardan
+              o‘tkaziladi va standartlarga mos kelishini kafolatlaydi.
+            </p>
+          </div>
         </div>
         <div className="about__end__right">
           <iframe

@@ -7,7 +7,7 @@ import SotuvGazabetonLink from "./components/sotuvGazabetonLink/sotuvGazabetonLi
 const titles = {
   "/sotuvlar": "Buyurtma berish va yetkazib berish tartibi",
   "/sotuvlar/tolovUsullari": "To’lov usullari",
-  "/sotuvlar/joylashuv": "Biz bilan bog’lanish",
+  "/joylashuv": "Biz bilan bog’lanish",
 };
 
 export default function SotuvLayout({ children }) {

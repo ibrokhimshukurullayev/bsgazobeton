@@ -1,14 +1,16 @@
 import React from "react";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.svg";
 import Image from "next/image";
 import "./footer.scss";
-import { Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
-import instagram from "../../assets/images/social/intagram.png";
-import facebook from "../../assets/images/social/facebook.png";
-import yootube from "../../assets/images/social/youtube.png";
-import twiter from "../../assets/images/social/twiter.png";
-import linkedin from "../../assets/images/social/linkedin.png";
-import telegram from "../../assets/images/social/telegram.png";
+import instagram from "../../assets/images/social/intagram.svg";
+import facebook from "../../assets/images/social/facebook.svg";
+import yootube from "../../assets/images/social/youtube.svg";
+import twiter from "../../assets/images/social/twiter.svg";
+import linkedin from "../../assets/images/social/linkedin.svg";
+import telegram from "../../assets/images/social/telegram.svg";
+import Link from "next/link";
+
+import dropdownItems from "../../static/index";
 
 const Footer = () => {
   return (
@@ -16,22 +18,31 @@ const Footer = () => {
       <div className="footer__top container">
         <div className="footer__column">
           <div className="footer__logo">
-            <Image src={logo} alt="logo" />
+            <Link href="/">
+              <Image src={logo} alt="logo" />
+            </Link>
           </div>
+
           <div>
             <h4>Manzil:</h4>
-            <p>Toshkent, Yakkasaroy tumani, Cho‘ponota ko‘chasi, 17</p>
+            <p>
+              Sirdaryo viloyati, Sirdaryo tumani, Sobir Rahimov SIU, Chibantay
+              qo'rg'oni
+            </p>
           </div>
+
           <div>
             <h4>Telefon:</h4>
             <p>+998 (99) 150-22-22</p>
             <p>+998 (99) 150-22-22</p>
           </div>
+
           <div>
             <h4>Email:</h4>
             <p>info@bsgazobeton.uz</p>
             <p>tuymuratov.sardor@bsgroup.uz</p>
           </div>
+
           <div className="footer__socials">
             <a href="#">
               <Image src={instagram} alt="instagram" />
@@ -43,10 +54,10 @@ const Footer = () => {
               <Image src={telegram} alt="telegram" />
             </a>
             <a href="#">
-              <Image src={yootube} alt="yootube" />
+              <Image src={yootube} alt="youtube" />
             </a>
             <a href="#">
-              <Image src={twiter} alt="twiter" />
+              <Image src={twiter} alt="twitter" />
             </a>
             <a href="#">
               <Image src={linkedin} alt="linkedin" />
@@ -57,56 +68,60 @@ const Footer = () => {
         <div className="footer__column">
           <h4>Katalog</h4>
           <ul>
-            <li>Gazobloklar</li>
-            <li>Gazobeton divanellari</li>
-            <li>Gazoblok kley</li>
-            <li>Gazoblokka tegishli instrumentlar va materiallar</li>
+            {dropdownItems.katalog.map((item, i) => (
+              <li key={i}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
           </ul>
 
           <h4>Xizmatlar</h4>
           <ul>
-            <li>Mahsulot bo‘yicha konsultatsiya</li>
-            <li>Gazoblok montaji</li>
-            <li>Gazobloklar miqdorini va narxini hisoblash</li>
+            {dropdownItems.xizmatlar.map((item, i) => (
+              <li key={i}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div className="footer__column">
           <h4>Biz haqimizda</h4>
           <ul>
-            <li>Komdivaniya haqida</li>
-            <li>Sifat nazorati va laboratoriya</li>
-            <li>Mijozlar va hamkorlar</li>
-            <li>Biz haqimizda OAV</li>
-            <li>Yangiliklar</li>
-            <li>Vakansiyalar</li>
+            {dropdownItems.about.map((item, i) => (
+              <li key={i}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
           </ul>
+
           <h4>Sotuvlar</h4>
           <ul>
-            <li>Buyurtma berish va yetkazib berish tartibi</li>
-            <li>To‘lov usullari</li>
-            <li>Manzillar</li>
+            {dropdownItems.sotuvlar.map((item, i) => (
+              <li key={i}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div className="footer__column">
           <h4>Gazobeton haqida</h4>
           <ul>
-            <li>Gazobeton haqida batafsil</li>
-            <li>Sinov testlari</li>
-            <li>Sertifikat va litsenziyalar</li>
-            <li>Gazobetonning qo‘llanilish joylari</li>
-            <li>Gazoblok ishlatish bo‘yicha qo‘llanma</li>
-            <li>Gazobetoning boshqa materiallardan farqi</li>
-            <li>Tez-tez beriladigan savollar</li>
+            {dropdownItems.gazobeton.map((item, i) => (
+              <li key={i}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
-        <div className="footer__bottom">
-          <p>
-            © 2023–2025 «BS gazobeton» — Qurilish materiallari va aksessuarlar
-            ishlab chiqaruvchi
-          </p>
-        </div>
+      </div>
+
+      <div className="footer__bottom">
+        <p>
+          © 2023–2025 «BS gazobeton» — Qurilish materiallari va aksessuarlar
+          ishlab chiqaruvchi
+        </p>
       </div>
     </footer>
   );

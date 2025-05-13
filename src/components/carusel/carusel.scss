@@ -1,16 +1,19 @@
 .carusel {
   position: relative;
   padding: 0;
-
+  .carusel__img {
+    max-width: 927px;
+    width: 100%;
+  }
   .main-image {
     position: relative;
-    width: 350px;
-    height: 185px;
-    @media (min-width: 900px) {
+    height: 200px;
+    @media (min-width: 600px) {
       width: 100%;
       height: 500;
     }
     .carusel__img1 {
+      width: 100%;
       object-fit: cover;
       border-radius: 12px !important;
     }

@@ -1,16 +1,16 @@
 import React from "react";
 import "./sotuv.scss";
 import Image from "next/image";
-import instagram from "../../../assets/images/social/intagram.png";
-import facebook from "../../../assets/images/social/facebook.png";
-import twiter from "../../../assets/images/social/twiter.png";
-import youtube from "../../../assets/images/social/youtube.png";
-import telegram from "../../../assets/images/social/telegram.png";
-import linkedin from "../../../assets/images/social/linkedin.png";
+import instagram from "../../assets/images/social/intagram.svg";
+import facebook from "../../assets/images/social/facebook.svg";
+import twiter from "../../assets/images/social/twiter.svg";
+import youtube from "../../assets/images/social/youtube.svg";
+import telegram from "../../assets/images/social/telegram.svg";
+import linkedin from "../../assets/images/social/linkedin.svg";
 
 const Joylashuv = () => {
   return (
-    <div className="cantact">
+    <div className="cantact container">
       <div className="cantact__left">
         <div className="cantact__phone">
           <h3>Telefon:</h3>

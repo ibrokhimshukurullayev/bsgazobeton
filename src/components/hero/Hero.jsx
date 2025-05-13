@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import flag from "../../assets/images/gollandiyaflag.png";
-import blok from "../../assets/images/blok.png";
+import flag from "../../assets/images/gollandiyaflag.svg";
+import blok from "../../assets/images/blok.svg";
 import "./hero.scss";
 
 const Hero = () => {

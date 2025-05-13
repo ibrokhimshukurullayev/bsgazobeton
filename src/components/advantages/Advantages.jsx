@@ -2,12 +2,12 @@ import React from "react";
 import "./advantages.scss";
 import Image from "next/image";
 
-import icon1 from "../../assets/images/yengillik.png";
-import icon2 from "../../assets/images/issiq.png";
-import icon3 from "../../assets/images/mustahkamlilk.png";
-import icon4 from "../../assets/images/olov.png";
-import icon5 from "../../assets/images/ekologik.png";
-import icon6 from "../../assets/images/ishlov.png";
+import icon1 from "../../assets/images/yengillik.svg";
+import icon2 from "../../assets/images/issiq.svg";
+import icon3 from "../../assets/images/mustahkamlilk.svg";
+import icon4 from "../../assets/images/olov.svg";
+import icon5 from "../../assets/images/ekologik.svg";
+import icon6 from "../../assets/images/ishlov.svg";
 
 const afzalliklar = [
   {

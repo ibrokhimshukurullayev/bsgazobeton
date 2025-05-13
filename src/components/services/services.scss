@@ -19,6 +19,7 @@
     &__list {
       display: grid;
       grid-template-columns: repeat(1, 350px);
+      justify-content: center;
       border-radius: 16px;
       gap: 20px;
       @media (min-width: 700px) {
