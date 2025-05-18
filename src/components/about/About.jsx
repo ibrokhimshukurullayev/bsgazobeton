@@ -1,29 +1,27 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
+3;
 import about1 from "../../assets/images/about1.svg";
 import "./about.scss";
 
 const About = () => {
+  const [t, i18n] = useTranslation("global");
+
   return (
     <div id="about">
       <div className="about__start container">
         <div className="about__start__left">
-          <h3>Biz haqimizda</h3>
+          <h3>{t("header.about")}</h3>
         </div>
         <div className="about__start__right">
           <h2>
-            <span>"BS gazobeton"</span> – O‘zbekiston bozorida yuqori sifatli
-            gazobeton mahsulotlarini ishlab chiqaruvchi yetakchi kompaniyalardan
-            biridir.
+            <span>"BS gazobeton"</span> {t("aboutsection.title")}
           </h2>
-          <p>
-            Kompaniya zamonaviy ishlab chiqarish zavodiga ega bo‘lib, eng ilg‘or
-            texnologiyalar va yuqori sifat standartlariga javob beruvchi
-            uskunalar bilan jihozlangan. Ishlab chiqarish liniyasi Yevropaning
-            "Aircrete" kompaniyasi tomonidan yo'lga qo'yilgan. Ishlab chiqarish
-            quvvati yiliga 450 000 kubometrni tashkil qiladi.
-          </p>
-          <button>Biz haqimizda</button>
+          <p>{t("aboutsection.desc1")}</p>
+          <button>{t("header.about")}</button>
         </div>
       </div>
       <div className="about__end container">
@@ -32,11 +30,8 @@ const About = () => {
             <Image src={about1} alt="about" />
           </div>
           <div>
-            <h3>Sifat nazorati va laboratoriya</h3>
-            <p>
-              Har bir ishlab chiqarilgan mahsulot qat'iy tekshiruvlardan
-              o‘tkaziladi va standartlarga mos kelishini kafolatlaydi.
-            </p>
+            <h3>{t("menu.about.sifat")}</h3>
+            <p>{t("aboutsection.desc2")}</p>
           </div>
         </div>
         <div className="about__end__right">

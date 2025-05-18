@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import "./advantages.scss";
 import Image from "next/image";
@@ -8,51 +9,53 @@ import icon3 from "../../assets/images/mustahkamlilk.svg";
 import icon4 from "../../assets/images/olov.svg";
 import icon5 from "../../assets/images/ekologik.svg";
 import icon6 from "../../assets/images/ishlov.svg";
-
-const afzalliklar = [
-  {
-    id: 1,
-    icon: icon1,
-    title: "Yengillik",
-    desc: "Oddiy betonga qaraganda ancha yengil, bu esa transport va qurilish xarajatlarini kamaytiradi.",
-  },
-  {
-    id: 2,
-    icon: icon2,
-    title: "Issiqlik izolyatsiyasi",
-    desc: "Gazobeton yuqori darajadagi issiqlikni saqlash xususiyatiga ega, bu esa qishda issiqlikni, yozda salqinlikni ta’minlaydi.",
-  },
-  {
-    id: 3,
-    icon: icon3,
-    title: "Mustahkamlik",
-    desc: "Yengil bo‘lishiga qaramay, gazobeton yaxshi yuk ko‘tarish qobiliyatiga ega va uzoq muddatga chidamli.",
-  },
-  {
-    id: 4,
-    icon: icon4,
-    title: "Olovga chidamlilik",
-    desc: "Gazobeton yong‘inga bardoshli bo‘lib, yuqori haroratga chidamli, xavfsizlikni ta’minlaydi.",
-  },
-  {
-    id: 5,
-    icon: icon5,
-    title: "Ekologik tozaligi",
-    desc: "Tarkibida zararli moddalar yo‘q, inson salomatligiga xavfsiz va ekologik toza material.",
-  },
-  {
-    id: 6,
-    icon: icon6,
-    title: "Oson ishlov berish",
-    desc: "Kesish, teshish va shakllantirish oson bo‘lib, qurilish jarayonini soddalashtiradi va vaqtni tejaydi.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const Advantages = () => {
+  const [t, i18n] = useTranslation("global");
+
+  const afzalliklar = [
+    {
+      id: 1,
+      icon: icon1,
+      title: t("advantages.title1"),
+      desc: t("advantages.desc1"),
+    },
+    {
+      id: 2,
+      icon: icon2,
+      title: t("advantages.title2"),
+      desc: t("advantages.desc2"),
+    },
+    {
+      id: 3,
+      icon: icon3,
+      title: t("advantages.title3"),
+      desc: t("advantages.desc3"),
+    },
+    {
+      id: 4,
+      icon: icon4,
+      title: t("advantages.title4"),
+      desc: t("advantages.desc4"),
+    },
+    {
+      id: 5,
+      icon: icon5,
+      title: t("advantages.title5"),
+      desc: t("advantages.desc5"),
+    },
+    {
+      id: 6,
+      icon: icon6,
+      title: t("advantages.title6"),
+      desc: t("advantages.desc6"),
+    },
+  ];
   return (
     <div id="advantages">
       <div className="container advantages">
-        <h2 className="advantages__title">Gazobeton afzalliklari</h2>
+        <h2 className="advantages__title">{t("advantages.title")}</h2>
         <div className="advantages__list">
           {afzalliklar.map((item) => (
             <div className="advantage-card" key={item.id}>

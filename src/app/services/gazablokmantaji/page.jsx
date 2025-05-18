@@ -1,46 +1,45 @@
+"use client";
+
 import React from "react";
 import "./services.scss";
 import Image from "next/image";
 import mantaj from "../../../assets/images/mantaj.png";
 import Button from "../../../components/button/Button";
-
-const takliflar = [
-  {
-    number: 1,
-    title: "To‘liq montaj xizmati",
-    text: "Gazobloklarni asosdan tomgacha o‘rnatish",
-  },
-  {
-    number: 2,
-    title: "Professional ustalar",
-    text: "Tajribali va o‘qitilgan quruvchilar jamoasi",
-  },
-  {
-    number: 3,
-    title: "Yupqa tikuvli texnologiya",
-    text: "Maxsus elim yordamida issiqlik yo‘qotilishini kamaytiruvchi montaj",
-  },
-  {
-    number: 4,
-    title: "Aniq va tekis devorlar",
-    text: "Keyinchalik suvoqni minimallashtiradi",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const Gazablokmantaji = () => {
+  const [t, i18n] = useTranslation("global");
+
+  const takliflar = [
+    {
+      number: 1,
+      title: t("gazoblockinfo.section1item1title"),
+      text: t("gazoblockinfo.section1item1text"),
+    },
+    {
+      number: 2,
+      title: t("gazoblockinfo.section1item2title"),
+      text: t("gazoblockinfo.section1item2text"),
+    },
+    {
+      number: 3,
+      title: t("gazoblockinfo.section1item3title"),
+      text: t("gazoblockinfo.section1item3text"),
+    },
+    {
+      number: 4,
+      title: t("gazoblockinfo.section1item4title"),
+      text: t("gazoblockinfo.section1item3text"),
+    },
+  ];
   return (
     <div className="mantaj">
       <div className="mantaj__img">
         <Image src={mantaj} alt="mantak" />
       </div>
-      <p className="mantaj__text">
-        Gazobloklar bilan qurilish qilayotgan bo‘lsangiz, sifatli montaj – bu
-        mustahkam va issiqlikni ushlab turuvchi devorning asosi. Biz sizga faqat
-        mahsulotni emas, balki tayyor yechimni taklif qilamiz — ya’ni tajribali
-        mutaxassislar tomonidan bajariladigan gazoblok o‘rnatish xizmatini.
-      </p>
+      <p className="mantaj__text">{t("gazoblockinfo.title")}</p>
       <div className="taklif">
-        <h3>Nimalarni taklif qilamiz:</h3>
+        <h3>{t("gazoblockinfo.section1title")}</h3>
         <ul>
           {takliflar.map((item) => (
             <li key={item.number} className="taklif__item">
@@ -54,20 +53,14 @@ const Gazablokmantaji = () => {
         </ul>
       </div>
       <div className="foydali">
-        <h3>Kimlar uchun foydali:</h3>
+        <h3>{t("gazoblockinfo.title2")}</h3>
         <ul>
-          <li>Uy qurayotganlar;</li>
-          <li>Qurilish firmalari uchun subpudrat xizmat.</li>
+          <li>{t("gazoblockinfo.text1")}</li>
+          <li>{t("gazoblockinfo.text2")}</li>
         </ul>
-        <p>
-          Qurilish sifati siz tanlagan ustalarga bog‘liq. Biz bilan ishlang —
-          ishonchli natijani kafolatlaymiz.
-        </p>
-        <strong>
-          Hoziroq bog‘laning va professional montaj xizmatimizga buyurtma
-          bering!
-        </strong>
-        <Button title={"Biz bilan bog’lanish"} />
+        <p>{t("gazoblockinfo.bottomtext")}</p>
+        <strong>{t("gazoblockinfo.bottomtext2")}</strong>
+        <Button title={t("gazoblockinfo.button")} />
       </div>
     </div>
   );

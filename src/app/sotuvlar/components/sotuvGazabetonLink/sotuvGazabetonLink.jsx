@@ -5,15 +5,20 @@ import "./sotuv.scss";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const links = [
-  { href: "/sotuvlar", label: "Buyurtma berish va yetkazib berish tartibi" },
-  { href: "/sotuvlar/tolovUsullari", label: "To’lov usullari" },
-  { href: "/joylashuv", label: "Manzillar" },
-];
+import { useTranslation } from "react-i18next";
 
 const SotuvGazabetonLink = () => {
+  const [t, i18n] = useTranslation("global");
   const pathname = usePathname();
+
+  const links = [
+    { href: "/sotuvlar", label: t("menu.sotuvlar.buyurtma") },
+    {
+      href: "/sotuvlar/tolovUsullari",
+      label: t("menu.sotuvlar.tolov"),
+    },
+    { href: "/joylashuv", label: t("menu.sotuvlar.manzillar") },
+  ];
 
   if (pathname === "/joylashuv") {
     return null;
@@ -21,7 +26,7 @@ const SotuvGazabetonLink = () => {
 
   return (
     <div className="sotuvLinkCard">
-      <h3>Sotuvlar</h3>
+      <h3>{t("menu.sotuvlar.sotuvlar")}</h3>
       {links.map((link, index) => {
         const isActive = pathname === link.href;
         return (

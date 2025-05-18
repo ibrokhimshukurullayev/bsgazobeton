@@ -2,6 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
+
 import "./about.scss";
 
 import icon2 from "../../../../assets/images/featuresicon/icon2.png";
@@ -14,64 +16,59 @@ import icon11 from "../../../../assets/images/featuresicon/icon11.png";
 import icon12 from "../../../../assets/images/featuresicon/icon12.png";
 import gazabeton from "../../../../assets/images/Containergaza.png";
 
-const advantages = [
-  {
-    title: "Yengillik",
-    description:
-      "Oddiy betonga qaraganda ancha yengil, bu esa transport va qurilish xarajatlarini kamaytiradi",
-    icon: icon6,
-  },
-  {
-    title: "Issiqlik izolyatsiyasi",
-    description:
-      "Gazobeton yuqori darajadagi issiqlikni saqlash xususiyatiga ega, bu esa qishda issiqlikni, yozda salqinlikni taʼminlaydi",
-    icon: icon7,
-  },
-  {
-    title: "Mustahkamlik",
-    description:
-      "Yengil bo‘lishiga qaramay, gazobeton yaxshi yuk ko‘tarish qobiliyatiga ega va uzoq muddatga chidamli",
-    icon: icon8,
-  },
-  {
-    title: "Olovga chidamlilik",
-    description:
-      "Gazobeton yong‘inga bardoshli bo‘lib, yuqori haroratga chidamli, xavfsizligini taʼminlaydi",
-    icon: icon9,
-  },
-  {
-    type: "image",
-    src: gazabeton,
-  },
-  {
-    title: "Oson ishlov berish",
-    description:
-      "Kesish, teshish va shakllantirish oson bo‘lib, qurilish jarayonini soddalashtiradi va vaqtni tejaydi",
-    icon: icon10,
-  },
-  {
-    title: "Ekologik tozaligi",
-    description:
-      "Tarkibida zararli moddalar yo‘q, inson salomatligiga xavfsiz va ekologik toza material",
-    icon: icon2,
-  },
-  {
-    title: "Mukammal tovush izolyatsiyasi",
-    description:
-      "Tovushlarni yaxshi yutib, binoda tovush izolyatsiyasini taʼminlaydi",
-    icon: icon11,
-  },
-  {
-    title: "Namlikka chidamliligi",
-    description: "Gazobeton mog‘or paydo bo‘lishining oldini oladi",
-    icon: icon12,
-  },
-];
-
 export const GazobetonAdvantages = () => {
+  const [t, i18n] = useTranslation("global");
+
+  const advantages = [
+    {
+      title: t("about.cardtitle1"),
+      description: t("about.cardlist1"),
+      icon: icon6,
+    },
+    {
+      title: t("about.cardtitle2"),
+      description: t("about.cardlist2"),
+      icon: icon7,
+    },
+    {
+      title: t("about.cardtitle3"),
+      description: t("about.cardlist3"),
+      icon: icon8,
+    },
+    {
+      title: t("about.cardtitle3"),
+      description: t("about.cardlist4"),
+      icon: icon9,
+    },
+    {
+      type: "image",
+      src: gazabeton,
+    },
+    {
+      title: t("about.cardtitle5"),
+      description: t("about.cardlist5"),
+      icon: icon10,
+    },
+    {
+      title: t("about.cardtitle6"),
+      description: t("about.cardlist6"),
+      icon: icon2,
+    },
+    {
+      title: t("about.cardtitle7"),
+      description: t("about.cardlist7"),
+      icon: icon11,
+    },
+    {
+      title: t("about.cardtitle8"),
+      description: t("about.cardlist8"),
+      icon: icon12,
+    },
+  ];
+
   return (
     <section className="advantages">
-      <h2 className="advantages__title">Gazobeton afzalliklari</h2>
+      <h2 className="advantages__title">{t("about.title3")}</h2>
       <div className="advantages__grid">
         {advantages.map((item, idx) => {
           if (item.type === "image") {

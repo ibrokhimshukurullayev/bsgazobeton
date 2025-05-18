@@ -1,0 +1,62 @@
+.lang-select {
+  position: relative;
+  display: inline-block;
+}
+
+.lang-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  background-color: rgba(244, 244, 245, 1);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.lang-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.lang-label {
+  color: rgba(54, 65, 79, 1);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.lang-dropdown {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  width: 80px;
+  background: rgba(244, 244, 245, 1);
+  border: 1px solid rgba(244, 244, 245, 1);
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  list-style: none;
+}
+
+.lang-item {
+  padding: 6px 0 6px 5px;
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: start;
+
+  &:hover {
+    background-color: #7a7b7c;
+    color: #fff;
+    border-radius: 6px;
+  }
+}

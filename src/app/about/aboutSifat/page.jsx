@@ -1,52 +1,48 @@
+"use client";
+
 import React from "react";
 import "./aboutSifat.scss";
 import Carusel from "../../../components/carusel/Carusel";
 import Image from "next/image";
 import labaratoriya from "../../../assets/images/labaratoriya.png";
 import Title from "../../../components/title/Title";
-
-const steps = [
-  {
-    id: 1,
-    title: "Xomashyo tekshiruvi",
-    description:
-      "Har bir komponent kimyoviy va fizik xususiyatlari bo‘yicha sinovdan o‘tkaziladi.",
-    image: labaratoriya,
-  },
-  {
-    id: 2,
-    title: "Ishlab chiqarish jarayonidagi nazorat",
-    description:
-      "Har bir bosqich zamonaviy texnologiyalar asosida nazorat qilinadi. Mutaxassislar ishlab chiqarish jarayonini doimiy ravishda kuzatib boradilar.",
-    image: labaratoriya,
-  },
-  {
-    id: 3,
-    title: "Mahsulot tayyor bo‘lgandagi tekshiruv",
-    description:
-      "Gazobetonning muhim ko‘rsatkichlari maxsus laboratoriyada sinovdan o‘tkaziladi.",
-    image: labaratoriya,
-  },
-  {
-    id: 4,
-    title: "Sertifikatlashtirish",
-    description:
-      "Har bir mahsulot belgilangan standartlarga muvofiqligini tasdiqlovchi sertifikatlarga ega bo‘ladi.",
-    image: labaratoriya,
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const AboutSifat = () => {
+  const [t, i18n] = useTranslation("global");
+
+  const steps = [
+    {
+      id: 1,
+      title: t("sifat.cardtitle1"),
+      description: t("sifat.cardlist1"),
+      image: labaratoriya,
+    },
+    {
+      id: 2,
+      title: t("sifat.cardtitle2"),
+      description: t("sifat.cardlist2"),
+      image: labaratoriya,
+    },
+    {
+      id: 3,
+      title: t("sifat.cardtitle3"),
+      description: t("sifat.cardlist3"),
+      image: labaratoriya,
+    },
+    {
+      id: 4,
+      title: t("sifat.cardtitle4"),
+      description: t("sifat.cardlist24"),
+      image: labaratoriya,
+    },
+  ];
+
   return (
     <div id="aboutSifat">
-      <Title
-        title={"BS gazobeton"}
-        text={
-          "kompaniyasi o‘z mahsulotlarining sifatini ta'minlash uchun sifat nazorati tizimiga ega. Har bir ishlab chiqarilgan mahsulot qat'iy tekshiruvlardan o‘tkaziladi va standartlarga mos kelishini kafolatlaydi."
-        }
-      />
+      <Title title={"BS gazobeton"} text={t("sifat.title1")} />
       <div className="timeline-wrapper">
-        <h2 className="timeline-heading">Sifat nazorati jarayonlari</h2>
+        <h2 className="timeline-heading">text={t("sifat.title2")}</h2>
         <div className="timeline">
           {steps.map((step, index) => (
             <div className="timeline-step" key={step.id}>
@@ -71,18 +67,10 @@ const AboutSifat = () => {
         </div>
       </div>
       <div className="aboutSifat__carusel">
-        <h3>Bizning laboratoriyamiz</h3>
+        <h3>{t("sifat.title3")}</h3>
         <Carusel />
-        <p>
-          Bizning laboratoriya mutaxassislarimiz har bir mahsulotning sifatini
-          kafolatlash uchun muntazam ravishda tekshiruv jarayonlarini olib
-          borishadi.
-        </p>
-        <p>
-          “BS gazobeton” kompaniyasi sifat nazorati tizimiga doimiy ravishda
-          e'tibor qaratib, qurilish industriyasida yuqori standartlarga javob
-          beruvchi mahsulotlarni ishlab chiqarishda davom etmoqda.
-        </p>
+        <p>{t("sifat.list1")}</p>
+        <p>{t("sifat.list2")}</p>
       </div>
     </div>
   );

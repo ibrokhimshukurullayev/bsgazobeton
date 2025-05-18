@@ -6,8 +6,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./clientCarousel.scss";
 import ds from "../../assets/images/hero.png";
+import { useTranslation } from "react-i18next";
 
 const ClientCarousel = () => {
+  const [t, i18n] = useTranslation("global");
+
   const videos = [
     "/videos/lolazor.mp4",
     "/videos/lolazor.mp4",
@@ -28,7 +31,7 @@ const ClientCarousel = () => {
 
   return (
     <div className="carousel-container">
-      <h2 className="carousel-title">Bizning mijozlarimiz</h2>
+      <h2 className="carousel-title">{t("mijoz.title4")}</h2>
       <Swiper
         modules={[Navigation]}
         spaceBetween={20}

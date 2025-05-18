@@ -2,17 +2,20 @@
 import { usePathname } from "next/navigation";
 import AboutLink from "../../components/aboutLink/AboutLink";
 import Aboutlink from "../../components/aboutlinks/Aboutlink";
+import { useTranslation } from "react-i18next";
 import "./about.scss";
-
-const titles = {
-  "/about": "Kompaniya haqida",
-  "/about/aboutSifat": "Sifat nazorati va laboratoriya",
-  "/about/aboutMijoz": "Mijozlar va hamkorlar",
-  "/about/aboutOAV": "Biz haqimizda OAV",
-};
 
 export default function AboutLayout({ children }) {
   const pathname = usePathname();
+  const [t, i18n] = useTranslation("global");
+  const titles = {
+    "/about": t("menu.about.kompaniya"),
+    "/about/aboutSifat": t("menu.about.sifat"),
+    "/about/aboutMijoz": t("menu.about.mijoz"),
+    "/about/aboutOAV": t("menu.about.oav"),
+    "/": t("menu.about.yangiliklar"),
+    "/": t("menu.about.vakansiyalar"),
+  };
 
   const title = titles[pathname] || "Kompaniya haqida";
 

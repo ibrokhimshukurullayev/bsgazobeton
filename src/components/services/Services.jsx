@@ -1,43 +1,49 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
+
 import "./services.scss";
 
 import xizmat1 from "../../assets/images/xizmat1.png";
 import xizmat2 from "../../assets/images/xizmat2.png";
 import xizmat3 from "../../assets/images/xizmat3.png";
 
-const xizmatlar = [
-  {
-    id: 1,
-    title: "Konsultatsiya",
-    desc: "BS gazbetonlari va qo‘llash texnologiyasi bo‘yicha texnik maslahat oling.",
-    button: "KONSULTATSIYA OLISH",
-    image: xizmat1,
-    type: "konsultatsiya",
-  },
-  {
-    id: 2,
-    title: "Gazoblok montaji",
-    desc: "Gazobloklarni to‘g‘ri o‘rnatish qurilishni mustahkamligini va uzoq xizmat qilishini ta’minlaydi.",
-    button: "XIZMAT HAQIDA BATAFSIL",
-    image: xizmat2,
-    type: "montaj",
-  },
-  {
-    id: 3,
-    title: "Gazobloklar sonini bilasizmi?",
-    desc: "Loyihangiz uchun kerakli gazoblok miqdori va narxini onlayn hisoblang!",
-    button: "HISOBLASH",
-    image: xizmat3,
-    type: "hisoblash",
-  },
-];
-
 const Services = () => {
+  const [t, i18n] = useTranslation("global");
+
+  const xizmatlar = [
+    {
+      id: 1,
+      title: t("services.title1"),
+      desc: t("services.desc1"),
+      button: t("services.button1"),
+      image: xizmat1,
+      type: "konsultatsiya",
+    },
+    {
+      id: 2,
+      title: t("services.title2"),
+      desc: t("services.desc2"),
+      button: t("services.button2"),
+      image: xizmat2,
+      type: "montaj",
+    },
+    {
+      id: 3,
+      title: t("services.title3"),
+      desc: t("services.desc3"),
+      button: t("services.button3"),
+      image: xizmat3,
+      type: "hisoblash",
+    },
+  ];
+
   return (
     <div id="services">
       <div className="container services">
-        <h2 className="services__title">Xizmatlar</h2>
+        <h2 className="services__title">{t("header.services")}</h2>
         <div className="services__list">
           {xizmatlar.map((item) => (
             <div className={`services__card ${item.type}`} key={item.id}>

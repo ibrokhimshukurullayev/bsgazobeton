@@ -1,0 +1,300 @@
+{
+  "header": {
+    "catalog": "Katalog",
+    "services": "Xizmatlar",
+    "sales": "Sotuvlar",
+    "gazabetonabout": "Gazobeton haqida",
+    "about": "Biz haqimizda",
+    "contact": "Aloqa"
+  },
+  "aboutkompany": {
+    "title1": "– O‘zbekiston bozorida yuqori sifatli gazobeton mahsulotlarini ishlab chiqaruvchi yetakchi kompaniyalardan biridir. Ishlab chiqarish zavodi Sirdaryo viloyatida joylashgan. Bizning maqsadimiz qurilish industriyasiga innovatsion, ekologik toza va mustahkam qurilish materiallarini taqdim etishdir.",
+    "title2": "Bizning tariximiz",
+    "title3": "BS gazobeton kompaniyasi o‘z faoliyatini 2023-yil boshida boshlagan. Hozirga qadar qurilish materiallari sohasida yuqori sifat va innovatsiya tamoyillariga amal qilib kelmoqda. Qurilishdagi uzoq yillik tajriba esa ushbu industriyada muvaffaqiyatli bo'lishga yordam berdi. Biz o‘z mijozlarimizga zamonaviy texnologiyalar asosida ishlab chiqarilgan yuqori sifatli gazobeton mahsulotlarini taklif qilamiz.",
+    "title4": "Missiyamiz va qadriyatlarimiz",
+    "title5": "Bizning asosiy maqsadimiz – O‘zbekiston va O'rta Osiyo davlatlari uchun yuqori sifatli, ekologik xavfsiz va energiya tejamkor qurilish materiallari bilan ta’minlash. Ishlab chiqarish jarayonimizda zamonaviy texnologiyalar va qat’iy sifat nazorati tizimiga tayangan holda, mijozlarimizga ishonchli va uzoq muddat xizmat qiluvchi mahsulotlarni yetkazib beramiz.",
+    "title6" : "Ishlab chiqarish haqida",
+    "title7": " BS gazobeton zamonaviy ishlab chiqarish zavodiga ega bo‘lib, eng ilg‘or texnologiyalar va yuqori sifat standartlariga javob beruvchi uskunalar bilan jihozlangan. Ishlab chiqarish liniyasi Yevropaning Aircrete kompaniyasi tomonidan yo'lga qo'yilgan. Ishlab chiqarish quvvati yiliga 450 000 kubometrni tashkil qiladi. Ushbu texnologiyalarga hamohang ravishda ishlab chiqarishda eng sifatli xom ashyolardan foydalanamiz va mahsulotlarimizni xalqaro standartlarga mos ravishda tayyorlaymiz.",
+    "title8": "Nima uchun bizni tanlashadi?",
+    "cardtitle1": "Yuqori sifat",
+    "cardlist1": "Mahsulotlarimiz standartlarga javob beradi",
+    "cardtitle2": "Ekologik tozaligi",
+    "cardlist2": "Gazobeton ekologik xavfsiz va inson salomatligiga zarar yetkazmaydi",
+    "cardtitle3": "Energiya tejamkorligi",
+    "cardlist3": "Bizning mahsulotlarimiz issiqlikni uzoq muddat ushlab turish xususiyatiga ega",
+    "cardtitle4": "Innovatsion yondashuv",
+    "cardlist4": "Ishlab chiqarishda zamonaviy texnologiyalardan foydalanamiz",
+    "cardtitle5": "Mijozlarga e’tibor",
+    "cardlist5": "Biz har bir mijozning ehtiyojlarini inobatga olgan holda xizmat ko‘rsatamiz",
+    "title9": "BS gazobeton kompaniyasi sifat, ishonchlilik va mijozlarga sodiqlik tamoyillariga tayangan holda, O‘zbekiston bozorida o‘z mavqeini mustahkamlab bormoqda. Biz sizning ishonchli hamkoringiz bo‘lishga tayyormiz!",
+    "title10": "Biz bilan bog’lanish"
+  },
+  "menu": {
+  "katalog": {
+    "gazobloklar": "Gazobloklar",
+    "panellar": "Gazobeton panellari",
+    "kleylar": "Gazoblok kleylari",
+    "instrumentlar": "Gazoblokka tegishli instrumentlar va materiallar"
+  },
+  "xizmatlar": {
+    "xizmatlar": "Xizmatlar",
+    "konsultatsiya": "Mahsulot bo’yicha konsultatsiya",
+    "montaj": "Gazoblok montaji",
+    "hisoblash": "Loyihangiz uchun gazobloklar miqdorini va narxini hisoblang (Kalkulyator)"
+  },
+  "sotuvlar": {
+    "sotuvlar": "Sotuvlar",
+    "buyurtma": "Buyurtma berish va yetkazib berish tartibi",
+    "tolov": "To’lov usullari",
+    "manzillar": "Manzillar"
+  },
+  "gazobeton": {
+    "gazobeton": "Gazobeton haqida",
+    "haqida": "Gazobeton haqida batafsil",
+    "testlar": "Sinov testlari",
+    "sertifikat": "Sertifikat va litsenziyalar",
+    "qollanilishi": "Gazobetonning qo‘llanilish joylari",
+    "qollanma": "Gazoblok ishlatish bo’yicha qo’llanma",
+    "farqi": "Gazobetonning boshqa materiallardan farqi",
+    "faq": "Kop beriladigan savollar"
+  },
+  "about": {
+    "about": "Biz haqimizda",
+    "kompaniya": "Kompaniya haqida",
+    "sifat": "Sifat nazorati va laboratoriya",
+    "mijoz": "Mijozlar va hamkorlar",
+    "oav": "Biz haqimizda OAV",
+    "yangiliklar": "Yangiliklar",
+    "vakansiyalar": "Vakansiyalar"
+  }
+  },
+  "hero": {
+    "title1": "Kelajak uchun yaratilgan",
+    "title2": "Gazobeton – Ishonchli",
+    "title3": "Qurilish materiali!",
+    "titlebutton1": "Mahsulotlarni ko’rish",
+    "titlebutton2": "Gollandiya texnologiyalari"
+  },
+    "1": {
+      "question": "Gazobeton nima?",
+      "answer": "Gazobeton — bu yengil, g‘ovak tuzimli qurilish materiali bo‘lib, sement, qum, ohak va suv aralashmasidan tayyorlanadi. Ichidagi mayda pufakchalar uni issiqlikni saqlovchi va yengil qiladi."
+    },
+    "2": {
+      "question": "Gazobeton devor issiq bo‘ladimi?",
+      "answer": "Ha, gazobeton yaxshi issiqlik izolyatsiyasiga ega."
+    },
+    "3": {
+      "question": "Gazobeton devor yong‘inga chidamlimi?",
+      "answer": "Ha, u yong‘inga chidamli va xavfsiz material hisoblanadi."
+    },
+    "4": {
+      "question": "Namlikdan shikastlanadimi?",
+      "answer": "To‘g‘ri o‘rnatilgan holatda u namlikdan himoyalangan bo‘ladi."
+    },
+    "5": {
+      "question": "Uni qanday elim bilan birlashtirish kerak?",
+      "answer": "Maxsus gazobeton elimlari mavjud bo‘lib, ular bilan mustahkam tutashadi."
+    },
+    "6": {
+      "question": "Uni oddiy arra bilan kesish mumkinmi?",
+      "answer": "Ha, uni maxsus yoki oddiy arra bilan osongina kesish mumkin."
+    },
+    "7": {
+      "question": "Gazobeton ekologik tozami?",
+      "answer": "To‘liq tabiiy xom ashyolardan tayyorlangan va ekologik toza."
+    },
+    "8": {
+      "question": "Uzoq muddat xizmat qiladimi?",
+      "answer": "To‘g‘ri parvarish qilinsa, gazobeton uzoq xizmat qiladi."
+    },
+    "9": {
+      "question": "Ichki devorlar uchun ham mosmi?",
+      "answer": "Albatta, u ichki va tashqi devorlar uchun mos keladi."
+    },
+    "sifat": {
+      "title1": "kompaniyasi o‘z mahsulotlarining sifatini ta'minlash uchun sifat nazorati tizimiga ega. Har bir ishlab chiqarilgan mahsulot qat'iy tekshiruvlardan o‘tkaziladi va standartlarga mos kelishini kafolatlaydi.",
+      "title2": "Sifat nazorati jarayonlari",
+      "cardtitle1": "Xomashyo tekshiruvi",
+      "cardlist1": "Har bir komponent kimyoviy va fizik xususiyatlari bo‘yicha sinovdan o‘tkaziladi.",
+      "cardtitle2": "Xomashyo tekshiruvi",
+      "cardlist2": "Har bir komponent kimyoviy va fizik xususiyatlari bo‘yicha sinovdan o‘tkaziladi.",
+      "cardtitle3": "Xomashyo tekshiruvi",
+      "cardlist3": "Har bir komponent kimyoviy va fizik xususiyatlari bo‘yicha sinovdan o‘tkaziladi.",
+      "cardtitle4": "Xomashyo tekshiruvi",
+      "cardlist24": "Har bir komponent kimyoviy va fizik xususiyatlari bo‘yicha sinovdan o‘tkaziladi.",
+      "title3": "Bizning laboratoriyamiz",
+      "list1": "Bizning laboratoriya mutaxassislarimiz har bir mahsulotning sifatini kafolatlash uchun muntazam ravishda tekshiruv jarayonlarini olib borishadi.",
+      "list2": "“BS gazobeton” kompaniyasi sifat nazorati tizimiga doimiy ravishda e'tibor qaratib, qurilish industriyasida yuqori standartlarga javob beruvchi mahsulotlarni ishlab chiqarishda davom etmoqda."
+    },
+    "mijoz":{
+      "title4": "Bizning mijozlarimiz",
+      "title1": "kompaniyasi qurilish industriyasida keng miqyosda hamkorlik aloqalarini yo‘lga qo‘ygan va O‘zbekiston bozorida ko'plab mijozlariga ega. Biz o‘z mijozlarimiz va hamkorlarimiz bilan o‘zaro manfaatli aloqalarni mustahkamlash va ularning biznes muvaffaqiyatiga hissa qo‘shish uchun doimiy ravishda ishlaymiz.",
+      "title2": "Agar siz ham ishonchli hamkor izlayotgan bo'lsangiz, biz bilan bog‘laning!",
+      "title3": "Mahsulotlarni butun O’zbekiston bo’ylab yetkazib beramiz!",
+      "title5": "Bizning faoliyatimiz OAV, yangiliklar, qurilish sohasidagi gazeta-jurnallar va mahalliy telekanallar tomonidan yoritib boriladi. Biz haqimizda chop etilgan maqolalar:"
+    },
+    "about": {
+      "title1": "Gazobeton (avtoklavlangan gazobeton)",
+      "title2": "bu yengil, yuqori issiqlik izolyatsiyasiga ega, mustahkam va ekologik toza qurilish materiali bo‘lib, bugungi kunda zamonaviy qurilish sanoatida keng qo‘llanilmoqda. Ushbu material kvars qumi, sement, ohak, alyuminiy kukuni va suv aralashmasidan tashkil topadi. Mustahkamlikka erishish uchun maxsus avtoklav pechlarida yuqori bosim ostida tayyorlanadi.",
+      "title3": "Gazobeton afzalliklari",
+      "cardtitle1": "Yengillik",
+      "cardlist1": "Oddiy betonga qaraganda ancha yengil, bu esa transport va qurilish xarajatlarini kamaytiradi",
+      "cardtitle2": "Issiqlik izolyatsiyasi",
+      "cardlist2": "Gazobeton yuqori darajadagi issiqlikni saqlash xususiyatiga ega, bu esa qishda issiqlikni, yozda salqinlikni taʼminlaydi",
+      "cardtitle3": "Mustahkamlik",
+      "cardlist3": "Yengil bo‘lishiga qaramay, gazobeton yaxshi yuk ko‘tarish qobiliyatiga ega va uzoq muddatga chidamli",
+      "cardtitle4": "Olovga chidamlilik",
+      "cardlist4": "Gazobeton yong‘inga bardoshli bo‘lib, yuqori haroratga chidamli, xavfsizligini taʼminlaydi",
+      "cardtitle5": "Oson ishlov berish",
+      "cardlist5": "Kesish, teshish va shakllantirish oson bo‘lib, qurilish jarayonini soddalashtiradi va vaqtni tejaydi",
+      "cardtitle6": "Ekologik tozaligi",
+      "cardlist6": "Tarkibida zararli moddalar yo‘q, inson salomatligiga xavfsiz va ekologik toza material",
+      "cardtitle7": "Mukammal tovush izolyatsiyasi",
+      "cardlist7": "Tovushlarni yaxshi yutib, binoda tovush izolyatsiyasini taʼminlaydi",
+      "cardtitle8": "Namlikka chidamliligi",
+      "cardlist8": "Gazobeton mog‘or paydo bo‘lishining oldini oladi"
+    },
+    "sinovtestlar": {
+      "title": "“mahsulotlari sifat va mustahkamlik bo‘yicha standartlarga mos kelishini ta’minlash uchun turli laboratoriya sinovlaridan o‘tkaziladi. Asosan, quyidagi sinov testlari bajariladi:”",
+      "cardtitle1": "Zichlik sinovi",
+      "cardlist1": "Mahsulotning standart zichlik ko‘rsatkichlariga mosligi tekshiriladi",
+
+      "cardtitle2": "Mustahkamlik sinovi",
+      "cardlist2": "Og‘irlik chidamliligi aniqlanadi",
+      
+      "cardtitle3": "Olovga chidamlilik sinovi",
+      "cardlist3": "Materialning yuqori haroratga bardoshliligi o‘rganiladi",
+
+      "cardtitle4": "Issiqlik izolyatsiyasi sinovi",
+      "cardlist4": "Issiqlikni o‘tkazmaslik va energiya tejash ko‘rsatkichlari tekshiriladi",
+
+      "cardtitle5": "Tovush izolyatsiyasi sinovi",
+      "cardlist5": "Shovqinni kamaytirish ko‘rsatkichi aniqlanadi"
+    },
+    "footer": {
+      "manzil": "Manzil:",
+      "manjil1": "Sirdaryo viloyati, Sirdaryo tumani, Sobir Rahimov SIU, Chibantay qo'rg'oni",
+      "telefon": "Telefon:",
+      "email": "Email:",
+      "title": "© 2023–2025 «BS gazobeton» — Qurilish materiallari va aksessuarlar ishlab chiqaruvchi"
+    },
+    "cantact": {
+      "title1": "HOZIROQ QO’NG’IROQ QILING!",
+      "formtitle1": "Xabar qoldirish",
+      "input1": "Ismingiz*",
+      "input2": "Telefon raqamingiz*",
+      "input3": "Xabar matni...",
+      "button": "Yuborish",
+      "formtitle2": "Yuborish tugmachasini bosish orqali siz maxfiylik siyosatiga rozilik bildirasiz."
+    },
+    "deliveryinfo": {
+      "title": "Siz materialni tanlashingiz va uy qurish uchun kerakli miqdorni hisoblashingiz yoki mutaxassislarimiz yordamidan foydalanishingiz mumkin.",
+      "section1title": "Buyurtma berish",
+      "section1text": "Agar ofisimizga yetib borish siz uchun noqulay bo‘lsa, kerakli tovarlar hajmi va kontaktlaringizni ko‘rsatgan holda veb-saytdagi shakl orqali o‘zingiz buyurtma berishingiz mumkin. Menejer albatta siz bilan bog‘lanadi va elektron pochta orqali hisob-faktura beradi.",
+      "section1text2": " Tovarlar uchun masofadan turib to‘lashingiz mumkin, xizmatlar va bloklar sizga qurilish maydonchasida yetkaziladi. Shuningdek, kompaniyamiz menejeri bilan quyidagi manzil orqali bog‘lanishingiz mumkin. elektron pochta – Batafsil ma’lumot yoki maslahat uchun sales@arton.uz.",
+      "section2title": "Yetkazib berish tartibi",
+      "section2text": "Yetkazib berish butun shahar va viloyatlar bo‘yicha amalga oshiriladi. Minimal buyurtma miqdoriga qarab bepul yoki shartnoma asosida yetkazib berish xizmati ko‘rsatiladi. Yetkazish muddati — odatda 1–2 ish kuni.",
+      "section3title": "Maslahat va hisoblash",
+      "section3text": "Mutaxassislarimizdan shaxsan maslahat olishingiz mumkin. Buning uchun siz bizning kompaniya ofisimizga kelishingiz kerak. Savdo bo‘yicha mutaxassislarimiz buyurtmangizni hisoblash va joylashtirishda yordam beradi.",
+      "bottomtext": "Agar sizda qo‘shimcha savollar bo‘lsa bizga qo‘ng‘iroq qiling yoki ofisimizga tashrif buyuring.",
+      "button1": "BIZ BILAN BOG‘LANISH",
+      "button2": "OFIS MANZILLARI"
+    },
+    "paymentinfo": {
+      "title": "Shartnoma tuzilgandan so‘ng sizga to‘lov uchun hisob-faktura beriladi, uni ikki usulda ham olish mumkin",
+      "method1title": "Bank o‘tkazmasi orqali to‘lov",
+      "method1text": "Agar kerak bo‘lsa, jismoniy shaxslar xaridni bank orqali o‘tkazma yo‘li bilan to‘lashlari mumkin.",
+      "method2title": "Naqd pulda to‘lov",
+      "method2text": "Biz jismoniy va yuridik shaxslardan naqd pul to‘lovlarini savdo ofislarida qabul qilamiz.",
+      "method3title": "Kartadan pul o‘tkazish",
+      "method3text": "Agar kerak bo‘lsa, xaridingiz uchun PayMe / Click to‘lov tizimlari orqali to‘lashingiz mumkin.",
+      "method4title": "Bo‘lib-bo‘lib to‘lash",
+      "method4text": "Agar kerak bo‘lsa, bo‘lib-bo‘lib to‘lashdan foydalanishingiz mumkin."
+    },
+    "consultationinfo": {
+      "title": "Sizga qanday gazoblok kerak?",
+      "subtitle": "Qanday o‘lcham, zichlik yoki miqdorni tanlashni bilmaysizmi?",
+      "text": "Ushbu xizmat orqali siz “BS gazobeton” brendining avtoklavlangan gazobeton mahsulotlari, ularning texnik xususiyatlari va qo‘llash usullari haqida batafsil maslahat olishingiz mumkin. Biz sizga qurilish ehtiyojlaringizga mos keladigan optimal yechimlarni tanlashda yordam beramiz.",
+      "bottomtext": "Agar sizda qo‘shimcha savollar bo‘lsa bizga qo‘ng‘iroq qiling yoki ofisimizga tashrif buyuring.",
+      "button1": "BEPUL KONSULTATSIYA OLISH",
+      "button2": "OFIS MANZILLARI"
+    },
+    "gazoblockinfo": {
+      "title": "Gazobloklar bilan qurilish qilayotgan bo‘lsangiz, sifatli montaj – bu mustahkam va issiqlikni ushlab turuvchi devorning asosi. Biz sizga faqat mahsulotni emas, balki tayyor yechimni taklif qilamiz — ya’ni tajribali mutaxassislar tomonidan bajariladigan gazoblok o‘rnatish xizmatini.",
+      "section1title": "Nimalarni taklif qilamiz:",
+      "section1item1title": "To‘liq montaj xizmati",
+      "section1item1text": "Gazobloklarni asosdan tomgacha o‘rnatish.",
+      "section1item2title": "Professional ustalar",
+      "section1item2text": "Tajribali va o‘qitilgan quruvchilar jamoasi.",
+      "section1item3title": "Yupqa tikuvli texnologiya",
+      "section1item3text": "Maxsus elim yordamida issiqlik yo‘qotilishini kamaytiruvchi montaj.",
+      "section1item4title": "Aniq va tekis devorlar",
+      "section1item4text": "Keyinchalik suvoqni minimallashtiradi.",
+      "bottomtext": "Qurilish sifati siz tanlagan ustalarga bog‘liq. Biz bilan ishlang — ishonchli natijani kafolatlaymiz.",
+      "bottomtext2": "Hoziroq bog‘laning va professional montaj xizmatimizga buyurtma bering!",
+      "button": "Biz bilan bog’lanish",
+      "title2": "Kimlar uchun foydali:",
+      "text1": "Uy qurayotganlar.",
+      "text2": "Qurilish firmalari uchun subpudrat xizmat."
+    },
+    "calculator": {
+    "title": "KALKULYATOR",
+    "lengthLabel": "Devor uzunligi (m)",
+    "lengthPlaceholder": "Devor uzunligi",
+    "heightLabel": "Devor balandligi (m)",
+    "heightPlaceholder": "Devor balandligi",
+    "thicknessLabel": "Devor qalinligi (mm)",
+    "calculateButton": "HISOBLASH",
+    "resultTitle": "Natija",
+    "blockCount": "Kerakli gazobloklar soni:",
+    "volume": "Umumiy hajmi:"
+  },
+  "advantages": {
+    "title": "Gazobeton afzalliklari",
+    "title1": "Yengillik",
+    "desc1": "Oddiy betonga qaraganda ancha yengil, bu esa transport va qurilish xarajatlarini kamaytiradi.",
+    "title2": "Issiqlik izolyatsiyasi",
+    "desc2": "Gazobeton yuqori darajadagi issiqlikni saqlash xususiyatiga ega, bu esa qishda issiqlikni, yozda salqinlikni ta’minlaydi.",
+    "title3": "Mustahkamlik",
+    "desc3": "Yengil bo‘lishiga qaramay, gazobeton yaxshi yuk ko‘tarish qobiliyatiga ega va uzoq muddatga chidamli.",
+    "title4": "Olovga chidamlilik",
+    "desc4": "Gazobeton yong‘inga bardoshli bo‘lib, yuqori haroratga chidamli, xavfsizlikni ta’minlaydi.",
+    "title5": "Ekologik tozaligi",
+    "desc5": "Tarkibida zararli moddalar yo‘q, inson salomatligiga xavfsiz va ekologik toza material.",
+    "title6": "Oson ishlov berish",
+    "desc6": "Kesish, teshish va shakllantirish oson bo‘lib, qurilish jarayonini soddalashtiradi va vaqtni tejaydi."
+  },
+  "aboutsection": {
+    "title": " – O‘zbekiston bozorida yuqori sifatli gazobeton mahsulotlarini ishlab chiqaruvchi yetakchi kompaniyalardan biridir.",
+    "desc1": "Kompaniya zamonaviy ishlab chiqarish zavodiga ega bo‘lib, eng ilg‘or texnologiyalar va yuqori sifat standartlariga javob beruvchi uskunalar bilan jihozlangan. Ishlab chiqarish liniyasi Yevropaning 'Aircrete' kompaniyasi tomonidan yo'lga qo'yilgan. Ishlab chiqarish quvvati yiliga 450 000 kubometrni tashkil qiladi.",
+    "desc2": "Har bir ishlab chiqarilgan mahsulot qat'iy tekshiruvlardan o‘tkaziladi va standartlarga mos kelishini kafolatlaydi."
+  },
+  "faq":{
+    "title": "Savollaringiz qoldimi?",
+    "desc": "Bepul konsultatsiya olish"
+  },
+  "services": {
+    "title1": "Konsultatsiya",
+    "desc1": "BS gazbetonlari va qo‘llash texnologiyasi bo‘yicha texnik maslahat oling.",
+    "button1": "KONSULTATSIYA OLISH",
+
+    "title2": "Gazoblok montaji",
+    "desc2": "Gazobloklarni to‘g‘ri o‘rnatish qurilishni mustahkamligini va uzoq xizmat qilishini ta’minlaydi.",
+    "button2": "XIZMAT HAQIDA BATAFSIL",
+
+    "title3": "Gazobloklar sonini bilasizmi?",
+    "desc3": "Loyihangiz uchun kerakli gazoblok miqdori va narxini onlayn hisoblang!",
+    "button3": "HISOBLASH"
+  },
+  "mahsulot": {
+    "title": "Mahsulotlar",
+    "text1": "Gazobeton bloklari",
+    "text2": "Gazobeton panellari",
+    "text3": "Gazoblok kley",
+    "text4": "Gazoblok vositalari",
+    "button": "Mahsulotlarni ko‘rish"
+  }
+}
+
+
+

@@ -1,0 +1,298 @@
+{
+  "header": {
+    "catalog": "Catalog",
+    "services": "Services",
+    "sales": "Sales",
+    "gazabetonabout": "About Gazabeton",
+    "about": "About us",
+    "contact": "Contact"
+  },
+  "aboutkompany": {
+    "title1": "– is one of the leading manufacturers of high-quality gazobeton products in Uzbekistan. Our production plant is located in the Syrdarya region. Our mission is to provide the construction industry with innovative, eco-friendly, and durable building materials.",
+    "title2": "Our history",
+    "title3": "BS Gazobeton was established in early 2023. Since then, we have remained committed to the principles of quality and innovation in building materials. Our extensive experience in the construction industry has helped us grow into a trusted and successful brand. We offer products developed with modern technologies and made to meet the highest standards.",
+    "title4": "Our mission and values",
+    "title5": "Our core mission is to supply Uzbekistan and Central Asian countries with premium, environmentally safe, and energy-efficient building materials. By combining cutting-edge technologies and strict quality control systems, we deliver products that are reliable and long-lasting.",
+    "title6" : "Our production",
+    "title7": "BS Gazobeton operates a state-of-the-art production facility equipped with advanced machinery that meets international standards. Our production line is developed by the European company Aircrete and has an annual capacity of 450,000 cubic meters. We use only top-grade raw materials and manufacture products that comply with global standards.",
+    "title8": "Why choose us?",
+    "cardtitle1": "High quality",
+    "cardlist1": "Our products meet industry standards",
+    "cardtitle2": "Eco-friendliness",
+    "cardlist2": "gazobeton is safe for both people and the environment.",
+    "cardtitle3": "Energy efficiency",
+    "cardlist3": "Our materials provide excellent thermal insulation",
+    "cardtitle4": "Innovation",
+    "cardlist4": "We use advanced production technologies",
+    "cardtitle5": "Customer focus",
+    "cardlist5": "We deliver personalized service based on individual needs",
+    "title9": "BS Gazobeton continues to strengthen its position in the Uzbek market by focusing on quality, reliability, and customer commitment. We are ready to become your trusted partner!",
+    "title10": "Contact us"
+  },
+  "menu": {
+  "katalog": {
+    "gazobloklar": "Gazobloklar",
+    "panellar": "gazobeton panels",
+    "kleylar": "Adhesives for gazobloklar",
+    "instrumentlar": "Tools and materials for gazobloklar"
+  },
+  "xizmatlar": {
+    "xizmatlar": "Services",
+    "konsultatsiya": "Product consultation",
+    "montaj": "Gazobloklar installation",
+    "hisoblash": "Calculate quantity and price of gazobloklar"
+  },
+  "sotuvlar": {
+    "sotuvlar": "Sales",
+    "buyurtma": "Ordering and delivery procedure",
+    "tolov": "Payment methods",
+    "manzillar": "Addresses"
+  },
+  "gazobeton": {
+    "gazobeton": "About gazobeton",
+    "haqida": "Detailed information about gazobeton",
+    "testlar": "Test results",
+    "sertifikat": "Certificates and licenses",
+    "qollanilishi": "Application areas of gazobeton",
+    "qollanma": "User guide for gazobloklar",
+    "farqi": "Difference from other materials",
+    "faq": "Frequently Asked Questions"
+  },
+  "about": {
+    "about": "About Us",
+    "kompaniya": "About the company",
+    "sifat": "Quality control and laboratory",
+    "mijoz": "Clients and partners",
+    "oav": "Press about us",
+    "yangiliklar": "News",
+    "vakansiyalar": "Vacancies"
+  }
+},
+"hero": {
+  "title1": "Created for the future",
+  "title2": "Aerated concrete – Reliable",
+  "title3": "Building material!",
+  "titlebutton1": "View products",
+  "titlebutton2": "Netherlands technologies"
+},
+"1": {
+    "question": "What is aerated concrete?",
+    "answer": "Aerated concrete is a lightweight, porous construction material made from a mixture of cement, sand, lime, and water. The tiny air bubbles inside provide insulation and reduce weight."
+  },
+  "2": {
+    "question": "Is a wall made of aerated concrete warm?",
+    "answer": "Yes, aerated concrete has good thermal insulation."
+  },
+  "3": {
+    "question": "Is aerated concrete fire-resistant?",
+    "answer": "Yes, it is a fire-resistant and safe material."
+  },
+  "4": {
+    "question": "Can it be damaged by moisture?",
+    "answer": "If properly installed, it is protected from moisture."
+  },
+  "5": {
+    "question": "What kind of adhesive should be used?",
+    "answer": "There are special adhesives for aerated concrete that ensure strong bonding."
+  },
+  "6": {
+    "question": "Can it be cut with a regular saw?",
+    "answer": "Yes, it can be easily cut with a regular or special saw."
+  },
+  "7": {
+    "question": "Is aerated concrete eco-friendly?",
+    "answer": "It is made from fully natural raw materials and is environmentally friendly."
+  },
+  "8": {
+    "question": "Is it durable?",
+    "answer": "With proper care, aerated concrete lasts a long time."
+  },
+  "9": {
+    "question": "Is it suitable for interior walls?",
+    "answer": "Absolutely, it is suitable for both interior and exterior walls."
+  },
+  "sifat": {
+    "title1": " we place a strong emphasis on maintaining high product standards through a rigorous quality control system. Every product undergoes thorough inspection to ensure it meets all required specifications.",
+    "title2": "Quality control stages",
+    "cardtitle1": "Raw material inspection",
+    "cardlist1": "Each component is tested for its chemical and physical properties.",
+    "cardtitle2": "Production process monitoring",
+    "cardlist2": "Every stage of the manufacturing process is monitored using modern technologies. Our specialists ensure continuous oversight.",
+    "cardtitle3": "Final product testing",
+    "cardlist3": "Key characteristics of aerated concrete are tested in our in-house laboratory.",
+    "cardtitle4": "Pre-delivery approval",
+    "cardlist24": "Each pallet is inspected before dispatch and must be approved before delivery to the client.",
+    "title3": "Our laboratory",
+    "list1": "Our laboratory experts carry out regular inspections to ensure every batch of product meets the expected quality.",
+    "list2": "BS Gazobeton remains committed to maintaining high quality standards and continues to produce materials that meet the evolving needs of the construction industry."
+  },
+  "mijoz":{
+    "title4": "Our clients",
+    "title1": "has established strong partnerships across the construction industry and has earned the trust of many clients throughout Uzbekistan.",
+    "title2": "If you’re interested in becoming a trusted partner, don’t hesitate to get in touch with us — we are always open to collaboration!",
+    "title3": "We deliver products all across Uzbekistan!",
+    "title5": "Our activities are covered by the media, news agencies, construction magazines, and local TV channels. Articles about us:"
+  },
+  "about": {
+    "title1": "AAC (Autoclaved Aerated Concrete)",
+    "title2": "is a lightweight, durable, and environmentally friendly building material known for its excellent thermal insulation. It is widely used in modern construction due to its versatility and performance.AAC is made from a mixture of quartz sand, cement, lime, aluminum powder, and water. It is cured in high-pressure autoclave chambers to achieve structural strength.",
+    "title3": "Advantages of AAC",
+    "cardtitle1": "Lightweight ",
+    "cardlist1": "3–4 times lighter than traditional bricks, making it easier to transport and build with",
+    "cardtitle2": "High thermal insulation",
+    "cardlist2": "Helps maintain a comfortable indoor climate and reduces energy consumption",
+    "cardtitle3": "High strength ",
+    "cardlist3": "Excellent load-bearing capacity",
+    "cardtitle4": "Fire resistance ",
+    "cardlist4": "100% fireproof material, ensuring safety",
+    "cardtitle5": "Easy to work with",
+    "cardlist5": "Simple to cut and shape during construction",
+    "cardtitle6": "Eco-friendly ",
+    "cardlist6": "Made from natural materials and safe for human health",
+    "cardtitle7": "Sound insulation",
+    "cardlist7": "Absorbs sound effectively, providing acoustic comfort",
+    "cardtitle8": "Moisture resistance",
+    "cardlist8": "Prevents mold and mildew formation"
+  },
+  "sinovtestlar": {
+    "title": "products undergo a series of laboratory tests to ensure they meet required standards for strength and quality",
+    "cardtitle1": "Density test",
+    "cardlist1": "Verifies whether the product meets standard density levels",
+
+    "cardtitle2": "Strength test",
+    "cardlist2": "Determines the material’s resistance to weight and mechanical stress",
+    
+    "cardtitle3": "Fire resistance test",
+    "cardlist3": "Assesses the material’s ability to withstand high temperatures",
+
+    "cardtitle4": "Thermal insulation test",
+    "cardlist4": "Evaluates energy-saving performance and heat retention",
+
+    "cardtitle5": "Sound insulation test",
+    "cardlist5": "Measures how effectively the material reduces noise transmission"
+  },
+  "footer": {
+    "manzil": "Address:",
+    "manjil1": "Sirdarya region, Sirdarya district, Sobir Rahimov SIU, Chibantay settlement",
+    "telefon": "Phone:",
+    "email": "Email:",
+    "title": "© 2023–2025 “BS Gazobeton” — Manufacturer of construction materials and accessories"
+  },
+  "cantact": {
+    "title1": "CALL NOW!",
+    "formtitle1": "Оставить сообщение",
+    "input1": "Ваше имя*",
+    "input2": "Ваш номер телефона*",
+    "input3": "Текст сообщения...",
+    "button": "Отправить",
+    "formtitle2": "Нажимая кнопку отправки, вы соглашаетесь с политикой конфиденциальности."
+  },
+  "deliveryinfo": {
+    "title": "You can select the material and calculate the required amount for your construction, or get assistance from our specialists.",
+    "section1title": "Placing an order",
+    "section1text": "Если вам неудобно приехать в наш офис, вы можете самостоятельно оформить заказ через форму на сайте, указав объем продукции и ваши контактные данные. Менеджер обязательно свяжется с вами и отправит счет-фактуру по электронной почте.",
+    "section1text2": "Оплату за товары можно произвести дистанционно, а услуги и блоки будут доставлены непосредственно на строительную площадку. Также вы можете связаться с менеджером нашей компании по следующему адресу: электронная почта — для подробной информации или консультации sales@arton.uz.",
+    "section2title": "Delivery terms",
+    "section2text": "Delivery is available across all cities and regions. Depending on the minimum order quantity, delivery may be free or subject to a contract. Estimated delivery time — typically 1–2 business days.",
+    "section3title": "Consultation and estimation",
+    "section3text": "You can get in-person advice from our specialists. To do so, please visit our company office. Our sales consultants will help you estimate and place your order.",
+    "bottomtext": "If you have additional questions, feel free to call us or visit our office.",
+    "button1": "CONTACT US",
+    "button2": "OFFICE LOCATIONS"
+  },
+  "paymentinfo": {
+    "title": "After signing the contract, an invoice will be issued for payment, which can be received in two ways",
+    "method1title": "Bank transfer payment",
+    "method1text": "If necessary, individuals can make a purchase payment via bank transfer.",
+    "method2title": "Cash payment",
+    "method2text": "We accept cash payments from individuals and legal entities at our sales offices.",
+    "method3title": "Card payment",
+    "method3text": "If needed, you can pay using PayMe / Click payment systems.",
+    "method4title": "Installment payment",
+    "method4text": "If necessary, you can take advantage of installment payment options."
+  },
+  "consultationinfo": {
+    "title": "What type of aerated block do you need?",
+    "subtitle": "Not sure which size, density or quantity to choose?",
+    "text": "Through this service, you can get detailed advice on autoclaved aerated concrete products from the “BS gazobeton” brand, including their technical features and application methods. We will help you find the optimal solutions that suit your construction needs.",
+    "bottomtext": "If you have additional questions, feel free to call us or visit our office.",
+    "button1": "GET FREE CONSULTATION",
+    "button2": "OFFICE LOCATIONS"
+  },
+  "gazoblockinfo": {
+    "title": "If you're building with gas blocks, proper installation is the foundation of a strong and heat-retaining wall. We offer not just the product but a complete solution — professional gas block installation by experienced specialists.",
+    "section1title": "What we offer:",
+    "section1item1title": "Full installation service",
+    "section1item1text": "From foundation to roof installation of gas blocks.",
+    "section1item2title": "Professional builders",
+    "section1item2text": "A team of experienced and trained construction workers.",
+    "section1item3title": "Thin-joint technology",
+    "section1item3text": "Installation with special adhesive that reduces heat loss.",
+    "section1item4title": "Accurate and smooth walls",
+    "section1item4text": "Minimizes future plastering work.",
+    "bottomtext": "Construction quality depends on the workers you choose. Work with us — we guarantee reliable results.",
+    "bottomtext2": "Contact us now and order our professional installation service!",
+    "button": "Contact us",
+    "title2": "Who it's useful for:",
+    "text1": "People building a house.",
+    "text2": "Subcontracting service for construction companies."
+  },
+  "calculator": {
+  "title": "CALCULATOR",
+  "lengthLabel": "Wall length (m)",
+  "lengthPlaceholder": "Wall length",
+  "heightLabel": "Wall height (m)",
+  "heightPlaceholder": "Wall height",
+  "thicknessLabel": "Wall thickness (mm)",
+  "calculateButton": "CALCULATE",
+  "resultTitle": "Result",
+  "blockCount": "Required number of blocks:",
+  "volume": "Total volume:"
+},
+"advantages": {
+  "title": "Advantages of aerated concrete",  
+  "title1": "Lightweight",
+  "desc1": "Much lighter than regular concrete, which reduces transportation and construction costs.",
+  "title2": "Thermal insulation",
+  "desc2": "Aerated concrete has excellent heat retention, keeping warmth in winter and coolness in summer.",
+  "title3": "Durability",
+  "desc3": "Despite being lightweight, it has good load-bearing capacity and long-term strength.",
+  "title4": "Fire resistance",
+  "desc4": "Aerated concrete is fire-resistant and withstands high temperatures, ensuring safety.",
+  "title5": "Eco-friendliness",
+  "desc5": "It contains no harmful substances, making it safe for health and environmentally friendly.",
+  "title6": "Easy to work with",
+  "desc6": "Easy to cut, drill, and shape, simplifying construction and saving time."
+},
+"aboutsection": {
+  "title": " – is one of the leading manufacturers of high-quality aerated concrete products in the Uzbek market.",
+  "desc1": "The company operates a modern production plant equipped with the most advanced technologies and machinery that meet high-quality standards. The production line is established by the European company 'Aircrete'. The annual production capacity is 450,000 cubic meters.",
+  "desc2": "Each product undergoes strict quality control to ensure compliance with standards."
+},
+  "faq": {
+    "title": "Still have questions?",
+    "desc": "Get a free consultation"
+  },
+  "services": {
+    "title1": "Consultation",
+    "desc1": "Get technical advice on BS aerated concrete and its application technologies.",
+    "button1": "GET CONSULTATION",
+
+    "title2": "Gas block installation",
+    "desc2": "Proper installation of gas blocks ensures durability and long-lasting performance of the construction.",
+    "button2": "MORE ABOUT THE SERVICE",
+
+    "title3": "Do you know how many gas blocks you need?",
+    "desc3": "Calculate the quantity and cost of gas blocks needed for your project online!",
+    "button3": "CALCULATE"
+  },
+  "mahsulot": {
+    "title": "Products",
+    "text1": "Aerated concrete blocks",
+    "text2": "Aerated concrete panels",
+    "text3": "Gas block adhesive",
+    "text4": "Gas block tools",
+    "button": "View products"
+  }
+}
+

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import "./aboutMijoz.scss";
@@ -5,16 +6,14 @@ import xonsaroy from "../../../assets/images/xonsaroy.png";
 import ClientCarousel from "../../../components/clientCarousel/ClientCarousel";
 import caricon from "../../../assets/images/caricon.png";
 import Title from "../../../components/title/Title";
+import { useTranslation } from "react-i18next";
 
 const AboutMijoz = () => {
+  const [t, i18n] = useTranslation("global");
+
   return (
     <div id="aboutMijoz">
-      <Title
-        title={"BS gazobeton"}
-        text={
-          "kompaniyasi qurilish industriyasida keng miqyosda hamkorlik aloqalarini yo‘lga qo‘ygan va O‘zbekiston bozorida ko'plab mijozlariga ega. Biz o‘z mijozlarimiz va hamkorlarimiz bilan o‘zaro manfaatli aloqalarni mustahkamlash va ularning biznes muvaffaqiyatiga hissa qo‘shish uchun doimiy ravishda ishlaymiz."
-        }
-      />
+      <Title title={"BS gazobeton"} text={t("mijoz.title1")} />
       <ClientCarousel />
       <div className="aboutMijoz__mijzolar">
         <div>
@@ -38,15 +37,12 @@ const AboutMijoz = () => {
       </div>
       <div className="aboutMijoz__banner">
         <div className="aboutMijoz__hero">
-          <h2>
-            Agar siz ham ishonchli hamkor izlayotgan bo'lsangiz, biz bilan
-            bog‘laning!
-          </h2>
-          <button>Biz bilan bog’lanish</button>
+          <h2>{t("mijoz.title2")}</h2>
+          <button>{t("aboutkompany.title10")}</button>
         </div>
         <div className="aboutMijoz__banner__end">
           <Image src={caricon} alt="carison" />
-          <p>Mahsulotlarni butun O’zbekiston bo’ylab yetkazib beramiz!</p>
+          <p>{t("mijoz.title3")}</p>
         </div>
       </div>
     </div>

@@ -10,19 +10,18 @@ import cart from "../../assets/images/header/cart.svg";
 import phone from "../../assets/images/header/phone.svg";
 import { Globe, User, ShoppingCart, Phone } from "lucide-react";
 import Modal from "../mudule/Modal";
-import dropdownItems from "../../static/index";
+import { useTranslation } from "react-i18next";
+import LangDropdown from "../select/langDropdown";
 
 import arrov from "../../assets/images/arrov.svg";
 import "./header.scss";
 
-const languages = ["O'Z", "РУ", "EN"];
-
 const Header = () => {
-  const [lang, setLang] = useState("O'Z");
   const [open, setOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [t, i18n] = useTranslation("global");
 
   const toggleNavbar = () => setNavbarOpen(!navbarOpen);
   const closeNavbar = () => setNavbarOpen(false);
@@ -34,19 +33,82 @@ const Header = () => {
   const toggleDropdown = (key) => {
     setActiveDropdown((prev) => (prev === key ? null : key));
   };
+
   const toggleUserModal = () => setIsUserModalOpen((prev) => !prev);
+  const dropdownItems = {
+    katalog: [
+      { label: t("menu.katalog.gazobloklar"), href: "#" },
+      { label: t("menu.katalog.panellar"), href: "#" },
+      { label: t("menu.katalog.kleylar"), href: "#" },
+      {
+        label: t("menu.katalog.instrumentlar"),
+        href: "#",
+      },
+    ],
+    xizmatlar: [
+      { label: t("menu.xizmatlar.konsultatsiya"), href: "/services" },
+      { label: t("menu.xizmatlar.montaj"), href: "/services/gazablokmantaji" },
+      {
+        label: t("menu.xizmatlar.hisoblash"),
+        href: "/services/calculator",
+      },
+    ],
+    sotuvlar: [
+      {
+        label: t("menu.sotuvlar.buyurtma"),
+        href: "/sotuvlar",
+      },
+      { label: t("menu.sotuvlar.tolov"), href: "/sotuvlar/tolovUsullari" },
+      { label: t("menu.sotuvlar.manzillar"), href: "/joylashuv" },
+    ],
+    gazobeton: [
+      { label: t("menu.gazobeton.haqida"), href: "/aboutGazabeton" },
+      {
+        label: t("menu.gazobeton.testlar"),
+        href: "/aboutGazabeton/aboutSinovtest",
+      },
+      {
+        label: t("menu.gazobeton.sertifikat"),
+        href: "/aboutGazabeton/aboutSertifikat",
+      },
+      {
+        label: t("menu.gazobeton.qollanilishi"),
+        href: "/aboutGazabeton/aboutQollanilishi",
+      },
+      {
+        label: t("menu.gazobeton.qollanma"),
+        href: "/aboutGazabeton/aboutIshlatilishi",
+      },
+      {
+        label: t("menu.gazobeton.farqi"),
+        href: "/aboutGazabeton/aboutMaterialardanFarqi",
+      },
+      {
+        label: t("menu.gazobeton.faq"),
+        href: "/aboutGazabeton/aboutFaq",
+      },
+    ],
+    about: [
+      { label: t("menu.about.kompaniya"), href: "/about" },
+      { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
+      { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
+      { label: t("menu.about.oav"), href: "/about/aboutOAV" },
+      { label: t("menu.about.yangiliklar"), href: "#" },
+      { label: t("menu.about.vakansiyalar"), href: "#" },
+    ],
+  };
 
   const navLinks = [
-    { href: "/katalog", label: "Katalog", key: "katalog" },
-    { href: "/services", label: "Xizmatlar", key: "xizmatlar" },
-    { href: "/sotuvlar", label: "Sotuvlar", key: "sotuvlar" },
+    { href: "/katalog", label: t("header.catalog"), key: "katalog" },
+    { href: "/services", label: t("header.services"), key: "xizmatlar" },
+    { href: "/sotuvlar", label: t("header.sales"), key: "sotuvlar" },
     {
       href: "/aboutGazabeton",
-      label: "Gazobeton haqida",
+      label: t("header.gazabetonabout"),
       key: "gazobeton",
     },
-    { href: "/about", label: "Biz haqimizda", key: "about" },
-    { href: "/joylashuv  ", label: "Aloqa" },
+    { href: "/about", label: t("header.about"), key: "about" },
+    { href: "/joylashuv  ", label: t("header.contact") },
   ];
 
   return (
@@ -92,25 +154,7 @@ const Header = () => {
               <span>(99) 150-22-22</span>
             </a>
             <div className="nav__actions">
-              <div className="lang-dropdown">
-                <button onClick={toggleDropdown} className="circle-btn">
-                  <Globe size={18} />
-                  <span>{lang}</span>
-                </button>
-                {open && (
-                  <div className="lang-options">
-                    {languages.map((l) => (
-                      <div
-                        key={l}
-                        className={`lang-option ${lang === l ? "active" : ""}`}
-                        onClick={() => chooseLang(l)}
-                      >
-                        {l}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <LangDropdown />
 
               <button className="circle-btn" onClick={toggleUserModal}>
                 <Image src={person} alt="person" />
@@ -161,24 +205,22 @@ const Header = () => {
           ))}
         </ul>
         <div className="nav__res">
-          <div className="lang-dropdown">
-            <button onClick={toggleDropdown} className="circle__btn">
-              <Globe size={18} />
-              <span>{lang}</span>
+          <div className="nav__actions">
+            <LangDropdown />
+
+            <button className="circle-btn" onClick={toggleUserModal}>
+              <Image src={person} alt="person" />
             </button>
-            {open && (
-              <div className="lang-options">
-                {languages.map((l) => (
-                  <div
-                    key={l}
-                    className={`lang-option ${lang === l ? "active" : ""}`}
-                    onClick={() => chooseLang(l)}
-                  >
-                    {l}
-                  </div>
-                ))}
-              </div>
-            )}
+            <Link href="/karzinka" className="circle-btns">
+              <Image src={cart} alt="cart" />
+            </Link>
+            <button
+              id="navbar-open"
+              onClick={toggleNavbar}
+              className="nav__icons"
+            >
+              <Image src={menu} alt="menu" width={16} height={14} />
+            </button>
           </div>
           <button className="circle__btn" onClick={toggleUserModal}>
             <Image src={person} alt="person" />

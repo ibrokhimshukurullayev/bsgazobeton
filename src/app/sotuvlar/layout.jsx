@@ -3,15 +3,17 @@ import { usePathname } from "next/navigation";
 import "./sotuvlar.scss";
 import SotuvGazabetonHeaderLink from "./components/sotuvHeaderLink/sotuvGazabetonHeaderLink";
 import SotuvGazabetonLink from "./components/sotuvGazabetonLink/sotuvGazabetonLink";
-
-const titles = {
-  "/sotuvlar": "Buyurtma berish va yetkazib berish tartibi",
-  "/sotuvlar/tolovUsullari": "To’lov usullari",
-  "/joylashuv": "Biz bilan bog’lanish",
-};
+import { useTranslation } from "react-i18next";
 
 export default function SotuvLayout({ children }) {
   const pathname = usePathname();
+  const [t, i18n] = useTranslation("global");
+
+  const titles = {
+    "/sotuvlar": t("menu.sotuvlar.buyurtma"),
+    "/sotuvlar/tolovUsullari": t("menu.sotuvlar.tolov"),
+    "/joylashuv": t("menu.sotuvlar.manzillar"),
+  };
 
   const title = titles[pathname] || "Sotuvlar";
   return (

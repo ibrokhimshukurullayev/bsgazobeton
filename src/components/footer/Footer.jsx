@@ -9,10 +9,73 @@ import twiter from "../../assets/images/social/twiter.svg";
 import linkedin from "../../assets/images/social/linkedin.svg";
 import telegram from "../../assets/images/social/telegram.svg";
 import Link from "next/link";
-
-import dropdownItems from "../../static/index";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const [t, i18n] = useTranslation("global");
+  const dropdownItems = {
+    katalog: [
+      { label: t("menu.katalog.gazobloklar"), href: "#" },
+      { label: t("menu.katalog.panellar"), href: "#" },
+      { label: t("menu.katalog.kleylar"), href: "#" },
+      {
+        label: t("menu.katalog.instrumentlar"),
+        href: "#",
+      },
+    ],
+    xizmatlar: [
+      { label: t("menu.xizmatlar.konsultatsiya"), href: "/services" },
+      { label: t("menu.xizmatlar.montaj"), href: "/services/gazablokmantaji" },
+      {
+        label: t("menu.xizmatlar.hisoblash"),
+        href: "/services/calculator",
+      },
+    ],
+    sotuvlar: [
+      {
+        label: t("menu.sotuvlar.buyurtma"),
+        href: "/sotuvlar",
+      },
+      { label: t("menu.sotuvlar.tolov"), href: "/sotuvlar/tolovUsullari" },
+      { label: t("menu.sotuvlar.manzillar"), href: "/joylashuv" },
+    ],
+    gazobeton: [
+      { label: t("menu.gazobeton.haqida"), href: "/aboutGazabeton" },
+      {
+        label: t("menu.gazobeton.testlar"),
+        href: "/aboutGazabeton/aboutSinovtest",
+      },
+      {
+        label: t("menu.gazobeton.sertifikat"),
+        href: "/aboutGazabeton/aboutSertifikat",
+      },
+      {
+        label: t("menu.gazobeton.qollanilishi"),
+        href: "/aboutGazabeton/aboutQollanilishi",
+      },
+      {
+        label: t("menu.gazobeton.qollanma"),
+        href: "/aboutGazabeton/aboutIshlatilishi",
+      },
+      {
+        label: t("menu.gazobeton.farqi"),
+        href: "/aboutGazabeton/aboutMaterialardanFarqi",
+      },
+      {
+        label: t("menu.gazobeton.faq"),
+        href: "/aboutGazabeton/aboutFaq",
+      },
+    ],
+    about: [
+      { label: t("menu.about.kompaniya"), href: "/about" },
+      { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
+      { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
+      { label: t("menu.about.oav"), href: "/about/aboutOAV" },
+      { label: t("menu.about.yangiliklar"), href: "#" },
+      { label: t("menu.about.vakansiyalar"), href: "#" },
+    ],
+  };
+
   return (
     <footer className="footer">
       <div className="footer__top container">
@@ -24,21 +87,18 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4>Manzil:</h4>
-            <p>
-              Sirdaryo viloyati, Sirdaryo tumani, Sobir Rahimov SIU, Chibantay
-              qo'rg'oni
-            </p>
+            <h4>{t("footer.manzil")}</h4>
+            <p>{t("footer.manjil1")}</p>
           </div>
 
           <div>
-            <h4>Telefon:</h4>
+            <h4>{t("footer.telefon")}</h4>
             <p>+998 (99) 150-22-22</p>
             <p>+998 (99) 150-22-22</p>
           </div>
 
           <div>
-            <h4>Email:</h4>
+            <h4>{t("footer.email")}</h4>
             <p>info@bsgazobeton.uz</p>
             <p>tuymuratov.sardor@bsgroup.uz</p>
           </div>
@@ -66,7 +126,7 @@ const Footer = () => {
         </div>
 
         <div className="footer__column">
-          <h4>Katalog</h4>
+          <h4>{t("header.catalog")}</h4>
           <ul>
             {dropdownItems.katalog.map((item, i) => (
               <li key={i}>
@@ -75,7 +135,7 @@ const Footer = () => {
             ))}
           </ul>
 
-          <h4>Xizmatlar</h4>
+          <h4>{t("header.services")}</h4>
           <ul>
             {dropdownItems.xizmatlar.map((item, i) => (
               <li key={i}>
@@ -86,7 +146,7 @@ const Footer = () => {
         </div>
 
         <div className="footer__column">
-          <h4>Biz haqimizda</h4>
+          <h4>{t("header.about")}</h4>
           <ul>
             {dropdownItems.about.map((item, i) => (
               <li key={i}>
@@ -95,7 +155,7 @@ const Footer = () => {
             ))}
           </ul>
 
-          <h4>Sotuvlar</h4>
+          <h4>{t("header.sales")}</h4>
           <ul>
             {dropdownItems.sotuvlar.map((item, i) => (
               <li key={i}>
@@ -106,7 +166,7 @@ const Footer = () => {
         </div>
 
         <div className="footer__column">
-          <h4>Gazobeton haqida</h4>
+          <h4>{t("header.gazabetonabout")}</h4>
           <ul>
             {dropdownItems.gazobeton.map((item, i) => (
               <li key={i}>
@@ -117,11 +177,8 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="footer__bottom">
-        <p>
-          © 2023–2025 «BS gazobeton» — Qurilish materiallari va aksessuarlar
-          ishlab chiqaruvchi
-        </p>
+      <div className="container footer__bottom">
+        <p>{t("footer.title")}</p>
       </div>
     </footer>
   );

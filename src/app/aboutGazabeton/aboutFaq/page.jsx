@@ -1,59 +1,60 @@
 "use client";
 import React, { useState } from "react";
-import "./about.scss";
+import { useTranslation } from "react-i18next";
 
-const faqData = [
-  {
-    id: 1,
-    question: "Gazobeton nima?",
-    answer:
-      "Gazobeton — bu yengil, g‘ovak tuzimli qurilish materiali bo‘lib, sement, qum, ohak va suv aralashmasidan tayyorlanadi. Ichidagi mayda pufakchalar uni issiqlikni saqlovchi va yengil qiladi.",
-  },
-  {
-    id: 2,
-    question: "Gazobeton devor issiq bo‘ladimi?",
-    answer: "Ha, gazobeton yaxshi issiqlik izolyatsiyasiga ega.",
-  },
-  {
-    id: 3,
-    question: "Gazobeton devor yong‘inga chidamlimi?",
-    answer: "Ha, u yong‘inga chidamli va xavfsiz material hisoblanadi.",
-  },
-  {
-    id: 4,
-    question: "Namlikdan shikastlanadimi?",
-    answer: "To‘g‘ri o‘rnatilgan holatda u namlikdan himoyalangan bo‘ladi.",
-  },
-  {
-    id: 5,
-    question: "Uni qanday elim bilan birlashtirish kerak?",
-    answer:
-      "Maxsus gazobeton elimlari mavjud bo‘lib, ular bilan mustahkam tutashadi.",
-  },
-  {
-    id: 6,
-    question: "Uni oddiy arra bilan kesish mumkinmi?",
-    answer: "Ha, uni maxsus yoki oddiy arra bilan osongina kesish mumkin.",
-  },
-  {
-    id: 7,
-    question: "Gazobeton ekologik tozami?",
-    answer: "To‘liq tabiiy xom ashyolardan tayyorlangan va ekologik toza.",
-  },
-  {
-    id: 8,
-    question: "Uzoq muddat xizmat qiladimi?",
-    answer: "To‘g‘ri parvarish qilinsa, gazobeton uzoq xizmat qiladi.",
-  },
-  {
-    id: 9,
-    question: "Ichki devorlar uchun ham mosmi?",
-    answer: "Albatta, u ichki va tashqi devorlar uchun mos keladi.",
-  },
-];
+import "./about.scss";
 
 const AboutFaq = () => {
   const [openId, setOpenId] = useState(1);
+  const [t, i18n] = useTranslation("global");
+
+  const faqData = [
+    {
+      id: 1,
+      question: t("1.question"),
+      answer: t("1.answer"),
+    },
+    {
+      id: 2,
+      question: t("2.question"),
+      answer: t("2.answer"),
+    },
+    {
+      id: 3,
+      question: t("3.question"),
+      answer: t("3.answer"),
+    },
+    {
+      id: 4,
+      question: t("4.question"),
+      answer: t("4.answer"),
+    },
+    {
+      id: 5,
+      question: t("5.question"),
+      answer: t("5.answer"),
+    },
+    {
+      id: 6,
+      question: t("6.question"),
+      answer: t("6.answer"),
+    },
+    {
+      id: 7,
+      question: t("7.question"),
+      answer: t("7.answer"),
+    },
+    {
+      id: 8,
+      question: t("8.question"),
+      answer: t("8.answer"),
+    },
+    {
+      id: 9,
+      question: t("9.question"),
+      answer: t("9.answer"),
+    },
+  ];
 
   const toggleFaq = (id) => {
     setOpenId(openId === id ? null : id);

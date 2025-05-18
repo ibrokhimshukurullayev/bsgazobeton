@@ -1,39 +1,38 @@
 "use client";
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./testlist.scss";
 
-const tests = [
-  {
-    number: 1,
-    title: "Zichlik sinovi",
-    description:
-      "Mahsulotning standart zichlik ko‘rsatkichlariga mosligi tekshiriladi",
-  },
-  {
-    number: 2,
-    title: "Mustahkamlik sinovi",
-    description: "Og‘irlik chidamliligi aniqlanadi",
-  },
-  {
-    number: 3,
-    title: "Olovga chidamlilik sinovi",
-    description: "Materialning yuqori haroratga bardoshliligi o‘rganiladi",
-  },
-  {
-    number: 4,
-    title: "Issiqlik izolyatsiyasi sinovi",
-    description:
-      "Issiqlikni o‘tkazmaslik va energiya tejash ko‘rsatkichlari tekshiriladi",
-  },
-  {
-    number: 5,
-    title: "Tovush izolyatsiyasi sinovi",
-    description: "Shovqinni kamaytirish ko‘rsatkichi aniqlanadi",
-  },
-];
-
 export const TestList = () => {
+  const [t, i18n] = useTranslation("global");
+  const tests = [
+    {
+      number: 1,
+      title: t("sinovtestlar.cardtitle1"),
+      description: t("sinovtestlar.cardlist1"),
+    },
+    {
+      number: 2,
+      title: t("sinovtestlar.cardtitle2"),
+      description: t("sinovtestlar.cardlist2"),
+    },
+    {
+      number: 3,
+      title: t("sinovtestlar.cardtitle3"),
+      description: t("sinovtestlar.cardlist3"),
+    },
+    {
+      number: 4,
+      title: t("sinovtestlar.cardtitle4"),
+      description: t("sinovtestlar.cardlist3"),
+    },
+    {
+      number: 5,
+      title: t("sinovtestlar.cardtitle5"),
+      description: t("sinovtestlar.cardlist4"),
+    },
+  ];
   return (
     <div className="testlist">
       {tests.map((test) => (

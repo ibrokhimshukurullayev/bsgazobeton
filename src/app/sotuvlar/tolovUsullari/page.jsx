@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import "./sotuv.scss";
 
@@ -11,44 +13,39 @@ import bank from "../../../assets/images/bank.png";
 import bolib from "../../../assets/images/bolib.png";
 import naqd from "../../../assets/images/naqd.png";
 import Title from "../../../components/title/Title";
-
-const payments = [
-  {
-    title: "Bank o'tkazmasi orqali to'lov",
-    description:
-      "Agar kerak bo'lsa, jismoniy shaxslar xaridni bank orqali o'tkazma yo'li bilan to'lashlari mumkin.",
-    icon: bank,
-  },
-  {
-    title: "Naqd pulda to'lov",
-    description:
-      "Biz jismoniy va yuridik shaxslardan naqd pul to‘lovlarini savdo ofislarida qabul qilamiz.",
-    icon: naqd,
-  },
-  {
-    title: "Kartadan pul o'tkazish",
-    description:
-      "Agar kerak bo‘lsa, xaridingiz uchun PayMe / Click to‘lov tizimlari orqali to‘lashingiz mumkin.",
-    icon: karta,
-    logos: [payme, click, uzumbank],
-  },
-  {
-    title: "Bo‘lib-bo‘lib to‘lash",
-    description:
-      "Agar kerak bo‘lsa, bo‘lib-bo‘lib to‘lashdan foydalanishingiz mumkin",
-    icon: bolib,
-    logos: [uzumnasiya],
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const TolovUsullari = () => {
+  const [t, i18n] = useTranslation("global");
+
+  const payments = [
+    {
+      title: t("paymentinfo.method1title"),
+      description: t("paymentinfo.method1text"),
+      icon: bank,
+    },
+    {
+      title: t("paymentinfo.method2title"),
+      description: t("paymentinfo.method2text"),
+      icon: naqd,
+    },
+    {
+      title: t("paymentinfo.method3title"),
+      description: t("paymentinfo.method3text"),
+      icon: karta,
+      logos: [payme, click, uzumbank],
+    },
+    {
+      title: t("paymentinfo.method4title"),
+      description: t("paymentinfo.method4text"),
+      icon: bolib,
+      logos: [uzumnasiya],
+    },
+  ];
+
   return (
     <div>
-      <Title
-        text={
-          "Shartnoma tuzilgandan so'ng sizga to'lov uchun hisob-faktura beriladi, uni ikki usulda ham olish mumkin"
-        }
-      />
+      <Title text={t("paymentinfo.title")} />
       <div className="payment">
         {payments.map((method, index) => (
           <div key={index} className="payment-method">

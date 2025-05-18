@@ -40,15 +40,16 @@
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    padding: 14px 0;
+    padding: 20px 0;
     text-align: center;
     min-height: 330px;
     transition: 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 32px;
+    height: 416px;
 
     h3 {
       color: rgb(39, 39, 42);

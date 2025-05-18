@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./services.scss";
 
 const Calculator = () => {
@@ -8,6 +9,7 @@ const Calculator = () => {
   const [balandlik, setBalandlik] = useState("");
   const [qalinlik, setQalinlik] = useState("100");
   const [natija, setNatija] = useState({ dona: 0, hajm: 0 });
+  const [t, i18n] = useTranslation("global");
 
   const handleSubmit = () => {
     const u = parseFloat(uzunlik);
@@ -25,14 +27,14 @@ const Calculator = () => {
 
   return (
     <div className="kalkulyator-container">
-      <h2>KALKULYATOR</h2>
+      <h2>{t("calculator.title")}</h2>
       <div className="form">
         <div className="input-group">
-          <label htmlFor="">Devor uzunligi (m)</label>
+          <label htmlFor="">{t("calculator.lengthLabel")}</label>
           <div>
             <input
               type="number"
-              placeholder="Devor uzunligi"
+              placeholder={t("calculator.lengthPlaceholder")}
               value={uzunlik}
               onChange={(e) => setUzunlik(e.target.value)}
             />
@@ -41,11 +43,11 @@ const Calculator = () => {
         </div>
 
         <div className="input-group">
-          <label htmlFor="">Devor balandligi (m)</label>
+          <label htmlFor="">{t("calculator.heightLabel")}</label>
           <div>
             <input
               type="number"
-              placeholder="Devor balandligi"
+              placeholder={t("calculator.heightPlaceholder")}
               value={balandlik}
               onChange={(e) => setBalandlik(e.target.value)}
             />
@@ -54,7 +56,7 @@ const Calculator = () => {
         </div>
 
         <div className="input-group">
-          <label htmlFor="">Devor qalinligi (mm)</label>
+          <label htmlFor="">{t("calculator.thicknessLabel")}</label>
 
           <select
             value={qalinlik}
@@ -69,16 +71,18 @@ const Calculator = () => {
         </div>
       </div>
       <div className="form__button">
-        <button onClick={handleSubmit}>HISOBLASH</button>
+        <button onClick={handleSubmit}>
+          {t("calculator.calculateButton")}
+        </button>
       </div>
 
       <div className="result">
-        <h4>Natija</h4>
+        <h4>{t("calculator.resultTitle")}</h4>
         <p>
-          Kerakli gazobloklar soni: <strong>{natija.dona}</strong> dona
+          {t("calculator.blockCount")} <strong>{natija.dona}</strong> dona
         </p>
         <p>
-          Umumiy hajmi: <strong>{natija.hajm}</strong> m³
+          {t("calculator.volume")} <strong>{natija.hajm}</strong> m³
         </p>
       </div>
     </div>

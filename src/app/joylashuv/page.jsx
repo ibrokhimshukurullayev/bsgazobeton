@@ -1,6 +1,9 @@
+"use client";
 import React from "react";
 import "./sotuv.scss";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
+
 import instagram from "../../assets/images/social/intagram.svg";
 import facebook from "../../assets/images/social/facebook.svg";
 import twiter from "../../assets/images/social/twiter.svg";
@@ -9,21 +12,23 @@ import telegram from "../../assets/images/social/telegram.svg";
 import linkedin from "../../assets/images/social/linkedin.svg";
 
 const Joylashuv = () => {
+  const [t, i18n] = useTranslation("global");
+
   return (
     <div className="cantact container">
       <div className="cantact__left">
         <div className="cantact__phone">
-          <h3>Telefon:</h3>
+          <h3>{t("footer.telefon")}</h3>
           <a href="tel:+998991502222" target="_blank" rel="noopener noreferrer">
             +998 (99) 150-22-22
           </a>
           <a href="tel:+998712001022" target="_blank" rel="noopener noreferrer">
             +998 (71) 200-10-22
           </a>
-          <p>HOZIROQ QO’NG’IROQ QILING!</p>
+          <p>{t("cantact.title1")}</p>
         </div>
         <div className="cantact__email">
-          <h3>Email:</h3>
+          <h3>{t("footer.email")}</h3>
           <a
             href="http://info@bsgroup.uz"
             target="_blank"
@@ -33,11 +38,8 @@ const Joylashuv = () => {
           </a>
         </div>
         <div className="cantact__ofis">
-          <h3>Bosh ofis:</h3>
-          <p>
-            Sirdaryo viloyati, Sirdaryo tumani, Sobir Rahimov SIU, Chibantay
-            qo'rg'oni
-          </p>
+          <h3>{t("footer.manzil")}</h3>
+          <p>{t("footer.manzil1")}</p>
         </div>
         <div className="cantact__social">
           <a href="#" target="_blank" rel="noopener noreferrer">
@@ -62,19 +64,20 @@ const Joylashuv = () => {
       </div>
       <div className="cantact__right">
         <form action="">
-          <h3>Xabar qoldirish</h3>
-          <input type="text" placeholder="Ismingiz*" name="firstname" />
-          <input type="tel" placeholder="Telefon raqamingiz*" name="phone" />
+          <h3>{t("cantact.formtitle1")}</h3>
+          <input
+            type="text"
+            placeholder={t("cantact.input1")}
+            name="firstname"
+          />
+          <input type="tel" placeholder={t("cantact.input2")} name="phone" />
           <textarea
             name="message"
-            placeholder="Xabar matni..."
+            placeholder={t("cantact.input3")}
             id=""
           ></textarea>
-          <button>Yuborish</button>
-          <p>
-            Yuborish tugmachasini bosish orqali siz maxfiylik siyosatiga rozilik
-            bildirasiz.
-          </p>
+          <button>{t("cantact.button")}</button>
+          <p>{t("cantact.formtitle2")}</p>
         </form>
       </div>
     </div>
