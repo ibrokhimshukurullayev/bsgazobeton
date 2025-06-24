@@ -16,7 +16,7 @@ const AboutLink = () => {
     { href: "/about/aboutMijoz", label: t("menu.about.mijoz") },
     { href: "/about/aboutOAV", label: t("menu.about.oav") },
     { href: "/", label: t("menu.about.yangiliklar") },
-    { href: "/", label: t("menu.about.vakansiyalar") },
+    { href: "/about/vakansiyalar", label: t("menu.about.vakansiyalar") },
   ];
 
   return (

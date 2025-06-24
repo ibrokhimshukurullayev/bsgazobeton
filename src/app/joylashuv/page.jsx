@@ -39,7 +39,7 @@ const Joylashuv = () => {
         </div>
         <div className="cantact__ofis">
           <h3>{t("footer.manzil")}</h3>
-          <p>{t("footer.manzil1")}</p>
+          <p>{t("footer.manjil1")}</p>
         </div>
         <div className="cantact__social">
           <a href="#" target="_blank" rel="noopener noreferrer">

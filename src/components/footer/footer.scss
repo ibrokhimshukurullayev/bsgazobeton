@@ -79,14 +79,20 @@
       }
     }
   }
+}
 
-  &__bottom {
-    padding: 20px 0;
-    border-top: 1px solid #ddd;
+.footer__bottom {
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 14px;
+  background-color: #f5f5f5;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
     text-align: center;
-    font-size: 14px;
-    background-color: #f5f5f5;
-    width: 100%;
   }
 }
 

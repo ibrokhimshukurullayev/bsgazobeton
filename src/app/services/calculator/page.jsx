@@ -19,7 +19,7 @@ const Calculator = () => {
     if (!u || !b || !q) return;
 
     const hajm = (u * b * q).toFixed(2);
-    const blokHajmi = 0.6 * 0.3 * 0.2; // gazoblok hajmi
+    const blokHajmi = 0.6 * 0.3 * 0.2;
     const dona = Math.ceil((u * b * q) / blokHajmi);
 
     setNatija({ hajm, dona });

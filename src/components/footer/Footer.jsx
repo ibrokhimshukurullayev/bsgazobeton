@@ -177,7 +177,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="container footer__bottom">
+      <div className="footer__bottom">
         <p>{t("footer.title")}</p>
       </div>
     </footer>

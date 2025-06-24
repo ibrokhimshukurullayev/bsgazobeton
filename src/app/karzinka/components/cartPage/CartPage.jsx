@@ -1,68 +1,48 @@
+// pages/CartPage.js
 "use client";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  incCart,
+  decCart,
+  removeFromCart,
+  clearCart,
+} from "../../../../context/cartSlice"; // path loyihangizga qarab sozlang
+
 import CartItem from "../cartItem/CartItem";
-import "./CartPage.scss";
-import { useState } from "react";
-import gazablok from "../../../../assets/images/Containergaza.png";
-import product3 from "../../../../assets/images/product3.png";
 import Button from "../../../../components/button/Button";
+// import gazablok from "../../assets/images/Containergaza.png";
+// import product3 from "../../assets/images/product3.png";
+import "./CartPage.scss";
 
 const CartPage = () => {
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      name: "Gazobeton",
-      desc: "D300, 600×200×200",
-      image: gazablok,
-      price: 72000,
-      quantity: 3,
-      total: 216000,
-      unit: "m³",
-    },
-    {
-      id: 2,
-      name: "Gazobeton",
-      desc: "D400, 600×200×200",
-      image: gazablok,
-      price: 72000,
-      quantity: 3,
-      total: 216000,
-      unit: "m³",
-    },
-    {
-      id: 3,
-      name: "Gazoblok kley",
-      desc: "Nanokley",
-      image: product3,
-      price: 31000,
-      quantity: 2,
-      total: 62000,
-    },
-  ]);
+  const cart = useSelector((state) => state.cart.value);
+  const dispatch = useDispatch();
 
   const updateQuantity = (id, delta) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity: Math.max(1, item.quantity + delta),
-              total: item.price * Math.max(1, item.quantity + delta),
-            }
-          : item
-      )
-    );
+    const item = cart.find((el) => el.id === id);
+    if (!item) return;
+
+    if (delta === 1) {
+      dispatch(incCart(item));
+    } else if (delta === -1) {
+      if (item.quantity <= 1) {
+        dispatch(removeFromCart(item));
+      } else {
+        dispatch(decCart(item));
+      }
+    }
   };
 
   const removeItem = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    const item = cart.find((el) => el.id === id);
+    if (item) dispatch(removeFromCart(item));
   };
 
-  const clearCart = () => {
-    setCart([]);
-  };
-
-  const totalSum = cart.reduce((sum, item) => sum + item.total, 0);
+  const totalSum = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
     <div className="cart-page container">
@@ -71,7 +51,7 @@ const CartPage = () => {
           <h2>Savatcha</h2>
           <span className="item-count">{cart.length}</span>
         </div>
-        <div className="clear-cart" onClick={clearCart}>
+        <div className="clear-cart" onClick={() => dispatch(clearCart())}>
           Savatchani tozalash
         </div>
       </div>

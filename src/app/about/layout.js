@@ -14,7 +14,7 @@ export default function AboutLayout({ children }) {
     "/about/aboutMijoz": t("menu.about.mijoz"),
     "/about/aboutOAV": t("menu.about.oav"),
     "/": t("menu.about.yangiliklar"),
-    "/": t("menu.about.vakansiyalar"),
+    "/about/vakansiyalar": t("menu.about.vakansiyalar"),
   };
 
   const title = titles[pathname] || "Kompaniya haqida";

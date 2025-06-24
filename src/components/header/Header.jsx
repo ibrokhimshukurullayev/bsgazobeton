@@ -214,13 +214,6 @@ const Header = () => {
             <Link href="/karzinka" className="circle-btns">
               <Image src={cart} alt="cart" />
             </Link>
-            <button
-              id="navbar-open"
-              onClick={toggleNavbar}
-              className="nav__icons"
-            >
-              <Image src={menu} alt="menu" width={16} height={14} />
-            </button>
           </div>
           <button className="circle__btn" onClick={toggleUserModal}>
             <Image src={person} alt="person" />

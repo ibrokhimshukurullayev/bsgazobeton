@@ -4,16 +4,14 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => {
   return (
     <div className="cart-item">
       <div className="item-info">
-        <Image src={item.image} alt={item.name} width={80} height={48} />
+        <Image src={item.imageUrl} alt={item.name} width={80} height={48} />
         <div className="item-text">
           <div className="name">{item.name}</div>
           <div className="desc">{item.desc}</div>
         </div>
       </div>
 
-      <div className="item-price">
-        {item.price} UZS{item.unit && `/${item.unit}`}
-      </div>
+      <div className="item-price">{item.price} UZS</div>
 
       <div className="item-quantity">
         <button onClick={onDecrease}>−</button>
