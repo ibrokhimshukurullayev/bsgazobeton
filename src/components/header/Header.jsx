@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../assets/images/logo.svg";
@@ -8,10 +8,9 @@ import menu from "../../assets/images/menu.svg";
 import person from "../../assets/images/header/person.svg";
 import cart from "../../assets/images/header/cart.svg";
 import phone from "../../assets/images/header/phone.svg";
-import { Globe, User, ShoppingCart, Phone } from "lucide-react";
-import Modal from "../mudule/Modal";
 import { useTranslation } from "react-i18next";
 import LangDropdown from "../select/langDropdown";
+import { useRouter } from "next/navigation";
 
 import arrov from "../../assets/images/arrov.svg";
 import "./header.scss";
@@ -28,6 +27,26 @@ const Header = () => {
   const chooseLang = (l) => {
     setLang(l);
     setOpen(false);
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("auth") === "true") {
+      setIsUserModalOpen(true);
+    }
+  }, []);
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    const token =
+      typeof window !== "undefined" && localStorage.getItem("token");
+
+    if (token) {
+      router.push("/profile");
+    } else {
+      router.push("/login");
+    }
   };
 
   const toggleDropdown = (key) => {
@@ -93,8 +112,8 @@ const Header = () => {
       { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
       { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
       { label: t("menu.about.oav"), href: "/about/aboutOAV" },
-      { label: t("menu.about.yangiliklar"), href: "#" },
-      { label: t("menu.about.vakansiyalar"), href: "#" },
+      // { label: t("menu.about.yangiliklar"), href: "#" },
+      { label: t("menu.about.vakansiyalar"), href: "/about/vakansiyalar" },
     ],
   };
 
@@ -156,9 +175,10 @@ const Header = () => {
             <div className="nav__actions">
               <LangDropdown />
 
-              <button className="circle-btn" onClick={toggleUserModal}>
+              <button className="circle-btns" onClick={handleClick}>
                 <Image src={person} alt="person" />
               </button>
+
               <Link href="/karzinka" className="circle-btns">
                 <Image src={cart} alt="cart" />
               </Link>
@@ -220,13 +240,6 @@ const Header = () => {
           </button>
         </div>
       </div>
-
-      {isUserModalOpen && (
-        <Modal
-          isOpen={isUserModalOpen}
-          onClose={() => setIsUserModalOpen(false)}
-        />
-      )}
     </>
   );
 };

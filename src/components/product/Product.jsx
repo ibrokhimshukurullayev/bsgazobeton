@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 import "./product.scss";
 import product1 from "../../assets/images/product1.svg";
@@ -10,34 +11,9 @@ import product2 from "../../assets/images/product2.svg";
 import product3 from "../../assets/images/product3.svg";
 import product4 from "../../assets/images/product4.svg";
 
-const products = [
-  {
-    id: 1,
-    title: "Gazobeton bloklari",
-    image: product1,
-    button: "Mahsulotlarni ko‘rish",
-  },
-  {
-    id: 2,
-    title: "Gazobeton panellari",
-    image: product2,
-    button: "Mahsulotlarni ko‘rish",
-  },
-  {
-    id: 3,
-    title: "Gazoblok kley",
-    image: product3,
-    button: "Mahsulotlarni ko‘rish",
-  },
-  {
-    id: 4,
-    title: "Gazoblok vositalari",
-    image: product4,
-    button: "Mahsulotlarni ko‘rish",
-  },
-];
-
 const Product = () => {
+  const router = useRouter();
+
   const [t, i18n] = useTranslation("global");
 
   const products = [
@@ -67,6 +43,10 @@ const Product = () => {
     },
   ];
 
+  const handleButtonClick = () => {
+    router.push("/katalog");
+  };
+
   return (
     <div id="product">
       <div className="container product">
@@ -81,7 +61,7 @@ const Product = () => {
                 width={300}
                 height={200}
               />
-              <button>{item.button}</button>
+              <button onClick={handleButtonClick}>{item.button}</button>
             </div>
           ))}
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./about.scss";
-import about from "../../../assets/images/about1.png";
+import about from "../../../assets/images/about1.svg";
 import Image from "next/image";
 import oav from "../../../assets/images/aboutoav.png";
 import Title from "../../../components/title/Title";

@@ -39,7 +39,7 @@ const ProductDetail = () => {
           <div className="image-section__header">
             <Image
               className="main-image"
-              src={productData.imageUrl}
+              src={productData.imageurl}
               alt="Product"
               width={200}
               height={120}
@@ -77,15 +77,13 @@ const ProductDetail = () => {
           <h4 className="info-section__title">Texnik xususiyatlari</h4>
 
           <div className="specs">
-            {productData.technicalData &&
-              Object.entries(JSON.parse(productData.technicalData)).map(
-                ([key, value], idx) => (
-                  <div className="spec-item" key={idx}>
-                    <span>{key}</span>
-                    <span>{value}</span>
-                  </div>
-                )
-              )}
+            {Array.isArray(productData.technicaldata) &&
+              productData.technicaldata.map((item, idx) => (
+                <div className="spec-item" key={idx}>
+                  <span>{item.key?.uz_uz}</span>
+                  <span>{item.value?.uz_uz}</span>
+                </div>
+              ))}
           </div>
 
           <button className="add-to-cart">SAVATGA QO‘SHISH</button>

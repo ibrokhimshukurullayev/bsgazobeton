@@ -1,0 +1,77 @@
+.order-history {
+  padding: 2rem;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+
+  .orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+    .order-left {
+      p {
+        margin: 0.3rem 0;
+      }
+
+      .order-id {
+        font-weight: bold;
+      }
+    }
+
+    .order-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .status {
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &.yangi {
+          background-color: #ffe58f;
+          color: #ad6800;
+        }
+
+        &.tasdiqlangan {
+          background-color: #bae7ff;
+          color: #0050b3;
+        }
+
+        &.yakunlangan {
+          background-color: #d9f7be;
+          color: #237804;
+        }
+
+        &.bekor {
+          background-color: #ffccc7;
+          color: #a8071a;
+        }
+      }
+
+      .details-btn {
+        background: #f0f0f0;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+    }
+  }
+}

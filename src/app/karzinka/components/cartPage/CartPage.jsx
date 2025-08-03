@@ -7,20 +7,18 @@ import {
   decCart,
   removeFromCart,
   clearCart,
-} from "../../../../context/cartSlice"; // path loyihangizga qarab sozlang
+} from "../../../../context/cartSlice";
 
 import CartItem from "../cartItem/CartItem";
 import Button from "../../../../components/button/Button";
-// import gazablok from "../../assets/images/Containergaza.png";
-// import product3 from "../../assets/images/product3.png";
 import "./CartPage.scss";
 
-const CartPage = () => {
+const CartPage = ({ onCheckout }) => {
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
 
-  const updateQuantity = (id, delta) => {
-    const item = cart.find((el) => el.id === id);
+  const updateQuantity = (productid, delta) => {
+    const item = cart.find((el) => el.productid === productid);
     if (!item) return;
 
     if (delta === 1) {
@@ -32,10 +30,12 @@ const CartPage = () => {
         dispatch(decCart(item));
       }
     }
+    console.log("Items to send:", items);
   };
+  console.log("Cart:", cart);
 
-  const removeItem = (id) => {
-    const item = cart.find((el) => el.id === id);
+  const removeItem = (productid) => {
+    const item = cart.find((el) => el.productid === productid);
     if (item) dispatch(removeFromCart(item));
   };
 
@@ -59,11 +59,11 @@ const CartPage = () => {
       <div className="cart-items">
         {cart.map((item) => (
           <CartItem
-            key={item.id}
+            key={item.productid}
             item={item}
-            onIncrease={() => updateQuantity(item.id, 1)}
-            onDecrease={() => updateQuantity(item.id, -1)}
-            onRemove={() => removeItem(item.id)}
+            onIncrease={() => updateQuantity(item.productid, 1)}
+            onDecrease={() => updateQuantity(item.productid, -1)}
+            onRemove={() => removeItem(item.productid)}
           />
         ))}
       </div>
@@ -72,7 +72,7 @@ const CartPage = () => {
         <h3 className="total">
           <span>Umumiy:</span> {totalSum.toLocaleString()} UZS
         </h3>
-        <Button title={"BUYURTMANI RASMIYLASHTIRISH"} />
+        <Button title={"BUYURTMANI RASMIYLASHTIRISH"} onClick={onCheckout} />
       </div>
     </div>
   );

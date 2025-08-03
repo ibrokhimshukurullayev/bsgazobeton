@@ -7,33 +7,33 @@ import "./taqqoslash.scss";
 import deleteicon from "../../assets/images/deleteicon.svg";
 import addproduct from "../../assets/images/addproduct.svg";
 
-// Compare sahifa komponenti
 export default function ProductComparison() {
   const wishlist = useSelector((state) => state.wishlist.value);
 
-  // 1. Texnik xususiyatlarning barcha nomlarini yig'ib olish
+  const lang = "uz_uz"; // Faqat uzbekcha ko‘rsatish (i18next ishlatilmayapti)
+
+  // Barcha texnik xususiyat nomlarini to‘plash
   const allLabels = Array.from(
     new Set(
-      wishlist.flatMap((product) =>
-        product.technicalData
-          ? Object.keys(JSON.parse(product.technicalData))
-          : []
+      wishlist.flatMap(
+        (product) =>
+          product.technicaldata?.map((item) => item.key?.[lang]) || []
       )
     )
   );
 
-  // 2. Har bir label uchun 3ta mahsulotdan qiymatlarni olish
+  // Har bir label uchun mahsulotlardan qiymatlarni chiqarish
   const specifications = allLabels.map((label) => ({
     label,
     value1:
-      wishlist[0]?.technicalData &&
-      JSON.parse(wishlist[0].technicalData)[label],
+      wishlist[0]?.technicaldata?.find((item) => item.key?.[lang] === label)
+        ?.value?.[lang] || "-",
     value2:
-      wishlist[1]?.technicalData &&
-      JSON.parse(wishlist[1].technicalData)[label],
+      wishlist[1]?.technicaldata?.find((item) => item.key?.[lang] === label)
+        ?.value?.[lang] || "-",
     value3:
-      wishlist[2]?.technicalData &&
-      JSON.parse(wishlist[2].technicalData)[label],
+      wishlist[2]?.technicaldata?.find((item) => item.key?.[lang] === label)
+        ?.value?.[lang] || "-",
   }));
 
   return (
@@ -43,7 +43,7 @@ export default function ProductComparison() {
           <h2 className="product__comparison__title">Xususiyatlar</h2>
         </div>
 
-        {/* Har bir mahsulot uchun ustun */}
+        {/* 3 ta mahsulot ustuni */}
         {wishlist.slice(0, 3).map((product, idx) => (
           <div className="product-column" key={idx}>
             <div className="product-card">
@@ -54,7 +54,7 @@ export default function ProductComparison() {
                 <div className="product-content">
                   <div className="product__image__wrapper">
                     <img
-                      src={product.imageUrl}
+                      src={product.imageurl}
                       alt={product.name}
                       width={100}
                       height={60}
@@ -63,7 +63,9 @@ export default function ProductComparison() {
                   </div>
                   <div className="product__title">{product.name}</div>
                   <div className="product__size">
-                    {JSON.parse(product.technicalData)["O‘lchami, mm"] || "-"}
+                    {product.technicaldata?.find(
+                      (item) => item.key?.[lang] === "O‘lchami, mm"
+                    )?.value?.[lang] || "-"}
                   </div>
                 </div>
               </div>
@@ -71,7 +73,7 @@ export default function ProductComparison() {
           </div>
         ))}
 
-        {/* Agar mahsulot < 3 bo‘lsa, qolgan ustunlarga "Qo‘shish" kartasi */}
+        {/* Bo‘sh ustunlar (agar mahsulotlar < 3 bo‘lsa) */}
         {Array.from({ length: 3 - wishlist.length }).map((_, idx) => (
           <div key={idx} className="product-column">
             <div className="add__product__card">
@@ -93,9 +95,9 @@ export default function ProductComparison() {
             {specifications.map((row, index) => (
               <tr key={index} className="table-row">
                 <td className="table-label">{row.label}</td>
-                <td className="table-value">{row.value1 || "-"}</td>
-                <td className="table-value">{row.value2 || "-"}</td>
-                <td className="table-value">{row.value3 || "-"}</td>
+                <td className="table-value">{row.value1}</td>
+                <td className="table-value">{row.value2}</td>
+                <td className="table-value">{row.value3}</td>
               </tr>
             ))}
           </tbody>

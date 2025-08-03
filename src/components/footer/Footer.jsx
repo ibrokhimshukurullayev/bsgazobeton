@@ -104,24 +104,24 @@ const Footer = () => {
           </div>
 
           <div className="footer__socials">
-            <a href="#">
+            <a href="https://www.instagram.com/bs_gazobeton/">
               <Image src={instagram} alt="instagram" />
             </a>
-            <a href="#">
+            <a href="https://www.facebook.com/profile.php?id=61575359537252">
               <Image src={facebook} alt="facebook" />
             </a>
-            <a href="#">
+            <a href="https://t.me/bsgazobeton_uz">
               <Image src={telegram} alt="telegram" />
             </a>
-            <a href="#">
+            <a href="https://www.youtube.com/@bsgazobeton">
               <Image src={yootube} alt="youtube" />
             </a>
-            <a href="#">
+            {/* <a href="#">
               <Image src={twiter} alt="twitter" />
-            </a>
-            <a href="#">
+            </a> */}
+            {/* <a href="#">
               <Image src={linkedin} alt="linkedin" />
-            </a>
+            </a> */}
           </div>
         </div>
 

@@ -4,7 +4,6 @@ const initialState = {
   value: [],
 };
 
-// Faqat brauzerda `localStorage`dan boshlang'ich qiymatni olish
 if (typeof window !== "undefined") {
   const stored = localStorage.getItem("carts");
   if (stored) {
@@ -18,7 +17,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       const index = state.value.findIndex(
-        (el) => el.productId === action.payload.productId
+        (el) => el.productid === action.payload.productid
       );
       if (index < 0) {
         state.value = [...state.value, { ...action.payload, quantity: 1 }];
@@ -30,7 +29,7 @@ export const cartSlice = createSlice({
     },
     incCart(state, action) {
       const index = state.value.findIndex(
-        (el) => el.productId === action.payload.productId
+        (el) => el.productid === action.payload.productid
       );
       state.value = state.value.map((product, inx) => {
         if (index === inx) {
@@ -46,7 +45,7 @@ export const cartSlice = createSlice({
     },
     decCart(state, action) {
       const index = state.value.findIndex(
-        (el) => el.productId === action.payload.productId
+        (el) => el.productid === action.payload.productid
       );
       state.value = state.value.map((product, inx) =>
         index === inx ? { ...product, quantity: product.quantity - 1 } : product
@@ -58,7 +57,7 @@ export const cartSlice = createSlice({
     },
     removeFromCart(state, action) {
       state.value = state.value.filter(
-        (product) => product.productId !== action.payload.productId
+        (product) => product.productid !== action.payload.productid
       );
 
       if (typeof window !== "undefined") {

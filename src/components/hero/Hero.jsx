@@ -5,6 +5,7 @@ import flag from "../../assets/images/gollandiyaflag.svg";
 import blok from "../../assets/images/blok.svg";
 import "./hero.scss";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 const Hero = () => {
   const [t, i18n] = useTranslation("global");
@@ -21,12 +22,12 @@ const Hero = () => {
         </h1>
         <div className="hero__end">
           <div className="hero__left">
-            <button className="hero__left__button1">
+            <Link href={"/katalog"} className="hero__left__button1">
               {t("hero.titlebutton1")}
-            </button>
-            <button className="hero__left__button2">
+            </Link>
+            <Link href={"/aboutGazabeton"} className="hero__left__button2">
               {t("menu.gazobeton.gazobeton")}
-            </button>
+            </Link>
           </div>
           <div className="hero__right">
             <button>

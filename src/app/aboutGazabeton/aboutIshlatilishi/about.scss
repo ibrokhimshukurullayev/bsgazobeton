@@ -1,0 +1,151 @@
+.about-container {
+  padding: 24px;
+}
+
+.sidebar {
+  width: 100%;
+  padding: 0 0 16px 0;
+}
+
+.download-section {
+  background: #f5f5f5;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pdf-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 628px;
+
+  p {
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    width: 100%;
+  }
+  span {
+    color: #71717a;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+  }
+}
+
+.pdf-info img {
+  width: 32px;
+}
+
+.download-btn {
+  margin-top: 10px;
+  background-color: #2c2c2c;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 16px 32px;
+}
+
+.consultation-box {
+  background: #36414f;
+  color: white;
+  padding: 36px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__card {
+    h2 {
+      font-weight: 600;
+      font-style: Semi Bold;
+      font-size: 28px;
+      line-height: 40px;
+      letter-spacing: 0%;
+      vertical-align: middle;
+      text-transform: uppercase;
+    }
+    p {
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 28px;
+      letter-spacing: 0%;
+      vertical-align: middle;
+    }
+  }
+}
+
+.contact-btn {
+  margin-top: 10px;
+  background-color: #e6362d;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.sidebar-menu li {
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.sidebar-menu li.active {
+  background-color: #e6362d;
+  color: white;
+  font-weight: bold;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 435px);
+  gap: 20px;
+  padding-top: 25px;
+}
+
+.step {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.step img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.step p {
+  margin: 8px 12px 12px;
+}

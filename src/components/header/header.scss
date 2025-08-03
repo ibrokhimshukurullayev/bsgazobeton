@@ -13,6 +13,10 @@
 //   box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.1);
 // }
 
+header.with-compare-bar {
+  padding-top: 56px; // CompareBar balandligiga qarab
+}
+
 .nav {
   display: flex;
   align-items: center;

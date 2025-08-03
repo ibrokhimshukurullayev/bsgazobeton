@@ -9,6 +9,7 @@ import "./services.scss";
 import xizmat1 from "../../assets/images/xizmat1.png";
 import xizmat2 from "../../assets/images/xizmat2.png";
 import xizmat3 from "../../assets/images/xizmat3.png";
+import Link from "next/link";
 
 const Services = () => {
   const [t, i18n] = useTranslation("global");
@@ -21,6 +22,7 @@ const Services = () => {
       button: t("services.button1"),
       image: xizmat1,
       type: "konsultatsiya",
+      link: "/joylashuv",
     },
     {
       id: 2,
@@ -29,6 +31,7 @@ const Services = () => {
       button: t("services.button2"),
       image: xizmat2,
       type: "montaj",
+      link: "/aboutGazabeton/aboutIshlatilishi",
     },
     {
       id: 3,
@@ -37,6 +40,7 @@ const Services = () => {
       button: t("services.button3"),
       image: xizmat3,
       type: "hisoblash",
+      link: "/services/calculator",
     },
   ];
 
@@ -53,7 +57,7 @@ const Services = () => {
                   <p>{item.desc}</p>
                 </div>
               </div>
-              <button>{item.button}</button>
+              <Link href={item.link}>{item.button}</Link>
               <Image
                 src={item.image}
                 alt={item.title}

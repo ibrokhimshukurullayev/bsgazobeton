@@ -11,7 +11,7 @@ import Loading from "../loading/Loading";
 
 import product1 from "../../assets/images/panel.png";
 
-const Card = ({ setProductLimit }) => {
+const Card = () => {
   const [categoryValue, setCategoryValue] = useState("");
 
   const {
@@ -23,6 +23,9 @@ const Card = ({ setProductLimit }) => {
     take: 10,
   });
 
+  console.log(dataGetProduct);
+  console.log(dataGetProduct?.data?.list.imageurl);
+
   const {
     data: dataGetCategory,
     isLoading: categoryLoading,
@@ -32,15 +35,17 @@ const Card = ({ setProductLimit }) => {
     take: 10,
   });
 
+  console.log(dataGetCategory);
+
   useEffect(() => {
     if (dataGetCategory?.data?.list.length && !categoryValue) {
-      setCategoryValue(dataGetCategory?.data?.list[0].productCategoryId);
+      setCategoryValue(dataGetCategory?.data?.list[0].productcategoryid);
     }
   }, [dataGetCategory?.data?.list]);
 
   const filteredProduct = categoryValue
     ? dataGetProduct?.data?.list.filter(
-        (el) => el.productCategoryId === categoryValue
+        (el) => el.productcategoryid === categoryValue
       )
     : [];
 
@@ -58,19 +63,19 @@ const Card = ({ setProductLimit }) => {
         <ul className="products__categories">
           {dataGetCategory?.data?.list.map((el) => (
             <li
-              key={el.productCategoryId}
+              key={el.productcategoryid}
               className="products__categories__item"
             >
               <div
-                onClick={() => setCategoryValue(el.productCategoryId)}
+                onClick={() => setCategoryValue(el.productcategoryid)}
                 className={`products__card ${
-                  categoryValue === el.productCategoryId ? "active" : ""
+                  categoryValue === el.productcategoryid ? "active" : ""
                 }`}
               >
                 <Image src={product1} alt="product" />
                 <button
                   className={`products__categories__btn ${
-                    categoryValue === el.productCategoryId ? "active" : ""
+                    categoryValue === el.productcategoryid ? "active" : ""
                   }`}
                 >
                   {el.name}
@@ -91,13 +96,13 @@ const Card = ({ setProductLimit }) => {
           {filteredProduct?.length ? (
             filteredProduct.map((el) => (
               <CardProducts
-                key={el.productId}
+                key={el.productid}
                 el={el}
-                id={el.productId}
+                id={el.productid}
                 title={el.name}
                 description={el.description}
                 price={el.price}
-                image={el.imageUrl}
+                image={el.imageurl}
               />
             ))
           ) : (

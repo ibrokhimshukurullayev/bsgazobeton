@@ -6,9 +6,15 @@ import Image from "next/image";
 import mantaj from "../../../assets/images/mantaj.png";
 import Button from "../../../components/button/Button";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 const Gazablokmantaji = () => {
+  const router = useRouter();
+
   const [t, i18n] = useTranslation("global");
+  const handleButtonClick = () => {
+    router.push("/joylashuv");
+  };
 
   const takliflar = [
     {
@@ -60,7 +66,7 @@ const Gazablokmantaji = () => {
         </ul>
         <p>{t("gazoblockinfo.bottomtext")}</p>
         <strong>{t("gazoblockinfo.bottomtext2")}</strong>
-        <Button title={t("gazoblockinfo.button")} />
+        <Button onClick={handleButtonClick} title={t("gazoblockinfo.button")} />
       </div>
     </div>
   );

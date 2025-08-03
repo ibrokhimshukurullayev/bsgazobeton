@@ -4,9 +4,16 @@ import "./sotuvlar.scss";
 import Title from "../../components/title/Title";
 import Button from "../../components/button/Button";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 const Sotuvlar = () => {
+  const router = useRouter();
+
   const [t, i18n] = useTranslation("global");
+
+  const handleButtonClick = () => {
+    router.push("/joylashuv");
+  };
 
   return (
     <div className="sotuv">
@@ -20,8 +27,8 @@ const Sotuvlar = () => {
       <p className="sotuv__text">{t("deliveryinfo.section3text")}</p>
       <h2>{t("deliveryinfo.bottomtext")}</h2>
       <div className="sotuv__end">
-        <Button title={t("deliveryinfo.button1")} />
-        <button className="sotuv__end__button">
+        <Button onClick={handleButtonClick} title={t("deliveryinfo.button1")} />
+        <button onClick={handleButtonClick} className="sotuv__end__button">
           {t("deliveryinfo.button2")}
         </button>
       </div>

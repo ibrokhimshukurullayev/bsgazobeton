@@ -7,7 +7,7 @@ import {
   addToCart,
   incCart,
   decCart,
-  removeFromCart, // 🛠️ SHUNI QO‘SHING
+  removeFromCart,
 } from "../../context/cartSlice";
 import { toggleToWishes } from "../../context/wishlistSlice";
 import Link from "next/link";
@@ -21,30 +21,28 @@ const CardProducts = ({ el }) => {
   const cart = useSelector((state) => state.cart.value);
   const wishlist = useSelector((state) => state.wishlist.value);
 
-  const inCart = cart.find((item) => item.productId === el.productId);
+  const inCart = cart.find((item) => item.productid === el.productid);
 
   return (
-    <div key={el.productId} className="card">
+    <div key={el.productid} className="card">
       <div className="product__card">
-        <Link href={`/single/${el.productId}`}>
-          <img className="product__img" src={el.imageUrl} alt={el.name} />
+        <Link href={`/single/${el.productid}`}>
+          <img className="product__img" src={el.imageurl} alt={el.name} />
         </Link>
 
         <h3>{el.name}</h3>
 
-        {el.technicalData &&
-          Object.entries(JSON.parse(el.technicalData))
-            .slice(0, 3)
-            .map(([key, value], idx) => (
-              <div className="product__card__text" key={idx}>
-                <p>{key}:</p>
-                <p>{value}</p>
-              </div>
-            ))}
+        {el.technicaldata &&
+          Array.isArray(el.technicaldata) &&
+          el.technicaldata.slice(0, 3).map((item, idx) => (
+            <div className="product__card__text" key={idx}>
+              <p>{item.key?.uz_uz}:</p>
+              <p>{item.value?.uz_uz}</p>
+            </div>
+          ))}
 
         <h4 className="product__price">{el.price} UZS/m3</h4>
 
-        {/* Savatga qo‘shish yoki +/- tugmalar */}
         {!inCart ? (
           <button
             className="add-to-cart"
@@ -62,16 +60,16 @@ const CardProducts = ({ el }) => {
                   : dispatch(decCart(el))
               }
             >
-              <Image src={minus} />
+              <Image src={minus} alt="minus" />
             </button>
             <p className="quantity-value">
-              {inCart.quantity} <span>m3</span>
+              {inCart.quantity} <span>m³</span>
             </p>
             <button
               className="quantity-btn"
               onClick={() => dispatch(incCart(el))}
             >
-              <Image src={plus} />
+              <Image src={plus} alt="plus" />
             </button>
           </div>
         )}
@@ -81,7 +79,7 @@ const CardProducts = ({ el }) => {
           onClick={() => dispatch(toggleToWishes(el))}
         >
           <Image src={compare} alt="compare" width={24} height={24} />
-          {wishlist.some((item) => item.productId === el.productId) ? (
+          {wishlist.some((item) => item.productid === el.productid) ? (
             <>
               <span className="red-dot"></span>
               Taqqoslashdan olish

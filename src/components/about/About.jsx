@@ -3,12 +3,18 @@
 import React from "react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-3;
+import { useRouter } from "next/navigation";
+
 import about1 from "../../assets/images/about1.svg";
 import "./about.scss";
 
 const About = () => {
+  const router = useRouter(); // 📍 Router hook
   const [t, i18n] = useTranslation("global");
+
+  const handleButtonClick = () => {
+    router.push("/about"); // 📍 Sahifaga o‘tish
+  };
 
   return (
     <div id="about">
@@ -21,7 +27,7 @@ const About = () => {
             <span>"BS gazobeton"</span> {t("aboutsection.title")}
           </h2>
           <p>{t("aboutsection.desc1")}</p>
-          <button>{t("header.about")}</button>
+          <button onClick={handleButtonClick}>{t("header.about")}</button>
         </div>
       </div>
       <div className="about__end container">

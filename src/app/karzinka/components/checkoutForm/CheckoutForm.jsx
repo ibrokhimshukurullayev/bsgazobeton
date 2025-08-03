@@ -1,52 +1,118 @@
 "use client";
 
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  useCreateOrderMutation,
+  useSaveOrderItemsMutation,
+} from "../../../../context/orderApi";
+import { clearCart } from "../../../../context/cartSlice";
+import { toast, ToastContainer } from "react-toastify";
 import "./checkoutForm.scss";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ onBack }) => {
+  const cart = useSelector((state) => state.cart.value);
+  const dispatch = useDispatch();
+
+  const [createOrder] = useCreateOrderMutation();
+  const [saveOrderItems] = useSaveOrderItemsMutation();
+
+  const [form, setForm] = useState({
+    fullName: "",
+    phoneNumber: "",
+    address: "",
+    email: "",
+  });
   const [deliveryMethod, setDeliveryMethod] = useState("delivery");
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Formani yuborish logikasi
-    alert("Buyurtma yuborildi!");
+
+    try {
+      // 1. Buyurtmani yaratish
+      const orderRes = await createOrder({
+        ...form,
+        isDeliverable: deliveryMethod === "delivery",
+      }).unwrap();
+
+      const orderId = orderRes?.data?.orderId || orderRes?.orderId;
+
+      // 2. Mahsulotlarni yuborish
+      const items = cart.map((item) => ({
+        productid: item.productid,
+        quantity: item.quantity,
+        state: 1,
+      }));
+
+      console.log("Yuborilayotgan items:", items);
+
+      await saveOrderItems(items).unwrap();
+
+      toast.success("Buyurtma muvaffaqiyatli yuborildi!");
+      dispatch(clearCart());
+    } catch (err) {
+      toast.error("Xatolik: " + (err?.data?.message || "Buyurtma yuborilmadi"));
+    }
   };
 
   return (
     <div className="checkout-page container">
-      <button className="back-button">← Savatga qaytish</button>
+      <ToastContainer />
+      <button className="back-button" onClick={onBack}>
+        ← Savatga qaytish
+      </button>
 
       <h2>Buyurtmani rasmiylashtirish</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>To'liq ismingiz*</label>
-          <input type="text" required placeholder="Ismingizni kiriting" />
+          <input
+            name="fullName"
+            value={form.fullName}
+            onChange={handleChange}
+            type="text"
+            required
+            placeholder="Ismingizni kiriting"
+          />
         </div>
 
         <div className="form-group">
           <label>Telefon raqamingiz*</label>
-          <input type="tel" required placeholder="+998 (__) ___-__-__" />
+          <input
+            name="phoneNumber"
+            value={form.phoneNumber}
+            onChange={handleChange}
+            type="tel"
+            required
+            placeholder="+998 (__) ___-__-__"
+          />
         </div>
 
-        <div className="form-group">
-          <label>Hudud</label>
-          <select>
-            <option>Hududni tanlang...</option>
-            <option>Toshkent</option>
-            <option>Samarqand</option>
-            <option>Buxoro</option>
-          </select>
-        </div>
-
-        <div className="form-group">
+        <div className="form-group full-width">
           <label>Email</label>
-          <input type="email" placeholder="Emailni kiriting" />
+          <input
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            type="email"
+            placeholder="Emailni kiriting"
+          />
         </div>
 
         <div className="form-group full-width">
           <label>Manzil</label>
-          <input type="text" placeholder="Manzilni kiriting" />
+          <input
+            name="address"
+            value={form.address}
+            onChange={handleChange}
+            type="text"
+            placeholder="Manzilni kiriting"
+          />
         </div>
 
         <div className="form-group full-width">

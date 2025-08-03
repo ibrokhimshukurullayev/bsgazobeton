@@ -7,9 +7,15 @@ import "./services.scss";
 
 import services from "../../assets/images/services.png";
 import Button from "../../components/button/Button";
+import { useRouter } from "next/navigation";
 
 const Services = () => {
+  const router = useRouter();
+
   const [t, i18n] = useTranslation("global");
+  const handleButtonClick = () => {
+    router.push("/joylashuv");
+  };
 
   return (
     <div className="services">
@@ -21,8 +27,11 @@ const Services = () => {
       <p>{t("consultationinfo.text")}</p>
       <h3>{t("consultationinfo.bottomtext")}</h3>
       <div className="services__end">
-        <Button title={t("consultationinfo.button1")} />
-        <button className="services__button">
+        <Button
+          onClick={handleButtonClick}
+          title={t("consultationinfo.button1")}
+        />
+        <button onClick={handleButtonClick} className="services__button">
           {t("consultationinfo.button2")}
         </button>
       </div>
