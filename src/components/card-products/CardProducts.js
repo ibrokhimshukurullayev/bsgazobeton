@@ -26,20 +26,30 @@ const CardProducts = ({ el }) => {
   return (
     <div key={el.productid} className="card">
       <div className="product__card">
-        <Link href={`/single/${el.productid}`}>
-          <img className="product__img" src={el.imageurl} alt={el.name} />
+        <Link href={`/products/${el.productid}`} prefetch={false}>
+          <Image
+            src={`https://api.bsgazobeton.uz${el?.imageurl}`}
+            className="product__img"
+            alt={el.name}
+            width={192}
+            height={120}
+          />
         </Link>
 
         <h3>{el.name}</h3>
 
         {el.technicaldata &&
           Array.isArray(el.technicaldata) &&
-          el.technicaldata.slice(0, 3).map((item, idx) => (
-            <div className="product__card__text" key={idx}>
-              <p>{item.key?.uz_uz}:</p>
-              <p>{item.value?.uz_uz}</p>
-            </div>
-          ))}
+          el.technicaldata.slice(0, 3).map((item, idx) => {
+            const lang =
+              localStorage.getItem("language")?.toLowerCase() || "uz_uz";
+            return (
+              <div className="product__card__text" key={idx}>
+                <p>{item.key?.[lang] || "-"}</p>
+                <p>{item.value?.[lang] || "-"}</p>
+              </div>
+            );
+          })}
 
         <h4 className="product__price">{el.price} UZS/m3</h4>
 

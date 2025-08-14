@@ -29,7 +29,6 @@ export default function LoginForm() {
 
       // 2. Profile sahifasiga yo'naltirish
       router.push("/profile");
-      console.log("Redirecting to /profile");
     } catch (err) {
       toast.error(err?.data?.message || "Xatolik yuz berdi");
     }

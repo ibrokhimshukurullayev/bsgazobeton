@@ -14,20 +14,18 @@ import { useRouter } from "next/navigation";
 
 import arrov from "../../assets/images/arrov.svg";
 import "./header.scss";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const cartCount = useSelector((state) => state.cart.value);
+  console.log("cart", cartCount);
+
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [t, i18n] = useTranslation("global");
 
   const toggleNavbar = () => setNavbarOpen(!navbarOpen);
-  const closeNavbar = () => setNavbarOpen(false);
-  const chooseLang = (l) => {
-    setLang(l);
-    setOpen(false);
-  };
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -56,12 +54,18 @@ const Header = () => {
   const toggleUserModal = () => setIsUserModalOpen((prev) => !prev);
   const dropdownItems = {
     katalog: [
-      { label: t("menu.katalog.gazobloklar"), href: "#" },
-      { label: t("menu.katalog.panellar"), href: "#" },
-      { label: t("menu.katalog.kleylar"), href: "#" },
+      {
+        label: t("menu.katalog.gazobloklar"),
+        href: "/katalog?productcategoryid=1",
+      },
+      {
+        label: t("menu.katalog.panellar"),
+        href: "katalog?productcategoryid=2",
+      },
+      { label: t("menu.katalog.kleylar"), href: "katalog?productcategoryid=3" },
       {
         label: t("menu.katalog.instrumentlar"),
-        href: "#",
+        href: "katalog?productcategoryid=4",
       },
     ],
     xizmatlar: [
@@ -180,7 +184,12 @@ const Header = () => {
               </button>
 
               <Link href="/karzinka" className="circle-btns">
-                <Image src={cart} alt="cart" />
+                <div className="iconWrapper">
+                  <Image src={cart} alt="cart" />
+                  {cartCount?.length > 0 && (
+                    <span className="badge">{cartCount?.length}</span>
+                  )}
+                </div>
               </Link>
               <button
                 id="navbar-open"

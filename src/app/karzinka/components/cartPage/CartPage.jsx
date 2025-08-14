@@ -12,8 +12,11 @@ import {
 import CartItem from "../cartItem/CartItem";
 import Button from "../../../../components/button/Button";
 import "./CartPage.scss";
+import { useTranslation } from "react-i18next";
 
 const CartPage = ({ onCheckout }) => {
+  const [t, i18n] = useTranslation("global");
+
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
 
@@ -30,9 +33,7 @@ const CartPage = ({ onCheckout }) => {
         dispatch(decCart(item));
       }
     }
-    console.log("Items to send:", items);
   };
-  console.log("Cart:", cart);
 
   const removeItem = (productid) => {
     const item = cart.find((el) => el.productid === productid);
@@ -48,14 +49,13 @@ const CartPage = ({ onCheckout }) => {
     <div className="cart-page container">
       <div className="cart-header">
         <div style={{ display: "flex", alignItems: "center" }}>
-          <h2>Savatcha</h2>
+          <h2>{t("card.title")}</h2>
           <span className="item-count">{cart.length}</span>
         </div>
         <div className="clear-cart" onClick={() => dispatch(clearCart())}>
-          Savatchani tozalash
+          {t("card.clearcard")}
         </div>
       </div>
-
       <div className="cart-items">
         {cart.map((item) => (
           <CartItem
@@ -67,12 +67,11 @@ const CartPage = ({ onCheckout }) => {
           />
         ))}
       </div>
-
       <div className="cart-summary">
         <h3 className="total">
-          <span>Umumiy:</span> {totalSum.toLocaleString()} UZS
+          <span>{t("card.total")}</span> {totalSum.toLocaleString()} UZS
         </h3>
-        <Button title={"BUYURTMANI RASMIYLASHTIRISH"} onClick={onCheckout} />
+        <Button title={t("card.checkout")} onClick={onCheckout} />
       </div>
     </div>
   );

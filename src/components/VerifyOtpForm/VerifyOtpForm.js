@@ -26,7 +26,7 @@ export default function VerifyOtpForm({ phoneNumber, password }) {
       await verifyPhone({
         phoneNumber: phoneNumber.replace("+", ""),
         code,
-        language: "uz",
+        language: "uz_Uz",
       }).unwrap();
 
       // 2. Login

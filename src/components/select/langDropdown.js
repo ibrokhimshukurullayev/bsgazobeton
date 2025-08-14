@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import global from "../../assets/images/global.svg";
 import { useTranslation } from "react-i18next";
@@ -9,18 +9,28 @@ import enFlag from "../../assets/images/uk.svg";
 import ruFlag from "../../assets/images/russia.svg";
 
 const languages = [
-  { code: "uz", label: "O‘Z", flag: uzFlag },
-  { code: "en", label: "EN", flag: enFlag },
-  { code: "ru", label: "RU", flag: ruFlag },
+  { code: "uz_Uz", label: "O‘Z", flag: uzFlag },
+  { code: "ru_Ru", label: "RU", flag: ruFlag },
+  { code: "en_Us", label: "EN", flag: enFlag },
 ];
 
 export default function LangDropdown() {
   const { i18n } = useTranslation();
+
   const [open, setOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState(i18n.language);
+  const [selectedLang, setSelectedLang] = useState("");
+
+  // Sahifa yuklanganda localStorage dan tilni set qilish
+  useEffect(() => {
+    const storedLang = localStorage.getItem("language") || "uz_Uz";
+    i18n.changeLanguage(storedLang);
+    setSelectedLang(storedLang);
+  }, [i18n]);
 
   const handleChangeLanguage = (lang) => {
     i18n.changeLanguage(lang);
+    localStorage.setItem("language", lang);
+    window.dispatchEvent(new CustomEvent("languageChanged", { detail: lang }));
     setSelectedLang(lang);
     setOpen(false);
   };

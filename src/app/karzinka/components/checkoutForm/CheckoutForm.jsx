@@ -48,8 +48,6 @@ const CheckoutForm = ({ onBack }) => {
         state: 1,
       }));
 
-      console.log("Yuborilayotgan items:", items);
-
       await saveOrderItems(items).unwrap();
 
       toast.success("Buyurtma muvaffaqiyatli yuborildi!");

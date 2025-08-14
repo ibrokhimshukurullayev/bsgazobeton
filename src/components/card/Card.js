@@ -12,30 +12,47 @@ import Loading from "../loading/Loading";
 import product1 from "../../assets/images/panel.png";
 
 const Card = () => {
+  const [language, setLanguage] = useState(() => {
+    return localStorage.getItem("language") || "uz_Uz";
+  });
   const [categoryValue, setCategoryValue] = useState("");
+  useEffect(() => {
+    const handleLanguageChange = (e) => {
+      const newLang = e?.detail || localStorage.getItem("language") || "uz_Uz";
+      setLanguage(newLang);
+    };
+
+    window.addEventListener("languageChanged", handleLanguageChange);
+
+    return () => {
+      window.removeEventListener("languageChanged", handleLanguageChange);
+    };
+  }, []);
 
   const {
     data: dataGetProduct,
     isLoading: productLoading,
     error: productError,
+    refetch: refetchProduct,
   } = useGetProductQuery({
     skip: 0,
     take: 10,
   });
 
-  console.log(dataGetProduct);
-  console.log(dataGetProduct?.data?.list.imageurl);
-
   const {
     data: dataGetCategory,
     isLoading: categoryLoading,
     error: categoryError,
+    refetch: refetchCategory,
   } = useGetCategoryQuery({
     skip: 0,
     take: 10,
   });
 
-  console.log(dataGetCategory);
+  useEffect(() => {
+    refetchProduct();
+    refetchCategory();
+  }, [language]);
 
   useEffect(() => {
     if (dataGetCategory?.data?.list.length && !categoryValue) {
@@ -72,7 +89,13 @@ const Card = () => {
                   categoryValue === el.productcategoryid ? "active" : ""
                 }`}
               >
-                <Image src={product1} alt="product" />
+                <Image
+                  src={`https://api.bsgazobeton.uz${el?.imageurl}`}
+                  alt={el.name}
+                  width={100}
+                  height={70}
+                />
+                {/* <Image src={product1} alt="product" /> */}
                 <button
                   className={`products__categories__btn ${
                     categoryValue === el.productcategoryid ? "active" : ""

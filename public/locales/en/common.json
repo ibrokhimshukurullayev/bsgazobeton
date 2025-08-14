@@ -13,7 +13,7 @@
     "title3": "BS Gazobeton was established in early 2023. Since then, we have remained committed to the principles of quality and innovation in building materials. Our extensive experience in the construction industry has helped us grow into a trusted and successful brand. We offer products developed with modern technologies and made to meet the highest standards.",
     "title4": "Our mission and values",
     "title5": "Our core mission is to supply Uzbekistan and Central Asian countries with premium, environmentally safe, and energy-efficient building materials. By combining cutting-edge technologies and strict quality control systems, we deliver products that are reliable and long-lasting.",
-    "title6" : "Our production",
+    "title6": "Our production",
     "title7": "BS Gazobeton operates a state-of-the-art production facility equipped with advanced machinery that meets international standards. Our production line is developed by the European company Aircrete and has an annual capacity of 450,000 cubic meters. We use only top-grade raw materials and manufacture products that comply with global standards.",
     "title8": "Why choose us?",
     "cardtitle1": "High quality",
@@ -30,52 +30,52 @@
     "title10": "Contact us"
   },
   "menu": {
-  "katalog": {
-    "gazobloklar": "Gazobloklar",
-    "panellar": "gazobeton panels",
-    "kleylar": "Adhesives for gazobloklar",
-    "instrumentlar": "Tools and materials for gazobloklar"
+    "katalog": {
+      "gazobloklar": "Gazobloklar",
+      "panellar": "gazobeton panels",
+      "kleylar": "Adhesives for gazobloklar",
+      "instrumentlar": "Tools and materials for gazobloklar"
+    },
+    "xizmatlar": {
+      "xizmatlar": "Services",
+      "konsultatsiya": "Product consultation",
+      "montaj": "Gazobloklar installation",
+      "hisoblash": "Calculate quantity and price of gazobloklar"
+    },
+    "sotuvlar": {
+      "sotuvlar": "Sales",
+      "buyurtma": "Ordering and delivery procedure",
+      "tolov": "Payment methods",
+      "manzillar": "Addresses"
+    },
+    "gazobeton": {
+      "gazobeton": "About gazobeton",
+      "haqida": "Detailed information about gazobeton",
+      "testlar": "Test results",
+      "sertifikat": "Certificates and licenses",
+      "qollanilishi": "Application areas of gazobeton",
+      "qollanma": "User guide for gazobloklar",
+      "farqi": "Difference from other materials",
+      "faq": "Frequently Asked Questions"
+    },
+    "about": {
+      "about": "About Us",
+      "kompaniya": "About the company",
+      "sifat": "Quality control and laboratory",
+      "mijoz": "Clients and partners",
+      "oav": "Press about us",
+      "yangiliklar": "News",
+      "vakansiyalar": "Vacancies"
+    }
   },
-  "xizmatlar": {
-    "xizmatlar": "Services",
-    "konsultatsiya": "Product consultation",
-    "montaj": "Gazobloklar installation",
-    "hisoblash": "Calculate quantity and price of gazobloklar"
+  "hero": {
+    "title1": "Created for the future",
+    "title2": "Aerated concrete – Reliable",
+    "title3": "Building material!",
+    "titlebutton1": "View products",
+    "titlebutton2": "Netherlands technologies"
   },
-  "sotuvlar": {
-    "sotuvlar": "Sales",
-    "buyurtma": "Ordering and delivery procedure",
-    "tolov": "Payment methods",
-    "manzillar": "Addresses"
-  },
-  "gazobeton": {
-    "gazobeton": "About gazobeton",
-    "haqida": "Detailed information about gazobeton",
-    "testlar": "Test results",
-    "sertifikat": "Certificates and licenses",
-    "qollanilishi": "Application areas of gazobeton",
-    "qollanma": "User guide for gazobloklar",
-    "farqi": "Difference from other materials",
-    "faq": "Frequently Asked Questions"
-  },
-  "about": {
-    "about": "About Us",
-    "kompaniya": "About the company",
-    "sifat": "Quality control and laboratory",
-    "mijoz": "Clients and partners",
-    "oav": "Press about us",
-    "yangiliklar": "News",
-    "vakansiyalar": "Vacancies"
-  }
-},
-"hero": {
-  "title1": "Created for the future",
-  "title2": "Aerated concrete – Reliable",
-  "title3": "Building material!",
-  "titlebutton1": "View products",
-  "titlebutton2": "Netherlands technologies"
-},
-"1": {
+  "1": {
     "question": "What is aerated concrete?",
     "answer": "Aerated concrete is a lightweight, porous construction material made from a mixture of cement, sand, lime, and water. The tiny air bubbles inside provide insulation and reduce weight."
   },
@@ -126,7 +126,7 @@
     "list1": "Our laboratory experts carry out regular inspections to ensure every batch of product meets the expected quality.",
     "list2": "BS Gazobeton remains committed to maintaining high quality standards and continues to produce materials that meet the evolving needs of the construction industry."
   },
-  "mijoz":{
+  "mijoz": {
     "title4": "Our clients",
     "title1": "has established strong partnerships across the construction industry and has earned the trust of many clients throughout Uzbekistan.",
     "title2": "If you’re interested in becoming a trusted partner, don’t hesitate to get in touch with us — we are always open to collaboration!",
@@ -161,7 +161,7 @@
 
     "cardtitle2": "Strength test",
     "cardlist2": "Determines the material’s resistance to weight and mechanical stress",
-    
+
     "cardtitle3": "Fire resistance test",
     "cardlist3": "Assesses the material’s ability to withstand high temperatures",
 
@@ -238,37 +238,37 @@
     "text2": "Subcontracting service for construction companies."
   },
   "calculator": {
-  "title": "CALCULATOR",
-  "lengthLabel": "Wall length (m)",
-  "lengthPlaceholder": "Wall length",
-  "heightLabel": "Wall height (m)",
-  "heightPlaceholder": "Wall height",
-  "thicknessLabel": "Wall thickness (mm)",
-  "calculateButton": "CALCULATE",
-  "resultTitle": "Result",
-  "blockCount": "Required number of blocks:",
-  "volume": "Total volume:"
-},
-"advantages": {
-  "title": "Advantages of aerated concrete",  
-  "title1": "Lightweight",
-  "desc1": "Much lighter than regular concrete, which reduces transportation and construction costs.",
-  "title2": "Thermal insulation",
-  "desc2": "Aerated concrete has excellent heat retention, keeping warmth in winter and coolness in summer.",
-  "title3": "Durability",
-  "desc3": "Despite being lightweight, it has good load-bearing capacity and long-term strength.",
-  "title4": "Fire resistance",
-  "desc4": "Aerated concrete is fire-resistant and withstands high temperatures, ensuring safety.",
-  "title5": "Eco-friendliness",
-  "desc5": "It contains no harmful substances, making it safe for health and environmentally friendly.",
-  "title6": "Easy to work with",
-  "desc6": "Easy to cut, drill, and shape, simplifying construction and saving time."
-},
-"aboutsection": {
-  "title": " – is one of the leading manufacturers of high-quality aerated concrete products in the Uzbek market.",
-  "desc1": "The company operates a modern production plant equipped with the most advanced technologies and machinery that meet high-quality standards. The production line is established by the European company 'Aircrete'. The annual production capacity is 450,000 cubic meters.",
-  "desc2": "Each product undergoes strict quality control to ensure compliance with standards."
-},
+    "title": "CALCULATOR",
+    "lengthLabel": "Wall length (m)",
+    "lengthPlaceholder": "Wall length",
+    "heightLabel": "Wall height (m)",
+    "heightPlaceholder": "Wall height",
+    "thicknessLabel": "Wall thickness (mm)",
+    "calculateButton": "CALCULATE",
+    "resultTitle": "Result",
+    "blockCount": "Required number of blocks:",
+    "volume": "Total volume:"
+  },
+  "advantages": {
+    "title": "Advantages of aerated concrete",
+    "title1": "Lightweight",
+    "desc1": "Much lighter than regular concrete, which reduces transportation and construction costs.",
+    "title2": "Thermal insulation",
+    "desc2": "Aerated concrete has excellent heat retention, keeping warmth in winter and coolness in summer.",
+    "title3": "Durability",
+    "desc3": "Despite being lightweight, it has good load-bearing capacity and long-term strength.",
+    "title4": "Fire resistance",
+    "desc4": "Aerated concrete is fire-resistant and withstands high temperatures, ensuring safety.",
+    "title5": "Eco-friendliness",
+    "desc5": "It contains no harmful substances, making it safe for health and environmentally friendly.",
+    "title6": "Easy to work with",
+    "desc6": "Easy to cut, drill, and shape, simplifying construction and saving time."
+  },
+  "aboutsection": {
+    "title": " – is one of the leading manufacturers of high-quality aerated concrete products in the Uzbek market.",
+    "desc1": "The company operates a modern production plant equipped with the most advanced technologies and machinery that meet high-quality standards. The production line is established by the European company 'Aircrete'. The annual production capacity is 450,000 cubic meters.",
+    "desc2": "Each product undergoes strict quality control to ensure compliance with standards."
+  },
   "faq": {
     "title": "Still have questions?",
     "desc": "Get a free consultation"
@@ -293,6 +293,19 @@
     "text3": "Gas block adhesive",
     "text4": "Gas block tools",
     "button": "View products"
+  },
+  "products": {
+    "aboutproducts": "About the product",
+    "technicalprops": "Technical specifications",
+    "moreprops": "Detailed information about product types and sizes is available in our catalog.",
+    "addcards": "ADD TO CART",
+    "addcompare": "Add to compare",
+    "downloadcatalog": "DOWNLOAD CATALOG"
+  },
+  "card": {
+    "title": "Cart",
+    "clearcard": "Clearing the cart",
+    "total": "Total",
+    "checkout": "Proceed to Checkout"
   }
 }
-

@@ -6,8 +6,8 @@ import global_en from "../../public/locales/en/common.json";
 
 i18n.use(initReactI18next).init({
   interpolation: { escapeValue: false },
-  lng: "uz",
-  fallbackLng: "uz",
+  lng: "uz_Uz",
+  fallbackLng: "uz_Uz",
   resources: {
     uz: {
       global: global_uz,

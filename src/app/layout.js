@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     return () => clearTimeout(timer);
   }, []);
   return (
-    <html lang="en">
+    <html lang="uz_Uz">
       <body>
         <Provider store={store}>
           <I18nextProvider i18n={i18n}>

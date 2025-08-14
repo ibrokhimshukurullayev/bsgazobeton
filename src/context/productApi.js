@@ -14,11 +14,10 @@ export const productApi = api.injectEndpoints({
     // Get single product request
     getProductSingle: build.query({
       query: (id) => ({
-        url: `/products?productId=${id}`,
+        url: `/products?productId=${id}`, // ✅ to‘g‘risi shu
       }),
       providesTags: ["Product"],
     }),
-
     // Post request
     createProduct: build.mutation({
       query: (body) => ({
