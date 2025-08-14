@@ -2,9 +2,9 @@ name: GitHub Actions CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   REPO_NAME: ${{ github.repository }}
