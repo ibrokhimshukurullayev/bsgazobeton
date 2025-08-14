@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://api.bsgazabeton.uz/api",
+  baseUrl: "https://api.bsgazobeton.uz/api",
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("token");
     if (token) {
