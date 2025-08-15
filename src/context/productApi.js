@@ -14,7 +14,7 @@ export const productApi = api.injectEndpoints({
     // Get single product request
     getProductSingle: build.query({
       query: (id) => ({
-        url: `/products?productId=${id}`, // ✅ to‘g‘risi shu
+        url: `/products?productId=${id}`,
       }),
       providesTags: ["Product"],
     }),

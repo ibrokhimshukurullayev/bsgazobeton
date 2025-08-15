@@ -40,6 +40,48 @@ header.with-compare-bar {
   &__list {
     display: none;
 
+    .nav__item {
+      position: relative;
+
+      .mega-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 0px 1px rgba(17, 24, 39, 0.05);
+
+        z-index: 100;
+        min-width: 305px;
+        display: flex;
+
+        ul {
+          list-style: none;
+
+          li {
+            padding: 14px 0;
+
+            a {
+              text-decoration: none;
+              color: rgba(54, 65, 79, 1);
+              font-weight: 500;
+              font-size: 15px;
+              line-height: 20px;
+              letter-spacing: 0%;
+              vertical-align: middle;
+
+              &:hover {
+                color: #e53935;
+              }
+            }
+          }
+        }
+      }
+    }
+
     @media (min-width: 1100px) {
       display: flex;
       align-items: center;
@@ -176,6 +218,7 @@ header.with-compare-bar {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  background-color: red;
 }
 
 .nav__link {

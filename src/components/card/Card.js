@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import "./card.scss";
 import Image from "next/image";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { useGetCategoryQuery } from "../../context/categoryApi";
 import { useGetProductQuery } from "../../context/productApi";
@@ -15,18 +16,23 @@ const Card = () => {
   const [language, setLanguage] = useState(() => {
     return localStorage.getItem("language") || "uz_Uz";
   });
+
   const [categoryValue, setCategoryValue] = useState("");
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const idFromQuery = (
+    searchParams.get("productcategoryid") || ""
+  ).toLowerCase();
+
   useEffect(() => {
     const handleLanguageChange = (e) => {
       const newLang = e?.detail || localStorage.getItem("language") || "uz_Uz";
       setLanguage(newLang);
     };
-
     window.addEventListener("languageChanged", handleLanguageChange);
-
-    return () => {
+    return () =>
       window.removeEventListener("languageChanged", handleLanguageChange);
-    };
   }, []);
 
   const {
@@ -34,37 +40,50 @@ const Card = () => {
     isLoading: productLoading,
     error: productError,
     refetch: refetchProduct,
-  } = useGetProductQuery({
-    skip: 0,
-    take: 10,
-  });
+  } = useGetProductQuery({ skip: 0, take: 10 });
 
   const {
     data: dataGetCategory,
     isLoading: categoryLoading,
     error: categoryError,
     refetch: refetchCategory,
-  } = useGetCategoryQuery({
-    skip: 0,
-    take: 10,
-  });
+  } = useGetCategoryQuery({ skip: 0, take: 10 });
 
   useEffect(() => {
     refetchProduct();
     refetchCategory();
-  }, [language]);
+  }, [language]); // til o'zgarsa qayta yuklash
 
+  // ✅ URL dagi productcategoryid bo'lsa — o'shani active qilish; bo'lmasa birinchisini
   useEffect(() => {
-    if (dataGetCategory?.data?.list.length && !categoryValue) {
-      setCategoryValue(dataGetCategory?.data?.list[0].productcategoryid);
+    const list = dataGetCategory?.data?.list ?? [];
+    if (!list.length) return;
+
+    // URL dagi id ro'yxatda bormi?
+    const match = list.find(
+      (c) => String(c.productcategoryid).toLowerCase() === idFromQuery
+    );
+
+    if (idFromQuery && match) {
+      setCategoryValue(match.productcategoryid);
+    } else if (!categoryValue) {
+      setCategoryValue(list[0].productcategoryid);
     }
-  }, [dataGetCategory?.data?.list]);
+  }, [dataGetCategory?.data?.list, idFromQuery]); // list yoki URL o'zgarsa
 
   const filteredProduct = categoryValue
-    ? dataGetProduct?.data?.list.filter(
-        (el) => el.productcategoryid === categoryValue
+    ? dataGetProduct?.data?.list?.filter(
+        (el) => String(el.productcategoryid) === String(categoryValue)
       )
     : [];
+
+  // Klikda ham state, ham URL yangilanadi
+  const handleSelectCategory = (id) => {
+    setCategoryValue(id);
+    const params = new URLSearchParams(window.location.search);
+    params.set("productcategoryid", id);
+    router.replace(`/katalog?${params.toString()}`, { scroll: false });
+  };
 
   if (productLoading || categoryLoading)
     return (
@@ -78,30 +97,42 @@ const Card = () => {
     <section id="products">
       <div className="products">
         <ul className="products__categories">
-          {dataGetCategory?.data?.list.map((el) => (
+          {(dataGetCategory?.data?.list ?? []).map((el) => (
             <li
               key={el.productcategoryid}
               className="products__categories__item"
             >
               <div
-                onClick={() => setCategoryValue(el.productcategoryid)}
+                onClick={() => handleSelectCategory(el.productcategoryid)}
                 className={`products__card ${
-                  categoryValue === el.productcategoryid ? "active" : ""
+                  String(categoryValue) === String(el.productcategoryid)
+                    ? "active"
+                    : ""
                 }`}
               >
-                <Image
-                  src={`https://api.bsgazobeton.uz${el?.imageurl}`}
-                  alt={el.name}
-                  width={100}
-                  height={70}
-                />
-                {/* <Image src={product1} alt="product" /> */}
+                {el?.imageurl ? (
+                  <Image
+                    src={`https://api.bsgazobeton.uz${el.imageurl}`}
+                    alt={String(el.name || "category")}
+                    width={100}
+                    height={70}
+                  />
+                ) : (
+                  <Image src={product1} alt="product" />
+                )}
+
                 <button
                   className={`products__categories__btn ${
-                    categoryValue === el.productcategoryid ? "active" : ""
+                    String(categoryValue) === String(el.productcategoryid)
+                      ? "active"
+                      : ""
                   }`}
                 >
-                  {el.name}
+                  {typeof el.name === "string"
+                    ? el.name
+                    : String(
+                        el.name?.uz_uz || el.name?.ru_ru || el.name?.en_us || ""
+                      )}
                 </button>
               </div>
             </li>
@@ -111,6 +142,7 @@ const Card = () => {
         <div className="products__header">
           <h3 className="products__title">Gazobeton bloklari - D300</h3>
         </div>
+
         <div
           className={`products__wrapper ${
             filteredProduct?.length ? "" : "simple__products__wrapper"

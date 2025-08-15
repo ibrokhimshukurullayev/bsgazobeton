@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../assets/images/logo.svg";
@@ -11,27 +11,31 @@ import phone from "../../assets/images/header/phone.svg";
 import { useTranslation } from "react-i18next";
 import LangDropdown from "../select/langDropdown";
 import { useRouter } from "next/navigation";
-
 import arrov from "../../assets/images/arrov.svg";
-import "./header.scss";
 import { useSelector } from "react-redux";
+import "./style.scss";
+import { useGetCategoryQuery } from "../../context/categoryApi";
 
 const Header = () => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const cartCount = useSelector((state) => state.cart.value);
-  console.log("cart", cartCount);
-
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const [t, i18n] = useTranslation("global");
+
+  // ✅ to'g'ri destructuring
+  const { t, i18n } = useTranslation("global");
 
   const toggleNavbar = () => setNavbarOpen(!navbarOpen);
 
+  const {
+    data: dataGetCategory,
+    isLoading: categoryLoading,
+    error: categoryError,
+  } = useGetCategoryQuery({ skip: 0, take: 10 });
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get("auth") === "true") {
-      setIsUserModalOpen(true);
-    }
+    if (params.get("auth") === "true") setIsUserModalOpen(true);
   }, []);
 
   const router = useRouter();
@@ -39,87 +43,110 @@ const Header = () => {
   const handleClick = () => {
     const token =
       typeof window !== "undefined" && localStorage.getItem("token");
-
-    if (token) {
-      router.push("/profile");
-    } else {
-      router.push("/login");
-    }
+    router.push(token ? "/profile" : "/login");
   };
 
-  const toggleDropdown = (key) => {
+  const toggleDropdown = (key) =>
     setActiveDropdown((prev) => (prev === key ? null : key));
+  const toggleUserModal = () => setIsUserModalOpen((prev) => !prev);
+
+  // ✅ i18n.language -> backend kalitlariga mos
+  const resolveLangKey = (lng) => {
+    const l = (lng || "").toLowerCase();
+    if (l.startsWith("uz")) return "uz_uz";
+    if (l.startsWith("ru")) return "ru_ru";
+    if (l.startsWith("en")) return "en_us";
+    return "uz_uz";
   };
 
-  const toggleUserModal = () => setIsUserModalOpen((prev) => !prev);
-  const dropdownItems = {
-    katalog: [
-      {
-        label: t("menu.katalog.gazobloklar"),
-        href: "/katalog?productcategoryid=1",
-      },
-      {
-        label: t("menu.katalog.panellar"),
-        href: "katalog?productcategoryid=2",
-      },
-      { label: t("menu.katalog.kleylar"), href: "katalog?productcategoryid=3" },
-      {
-        label: t("menu.katalog.instrumentlar"),
-        href: "katalog?productcategoryid=4",
-      },
-    ],
-    xizmatlar: [
-      { label: t("menu.xizmatlar.konsultatsiya"), href: "/services" },
-      { label: t("menu.xizmatlar.montaj"), href: "/services/gazablokmantaji" },
-      {
-        label: t("menu.xizmatlar.hisoblash"),
-        href: "/services/calculator",
-      },
-    ],
-    sotuvlar: [
-      {
-        label: t("menu.sotuvlar.buyurtma"),
-        href: "/sotuvlar",
-      },
-      { label: t("menu.sotuvlar.tolov"), href: "/sotuvlar/tolovUsullari" },
-      { label: t("menu.sotuvlar.manzillar"), href: "/joylashuv" },
-    ],
-    gazobeton: [
-      { label: t("menu.gazobeton.haqida"), href: "/aboutGazabeton" },
-      {
-        label: t("menu.gazobeton.testlar"),
-        href: "/aboutGazabeton/aboutSinovtest",
-      },
-      {
-        label: t("menu.gazobeton.sertifikat"),
-        href: "/aboutGazabeton/aboutSertifikat",
-      },
-      {
-        label: t("menu.gazobeton.qollanilishi"),
-        href: "/aboutGazabeton/aboutQollanilishi",
-      },
-      {
-        label: t("menu.gazobeton.qollanma"),
-        href: "/aboutGazabeton/aboutIshlatilishi",
-      },
-      {
-        label: t("menu.gazobeton.farqi"),
-        href: "/aboutGazabeton/aboutMaterialardanFarqi",
-      },
-      {
-        label: t("menu.gazobeton.faq"),
-        href: "/aboutGazabeton/aboutFaq",
-      },
-    ],
-    about: [
-      { label: t("menu.about.kompaniya"), href: "/about" },
-      { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
-      { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
-      { label: t("menu.about.oav"), href: "/about/aboutOAV" },
-      // { label: t("menu.about.yangiliklar"), href: "#" },
-      { label: t("menu.about.vakansiyalar"), href: "/about/vakansiyalar" },
-    ],
-  };
+  // ✅ API -> katalog elementlari (label = string)
+  const katalogFromApi = useMemo(() => {
+    const list = dataGetCategory?.data?.list ?? [];
+    const langKey = resolveLangKey(i18n?.language);
+
+    // (ixtiyoriy) pozitsiyaga qarab sort
+    const sorted = [...list].sort((a, b) => {
+      const pa = a.position ?? a.order ?? 0;
+      const pb = b.position ?? b.order ?? 0;
+      return pa - pb;
+    });
+
+    return sorted.map((cat) => {
+      const id =
+        cat.productcategoryid ?? cat.id ?? cat.productCategoryId ?? null;
+
+      let label = "";
+      const trName = cat?.translations?.name; // {uz_uz, ru_ru, en_us} yoki string
+
+      if (typeof trName === "string") {
+        label = trName;
+      } else if (trName && typeof trName === "object") {
+        label = trName[langKey] ?? Object.values(trName).find(Boolean) ?? "";
+      } else {
+        label = cat?.name ?? "";
+      }
+
+      return {
+        label: String(label),
+        href: id ? `/katalog?productcategoryid=${id}` : "/katalog",
+      };
+    });
+  }, [dataGetCategory, i18n?.language]);
+
+  const dropdownItems = useMemo(
+    () => ({
+      katalog:
+        !categoryLoading &&
+        !categoryError &&
+        katalogFromApi.length &&
+        katalogFromApi,
+      xizmatlar: [
+        { label: t("menu.xizmatlar.konsultatsiya"), href: "/services" },
+        {
+          label: t("menu.xizmatlar.montaj"),
+          href: "/services/gazablokmantaji",
+        },
+        { label: t("menu.xizmatlar.hisoblash"), href: "/services/calculator" },
+      ],
+      sotuvlar: [
+        { label: t("menu.sotuvlar.buyurtma"), href: "/sotuvlar" },
+        { label: t("menu.sotuvlar.tolov"), href: "/sotuvlar/tolovUsullari" },
+        { label: t("menu.sotuvlar.manzillar"), href: "/joylashuv" },
+      ],
+      gazobeton: [
+        { label: t("menu.gazobeton.haqida"), href: "/aboutGazabeton" },
+        {
+          label: t("menu.gazobeton.testlar"),
+          href: "/aboutGazabeton/aboutSinovtest",
+        },
+        {
+          label: t("menu.gazobeton.sertifikat"),
+          href: "/aboutGazabeton/aboutSertifikat",
+        },
+        {
+          label: t("menu.gazobeton.qollanilishi"),
+          href: "/aboutGazabeton/aboutQollanilishi",
+        },
+        {
+          label: t("menu.gazobeton.qollanma"),
+          href: "/aboutGazabeton/aboutIshlatilishi",
+        },
+        {
+          label: t("menu.gazobeton.farqi"),
+          href: "/aboutGazabeton/aboutMaterialardanFarqi",
+        },
+        { label: t("menu.gazobeton.faq"), href: "/aboutGazabeton/aboutFaq" },
+      ],
+      about: [
+        { label: t("menu.about.kompaniya"), href: "/about" },
+        { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
+        { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
+        { label: t("menu.about.oav"), href: "/about/aboutOAV" },
+        { label: t("menu.about.vakansiyalar"), href: "/about/vakansiyalar" },
+      ],
+    }),
+    [katalogFromApi, categoryLoading, categoryError, t]
+  );
 
   const navLinks = [
     { href: "/katalog", label: t("header.catalog"), key: "katalog" },
@@ -131,7 +158,7 @@ const Header = () => {
       key: "gazobeton",
     },
     { href: "/about", label: t("header.about"), key: "about" },
-    { href: "/joylashuv  ", label: t("header.contact") },
+    { href: "/joylashuv", label: t("header.contact") },
   ];
 
   return (
@@ -158,13 +185,19 @@ const Header = () => {
 
                 {dropdownItems[item.key] && activeDropdown === item.key && (
                   <div className="mega-dropdown">
-                    <ul>
-                      {dropdownItems[item.key].map((subItem, i) => (
-                        <li key={i}>
-                          <Link href={subItem.href}>{subItem.label}</Link>
-                        </li>
-                      ))}
-                    </ul>
+                    {item.key === "katalog" && categoryLoading ? (
+                      <div style={{ padding: 8, color: "#6b7280" }}>
+                        Yuklanmoqda…
+                      </div>
+                    ) : (
+                      <ul>
+                        {dropdownItems[item.key].map((subItem, i) => (
+                          <li key={i}>
+                            <Link href={subItem.href}>{subItem.label}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 )}
               </li>
@@ -178,7 +211,6 @@ const Header = () => {
             </a>
             <div className="nav__actions">
               <LangDropdown />
-
               <button className="circle-btns" onClick={handleClick}>
                 <Image src={person} alt="person" />
               </button>
@@ -191,6 +223,7 @@ const Header = () => {
                   )}
                 </div>
               </Link>
+
               <button
                 id="navbar-open"
                 onClick={toggleNavbar}
@@ -203,6 +236,7 @@ const Header = () => {
         </div>
       </header>
 
+      {/* Mobile */}
       <div id="navbar-responsive" style={{ top: navbarOpen ? "0" : "-100%" }}>
         <ul className="nav__lists">
           {navLinks.map((item) => (
@@ -233,10 +267,10 @@ const Header = () => {
             </li>
           ))}
         </ul>
+
         <div className="nav__res">
           <div className="nav__actions">
             <LangDropdown />
-
             <button className="circle-btn" onClick={toggleUserModal}>
               <Image src={person} alt="person" />
             </button>
