@@ -13,8 +13,8 @@ import LangDropdown from "../select/langDropdown";
 import { useRouter } from "next/navigation";
 import arrov from "../../assets/images/arrov.svg";
 import { useSelector } from "react-redux";
-import "./style.scss";
 import { useGetCategoryQuery } from "../../context/categoryApi";
+import "./style.scss";
 
 const Header = () => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
@@ -50,7 +50,6 @@ const Header = () => {
     setActiveDropdown((prev) => (prev === key ? null : key));
   const toggleUserModal = () => setIsUserModalOpen((prev) => !prev);
 
-  // ✅ i18n.language -> backend kalitlariga mos
   const resolveLangKey = (lng) => {
     const l = (lng || "").toLowerCase();
     if (l.startsWith("uz")) return "uz_uz";
@@ -59,12 +58,10 @@ const Header = () => {
     return "uz_uz";
   };
 
-  // ✅ API -> katalog elementlari (label = string)
   const katalogFromApi = useMemo(() => {
     const list = dataGetCategory?.data?.list ?? [];
     const langKey = resolveLangKey(i18n?.language);
 
-    // (ixtiyoriy) pozitsiyaga qarab sort
     const sorted = [...list].sort((a, b) => {
       const pa = a.position ?? a.order ?? 0;
       const pb = b.position ?? b.order ?? 0;
@@ -76,7 +73,7 @@ const Header = () => {
         cat.productcategoryid ?? cat.id ?? cat.productCategoryId ?? null;
 
       let label = "";
-      const trName = cat?.translations?.name; // {uz_uz, ru_ru, en_us} yoki string
+      const trName = cat?.translations?.name;
 
       if (typeof trName === "string") {
         label = trName;

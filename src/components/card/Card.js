@@ -52,9 +52,8 @@ const Card = () => {
   useEffect(() => {
     refetchProduct();
     refetchCategory();
-  }, [language]); // til o'zgarsa qayta yuklash
+  }, [language]);
 
-  // ✅ URL dagi productcategoryid bo'lsa — o'shani active qilish; bo'lmasa birinchisini
   useEffect(() => {
     const list = dataGetCategory?.data?.list ?? [];
     if (!list.length) return;
