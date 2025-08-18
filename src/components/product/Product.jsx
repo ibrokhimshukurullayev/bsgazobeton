@@ -10,6 +10,7 @@ import product1 from "../../assets/images/product1.svg";
 import "./product.scss";
 
 const Product = () => {
+  console.log("");
   const router = useRouter();
   const [language, setLanguage] = useState(() => {
     return localStorage.getItem("language") || "uz_Uz";
