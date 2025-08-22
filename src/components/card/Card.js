@@ -210,7 +210,6 @@ const Card = () => {
                     onClick={() => handleSelectChild(child.productcategoryid)}
                     style={{ cursor: "pointer" }}
                   >
-                    {getName(selectedRoot, language)} —{" "}
                     {getName(child, language)}
                   </h3>
                 </div>
