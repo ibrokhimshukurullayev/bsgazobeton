@@ -7,6 +7,7 @@
       align-items: center;
       margin-bottom: 30px;
       @media (max-width: 680px) {
+        
         flex-direction: column;
         gap: 20px;
         align-items: start;
@@ -47,8 +48,9 @@
       vertical-align: middle;
     }
     &__categories {
+      display: none;
       display: grid;
-      grid-template-columns: repeat(4, 305px);
+      grid-template-columns: repeat(auto-fill, 305px);
       align-items: center;
       justify-content: space-between;
       border-radius: 100px;
@@ -102,7 +104,8 @@
         grid-template-columns: repeat(3, 1fr);
       }
       @media (max-width: 760px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
+        
       }
     }
     .simple__products__wrapper {
