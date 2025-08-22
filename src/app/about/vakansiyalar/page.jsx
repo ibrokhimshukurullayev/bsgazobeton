@@ -7,7 +7,7 @@ import "./vakansiyalar.scss";
 import Loading from "../../../components/loading/Loading";
 
 const Vakansiyalar = () => {
-  const router = useRouter(); // 📍 Router hook
+  const router = useRouter();
   const { data, isLoading, error } = useGetVakansiyalarQuery({
     skip: 0,
     take: 20,
@@ -15,7 +15,6 @@ const Vakansiyalar = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);
 
-  // Birinchi vakansiyani ochiq qilish
   useEffect(() => {
     if (data?.data?.list?.length > 0) {
       setActiveIndex(0);

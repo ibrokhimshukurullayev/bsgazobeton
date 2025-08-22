@@ -16,12 +16,9 @@ const Product = () => {
   });
   const [t, i18n] = useTranslation("global");
   const [loadingId, setLoadingId] = useState();
-  console.log("loadingId", loadingId);
 
   const handleButtonClick = async (categoryId) => {
     setLoadingId(categoryId);
-    console.log("categoryId", categoryId);
-
     try {
       await router.push(`/katalog?productcategoryid=${categoryId}`);
     } finally {

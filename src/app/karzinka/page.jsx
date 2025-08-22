@@ -12,9 +12,9 @@ const Karzinka = () => {
   const [step, setStep] = useState("cart"); // 'cart' yoki 'checkout'
 
   // 1. Agar karzinka bo'sh bo'lsa
-  if (!cart.length) {
-    return <Empty />;
-  }
+  // if (!cart.length) {
+  //   return <Empty />;
+  // }
 
   return (
     <div>

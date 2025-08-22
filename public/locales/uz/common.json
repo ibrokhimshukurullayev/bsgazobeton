@@ -300,6 +300,7 @@
     "moreprops": "Mahsulot turlari va o‘lchamlari haqida batafsil ma'lumot katalogimizda mavjud.",
     "addcards": "SAVATGA QO‘SHISH",
     "addcompare": "Taqqoslashga qo‘shish",
+    "removecompare": "Taqqoslashdan olish",
     "downloadcatalog": "KATALOGNI YUKLAB OLISH"
   },
   "card": {
@@ -307,5 +308,22 @@
     "clearcard": "Savatchani tozalash",
     "total": "Umumiy",
     "checkout": "Buyurtmani rasmiylashtirish"
+  },
+  "auth": { "loginFirst": "Avval login qiling" },
+  "common": { "loading": "Yuklanmoqda...", "error": "Xatolik yuz berdi" },
+  "orders": {
+    "title": "Buyurtmalar tarixi",
+    "empty": "Buyurtmalar topilmadi",
+    "details": "Batafsil",
+    "status": {
+      "Cart": "Savat",
+      "New": "Yangi",
+      "Pending": "Kutilmoqda",
+      "Confirmed": "Tasdiqlandi",
+      "InProgress": "Yetkazib berish",
+      "Completed": "Yakunlangan",
+      "Cancelled": "Bekor qilingan"
+    },
+    "showMore": "Ko‘proq ko‘rsatish"
   }
 }

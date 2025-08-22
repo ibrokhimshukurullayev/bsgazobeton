@@ -1,110 +1,169 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./card.scss";
 import Image from "next/image";
-import { useSearchParams, useRouter } from "next/navigation";
-
+import { useRouter, useSearchParams } from "next/navigation";
 import { useGetCategoryQuery } from "../../context/categoryApi";
 import { useGetProductQuery } from "../../context/productApi";
 import CardProducts from "../card-products/CardProducts";
 import Loading from "../loading/Loading";
-
 import product1 from "../../assets/images/panel.png";
+
+function getName(cat, language = "uz_Uz") {
+  if (!cat) return "";
+  if (typeof cat.name === "string" && cat.name) return cat.name;
+  const n =
+    (cat.name && (cat.name.uz_uz || cat.name.ru_ru || cat.name.en_us)) || "";
+  return String(n);
+}
 
 const Card = () => {
   const [language, setLanguage] = useState(() => {
-    return localStorage.getItem("language") || "uz_Uz";
+    return (
+      (typeof window !== "undefined" && localStorage.getItem("language")) ||
+      "uz_Uz"
+    );
   });
 
-  const [categoryValue, setCategoryValue] = useState("");
+  // Root va “tanlangan” idlar
+  const [rootId, setRootId] = useState("");
+  const [selectedId, setSelectedId] = useState(""); // highlight/URL uchun
 
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const idFromQuery = (
     searchParams.get("productcategoryid") || ""
   ).toLowerCase();
 
   useEffect(() => {
-    const handleLanguageChange = (e) => {
-      const newLang = e?.detail || localStorage.getItem("language") || "uz_Uz";
+    const onLang = (e) => {
+      const newLang =
+        (e && e.detail) ||
+        (typeof window !== "undefined" && localStorage.getItem("language")) ||
+        "uz_Uz";
       setLanguage(newLang);
     };
-    window.addEventListener("languageChanged", handleLanguageChange);
-    return () =>
-      window.removeEventListener("languageChanged", handleLanguageChange);
+    window.addEventListener("languageChanged", onLang);
+    return () => window.removeEventListener("languageChanged", onLang);
   }, []);
 
   const {
-    data: dataGetProduct,
-    isLoading: productLoading,
-    error: productError,
-    refetch: refetchProduct,
-  } = useGetProductQuery({ skip: 0, take: 10 });
-
-  const {
-    data: dataGetCategory,
+    data: catRes,
     isLoading: categoryLoading,
     error: categoryError,
     refetch: refetchCategory,
-  } = useGetCategoryQuery({ skip: 0, take: 10 });
+  } = useGetCategoryQuery({ skip: 0, take: 1000 });
+
+  const {
+    data: prodRes,
+    isLoading: productLoading,
+    error: productError,
+    refetch: refetchProduct,
+  } = useGetProductQuery({ skip: 0, take: 1000 });
 
   useEffect(() => {
-    refetchProduct();
     refetchCategory();
-  }, [language]);
+    refetchProduct();
+  }, [language, refetchCategory, refetchProduct]);
 
+  const categories = catRes?.data?.list || [];
+  const products = prodRes?.data?.list || [];
+
+  // Faqat root kategoriyalar
+  const rootCategories = useMemo(
+    () => categories.filter((c) => c.parentproductcategoryid == null),
+    [categories]
+  );
+
+  // URL bo‘yicha dastlabki root/selected ni sozlash
   useEffect(() => {
-    const list = dataGetCategory?.data?.list ?? [];
-    if (!list.length) return;
+    if (!categories.length) return;
 
-    // URL dagi id ro'yxatda bormi?
-    const match = list.find(
+    const matched = categories.find(
       (c) => String(c.productcategoryid).toLowerCase() === idFromQuery
     );
 
-    if (idFromQuery && match) {
-      setCategoryValue(match.productcategoryid);
-    } else if (!categoryValue) {
-      setCategoryValue(list[0].productcategoryid);
+    if (matched) {
+      if (matched.parentproductcategoryid != null) {
+        // child -> rootId = parent, selected = child
+        setRootId(String(matched.parentproductcategoryid));
+        setSelectedId(String(matched.productcategoryid));
+      } else {
+        setRootId(String(matched.productcategoryid));
+        setSelectedId(String(matched.productcategoryid));
+      }
+    } else if (!rootId && rootCategories.length) {
+      const first = rootCategories[0];
+      setRootId(String(first.productcategoryid));
+      setSelectedId(String(first.productcategoryid));
     }
-  }, [dataGetCategory?.data?.list, idFromQuery]); // list yoki URL o'zgarsa
+  }, [categories, idFromQuery, rootCategories, rootId]);
 
-  const filteredProduct = categoryValue
-    ? dataGetProduct?.data?.list?.filter(
-        (el) => String(el.productcategoryid) === String(categoryValue)
-      )
-    : [];
+  // Tanlangan rootning bolalari (pastda shu bo‘limlar chiqadi)
+  const childCategories = useMemo(
+    () =>
+      categories.filter(
+        (c) => String(c.parentproductcategoryid) === String(rootId)
+      ),
+    [categories, rootId]
+  );
 
-  // Klikda ham state, ham URL yangilanadi
-  const handleSelectCategory = (id) => {
-    setCategoryValue(id);
+  // Mahsulotlarni categoryId bo‘yicha guruhlab qo‘yish (tezkor render uchun)
+  const productsByCategory = useMemo(() => {
+    const map = new Map();
+    for (const p of products) {
+      const key = String(p.productcategoryid);
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(p);
+    }
+    return map;
+  }, [products]);
+
+  const handleSelectRoot = (id) => {
+    const idStr = String(id);
+    setRootId(idStr);
+    setSelectedId(idStr);
     const params = new URLSearchParams(window.location.search);
-    params.set("productcategoryid", id);
+    params.set("productcategoryid", idStr);
     router.replace(`/katalog?${params.toString()}`, { scroll: false });
   };
 
-  if (productLoading || categoryLoading)
+  const handleSelectChild = (id) => {
+    const idStr = String(id);
+    setSelectedId(idStr);
+    const params = new URLSearchParams(window.location.search);
+    params.set("productcategoryid", idStr);
+    router.replace(`/katalog?${params.toString()}`, { scroll: false });
+  };
+
+  if (productLoading || categoryLoading) {
     return (
       <div>
         <Loading />
       </div>
     );
+  }
   if (productError || categoryError) return <div>Error loading data</div>;
+
+  const selectedRoot = categories.find(
+    (c) => String(c.productcategoryid) === String(rootId)
+  );
 
   return (
     <section id="products">
       <div className="products">
+        {/* ==== YUQORIDA: faqat ROOT kategoriyalar ==== */}
         <ul className="products__categories">
-          {(dataGetCategory?.data?.list ?? []).map((el) => (
+          {rootCategories.map((el) => (
             <li
               key={el.productcategoryid}
               className="products__categories__item"
             >
               <div
-                onClick={() => handleSelectCategory(el.productcategoryid)}
+                onClick={() => handleSelectRoot(el.productcategoryid)}
                 className={`products__card ${
-                  String(categoryValue) === String(el.productcategoryid)
+                  String(rootId) === String(el.productcategoryid)
                     ? "active"
                     : ""
                 }`}
@@ -112,7 +171,7 @@ const Card = () => {
                 {el?.imageurl ? (
                   <Image
                     src={`https://api.bsgazobeton.uz${el.imageurl}`}
-                    alt={String(el.name || "category")}
+                    alt={getName(el, language)}
                     width={100}
                     height={70}
                   />
@@ -122,49 +181,101 @@ const Card = () => {
 
                 <button
                   className={`products__categories__btn ${
-                    String(categoryValue) === String(el.productcategoryid)
+                    String(rootId) === String(el.productcategoryid)
                       ? "active"
                       : ""
                   }`}
                 >
-                  {typeof el.name === "string"
-                    ? el.name
-                    : String(
-                        el.name?.uz_uz || el.name?.ru_ru || el.name?.en_us || ""
-                      )}
+                  {getName(el, language)}
                 </button>
               </div>
             </li>
           ))}
         </ul>
 
-        <div className="products__header">
-          <h3 className="products__title">Gazobeton bloklari - D300</h3>
-        </div>
+        {/* ==== PASTDA: tanlangan rootning CHILD bo‘limlari ==== */}
+        {childCategories.length > 0 ? (
+          childCategories.map((child) => {
+            const list =
+              productsByCategory.get(String(child.productcategoryid)) || [];
+            return (
+              <div key={child.productcategoryid} className="child-section">
+                <div className="products__header">
+                  <h3
+                    className={`products__title ${
+                      String(selectedId) === String(child.productcategoryid)
+                        ? "active"
+                        : ""
+                    }`}
+                    onClick={() => handleSelectChild(child.productcategoryid)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {getName(selectedRoot, language)} —{" "}
+                    {getName(child, language)}
+                  </h3>
+                </div>
 
-        <div
-          className={`products__wrapper ${
-            filteredProduct?.length ? "" : "simple__products__wrapper"
-          }`}
-        >
-          {filteredProduct?.length ? (
-            filteredProduct.map((el) => (
-              <CardProducts
-                key={el.productid}
-                el={el}
-                id={el.productid}
-                title={el.name}
-                description={el.description}
-                price={el.price}
-                image={el.imageurl}
-              />
-            ))
-          ) : (
-            <div className="no__category">
-              <p>Bunday kategoriyalik mahsulot mavjud emas</p>
+                <div
+                  className={`products__wrapper ${
+                    list.length ? "" : "simple__products__wrapper"
+                  }`}
+                >
+                  {list.length ? (
+                    list.map((el) => (
+                      <CardProducts
+                        key={el.productid}
+                        el={el}
+                        id={el.productid}
+                        title={el.name}
+                        description={el.description}
+                        price={el.price}
+                        image={el.imageurl}
+                      />
+                    ))
+                  ) : (
+                    <div className="no__category">
+                      <p>Bunday kategoriyalik mahsulot mavjud emas</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          // Agar tanlangan root’ning child’lari bo‘lmasa, o‘sha root’ning o‘z mahsulotlari
+          <div className="child-section">
+            <div className="products__header">
+              <h3 className="products__title">
+                {getName(selectedRoot, language)}
+              </h3>
             </div>
-          )}
-        </div>
+            <div
+              className={`products__wrapper ${
+                (productsByCategory.get(String(rootId)) || []).length
+                  ? ""
+                  : "simple__products__wrapper"
+              }`}
+            >
+              {(productsByCategory.get(String(rootId)) || []).length ? (
+                (productsByCategory.get(String(rootId)) || []).map((el) => (
+                  <CardProducts
+                    key={el.productid}
+                    el={el}
+                    id={el.productid}
+                    title={el.name}
+                    description={el.description}
+                    price={el.price}
+                    image={el.imageurl}
+                  />
+                ))
+              ) : (
+                <div className="no__category">
+                  <p>Bunday kategoriyalik mahsulot mavjud emas</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

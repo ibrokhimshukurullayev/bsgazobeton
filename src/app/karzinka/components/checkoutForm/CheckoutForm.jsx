@@ -9,10 +9,12 @@ import {
 import { clearCart } from "../../../../context/cartSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "./checkoutForm.scss";
+import { useRouter } from "next/navigation";
 
 const CheckoutForm = ({ onBack }) => {
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [createOrder] = useCreateOrderMutation();
   const [saveOrderItems] = useSaveOrderItemsMutation();
@@ -39,8 +41,6 @@ const CheckoutForm = ({ onBack }) => {
         isDeliverable: deliveryMethod === "delivery",
       }).unwrap();
 
-      const orderId = orderRes?.data?.orderId || orderRes?.orderId;
-
       // 2. Mahsulotlarni yuborish
       const items = cart.map((item) => ({
         productid: item.productid,
@@ -52,6 +52,7 @@ const CheckoutForm = ({ onBack }) => {
 
       toast.success("Buyurtma muvaffaqiyatli yuborildi!");
       dispatch(clearCart());
+      router.push("/katalog");
     } catch (err) {
       toast.error("Xatolik: " + (err?.data?.message || "Buyurtma yuborilmadi"));
     }

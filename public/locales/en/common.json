@@ -300,12 +300,30 @@
     "moreprops": "Detailed information about product types and sizes is available in our catalog.",
     "addcards": "ADD TO CART",
     "addcompare": "Add to compare",
-    "downloadcatalog": "DOWNLOAD CATALOG"
+    "downloadcatalog": "DOWNLOAD CATALOG",
+    "removecompare": "To take from comparison"
   },
   "card": {
     "title": "Cart",
     "clearcard": "Clearing the cart",
     "total": "Total",
     "checkout": "Proceed to Checkout"
+  },
+  "auth": { "loginFirst": "Please log in first" },
+  "common": { "loading": "Loading...", "error": "Something went wrong" },
+  "orders": {
+    "title": "Order history",
+    "empty": "No orders found",
+    "details": "Details",
+    "status": {
+      "Cart": "Cart",
+      "New": "New",
+      "Pending": "Pending",
+      "Confirmed": "Confirmed",
+      "InProgress": "In progress",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
+    },
+    "showMore": "Show more"
   }
 }

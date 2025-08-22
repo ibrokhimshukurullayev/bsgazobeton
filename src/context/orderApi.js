@@ -9,12 +9,21 @@ export const orderApi = api.injectEndpoints({
         body,
       }),
     }),
+    getAllOrders: build.query({
+      query: (params) => ({
+        url: "/orders",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["Orders"],
+    }),
     saveOrderItems: build.mutation({
       query: (body) => ({
         url: "/orders/save",
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Orders"],
     }),
     getUserOrders: build.query({
       query: () => ({
@@ -30,4 +39,5 @@ export const {
   useCreateOrderMutation,
   useSaveOrderItemsMutation,
   useGetUserOrdersQuery,
+  useGetAllOrdersQuery,
 } = orderApi;
