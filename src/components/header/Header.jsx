@@ -18,21 +18,70 @@ import { useGetUserOrdersQuery } from "../../context/orderApi";
 import "./style.scss";
 import useLoginCartSync from "../../hooks/useLoginCartSync";
 
+function resolveLangKey(lng) {
+  const l = (lng || "").toLowerCase();
+  if (l.startsWith("uz")) return "uz_uz";
+  if (l.startsWith("ru")) return "ru_ru";
+  if (l.startsWith("en")) return "en_us";
+  return "uz_uz";
+}
+
 const Header = () => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const localCart = useSelector((state) => state.cart.value);
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const { t, i18n } = useTranslation("global");
+  const router = useRouter();
 
+  function logoutAndCleanup(redirectToLogin = true) {
+    try {
+      localStorage.removeItem("token");
+      window.dispatchEvent(new CustomEvent("auth:logout"));
+    } catch (e) {}
+    if (redirectToLogin) {
+      router.push("/login");
+    }
+  }
   // ----- SERVER CART -----
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
   useLoginCartSync(token);
-  const { data: serverCart, isFetching: cartFetching } = useGetUserOrdersQuery(
-    undefined,
-    { skip: !token, refetchOnFocus: true, refetchOnReconnect: true }
-  );
+
+  const {
+    data: serverCart,
+    isFetching: cartFetching,
+    error: serverCartError, // <- 401 ni tutish uchun
+  } = useGetUserOrdersQuery(undefined, {
+    skip: !token,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+  });
+
+  // 401/expired bo'lsa tokenni o'chirish
+  useEffect(() => {
+    if (!serverCartError) return;
+
+    // RTK Query error formatlari turlicha bo'lishi mumkin:
+    const status =
+      serverCartError?.status ||
+      serverCartError?.originalStatus ||
+      serverCartError?.data?.status;
+
+    const msg =
+      (serverCartError?.data &&
+        (serverCartError.data.message ||
+          serverCartError.data.error ||
+          serverCartError.data.detail)) ||
+      "";
+
+    if (status === 401 || status === 403) {
+      // Agar backend xabari "expired"/"unauthorized" bo'lsa ham tekshirishingiz mumkin
+      // if (String(msg).toLowerCase().includes("expired") || String(msg).toLowerCase().includes("unauthorized"))
+      logoutAndCleanup(true);
+    }
+  }, [serverCartError]);
 
   const serverCount = useMemo(() => {
     const d = serverCart;
@@ -95,6 +144,7 @@ const Header = () => {
 
   // ----- NAV -----
   const toggleNavbar = () => setNavbarOpen(!navbarOpen);
+
   const {
     data: dataGetCategory,
     isLoading: categoryLoading,
@@ -106,7 +156,6 @@ const Header = () => {
     if (params.get("auth") === "true") setIsUserModalOpen(true);
   }, []);
 
-  const router = useRouter();
   const handleClick = () => {
     const tk = typeof window !== "undefined" && localStorage.getItem("token");
     router.push(tk ? "/profile" : "/login");
@@ -116,14 +165,7 @@ const Header = () => {
     setActiveDropdown((prev) => (prev === key ? null : key));
   const toggleUserModal = () => setIsUserModalOpen((prev) => !prev);
 
-  const resolveLangKey = (lng) => {
-    const l = (lng || "").toLowerCase();
-    if (l.startsWith("uz")) return "uz_uz";
-    if (l.startsWith("ru")) return "ru_ru";
-    if (l.startsWith("en")) return "en_us";
-    return "uz_uz";
-  };
-
+  // KATALOG DROPDOWN: faqat ROOT (parent) kategoriyalar
   const katalogFromApi = useMemo(() => {
     const list = dataGetCategory?.data?.list ?? [];
     const langKey = resolveLangKey(i18n?.language);
