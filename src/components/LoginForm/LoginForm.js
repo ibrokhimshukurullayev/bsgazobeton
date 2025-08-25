@@ -28,7 +28,9 @@ export default function LoginForm() {
       toast.success("Tizimga muvaffaqiyatli kirdingiz!");
 
       // 2. Profile sahifasiga yo'naltirish
-      router.push("/profile");
+      if (response.data.token) {
+        router.push("/profile");
+      }
     } catch (err) {
       toast.error(err?.data?.message || "Xatolik yuz berdi");
     }
