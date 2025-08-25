@@ -124,12 +124,10 @@ const Header = () => {
     return "uz_uz";
   };
 
-  // ✅ KATALOG DROPDOWN: faqat PARENT kategoriyalar
   const katalogFromApi = useMemo(() => {
     const list = dataGetCategory?.data?.list ?? [];
     const langKey = resolveLangKey(i18n?.language);
 
-    // faqat parent (root) lar
     const parents = list.filter((cat) => !cat.parentproductcategoryid);
 
     const sorted = [...parents].sort((a, b) => {
@@ -142,7 +140,6 @@ const Header = () => {
       const id =
         cat.productcategoryid ?? cat.id ?? cat.productCategoryId ?? null;
 
-      // nomni i18n bo‘yicha yechib olish
       const trName = cat?.translations?.name;
       let label =
         typeof trName === "string"

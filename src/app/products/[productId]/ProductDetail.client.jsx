@@ -9,7 +9,6 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import "./single.scss";
 
-// LocalStorage-dagi til kodini i18next formatiga moslashtirish (uz_Uz -> uz)
 const toI18nCode = (lang) => (lang || "uz_Uz").slice(0, 2).toLowerCase();
 
 const ProductDetail = ({ productId }) => {
@@ -20,7 +19,6 @@ const ProductDetail = ({ productId }) => {
     return localStorage.getItem("language") || "uz_Uz";
   });
 
-  // API so‘rovi
   const {
     data: product,
     isLoading,
@@ -30,7 +28,6 @@ const ProductDetail = ({ productId }) => {
     skip: !productId,
   });
 
-  // `languageChanged` eventini tinglash
   useEffect(() => {
     const handleLanguageChange = (e) => {
       const newLang = e?.detail || localStorage.getItem("language") || "uz_Uz";

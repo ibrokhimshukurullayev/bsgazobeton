@@ -19,7 +19,6 @@ export default function RootLayout({ children }) {
     let mounted = true;
     setIsLoading(true);
 
-    // yangi route DOMga joylashgach, qisqa fursatda o'chiramiz
     const id = setTimeout(() => mounted && setIsLoading(false), 350);
 
     return () => {
@@ -27,11 +26,7 @@ export default function RootLayout({ children }) {
       clearTimeout(id);
     };
   }, [pathname]);
-  // useEffect(() => {
-  //   // sahifa yuklangandan keyin loadingni yo‘qotish
-  //   const timer = setTimeout(() => setIsLoading(false), 2000); // 1s loading
-  //   return () => clearTimeout(timer);
-  // }, []);
+
   return (
     <html lang="uz_Uz">
       <body>

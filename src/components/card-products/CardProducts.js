@@ -29,7 +29,6 @@ const CardProducts = ({ el }) => {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-  // server cart faqat token bo'lsa
   const { data: serverCart } = useGetUserOrdersQuery(undefined, {
     skip: !token,
     refetchOnFocus: true,
@@ -43,7 +42,6 @@ const CardProducts = ({ el }) => {
 
   const productId = el.productid;
 
-  // --- server/lokal itemlar ---
   const serverItem = useMemo(
     () =>
       token ? serverCart?.data?.find((x) => x.productid === productId) : null,
@@ -54,12 +52,9 @@ const CardProducts = ({ el }) => {
     [localCart, productId]
   );
 
-  // --- UI ko'rsatadigan qty ---
-  // token bo'lsa: serverdagi qty + pendings (delta)
   const baseQty = Number(serverItem?.quantity ?? 0);
   const [delta, setDelta] = useState(0);
 
-  // server qty yangilanganda (yoki token o'zgarsa) pendingsni nolga tushiramiz
   useEffect(() => {
     setDelta(0);
   }, [token, baseQty]);
@@ -67,20 +62,16 @@ const CardProducts = ({ el }) => {
   const uiQty = token ? baseQty + delta : Number(localItem?.quantity ?? 0);
   const hasQty = uiQty > 0;
 
-  // --- yordamchi: serverga jo'natish uchun state hisoblash ---
   const nextState = (prev, next) =>
     next === 0 ? "Delete" : prev === 0 ? "Create" : "Update";
 
-  // --- HANDLERS ---
   const handleAdd = () => {
     if (!token) {
-      // guest: Redux/LS
       dispatch(addToCart(el));
       return;
     }
-    // token: faqat serverga
-    const prev = baseQty + delta; // odatda 0
-    const next = prev + 1; // 1
+    const prev = baseQty + delta;
+    const next = prev + 1;
     setDelta((d) => d + 1);
     saveLater(productId, next, nextState(prev, next));
   };
@@ -105,7 +96,6 @@ const CardProducts = ({ el }) => {
     }
     const prev = Math.max(0, baseQty + delta);
     const next = Math.max(0, prev - 1);
-    // delta ni bazadan pastga tushirmaymiz
     setDelta((d) => Math.max(-baseQty, d - 1));
     saveLater(productId, next, nextState(prev, next));
   };
@@ -124,8 +114,6 @@ const CardProducts = ({ el }) => {
         </Link>
 
         <h3>{el.name}</h3>
-
-        {/* ... sizning texnik ma'lumot bloklaringiz ... */}
 
         <h4 className="product__price">{el.price} UZS/m3</h4>
 

@@ -1,7 +1,5 @@
-// hooks/useLoginCartSync.js
 import { useEffect, useRef } from "react";
 import { useSaveOrderItemsMutation } from "../context/orderApi";
-// (ixtiyoriy) agar GET /orders/cart ni avtomatik yangilamoqchi bo'lsangiz:
 import { useDispatch } from "react-redux";
 import { api as rootApi } from "../context/api";
 
@@ -27,33 +25,27 @@ function buildPayloadFromLocal(localItems) {
     map.set(pid, {
       productId: pid,
       quantity: prev + qty,
-      state: "Update", // login sync: yakuniy quantity'ni set qilamiz
+      state: "Update",
     });
   }
   return Array.from(map.values());
 }
 
-/**
- * Login (token paydo bo'lganda) paytida local savatni serverga BIR MARTA sync qiladi.
- * Reduxga tegmaydi; GET ham shart emas. Istasangiz invalidatesTags bilan GETni uyg'otasiz.
- */
 export default function useLoginCartSync(token) {
   const [saveOrderItems] = useSaveOrderItemsMutation();
   const syncingRef = useRef(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) return; // login bo'lmagan
-    if (syncingRef.current) return; // allaqachon sync ketayotgan bo'lsa - to'xtatamiz
+    if (!token) return;
+    if (syncingRef.current) return;
 
-    // Bir token uchun faqat bir marta ishlasin
     const alreadyFor = localStorage.getItem(LS_SYNC_FLAG);
     if (alreadyFor && alreadyFor === token) return;
 
     const localItems = readLocalCart();
     const payload = buildPayloadFromLocal(localItems);
     if (payload.length === 0) {
-      // hatto bo'sh bo'lsa ham flag qo'yamiz (takror sync bo'lmasin)
       localStorage.setItem(LS_SYNC_FLAG, token);
       return;
     }
@@ -61,14 +53,11 @@ export default function useLoginCartSync(token) {
     syncingRef.current = true;
     (async () => {
       try {
-        await saveOrderItems(payload).unwrap(); // POST /orders/save
-        // Bir token uchun sync bo‘ldi – flag set
+        await saveOrderItems(payload).unwrap();
         localStorage.setItem(LS_SYNC_FLAG, token);
 
-        // (ixtiyoriy) Headerdagi useGetUserOrdersQuery refetch bo'lsin
         dispatch(rootApi.util.invalidateTags(["Orders"]));
 
-        // Shu tab UI'lari bilsin
         window.dispatchEvent(
           new CustomEvent("cart:server-synced", {
             detail: { count: payload.length },

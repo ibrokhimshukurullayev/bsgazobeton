@@ -26,7 +26,7 @@ const Vakansiyalar = () => {
   };
 
   const handleButtonClick = () => {
-    router.push("/joylashuv"); // 📍 Sahifaga o‘tish
+    router.push("/joylashuv");
   };
 
   if (isLoading)

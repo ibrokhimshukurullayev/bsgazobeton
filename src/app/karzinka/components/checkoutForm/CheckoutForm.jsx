@@ -8,8 +8,8 @@ import {
 } from "../../../../context/orderApi";
 import { clearCart } from "../../../../context/cartSlice";
 import { toast, ToastContainer } from "react-toastify";
-import "./checkoutForm.scss";
 import { useRouter } from "next/navigation";
+import "./checkoutForm.scss";
 
 const CheckoutForm = ({ onBack }) => {
   const cart = useSelector((state) => state.cart.value);
@@ -35,13 +35,11 @@ const CheckoutForm = ({ onBack }) => {
     e.preventDefault();
 
     try {
-      // 1. Buyurtmani yaratish
       const orderRes = await createOrder({
         ...form,
         isDeliverable: deliveryMethod === "delivery",
       }).unwrap();
 
-      // 2. Mahsulotlarni yuborish
       const items = cart.map((item) => ({
         productid: item.productid,
         quantity: item.quantity,

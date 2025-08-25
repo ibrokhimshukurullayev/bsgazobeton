@@ -26,9 +26,8 @@ const Card = () => {
     );
   });
 
-  // Root va “tanlangan” idlar
   const [rootId, setRootId] = useState("");
-  const [selectedId, setSelectedId] = useState(""); // highlight/URL uchun
+  const [selectedId, setSelectedId] = useState("");
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -70,13 +69,11 @@ const Card = () => {
   const categories = catRes?.data?.list || [];
   const products = prodRes?.data?.list || [];
 
-  // Faqat root kategoriyalar
   const rootCategories = useMemo(
     () => categories.filter((c) => c.parentproductcategoryid == null),
     [categories]
   );
 
-  // URL bo‘yicha dastlabki root/selected ni sozlash
   useEffect(() => {
     if (!categories.length) return;
 
@@ -86,7 +83,6 @@ const Card = () => {
 
     if (matched) {
       if (matched.parentproductcategoryid != null) {
-        // child -> rootId = parent, selected = child
         setRootId(String(matched.parentproductcategoryid));
         setSelectedId(String(matched.productcategoryid));
       } else {
@@ -100,7 +96,6 @@ const Card = () => {
     }
   }, [categories, idFromQuery, rootCategories, rootId]);
 
-  // Tanlangan rootning bolalari (pastda shu bo‘limlar chiqadi)
   const childCategories = useMemo(
     () =>
       categories.filter(
@@ -109,7 +104,6 @@ const Card = () => {
     [categories, rootId]
   );
 
-  // Mahsulotlarni categoryId bo‘yicha guruhlab qo‘yish (tezkor render uchun)
   const productsByCategory = useMemo(() => {
     const map = new Map();
     for (const p of products) {
@@ -153,7 +147,6 @@ const Card = () => {
   return (
     <section id="products">
       <div className="products">
-        {/* ==== YUQORIDA: faqat ROOT kategoriyalar ==== */}
         <ul className="products__categories">
           {rootCategories.map((el) => (
             <li

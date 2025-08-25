@@ -1,4 +1,3 @@
-// pages/CartPage.js
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -11,12 +10,14 @@ import {
 
 import CartItem from "../cartItem/CartItem";
 import Button from "../../../../components/button/Button";
-import "./CartPage.scss";
 import { useTranslation } from "react-i18next";
 import { useGetUserOrdersQuery } from "../../../../context/orderApi";
+import { useRouter } from "next/navigation";
+import "./CartPage.scss";
 
 const CartPage = ({ onCheckout }) => {
   const [t, i18n] = useTranslation("global");
+  const router = useRouter();
 
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const CartPage = ({ onCheckout }) => {
   const { data: serverCart, isFetching: cartFetching } = useGetUserOrdersQuery(
     undefined,
     {
-      skip: !token, // token bo'lmasa GET ketmasin
+      skip: !token,
       refetchOnFocus: true,
       refetchOnReconnect: true,
     }
@@ -83,10 +84,22 @@ const CartPage = ({ onCheckout }) => {
         ))}
       </div>
       <div className="cart-summary">
+        {console.log("serverCart", serverCart)}
         <h3 className="total">
           <span>{t("card.total")}</span> {totalSum.toLocaleString()} UZS
         </h3>
-        {token && <Button title={t("card.checkout")} onClick={onCheckout} />}{" "}
+        {(serverCart?.data?.length || cart.length > 0) && (
+          <Button
+            title={t("card.checkout")}
+            onClick={() => {
+              if (!token) {
+                router.push("/login");
+              } else {
+                onCheckout();
+              }
+            }}
+          />
+        )}{" "}
       </div>
     </div>
   );
