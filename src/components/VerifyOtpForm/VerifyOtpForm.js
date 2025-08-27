@@ -22,14 +22,12 @@ export default function VerifyOtpForm({ phoneNumber, password }) {
     e.preventDefault();
 
     try {
-      // 1. SMS verify
       await verifyPhone({
         phoneNumber: phoneNumber.replace("+", ""),
         code,
         language: "uz",
       }).unwrap();
 
-      // 2. Login
       const loginRes = await loginUser({
         phoneNumber,
         password,

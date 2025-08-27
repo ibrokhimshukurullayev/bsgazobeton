@@ -8,6 +8,7 @@ export const orderApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Orders"],
     }),
     saveOrderItems: build.mutation({
       query: (body) => ({
@@ -15,6 +16,7 @@ export const orderApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Orders"],
     }),
     getUserOrders: build.query({
       query: () => ({

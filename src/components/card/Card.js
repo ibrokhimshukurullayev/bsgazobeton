@@ -24,7 +24,6 @@ const Card = () => {
   });
 
   console.log(dataGetProduct);
-  console.log(dataGetProduct?.data?.list.imageurl);
 
   const {
     data: dataGetCategory,

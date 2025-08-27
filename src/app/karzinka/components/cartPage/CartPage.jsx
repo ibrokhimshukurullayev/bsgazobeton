@@ -30,9 +30,7 @@ const CartPage = ({ onCheckout }) => {
         dispatch(decCart(item));
       }
     }
-    console.log("Items to send:", items);
   };
-  console.log("Cart:", cart);
 
   const removeItem = (productid) => {
     const item = cart.find((el) => el.productid === productid);

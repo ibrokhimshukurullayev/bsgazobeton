@@ -41,13 +41,16 @@ const CheckoutForm = ({ onBack }) => {
 
       const orderId = orderRes?.data?.orderId || orderRes?.orderId;
 
+      console.log("ORDER RESPONSE:", orderRes);
+
       // 2. Mahsulotlarni yuborish
       const items = cart.map((item) => ({
-        productid: item.productid,
+        productId: item.productid,
         quantity: item.quantity,
         state: 1,
       }));
 
+      console.log("ORDER RESPONSE:", orderRes);
       console.log("Yuborilayotgan items:", items);
 
       await saveOrderItems(items).unwrap();
