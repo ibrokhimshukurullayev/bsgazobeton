@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import "./cardproducts.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -19,6 +18,8 @@ import plus from "../../assets/images/plus.svg";
 import minus from "../../assets/images/minus.svg";
 import useDebouncedCartSaver from "../../hooks/useDebouncedCartSaver";
 import { useGetUserOrdersQuery } from "../../context/orderApi";
+
+import "./cardproducts.scss";
 
 const CardProducts = ({ el }) => {
   const dispatch = useDispatch();

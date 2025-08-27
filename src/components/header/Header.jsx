@@ -43,7 +43,6 @@ const Header = () => {
       router.push("/login");
     }
   }
-  // ----- SERVER CART -----
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
@@ -52,7 +51,7 @@ const Header = () => {
   const {
     data: serverCart,
     isFetching: cartFetching,
-    error: serverCartError, // <- 401 ni tutish uchun
+    error: serverCartError,
   } = useGetUserOrdersQuery(undefined, {
     skip: !token,
     refetchOnFocus: true,
@@ -63,7 +62,6 @@ const Header = () => {
   useEffect(() => {
     if (!serverCartError) return;
 
-    // RTK Query error formatlari turlicha bo'lishi mumkin:
     const status =
       serverCartError?.status ||
       serverCartError?.originalStatus ||
@@ -77,8 +75,6 @@ const Header = () => {
       "";
 
     if (status === 401 || status === 403) {
-      // Agar backend xabari "expired"/"unauthorized" bo'lsa ham tekshirishingiz mumkin
-      // if (String(msg).toLowerCase().includes("expired") || String(msg).toLowerCase().includes("unauthorized"))
       logoutAndCleanup(true);
     }
   }, [serverCartError]);

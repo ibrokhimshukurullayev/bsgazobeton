@@ -84,7 +84,6 @@ const CartPage = ({ onCheckout }) => {
         ))}
       </div>
       <div className="cart-summary">
-        {console.log("serverCart", serverCart)}
         <h3 className="total">
           <span>{t("card.total")}</span> {totalSum.toLocaleString()} UZS
         </h3>

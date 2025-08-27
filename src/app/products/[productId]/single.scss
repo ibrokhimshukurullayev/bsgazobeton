@@ -86,6 +86,42 @@
       }
     }
 
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgb(228, 228, 231);
+      border-radius: 12px;
+      background: rgb(255, 255, 255);
+      padding: 8px;
+      margin-top: 10px;
+
+      .quantity-btn {
+        border-radius: 8px;
+        background: rgb(220, 38, 38);
+        color: #fff;
+        padding: 8px;
+      }
+
+      .quantity-value {
+        color: rgb(17, 24, 39);
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 28px;
+        letter-spacing: 0%;
+        text-align: center;
+
+        span {
+          color: rgb(113, 113, 122);
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: 0%;
+          text-align: left;
+        }
+      }
+    }
+
     .add-to-cart {
       background-color: #e60000;
       color: white;
@@ -233,11 +269,13 @@
   background: rgb(245, 245, 245);
   padding: 48px 0;
   margin: 70px 0 40px 0;
+
   .kataloglink {
     &__link {
       display: flex;
       align-items: center;
       gap: 6px;
+
       a,
       p {
         color: rgb(113, 113, 122);
@@ -247,13 +285,16 @@
         letter-spacing: 0%;
         text-align: left;
       }
+
       span {
         color: rgb(212, 212, 216);
+
         .icon {
           width: 20px;
         }
       }
     }
+
     h2 {
       color: rgb(39, 39, 42);
       font-size: 36px;
