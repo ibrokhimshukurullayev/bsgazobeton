@@ -21,11 +21,40 @@ import {
 
 import "./single.scss";
 
+// i18n (frontend) uchun: "uz_Uz" -> "uz"
 const toI18nCode = (lang) => (lang || "uz_Uz").slice(0, 2).toLowerCase();
+
+// backend kalitlari uchun: "uz_Uz" | "uz" -> "uz_uz"
+const resolveLangKey = (lng) => {
+  const s = String(lng || "").toLowerCase();
+  if (s.startsWith("uz")) return "uz_uz";
+  if (s.startsWith("ru")) return "ru_ru";
+  if (s.startsWith("en")) return "en_us";
+  return "uz_uz";
+};
+
+// i18n obyektidan qiymatni xavfsiz o‘qish
+const readI18n = (obj, lng) => {
+  if (!obj || typeof obj !== "object") return "";
+  const key = resolveLangKey(lng); // masalan "uz_uz"
+  if (obj[key]) return obj[key];
+
+  // qisqa (uz/ru/en) bo‘lsa
+  const short = key.slice(0, 2);
+  return (
+    obj[short] ||
+    obj.uz_uz ||
+    obj.ru_ru ||
+    obj.en_us ||
+    obj.uz ||
+    obj.ru ||
+    obj.en ||
+    ""
+  );
+};
 
 const ProductDetail = ({ productId }) => {
   const dispatch = useDispatch();
-
   const { t, i18n } = useTranslation("global");
   const localCart = useSelector((s) => s.cart.value);
 
@@ -37,12 +66,14 @@ const ProductDetail = ({ productId }) => {
     return localStorage.getItem("language") || "uz_Uz";
   });
 
+  // Server cart (agar token bo‘lsa)
   const { data: serverCart } = useGetUserOrdersQuery(undefined, {
     skip: !token,
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });
 
+  // Mahsulotni olish
   const {
     data: product,
     isLoading,
@@ -52,21 +83,37 @@ const ProductDetail = ({ productId }) => {
     skip: !productId,
   });
 
+  // Serverga batch saqlash
   const { saveLater, isSyncing } = useDebouncedCartSaver({
     token,
     debounceMs: 1000,
   });
 
-  const serverItem = useMemo(
-    () =>
-      token ? serverCart?.data?.find((x) => x.productid === productId) : null,
-    [token, serverCart, productId]
-  );
+  // Joriy mahsulot cartdagi yozuvi
+  const serverItem = useMemo(() => {
+    if (!token) return null;
+    // serverCart tuzilmasi: data yoki list bo‘lishi mumkin — moslashuvchan o‘qiymiz
+    const rows =
+      serverCart?.data?.list ||
+      serverCart?.data ||
+      serverCart?.list ||
+      serverCart?.items ||
+      serverCart?.result ||
+      [];
+    return Array.isArray(rows)
+      ? rows.find((x) => x.productid === productId)
+      : null;
+  }, [token, serverCart, productId]);
+
   const localItem = useMemo(
-    () => localCart?.find((x) => x.productid === productId),
+    () =>
+      Array.isArray(localCart)
+        ? localCart.find((x) => x.productid === productId)
+        : null,
     [localCart, productId]
   );
 
+  // Serverdagi bazaviy qty + bu sessiyada qilgan o‘zgarishlar
   const baseQty = Number(serverItem?.quantity ?? 0);
   const [delta, setDelta] = useState(0);
 
@@ -80,9 +127,10 @@ const ProductDetail = ({ productId }) => {
   const nextState = (prev, next) =>
     next === 0 ? "Delete" : prev === 0 ? "Create" : "Update";
 
+  // Qo‘shish
   const handleAdd = () => {
     if (!token) {
-      dispatch(addToCart(product?.data));
+      if (product?.data) dispatch(addToCart(product.data));
       return;
     }
     const prev = baseQty + delta;
@@ -91,9 +139,10 @@ const ProductDetail = ({ productId }) => {
     saveLater(productId, next, nextState(prev, next));
   };
 
+  // +
   const handleInc = () => {
     if (!token) {
-      dispatch(incCart(product?.data));
+      if (product?.data) dispatch(incCart(product.data));
       return;
     }
     const prev = baseQty + delta;
@@ -102,11 +151,15 @@ const ProductDetail = ({ productId }) => {
     saveLater(productId, next, nextState(prev, next));
   };
 
+  // -
   const handleDec = () => {
     if (!token) {
       const cur = Number(localItem?.quantity || 0);
-      if (cur <= 1) dispatch(removeFromCart(product?.data));
-      else dispatch(decCart(product?.data));
+      if (cur <= 1) {
+        if (product?.data) dispatch(removeFromCart(product.data));
+      } else {
+        if (product?.data) dispatch(decCart(product.data));
+      }
       return;
     }
     const prev = Math.max(0, baseQty + delta);
@@ -115,15 +168,13 @@ const ProductDetail = ({ productId }) => {
     saveLater(productId, next, nextState(prev, next));
   };
 
+  // Til o‘zgarganda i18n va refetch
   useEffect(() => {
     const handleLanguageChange = (e) => {
       const newLang = e?.detail || localStorage.getItem("language") || "uz_Uz";
       setLanguage(newLang);
-
-      const code = toI18nCode(newLang);
-      i18n.changeLanguage(code);
+      i18n.changeLanguage(toI18nCode(newLang));
     };
-
     window.addEventListener("languageChanged", handleLanguageChange);
     return () =>
       window.removeEventListener("languageChanged", handleLanguageChange);
@@ -131,7 +182,7 @@ const ProductDetail = ({ productId }) => {
 
   useEffect(() => {
     refetchProduct();
-  }, [language]);
+  }, [language, refetchProduct]);
 
   if (isLoading) return <p>Yuklanmoqda...</p>;
   if (isError) return <p>Xatolik yuz berdi</p>;
@@ -160,7 +211,7 @@ const ProductDetail = ({ productId }) => {
             <Image
               className="main-image"
               src={`https://api.bsgazobeton.uz${productData.imageurl}`}
-              alt="Product"
+              alt={productData.name || "Product"}
               width={200}
               height={120}
             />
@@ -183,16 +234,16 @@ const ProductDetail = ({ productId }) => {
           </h4>
 
           <div className="specs">
-            {Array.isArray(productData.technicaldata) &&
+            {Array.isArray(productData?.technicaldata) &&
               productData.technicaldata.map((item, idx) => (
                 <div className="spec-item" key={idx}>
-                  <span>{item.key && item.key[language]}</span>
-                  <span>{item.value && item.value[language]}</span>
+                  <span>{readI18n(item?.key, language)}</span>
+                  <span>{readI18n(item?.value, language)}</span>
                 </div>
               ))}
           </div>
 
-          {hasQty > 0 ? (
+          {hasQty ? (
             <div className="quantity-control">
               <button className="quantity-btn" onClick={handleDec}>
                 <Image src={minus} alt="minus" />
@@ -213,6 +264,7 @@ const ProductDetail = ({ productId }) => {
               {t("products.addcards")}
             </button>
           )}
+
           <a href="#" className="info-section__end">
             <Image src={compare} alt="compare" />
             {t("products.addcompare")}
