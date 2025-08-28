@@ -1,0 +1,140 @@
+#serviceslink {
+  background: rgb(245, 245, 245);
+  padding: 48px 0;
+}
+#serviceslink .serviceslink__link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 6px;
+}
+#serviceslink .serviceslink__link a,
+#serviceslink .serviceslink__link p {
+  color: rgb(113, 113, 122);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+#serviceslink .serviceslink__link span {
+  color: rgb(212, 212, 216);
+}
+#serviceslink .serviceslink__link span .icon {
+  width: 20px;
+}
+#serviceslink .serviceslink h2 {
+  color: rgb(39, 39, 42);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: uppercase;
+  padding-top: 16px;
+}gb(220, 38, 38);
+  color: #fff;
+  border-radius: 6px;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  border-radius: 12px;
+  padding: 24px;
+  background: rgb(245, 245, 245);
+  max-width: 510px;
+  width: 100%;
+}
+form h3 {
+  color: rgb(17, 24, 39);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: uppercase;
+}
+form input {
+  color: rgba(17, 24, 39, 0.5);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding: 10px 20px;
+  border: 1px solid rgb(228, 228, 231);
+  border-radius: 12px;
+  background: rgb(255, 255, 255);
+}
+form textarea {
+  color: rgba(17, 24, 39, 0.5);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding: 12px 0 0 20px;
+  height: 180px;
+  border: 1px solid rgb(228, 228, 231);
+  border-radius: 12px;
+  background: rgb(255, 255, 255);
+}
+form button {
+  border-radius: 12px;
+  padding: 16px 0;
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  background: rgb(220, 38, 38);
+}
+form p {
+  color: rgb(54, 65, 79);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: left;
+}0, 0, 0, 0.06);
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.foydali button:hover {
+  background-color: #b91c1c;
+} rgb(228, 228, 231);
+}
+.kalkulyator-container .result h4 {
+  color: rgb(17, 24, 39);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.kalkulyator-container .result p {
+  margin: 0.5rem 0;
+  color: rgb(54, 65, 79);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.kalkulyator-container .result strong {
+  font-weight: bold;
+}

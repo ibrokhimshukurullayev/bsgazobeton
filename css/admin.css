@@ -1,0 +1,122 @@
+.adminLinkCard {
+  padding: 20px 0 20px 8px;
+  border-radius: 12px;
+  background: rgb(245, 245, 245);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4px;
+  max-width: 350px;
+  width: 100%;
+}
+.adminLinkCard h3 {
+  color: rgb(17, 24, 39);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding: 0 0 12px 36px;
+}
+.adminLinkCard a {
+  color: rgb(54, 65, 79);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding: 14px 70px 14px 36px;
+}
+.adminLinkCard a.active {
+  border-radius: 6px;
+  background: rgb(220, 38, 38);
+  color: #fff;
+}
+.adminLinkCard a:hover {
+  background-color: rgb(220, 38, 38);
+  color: #fff;
+  border-radius: 6px;
+}: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+.admin__form__header, .admin__form__end {
+  padding: 24px 0 0 0;
+}
+.admin__form__header__left, .admin__form__header__right, .admin__form__end__left, .admin__form__end__right {
+  width: 450px;
+}
+.admin__form__header__left label, .admin__form__header__right label, .admin__form__end__left label, .admin__form__end__right label {
+  color: rgb(54, 65, 79);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.admin__form__header__left input, .admin__form__header__right input, .admin__form__end__left input, .admin__form__end__right input {
+  color: rgb(17, 24, 39);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 2%;
+  text-align: left;
+  border: 1px solid rgb(228, 228, 231);
+  border-radius: 12px;
+  padding: 14px 20px;
+  background: rgb(245, 245, 245);
+  width: 100%;
+}
+.admin__form__header__left select, .admin__form__header__right select, .admin__form__end__left select, .admin__form__end__right select {
+  color: rgb(17, 24, 39);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 2%;
+  text-align: left;
+  border: 1px solid rgb(228, 228, 231);
+  border-radius: 12px;
+  padding: 14px 20px;
+  background: rgb(245, 245, 245);
+  width: 100%;
+}
+.admin__form__footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  padding: 24px 0;
+}
+.admin__form__footer label {
+  color: rgb(54, 65, 79);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.admin__form__footer input {
+  color: rgb(17, 24, 39);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 2%;
+  text-align: left;
+  border: 1px solid rgb(228, 228, 231);
+  border-radius: 12px;
+  padding: 14px 20px;
+  background: rgb(245, 245, 245);
+  width: 100%;
+}

@@ -1,0 +1,187 @@
+.aboutLinkCard {
+  padding: 20px 8px;
+  border-radius: 12px;
+  background: rgb(245, 245, 245);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4px;
+  max-width: 310px;
+}
+.aboutLinkCard h3 {
+  color: rgb(17, 24, 39);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding: 0 0 12px 36px;
+}
+.aboutLinkCard a {
+  color: rgb(54, 65, 79);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding: 14px 36px;
+}
+.aboutLinkCard a.active {
+  border-radius: 6px;
+  background: rgb(220, 38, 38);
+  color: #fff;
+}
+.aboutLinkCard a:hover {
+  background-color: rgb(220, 38, 38);
+  color: #fff;
+  border-radius: 6px;
+}w 0.2s ease;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  height: 224px;
+}
+.advantages__icon {
+  margin-bottom: 10px;
+}
+.advantages__cardTitle {
+  color: rgb(17, 24, 39);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 28px;
+  padding: 16px 0 4px 0;
+  text-align: left;
+}
+.advantages__desc {
+  color: rgb(54, 65, 79);
+  max-width: 255px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+}
+.advantages__imageWrapper {
+  grid-column: 2;
+  grid-row: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.advantages__imageWrapper {
+  display: none;
+}
+@media (min-width: 800px) {
+  .advantages__imageWrapper {
+    display: block;
+  }
+}bkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    gap: 10px;
+    padding-bottom: 30px;
+  }
+  .timeline-left {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    min-width: 100%;
+    margin-bottom: 10px;
+  }
+  .circle {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+  .line {
+    display: none;
+  }
+  .timeline-content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .timeline-content h3 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .timeline-content p {
+    font-size: 14px;
+    line-height: 22px;
+    max-width: 100%;
+  }
+  .timeline-content img {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+}em .faq__answer {
+  margin-top: 10px;
+  color: rgb(54, 65, 79);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+}  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding: 30px 0 12px 0;
+}
+#about .about__end p {
+  color: rgb(54, 65, 79);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-align: left;
+  max-width: 413px;
+}
+#about .about__end .about__end__right {
+  max-width: 847px;
+  width: 100%;
+}
+#about .about__end .about__end__right iframe {
+  border-radius: 16px;
+  height: 232px;
+  width: 100%;
+}
+@media (min-width: 600px) {
+  #about .about__end .about__end__right iframe {
+    height: 476px;
+  }
+}

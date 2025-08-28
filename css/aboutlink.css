@@ -1,0 +1,42 @@
+.aboutLinkCard {
+  padding: 20px 8px;
+  border-radius: 12px;
+  background: rgb(245, 245, 245);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4px;
+  max-width: 310px;
+}
+.aboutLinkCard h3 {
+  color: rgb(17, 24, 39);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding: 0 0 12px 36px;
+}
+.aboutLinkCard a {
+  color: rgb(54, 65, 79);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding: 14px 36px;
+}
+.aboutLinkCard a.active {
+  border-radius: 6px;
+  background: rgb(220, 38, 38);
+  color: #fff;
+}
+.aboutLinkCard a:hover {
+  background-color: rgb(220, 38, 38);
+  color: #fff;
+  border-radius: 6px;
+}

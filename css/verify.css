@@ -1,0 +1,96 @@
+#otp {
+  background-color: #f9fafb;
+  padding-top: 20px;
+}
+
+.otp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.otp__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: 470px;
+  border-radius: 12px;
+  background: rgb(255, 255, 255);
+  padding: 34px;
+  margin: 100px 0;
+  width: 100%;
+}
+.otp__form img {
+  text-align: center;
+  margin: 0 auto;
+}
+.otp__form h2 {
+  color: rgb(54, 65, 79);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: center;
+  margin: 20px 0 25px 0;
+}
+.otp__form label {
+  color: rgb(54, 65, 79);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.otp__input {
+  border: 1px solid rgb(228, 228, 231);
+  border-radius: 12px;
+  padding: 12px 20px;
+  width: 100%;
+  background: rgb(245, 245, 245);
+  color: rgb(17, 24, 39);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 2%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+.otp .opt__button {
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  background: rgb(220, 38, 38);
+  padding: 16px 0;
+  width: 100%;
+  margin: 10px 0 20px 0;
+}
+.otp p {
+  color: rgb(54, 65, 79);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+.otp p a {
+  color: #708dff;
+}

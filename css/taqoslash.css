@@ -1,0 +1,38 @@
+#sotuvlink {
+  background: rgb(245, 245, 245);
+  padding: 48px 0;
+}
+#sotuvlink .sotuvlink__link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 6px;
+}
+#sotuvlink .sotuvlink__link a,
+#sotuvlink .sotuvlink__link p {
+  color: rgb(113, 113, 122);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+#sotuvlink .sotuvlink__link span {
+  color: rgb(212, 212, 216);
+}
+#sotuvlink .sotuvlink__link span .icon {
+  width: 20px;
+}
+#sotuvlink .sotuvlink h2 {
+  color: rgb(39, 39, 42);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: uppercase;
+  padding-top: 16px;
+}
