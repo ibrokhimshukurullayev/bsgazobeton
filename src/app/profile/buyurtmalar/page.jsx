@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useGetAllOrdersQuery } from "../../../context/orderApi";
 import { useTranslation } from "react-i18next";
 import "./order.scss";
+import OrderDetailes from "../../../components/orderDetailes/OrderDetailes"; // shu yerda import
 
 const ENUM_BY_ID = {
   0: "Cart",
@@ -54,6 +55,8 @@ export default function Buyurtmalar() {
     return localStorage.getItem("language") || "uz_Uz";
   });
 
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
   const { data, isLoading, error, refetch } = useGetAllOrdersQuery({
     skip: 0,
     take,
@@ -93,6 +96,16 @@ export default function Buyurtmalar() {
     return "uz-UZ";
   }
 
+  // ✅ Agar order tanlangan bo‘lsa faqat detailes chiqadi
+  if (selectedOrder) {
+    return (
+      <OrderDetailes
+        order={selectedOrder}
+        onBack={() => setSelectedOrder(null)}
+      />
+    );
+  }
+
   return (
     <div className="order-history">
       <h2>{t("orders.title")}</h2>
@@ -119,15 +132,18 @@ export default function Buyurtmalar() {
 
                 <p className="order-date">
                   {order?.orderdate
-                    ? new Date(order.orderdate).toLocaleString(
-                        toI18nCode(language) === "ru" ? "ru-RU" : "uz-UZ"
-                      )
+                    ? new Date(order.orderdate).toLocaleString("uz-UZ")
                     : "—"}
                 </p>
 
                 <div className="order-right">
                   <span className={`status-badge ${cls}`}>{label}</span>
-                  <button className="details-btn">{t("orders.details")}</button>
+                  <button
+                    className="details-btn"
+                    onClick={() => setSelectedOrder(order)} // ✅ shu yerda ochiladi
+                  >
+                    {t("orders.details")}
+                  </button>
                 </div>
               </div>
             );

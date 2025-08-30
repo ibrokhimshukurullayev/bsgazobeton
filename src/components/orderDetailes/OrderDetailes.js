@@ -4,53 +4,65 @@ import left from "../../assets/images/left.svg";
 import panel from "../../assets/images/panel.png";
 import Image from "next/image";
 
-const OrderDetailes = () => {
+const OrderDetailes = ({ order, onBack }) => {
   return (
     <div className="order__content">
-      <button className="oreder__back__btn">
-        <Image src={left} />
+      <button className="oreder__back__btn" onClick={onBack}>
+        <Image src={left} alt="back" />
         Ortga qaytish
       </button>
-      <h2 className="order__content__title">Buyurtma ID: #123312</h2>
+
+      <h2 className="order__content__title">
+        Buyurtma ID: #{order?.ordernumber || order?.orderNumber}
+      </h2>
+
       <div className="order__content__info">
         <div className="order__content__left">
           <p>
-            <span>Buyurtma sanasi:</span> 24 fevral 2025, 09:12
+            <span>Buyurtma sanasi:</span>{" "}
+            {order?.orderdate
+              ? new Date(order.orderdate).toLocaleString("uz-UZ")
+              : "—"}
           </p>
           <p>
-            <span>Umumiy summa:</span> 30 000 000 UZS
+            <span>Umumiy summa:</span>{" "}
+            {(Number(order?.totalprice) || 0).toLocaleString()} UZS
           </p>
           <p>
-            <span>Hudud:</span> Toshkent sh.
+            <span>Hudud:</span> {order?.region || "—"}
           </p>
         </div>
+
         <div className="order__content__right">
           <div className="order__content__right__status">
             <span className="order__content__right__status__label">Holat:</span>
-            <span className="order__content__right__status__new">YANGI</span>
+            <span className="order__content__right__status__new">
+              {order?.status}
+            </span>
           </div>
           <p>
-            <span>Qo‘shimcha:</span> Yetkazib berish
+            <span>Qo‘shimcha:</span> {order?.extra || "—"}
           </p>
           <p>
-            <span>Manzil:</span> Uchtepa 26-26-35, Olmos Building
+            <span>Manzil:</span> {order?.address || "—"}
           </p>
         </div>
       </div>
+
       {/* Mahsulotlar */}
       <div className="order__content__products">
-        {[1, 2, 3].map((item) => (
-          <div className="order__content__product" key={item}>
+        {(order?.items || []).map((item, idx) => (
+          <div className="order__content__product" key={idx}>
             <Image src={panel} alt="panel" />
             <div className="product-info">
               <div className="product-info__title">
-                <h4>Gazobeton</h4>
-                <p>D300, 600×200×200</p>
+                <h4>{item?.name}</h4>
+                <p>{item?.desc}</p>
               </div>
-              <p className="product__text">72 000 UZS/m³</p>
-              <p className="product__text">3 m³</p>
+              <p className="product__text">{item?.price} UZS/m³</p>
+              <p className="product__text">{item?.quantity} m³</p>
             </div>
-            <div className="product-price">216 000 UZS</div>
+            <div className="product-price">{item?.total} UZS</div>
           </div>
         ))}
       </div>

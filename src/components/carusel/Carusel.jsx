@@ -2,9 +2,12 @@
 import Image from "next/image";
 import { useState } from "react";
 import hero from "../../assets/images/hero.png";
+import bs1 from "../../assets/images/bs1.png";
+import bs2 from "../../assets/images/bs2.png";
+import bs3 from "../../assets/images/bs3.png";
 import "./carusel.scss";
 
-const images = [hero, hero];
+const images = [hero, bs1, bs2, bs3];
 
 export default function Carusel() {
   const [current, setCurrent] = useState(0);

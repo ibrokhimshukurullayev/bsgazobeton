@@ -1,18 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import "./taqqoslash.scss";
 import deleteicon from "../../assets/images/deleteicon.svg";
 import addproduct from "../../assets/images/addproduct.svg";
+import Modal from "../../components/modal/Modal";
+import ProductPicker from "../../components/ProductPicker/ProductPicker"; // yangi komponent
 
 export default function ProductComparison() {
   const wishlist = useSelector((state) => state.wishlist.value);
+  const [open, setOpen] = useState(false);
 
-  const lang = "uz_uz"; // Faqat uzbekcha ko‘rsatish (i18next ishlatilmayapti)
+  const lang = "uz_uz";
 
-  // Barcha texnik xususiyat nomlarini to‘plash
   const allLabels = Array.from(
     new Set(
       wishlist.flatMap(
@@ -22,7 +24,6 @@ export default function ProductComparison() {
     )
   );
 
-  // Har bir label uchun mahsulotlardan qiymatlarni chiqarish
   const specifications = allLabels.map((label) => ({
     label,
     value1:
@@ -43,7 +44,6 @@ export default function ProductComparison() {
           <h2 className="product__comparison__title">Xususiyatlar</h2>
         </div>
 
-        {/* 3 ta mahsulot ustuni */}
         {wishlist.slice(0, 3).map((product, idx) => (
           <div className="product-column" key={idx}>
             <div className="product-card">
@@ -73,10 +73,9 @@ export default function ProductComparison() {
           </div>
         ))}
 
-        {/* Bo‘sh ustunlar (agar mahsulotlar < 3 bo‘lsa) */}
         {Array.from({ length: 3 - wishlist.length }).map((_, idx) => (
           <div key={idx} className="product-column">
-            <div className="add__product__card">
+            <div className="add__product__card" onClick={() => setOpen(true)}>
               <div className="add-product-content">
                 <div className="add__product__card__icon">
                   <Image src={addproduct} alt="addproduct" />
@@ -88,7 +87,6 @@ export default function ProductComparison() {
         ))}
       </div>
 
-      {/* Xususiyatlar jadvali */}
       <div className="table-container">
         <table className="comparison-table">
           <tbody>
@@ -103,6 +101,11 @@ export default function ProductComparison() {
           </tbody>
         </table>
       </div>
+
+      {/* Modal */}
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <ProductPicker onClose={() => setOpen(false)} />
+      </Modal>
     </div>
   );
 }
