@@ -13,7 +13,7 @@ export default function AboutLayout({ children }) {
     "/about/aboutSifat": t("menu.about.sifat"),
     "/about/aboutMijoz": t("menu.about.mijoz"),
     "/about/aboutOAV": t("menu.about.oav"),
-    // "/": t("menu.about.yangiliklar"),
+    "/about/news": t("menu.about.yangiliklar"),
     "/about/vakansiyalar": t("menu.about.vakansiyalar"),
   };
 

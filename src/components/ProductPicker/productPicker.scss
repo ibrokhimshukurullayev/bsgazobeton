@@ -1,71 +1,51 @@
 .product-picker {
-  h3 {
+  padding: 16px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 16px;
-    font-size: 20px;
-    font-weight: bold;
   }
 
-  .category-list {
+  &__body {
     display: flex;
-    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  &__categories {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
 
     .category-btn {
-      padding: 8px 12px;
+      padding: 10px;
+      border-radius: 8px;
       border: 1px solid #ddd;
-      border-radius: 6px;
+      background: #fff;
       cursor: pointer;
-      background: #f9f9f9;
 
       &.active {
-        background: #dc2626;
-        color: white;
+        background: #e53935;
+        color: #fff;
       }
     }
   }
 
-  .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 16px;
-
-    .product-item {
+  &__products {
+    flex: 1;
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .product-card {
       border: 1px solid #eee;
+      padding: 12px;
       border-radius: 8px;
-      padding: 10px;
+      background: #fff;
       text-align: center;
-      background: white;
-
-      img {
-        max-width: 100%;
-        height: 80px;
-        object-fit: contain;
-      }
-
-      button {
-        margin-top: 8px;
-        background: #dc2626;
-        color: white;
-        border: none;
-        padding: 6px 10px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-    }
-  }
-
-  .modal-footer {
-    margin-top: 20px;
-    text-align: right;
-
-    .close-btn {
-      background: #111827;
-      color: white;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
     }
   }
 }

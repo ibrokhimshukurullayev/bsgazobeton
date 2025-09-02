@@ -9,6 +9,10 @@
     @media (min-width: 900px) {
       flex-direction: row;
     }
+    &__left {
+      max-width: 927px;
+      width: 100%;
+    }
     &__title {
       color: rgb(54, 65, 79);
       font-size: 16px;

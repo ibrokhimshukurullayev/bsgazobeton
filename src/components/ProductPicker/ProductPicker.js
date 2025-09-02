@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useGetCategoryQuery } from "../../context/categoryApi";
 import { useGetProductQuery } from "../../context/productApi";
 import "./productPicker.scss";
@@ -8,95 +8,69 @@ import "./productPicker.scss";
 export default function ProductPicker({ onClose }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  // Kategoriyalar
   const { data: categories, isLoading: loadingCategories } =
-    useGetCategoryQuery({ skip: 0, take: 1000 });
+    useGetCategoryQuery({ skip: 0, take: 100 });
 
-  // Mahsulotlar (kategoriya bo‘yicha filter)
+  useEffect(() => {
+    if (!loadingCategories && categories?.data?.length && !selectedCategory) {
+      setSelectedCategory(categories.data[0].productcategoryid);
+    }
+  }, [loadingCategories, categories, selectedCategory]);
+
+  // Mahsulotlar
   const { data: products, isLoading: loadingProducts } = useGetProductQuery(
-    { productcategoryid: selectedCategory, skip: 0, take: 100 },
+    {
+      productcategoryid: selectedCategory,
+      skip: 0,
+      take: 1000,
+    },
     { skip: !selectedCategory }
   );
 
-  console.log("Categories API response:", categories);
-  console.log("Products API response:", products);
-
   return (
     <div className="product-picker">
-      <h3>Kategoriya va mahsulot tanlang</h3>
+      <div className="product-picker__header">
+        <h2>Mahsulot tanlash</h2>
+        <button onClick={onClose}>✕</button>
+      </div>
 
-      {/* Kategoriya list */}
-      {loadingCategories ? (
-        <p>Yuklanmoqda...</p>
-      ) : (
-        <div className="category-list">
-          {categories?.data?.list?.length ? (
-            categories.data.list.map((cat) => (
+      <div className="product-picker__body">
+        {/* Chap tomonda kategoriyalar */}
+        <div className="product-picker__categories">
+          {loadingCategories ? (
+            <p>Yuklanmoqda...</p>
+          ) : (
+            categories?.data?.list.map((cat) => (
               <button
-                key={cat.id || cat.productCategoryId} // ✅ key har doim noyob
+                key={cat.productcategoryid}
                 className={`category-btn ${
-                  selectedCategory === (cat.id || cat.productCategoryId)
-                    ? "active"
-                    : ""
+                  selectedCategory === cat.productcategoryid ? "active" : ""
                 }`}
-                onClick={() =>
-                  setSelectedCategory(cat.id || cat.productCategoryId)
-                }
+                onClick={() => setSelectedCategory(cat.productcategoryid)}
               >
-                {cat.name?.uz_UZ ||
-                  cat.name?.ru_RU ||
-                  cat.name?.en_US ||
-                  cat.name}
+                {cat.name}
               </button>
             ))
-          ) : (
-            <p>Kategoriyalar topilmadi</p>
           )}
         </div>
-      )}
 
-      {/* Mahsulot list */}
-      {selectedCategory && (
-        <div className="product-list">
+        {/* O‘ng tomonda mahsulotlar */}
+        <div className="product-picker__products">
           {loadingProducts ? (
             <p>Mahsulotlar yuklanmoqda...</p>
-          ) : products?.data?.list?.length ? (
-            products.data.list.map((p) => (
-              <div
-                key={p.productId || p.id} // ✅ key noyob bo‘lishi shart
-                className="product-item"
-              >
-                {/* <img
-                  src={
-                    p.imageUrl
-                      ? `https://api.bsgazobeton.uz${p.imageUrl}`
-                      : "/no-image.png"
-                  }
-                  alt={
-                    p.name?.uz_UZ ||
-                    p.name?.ru_RU ||
-                    p.name?.en_US ||
-                    "Mahsulot"
-                  }
-                /> */}
-                <p>
-                  {p.name?.uz_UZ || p.name?.ru_RU || p.name?.en_US || p.name}
-                </p>
-                <button onClick={() => console.log("Tanlandi:", p)}>
-                  Tanlash
-                </button>
-              </div>
-            ))
+          ) : products?.data?.list.length ? (
+            <div className="product-grid">
+              {products.data?.list.map((prod) => (
+                <div key={prod.productid} className="product-card">
+                  <h4>{prod.name}</h4>
+                  <p>{prod.price} so‘m</p>
+                </div>
+              ))}
+            </div>
           ) : (
-            <p>Mahsulotlar topilmadi</p>
+            <p>Bu kategoriyada mahsulot yo‘q</p>
           )}
         </div>
-      )}
-
-      <div className="modal-footer">
-        <button className="close-btn" onClick={onClose}>
-          Yopish
-        </button>
       </div>
     </div>
   );

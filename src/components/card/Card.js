@@ -186,7 +186,6 @@ const Card = () => {
           ))}
         </ul>
 
-        {/* ==== PASTDA: tanlangan rootning CHILD bo‘limlari ==== */}
         {childCategories.length > 0 ? (
           childCategories.map((child) => {
             const list =
