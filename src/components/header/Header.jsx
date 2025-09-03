@@ -243,6 +243,7 @@ const Header = () => {
         { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
         { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
         { label: t("menu.about.oav"), href: "/about/aboutOAV" },
+        { label: t("menu.about.yangiliklar"), href: "/about/news" },
         { label: t("menu.about.vakansiyalar"), href: "/about/vakansiyalar" },
       ],
     }),
