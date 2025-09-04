@@ -7,6 +7,9 @@ import Image from "next/image";
 import labaratoriya from "../../../assets/images/labaratoriya.png";
 import Title from "../../../components/title/Title";
 import { useTranslation } from "react-i18next";
+import nazorat1 from "../../../assets/images/nazorat/nazorat1.jpg";
+import nazorat2 from "../../../assets/images/nazorat/nazorat2.jpg";
+import nazorat3 from "../../../assets/images/nazorat/nazorat3.jpg";
 
 const AboutSifat = () => {
   const [t, i18n] = useTranslation("global");
@@ -22,19 +25,19 @@ const AboutSifat = () => {
       id: 2,
       title: t("sifat.cardtitle2"),
       description: t("sifat.cardlist2"),
-      image: labaratoriya,
+      image: nazorat1,
     },
     {
       id: 3,
       title: t("sifat.cardtitle3"),
       description: t("sifat.cardlist3"),
-      image: labaratoriya,
+      image: nazorat2,
     },
     {
       id: 4,
       title: t("sifat.cardtitle4"),
       description: t("sifat.cardlist24"),
-      image: labaratoriya,
+      image: nazorat3,
     },
   ];
 
@@ -42,7 +45,7 @@ const AboutSifat = () => {
     <div id="aboutSifat">
       <Title title={"BS gazobeton"} text={t("sifat.title1")} />
       <div className="timeline-wrapper">
-        <h2 className="timeline-heading">text={t("sifat.title2")}</h2>
+        <h2 className="timeline-heading">{t("sifat.title2")}</h2>
         <div className="timeline">
           {steps.map((step, index) => (
             <div className="timeline-step" key={step.id}>

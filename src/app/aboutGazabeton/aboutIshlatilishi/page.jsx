@@ -80,7 +80,10 @@ const AboutIshlatilishi = () => {
               <span>1.2 MB, PDF</span>
             </div>
           </div>
-          <button className="download-btn">YUKLAB OLISH</button>
+
+          <a href="/files/instruksiya.pdf" download className="download-btn">
+            YUKLAB OLISH
+          </a>
         </div>
 
         <div className="consultation-box">
@@ -108,7 +111,7 @@ const AboutIshlatilishi = () => {
               <p>
                 <strong>{step.title}</strong>
                 <br />
-                {step.desc}
+                <span>{step.desc}</span>
               </p>
             </div>
           ))}

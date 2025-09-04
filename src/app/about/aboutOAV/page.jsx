@@ -1,63 +1,54 @@
+"use client";
 import React from "react";
 import "./about.scss";
-import about from "../../../assets/images/about1.svg";
 import Image from "next/image";
 import oav from "../../../assets/images/aboutoav.png";
 import Title from "../../../components/title/Title";
-
-const aboutOAV = [
-  {
-    id: 1,
-    img: about,
-    question:
-      "“BS gazobeton” korxonasi mahsulotlari xorijiy brendlar bilan tenglasha oladi",
-    answer: "Sirdaryo viloyat hokimligi",
-  },
-  {
-    id: 2,
-    img: about,
-    question:
-      "New AAC plant adds premium product to BS Group in Uzbekistan (Hover)",
-    answer: "Aircrete news",
-  },
-  {
-    id: 3,
-    img: about,
-    question: "“Ўзстандарт” агентлиги: Газобетон қурилиш",
-    answer: "Sirdaryo viloyat hokimligi",
-  },
-  {
-    id: 4,
-    img: about,
-    question: "Mahsulot tayyor bo'lgandagi tekshiruv",
-    answer: "Sirdaryo viloyat hokimligi",
-  },
-  {
-    id: 5,
-    img: about,
-    question: "“Ўзстандарт” агентлиги: Газобетон қурилиш",
-    answer: "Sirdaryo viloyat hokimligi",
-  },
-];
+import { useGetNewsQuery } from "../../../context/newsApi";
+import Link from "next/link";
 
 const AboutOAV = () => {
+  // API dan yangiliklarni olish
+  const { data, isLoading, error } = useGetNewsQuery({ take: 100, skip: 0 });
+
+  if (isLoading) return <p>Yuklanmoqda...</p>;
+  if (error) return <p>Xatolik yuz berdi</p>;
+
+  // faqat `posttype = blog`
+  const blogPosts =
+    data?.data?.list?.filter(
+      (item) => item.posttype?.toLowerCase() === "blog"
+    ) || [];
+
   return (
     <div id="aboutOAV">
       <Title
         text={
-          "Bizning faoliyatimiz OAV, yangiliklar, qurilish sohasidagi gazeta-jurnallar va mahalliy telekanallar tomonidan yoritib boriladi. Biz haqimizda chop etilgan maqolalar:"
+          "Bizning faoliyatimiz OAV, yangiliklar, qurilish sohasidagi gazeta-jurnallar va mahalliy telekanallar tomonidan yoritib boriladi. Biz haqimizda chop etilgan maqolalar:"
         }
       />
       <div className="aboutOAV__card">
-        {aboutOAV.map((item) => (
-          <div key={item.id} className="aboutOAV__box">
-            <Image className="img" src={item.img} alt="img" />
-            <h3>{item.question}</h3>
+        {blogPosts.map((item) => (
+          <Link
+            key={item.postid}
+            href={`/about/news/${item.postid}`} // detail sahifaga yo‘naltirish
+            className="aboutOAV__box"
+          >
+            {/* {item.thubnailimageurl && (
+              <Image
+                className="img"
+                src={`https://api.bsgazobeton.uz${item.thubnailimageurl}`}
+                alt={item.title}
+                width={300}
+                height={200}
+              />
+            )} */}
+            <h3>{item.title}</h3>
             <div>
               <Image src={oav} alt="qayd" />
-              <p>{item.answer}</p>
+              <p>{item.shortdescription}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

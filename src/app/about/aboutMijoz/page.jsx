@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import "./aboutMijoz.scss";
 import xonsaroy from "../../../assets/images/xonsaroy.png";
+import versal from "../../../assets/images/versal.png";
 import ClientCarousel from "../../../components/clientCarousel/ClientCarousel";
 import caricon from "../../../assets/images/caricon.png";
 import Title from "../../../components/title/Title";
@@ -17,22 +18,7 @@ const AboutMijoz = () => {
       <ClientCarousel />
       <div className="aboutMijoz__mijzolar">
         <div>
-          <Image src={xonsaroy} alt="xonsaroy" />
-        </div>
-        <div>
-          <Image src={xonsaroy} alt="xonsaroy" />
-        </div>
-        <div>
-          <Image src={xonsaroy} alt="xonsaroy" />
-        </div>
-        <div>
-          <Image src={xonsaroy} alt="xonsaroy" />
-        </div>
-        <div>
-          <Image src={xonsaroy} alt="xonsaroy" />
-        </div>
-        <div>
-          <Image src={xonsaroy} alt="xonsaroy" />
+          <Image src={versal} alt="xonsaroy" />
         </div>
       </div>
       <div className="aboutMijoz__banner">

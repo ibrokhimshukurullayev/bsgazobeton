@@ -5,27 +5,40 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./clientCarousel.scss";
-import ds from "../../assets/images/hero.png";
 import { useTranslation } from "react-i18next";
+import { useRef } from "react";
 
 const ClientCarousel = () => {
   const [t, i18n] = useTranslation("global");
+  const videoRefs = useRef([]);
 
   const videos = [
-    "/videos/lolazor.mp4",
-    "/videos/lolazor.mp4",
-    "/videos/lolazor.mp4",
-    "/videos/lolazor.mp4",
-    "/videos/lolazor.mp4",
-    "/videos/lolazor.mp4",
+    "/videos/get.mp4",
+    "/videos/get1.mp4",
+    "/videos/get2.mp4",
+    "/videos/get3.mp4",
+    "/videos/get4.mp4",
   ];
 
-  const handleVideoClick = (event) => {
-    const video = event.currentTarget;
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
+  const handleVideoClick = (index) => {
+    const video = videoRefs.current[index];
+
+    if (video) {
+      if (video.paused) {
+        // Boshqa videolarni pauza qilish
+        videoRefs.current.forEach((v, i) => {
+          if (i !== index && v) {
+            v.pause();
+            v.muted = true;
+          }
+        });
+
+        video.play();
+        video.muted = false; // ovozni yoqish
+      } else {
+        video.pause();
+        video.muted = true; // pauza bo‘lsa yana mute bo‘lsin
+      }
     }
   };
 
@@ -51,10 +64,10 @@ const ClientCarousel = () => {
           <SwiperSlide key={index}>
             <div className="carousel-slide">
               <video
+                ref={(el) => (videoRefs.current[index] = el)}
                 src={src}
-                onClick={handleVideoClick}
+                onClick={() => handleVideoClick(index)}
                 className="carousel-video"
-                controls={false}
                 muted
                 loop
               />

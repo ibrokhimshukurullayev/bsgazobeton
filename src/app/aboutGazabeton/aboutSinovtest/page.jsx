@@ -7,34 +7,22 @@ import { useTranslation } from "react-i18next";
 
 const AboutSinovtest = () => {
   const [t, i18n] = useTranslation("global");
-
-  const videos = ["/videos/lolazor.mp4"];
-
-  const handleVideoClick = (event) => {
-    const video = event.currentTarget;
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
-    }
-  };
   return (
     <div className="aboutSinovtest">
       <Title text={t("sinovtestlar.title")} title={"“BS gazobeton”"} />
       <TestList />
       <div>
-        {videos.map((src, index) => (
-          <div key={index} className="carousel-slide">
-            <video
-              src={src}
-              onClick={handleVideoClick}
-              className="carousel-video"
-              controls={false}
-              muted
-              loop
-            />
-          </div>
-        ))}
+        <iframe
+          className="iframe"
+          width="927"
+          height="465"
+          src="https://www.youtube.com/embed/g5kA7gkIiuA?si=eayNvx9dZ0FjknWh"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
       </div>
     </div>
   );

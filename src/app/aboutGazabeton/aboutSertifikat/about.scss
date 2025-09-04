@@ -14,7 +14,6 @@
   &__box {
     display: grid;
     grid-template-columns: repeat(3, 295px);
-    gap: 20px;
     padding: 36px 0;
   }
   .aboutSertifikat__card__title {
@@ -28,6 +27,7 @@
   }
 
   .aboutSertifikat__card {
+    text-align: center;
     img {
       border-radius: 8px;
       box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1),

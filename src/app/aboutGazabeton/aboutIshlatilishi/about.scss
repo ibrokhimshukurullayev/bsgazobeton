@@ -71,7 +71,6 @@
   &__card {
     h2 {
       font-weight: 600;
-      font-style: Semi Bold;
       font-size: 28px;
       line-height: 40px;
       letter-spacing: 0%;
@@ -147,5 +146,19 @@
 }
 
 .step p {
-  margin: 8px 12px 12px;
+  margin: 8px 12px 12px 0;
+  color: #111827;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  span {
+    color: #71717a;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+  }
 }
