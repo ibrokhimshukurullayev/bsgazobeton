@@ -15,11 +15,11 @@
 .modal-content {
   background: #fff;
   border-radius: 12px;
-  padding: 20px;
-  max-width: 1000px;
+  padding: 30px 20px;
+  max-width: 1300px;
   width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
+  height: 75vh;
+  // height: 100%;
   position: relative;
 }
 

@@ -153,7 +153,7 @@ const CardProducts = ({ el }) => {
           onClick={() => dispatch(toggleToWishes(el))}
         >
           <Image src={compare} alt="compare" width={24} height={24} />
-          {wishlist.some((item) => item.productid === productId) ? (
+          {wishlist.some((item) => item.productid === el.productid) ? (
             <>
               <span className="red-dot"></span>
               {t("products.removecompare")}

@@ -14,16 +14,16 @@ export const wishlistSlice = createSlice({
     toggleToWishes: (state, action) => {
       const product = action.payload;
       const exists = state.value.find(
-        (item) => item.productId === product.productId
+        (item) => item.productid === product.productid // ✅ to‘g‘rilandi
       );
 
       if (exists) {
-        // o‘chiramiz
+        // o‘chirish
         state.value = state.value.filter(
-          (item) => item.productId !== product.productId
+          (item) => item.productid !== product.productid // ✅ to‘g‘rilandi
         );
       } else {
-        // qo‘shamiz
+        // qo‘shish
         state.value.push(product);
       }
 

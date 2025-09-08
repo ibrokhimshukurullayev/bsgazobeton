@@ -1,16 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux"; // ✅ dispatch qo‘shildi
 import Image from "next/image";
 import "./taqqoslash.scss";
 import deleteicon from "../../assets/images/deleteicon.svg";
 import addproduct from "../../assets/images/addproduct.svg";
 import Modal from "../../components/modal/Modal";
-import ProductPicker from "../../components/ProductPicker/ProductPicker"; // yangi komponent
+import ProductPicker from "../../components/ProductPicker/ProductPicker";
+import { toggleToWishes } from "../../context/wishlistSlice"; // ✅ action chaqiramiz
 
 export default function ProductComparison() {
   const wishlist = useSelector((state) => state.wishlist.value);
+  const dispatch = useDispatch(); // ✅ ishlatamiz
   const [open, setOpen] = useState(false);
 
   const lang = "uz_uz";
@@ -46,15 +48,19 @@ export default function ProductComparison() {
 
         {wishlist.slice(0, 3).map((product, idx) => (
           <div className="product-column" key={idx}>
-            <div className="product-card">
+            <div className="product-cards">
               <div className="product-header">
-                <button className="close__button">
+                <button
+                  className="close__button"
+                  onClick={() => dispatch(toggleToWishes(product))}
+                >
                   <Image src={deleteicon} alt="deleteicon" />
                 </button>
+
                 <div className="product-content">
                   <div className="product__image__wrapper">
                     <img
-                      src={product.imageurl}
+                      src={`https://api.bsgazobeton.uz${product?.imageurl}`}
                       alt={product.name}
                       width={100}
                       height={60}

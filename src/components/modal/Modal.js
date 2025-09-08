@@ -1,8 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import "./modal.scss";
 
 export default function Modal({ open, onClose, children }) {
+  // body scroll'ni bloklash
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   if (!open) return null;
 
   return (
