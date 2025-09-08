@@ -1,10 +1,10 @@
-# BSGazabeton - Building Materials E-commerce Platform
+# BSGazobeton - Building Materials E-commerce Platform
 
 A modern, responsive e-commerce web application for building materials and construction supplies, built with Next.js 15 and TypeScript.
 
 ## 🏗️ Project Overview
 
-BSGazabeton is a comprehensive e-commerce platform designed for the construction industry, providing users with an intuitive interface to browse, compare, and purchase building materials. The platform features a modern design with multi-language support, responsive layouts, and optimized performance.
+BSGazobeton is a comprehensive e-commerce platform designed for the construction industry, providing users with an intuitive interface to browse, compare, and purchase building materials. The platform features a modern design with multi-language support, responsive layouts, and optimized performance.
 
 ## ✨ Features
 
@@ -50,8 +50,8 @@ BSGazabeton is a comprehensive e-commerce platform designed for the construction
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/bsgazabeton.git
-   cd bsgazabeton
+   git clone https://github.com/yourusername/bsgazobeton.git
+   cd bsgazobeton
    ```
 
 2. **Install dependencies**
@@ -80,14 +80,14 @@ BSGazabeton is a comprehensive e-commerce platform designed for the construction
 
 ```bash
 # Build the Docker image
-docker build -t bsgazabeton .
+docker build -t bsgazobeton .
 
 # Run the container
-docker run -p 3000:3000 --name bsgazabeton-app bsgazabeton
+docker run -p 3000:3000 --name bsgazobeton-app bsgazobeton
 
 # Stop and remove the container
-docker stop bsgazabeton-app
-docker rm bsgazabeton-app
+docker stop bsgazobeton-app
+docker rm bsgazobeton-app
 ```
 
 ### Docker Features
@@ -113,7 +113,7 @@ The project includes automated CI/CD using GitHub Actions:
 ## 📁 Project Structure
 
 ```
-bsgazabeton/
+bsgazobeton/
 ├── src/
 │   ├── app/                 # Next.js App Router pages
 │   ├── components/          # Reusable React components
