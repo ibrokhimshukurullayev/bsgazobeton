@@ -109,7 +109,7 @@ const CardProducts = ({ el }) => {
             src={`https://api.bsgazobeton.uz${el?.imageurl}`}
             className="product__img"
             alt={el.name}
-            width={192}
+            width={202}
             height={120}
           />
         </Link>
