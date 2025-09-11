@@ -11,13 +11,13 @@ const TaqoslashHeaderLink = () => {
     <div id="sotuvlink">
       <div className="container sotuvlink">
         <div className="sotuvlink__link">
-          <Link href={"/"}>Bosh sahifa</Link>
+          <Link href={"/"}>{t("home.welcome")}</Link>
           <span>
             <ChevronRight className="icon" />
           </span>
-          <p>Mahsulotlarni taqqoslash</p>
+          <p>{t("taqqoslash.title")}</p>
         </div>
-        <h2>Mahsulotlarni taqqoslash</h2>
+        <h2>{t("taqqoslash.title")}</h2>
       </div>
     </div>
   );

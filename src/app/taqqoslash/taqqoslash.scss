@@ -257,3 +257,139 @@
     white-space: nowrap;
   }
 }
+
+/* 📱 Mobil uchun optimizatsiya */
+@media (max-width: 768px) {
+  .header-section {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    height: auto;
+    padding-bottom: 12px;
+
+    /* Scrollbarni chiroyli yashirish */
+    -ms-overflow-style: none; /* IE va Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
+    }
+  }
+
+  .product-column {
+    min-width: 260px;
+    flex-shrink: 0;
+  }
+
+  .product-cards,
+  .add__product__card {
+    height: 100%;
+  }
+
+  .product-header {
+    min-height: 130px;
+    padding: 12px;
+  }
+
+  .product__title {
+    font-size: 14px;
+  }
+
+  .product__size {
+    font-size: 12px;
+  }
+
+  /* 📊 Jadval uchun scroll */
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .comparison-table {
+    min-width: 600px; /* scroll bo‘lishi uchun */
+    font-size: 13px;
+  }
+
+  .table-label,
+  .table-value {
+    padding: 8px 6px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-column {
+    min-width: 220px;
+  }
+
+  .comparison-table {
+    min-width: 500px;
+    font-size: 12px;
+  }
+
+  .table-label,
+  .table-value {
+    font-size: 12px;
+    padding: 6px 4px;
+  }
+}
+
+.header-section {
+  display: grid;
+  grid-template-columns: repeat(4, 305px);
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  height: 150px;
+  margin-bottom: 32px;
+
+  @media (max-width: 768px) {
+    display: flex; /* ✅ grid emas */
+    overflow-x: auto; /* ✅ scroll */
+    gap: 16px;
+    height: auto;
+    padding-bottom: 12px;
+
+    -ms-overflow-style: none; /* IE va Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
+    }
+  }
+}
+
+.product-column {
+  position: relative;
+  height: 100%;
+
+  @media (max-width: 768px) {
+    min-width: 260px; /* ✅ scroll bo‘lishi uchun */
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 220px;
+  }
+}
+
+.table-container {
+  margin-top: 24px;
+
+  @media (max-width: 768px) {
+    overflow-x: auto; /* ✅ jadval scroll bo‘ladi */
+  }
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    min-width: 600px; /* ✅ ustunlar sig‘masa scroll bo‘ladi */
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 500px;
+    font-size: 12px;
+  }
+}

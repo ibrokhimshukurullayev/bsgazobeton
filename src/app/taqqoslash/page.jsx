@@ -1,22 +1,31 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux"; // ✅ dispatch qo‘shildi
+import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import "./taqqoslash.scss";
 import deleteicon from "../../assets/images/deleteicon.svg";
 import addproduct from "../../assets/images/addproduct.svg";
 import Modal from "../../components/modal/Modal";
 import ProductPicker from "../../components/ProductPicker/ProductPicker";
-import { toggleToWishes } from "../../context/wishlistSlice"; // ✅ action chaqiramiz
+import { toggleToWishes } from "../../context/wishlistSlice";
+import { useTranslation } from "react-i18next";
 
 export default function ProductComparison() {
   const wishlist = useSelector((state) => state.wishlist.value);
-  const dispatch = useDispatch(); // ✅ ishlatamiz
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const { t, i18n } = useTranslation("global");
 
-  const lang = "uz_uz";
+  // Tilni backend formatiga o‘tkazamiz
+  const langMap = {
+    uz: "uz_uz",
+    ru: "ru_ru",
+    en: "en_us",
+  };
+  const lang = langMap[i18n.language] || "uz_uz";
 
+  // Barcha unikal label'larni olish
   const allLabels = Array.from(
     new Set(
       wishlist.flatMap(
@@ -26,6 +35,7 @@ export default function ProductComparison() {
     )
   );
 
+  // Jadval uchun data
   const specifications = allLabels.map((label) => ({
     label,
     value1:
@@ -43,9 +53,12 @@ export default function ProductComparison() {
     <div className="product__comparison container">
       <div className="header-section">
         <div className="product__comparison__header__title">
-          <h2 className="product__comparison__title">Xususiyatlar</h2>
+          <h2 className="product__comparison__title">
+            {t("taqqoslash.features")}
+          </h2>
         </div>
 
+        {/* Mahsulotlar */}
         {wishlist.slice(0, 3).map((product, idx) => (
           <div className="product-column" key={idx}>
             <div className="product-cards">
@@ -70,7 +83,9 @@ export default function ProductComparison() {
                   <div className="product__title">{product.name}</div>
                   <div className="product__size">
                     {product.technicaldata?.find(
-                      (item) => item.key?.[lang] === "O‘lchami, mm"
+                      (item) =>
+                        item.key?.[lang]?.toLowerCase() ===
+                        "o‘lchami, mm".toLowerCase()
                     )?.value?.[lang] || "-"}
                   </div>
                 </div>
@@ -79,6 +94,7 @@ export default function ProductComparison() {
           </div>
         ))}
 
+        {/* Bo‘sh joylar uchun "Add product" card */}
         {Array.from({ length: 3 - wishlist.length }).map((_, idx) => (
           <div key={idx} className="product-column">
             <div className="add__product__card" onClick={() => setOpen(true)}>
@@ -86,13 +102,16 @@ export default function ProductComparison() {
                 <div className="add__product__card__icon">
                   <Image src={addproduct} alt="addproduct" />
                 </div>
-                <div className="add__product__text">Mahsulot qo‘shish</div>
+                <div className="add__product__text">
+                  {t("taqqoslash.addProduct")}
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
 
+      {/* Jadval */}
       <div className="table-container">
         <table className="comparison-table">
           <tbody>

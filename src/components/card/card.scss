@@ -1,5 +1,6 @@
 #products {
   padding-bottom: 70px;
+  padding-top: 20px;
   .products {
     &__header {
       display: flex;
@@ -7,7 +8,6 @@
       align-items: center;
       margin-bottom: 30px;
       @media (max-width: 680px) {
-        
         flex-direction: column;
         gap: 20px;
         align-items: start;
@@ -50,11 +50,16 @@
     &__categories {
       display: none;
       display: grid;
-      grid-template-columns: repeat(auto-fill, 305px);
+      grid-template-columns: 360px;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       border-radius: 100px;
       margin-bottom: 56px;
+      gap: 10px;
+      @media (min-width: 600px) {
+        grid-template-columns: repeat(auto-fill, 305px);
+        justify-content: space-between;
+      }
       &__btn {
         color: rgba(39, 39, 42, 1);
         font-weight: 600;
@@ -105,7 +110,6 @@
       }
       @media (max-width: 760px) {
         grid-template-columns: repeat(1, 1fr);
-        
       }
     }
     .simple__products__wrapper {

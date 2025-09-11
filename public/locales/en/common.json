@@ -325,5 +325,13 @@
       "Cancelled": "Cancelled"
     },
     "showMore": "Show more"
+  },
+  "taqqoslash":{
+  "title": "Product Comparison",
+  "features": "Features",
+  "addProduct": "Add Product"
+  },
+  "home": {
+    "welcome": "Home"
   }
 }

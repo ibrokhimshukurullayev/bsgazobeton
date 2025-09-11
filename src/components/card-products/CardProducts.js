@@ -18,6 +18,7 @@ import plus from "../../assets/images/plus.svg";
 import minus from "../../assets/images/minus.svg";
 import useDebouncedCartSaver from "../../hooks/useDebouncedCartSaver";
 import { useGetUserOrdersQuery } from "../../context/orderApi";
+import { toast, ToastContainer } from "react-toastify";
 
 import "./cardproducts.scss";
 
@@ -127,7 +128,7 @@ const CardProducts = ({ el }) => {
               </div>
             );
           })}
-        <h4 className="product__price">{el.price} UZS/m3</h4>
+        <h4 className="product__price">{el.price}</h4>
 
         {!hasQty ? (
           <button className="add-to-cart" onClick={handleAdd}>
@@ -150,7 +151,18 @@ const CardProducts = ({ el }) => {
 
         <p
           className="product__card__compare"
-          onClick={() => dispatch(toggleToWishes(el))}
+          onClick={() => {
+            if (wishlist.some((item) => item.productid === el.productid)) {
+              // agar ichida bor bo‘lsa o‘chiradi
+              dispatch(toggleToWishes(el));
+            } else if (wishlist.length < 3) {
+              // 3tadan kam bo‘lsa qo‘shadi
+              dispatch(toggleToWishes(el));
+              toast.success("Mahsulot taqqoslashga qo‘shildi");
+            } else {
+              toast.warn("Faqat 3 ta mahsulotni taqqoslash mumkin!");
+            }
+          }}
         >
           <Image src={compare} alt="compare" width={24} height={24} />
           {wishlist.some((item) => item.productid === el.productid) ? (
@@ -163,6 +175,7 @@ const CardProducts = ({ el }) => {
           )}
         </p>
       </div>
+      <ToastContainer />
     </div>
   );
 };

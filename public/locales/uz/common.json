@@ -325,5 +325,13 @@
       "Cancelled": "Bekor qilingan"
     },
     "showMore": "Ko‘proq ko‘rsatish"
+  },
+  "taqqoslash":{
+  "title": "Mahsulotlarni taqqoslash",
+  "features": "Xususiyatlar",
+  "addProduct": "Mahsulot qo‘shish"
+  },
+  "home": {
+    "welcome": "Bosh sahifa"
   }
 }

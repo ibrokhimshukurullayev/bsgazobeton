@@ -46,6 +46,8 @@ export default function ProductPicker() {
   const categories = catRes?.data?.list || [];
   const products = prodRes?.data?.list || [];
 
+  console.log(products);
+
   // Root kategoriyalar
   const rootCategories = useMemo(
     () => categories.filter((c) => !c.parentproductcategoryid),
@@ -100,14 +102,12 @@ export default function ProductPicker() {
     );
   }
 
-  // Savatdagi mahsulotni olish
   function getCartItem(prod) {
     return cart.find((item) => item.productid === prod.productid);
   }
 
   return (
     <div className="product-picker">
-      {/* Root kategoriyalar */}
       <ul className="picker__roots">
         {rootCategories.map((root) => (
           <li
