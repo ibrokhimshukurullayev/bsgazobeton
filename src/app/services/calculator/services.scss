@@ -42,10 +42,15 @@
       letter-spacing: 2%;
       text-align: left;
     }
+    select {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+    }
 
     span {
       position: absolute;
-      right: 10px;
+      right: 15px;
       bottom: 16px;
       color: rgba(17, 24, 39, 0.9);
       font-size: 16px;
@@ -116,5 +121,44 @@
     strong {
       font-weight: bold;
     }
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 277px;
+
+  select {
+    width: 100%;
+    padding: 14px 20px;
+    border: 1px solid rgb(228, 228, 231);
+    border-radius: 12px;
+    background: #fff;
+    color: rgba(17, 24, 39, 0.9);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 28px;
+    appearance: none; // default strelkani olib tashlaymiz
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  .custom-arrow {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; // ikonani bosib bo‘lmasin
   }
 }

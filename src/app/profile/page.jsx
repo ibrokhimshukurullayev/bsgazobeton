@@ -49,9 +49,9 @@ export default function ProfilePage() {
             <strong>Telefon:</strong> +{user.phonenumber}
           </p>
         </div>
-        <div className="button">
+        {/* <div className="button">
           <button>Edit</button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

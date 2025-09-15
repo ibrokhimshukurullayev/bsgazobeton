@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://api.bsgazobeton.uz/api",
+  baseUrl: "  ",
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("token");
     const language = localStorage.getItem("language") || "uz_Uz";

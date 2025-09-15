@@ -221,6 +221,7 @@ const Card = () => {
                         description={el.description}
                         price={el.price}
                         image={el.imageurl}
+                        unit={el.unit}
                       />
                     ))
                   ) : (

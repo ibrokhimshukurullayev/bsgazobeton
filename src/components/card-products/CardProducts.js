@@ -128,7 +128,9 @@ const CardProducts = ({ el }) => {
               </div>
             );
           })}
-        <h4 className="product__price">{el.price}</h4>
+        <h4 className="product__price">
+          {el.price} {el.unit}
+        </h4>
 
         {!hasQty ? (
           <button className="add-to-cart" onClick={handleAdd}>
@@ -171,7 +173,7 @@ const CardProducts = ({ el }) => {
               {t("products.removecompare")}
             </>
           ) : (
-            <p>{t("products.addcompare")}</p>
+            <span>{t("products.addcompare")}</span>
           )}
         </p>
       </div>
