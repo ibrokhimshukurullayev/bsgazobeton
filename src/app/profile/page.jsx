@@ -1,12 +1,16 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGetUserInfoQuery } from "../../context/userApi";
 import "./profile.scss";
 import Loading from "../../components/loading/Loading";
+import Modal from "../../components/modal/Modal";
+import EditProfileForm from "../../components/EditProfileForm/EditProfileForm";
+import EditModal from "../../components/editModal/EditModal";
 
 export default function ProfilePage() {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
@@ -21,12 +25,7 @@ export default function ProfilePage() {
   });
 
   if (!token) return <div>Yuborilmoqda...</div>;
-  if (isLoading)
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+  if (isLoading) return <Loading />;
   if (error) return <div>Xatolik yuz berdi</div>;
 
   const user = data?.data;
@@ -49,10 +48,15 @@ export default function ProfilePage() {
             <strong>Telefon:</strong> +{user.phonenumber}
           </p>
         </div>
-        {/* <div className="button">
-          <button>Edit</button>
-        </div> */}
+        <div className="button">
+          <button onClick={() => setOpen(true)}>Edit</button>
+        </div>
       </div>
+
+      {/* Modal */}
+      <EditModal open={open} onClose={() => setOpen(false)}>
+        <EditProfileForm onClose={() => setOpen(false)} />
+      </EditModal>
     </div>
   );
 }

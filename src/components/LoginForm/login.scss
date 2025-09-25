@@ -53,7 +53,7 @@
     text-align: left;
     margin-bottom: 20px;
   }
-  button {
+  .button {
     color: rgb(255, 255, 255);
     font-size: 15px;
     font-weight: 600;
@@ -81,3 +81,68 @@
     }
   }
 }
+
+.phone-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  .prefix {
+    background: #f3f3f3;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px 0 0 6px;
+  }
+
+  input {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 0 6px 6px 0;
+    outline: none;
+  }
+}
+
+/* login.scss (qo'shimcha qoidalar) */
+
+.login__form {
+  position: relative;
+  /* mavjud qoidalaringiz bo'lsa saqlang */
+}
+
+/* password wrapper to position the eye icon */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  /* agar siz inputlarni 100% kenglikda ishlatsangiz: */
+  .login__input--password {
+    padding-right: 3rem; /* tugma uchun joy qoldiring */
+  }
+}
+
+/* toggle button */
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 36%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 0;
+}
+
+/* tugma hover/focus styles */
+.password-toggle-btn:focus,
+.password-toggle-btn:hover {
+  outline: none;
+  opacity: 0.85;
+}
+
+/* agar kerak bo'lsa, input va button responsive sozlamalarini qo'shing */

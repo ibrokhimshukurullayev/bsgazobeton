@@ -1,0 +1,108 @@
+.edit-profile-form {
+  background: transparent;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #f3f4f6;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #e5e7eb;
+      }
+
+      &.active {
+        background: #dc2626;
+        color: #fff;
+      }
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+
+      &:focus {
+        border-color: #dc2626;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+      }
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button[type="submit"] {
+      background: #dc2626;
+      color: #fff;
+
+      &:disabled {
+        background: #e44949;
+        cursor: not-allowed;
+      }
+    }
+
+    // resend button yonida joylashganda
+    .resend-wrapper {
+      display: flex;
+      gap: 8px;
+
+      input {
+        flex: 2;
+      }
+
+      button {
+        flex: 1;
+        font-size: 12px;
+        background: #f3f4f6;
+
+        &:hover {
+          background: #e5e7eb;
+        }
+
+        &:disabled {
+          background: #ddd;
+          color: #888;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

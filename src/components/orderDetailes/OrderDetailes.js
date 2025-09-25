@@ -1,7 +1,6 @@
 import React from "react";
 import "./orderDetailes.scss";
 import left from "../../assets/images/left.svg";
-import panel from "../../assets/images/panel.png";
 import Image from "next/image";
 
 const OrderDetailes = ({ order, onBack }) => {
@@ -16,6 +15,7 @@ const OrderDetailes = ({ order, onBack }) => {
         Buyurtma ID: #{order?.ordernumber || order?.orderNumber}
       </h2>
 
+      {/* Yuqori qism */}
       <div className="order__content__info">
         <div className="order__content__left">
           <p>
@@ -28,9 +28,6 @@ const OrderDetailes = ({ order, onBack }) => {
             <span>Umumiy summa:</span>{" "}
             {(Number(order?.totalprice) || 0).toLocaleString()} UZS
           </p>
-          <p>
-            <span>Hudud:</span> {order?.region || "—"}
-          </p>
         </div>
 
         <div className="order__content__right">
@@ -41,28 +38,41 @@ const OrderDetailes = ({ order, onBack }) => {
             </span>
           </div>
           <p>
-            <span>Qo‘shimcha:</span> {order?.extra || "—"}
-          </p>
-          <p>
             <span>Manzil:</span> {order?.address || "—"}
           </p>
         </div>
       </div>
 
-      {/* Mahsulotlar */}
+      {/* Mahsulotlar - kartochkalar */}
       <div className="order__content__products">
-        {(order?.items || []).map((item, idx) => (
+        {(order?.orderitems || []).map((item, idx) => (
           <div className="order__content__product" key={idx}>
-            <Image src={panel} alt="panel" />
+            {/* <img
+              src={item?.imageurl}
+              alt={item?.productname}
+              style={{ width: 80, height: 80, objectFit: "cover" }}
+            /> */}
+            <Image
+              src={`https://api.bsgazobeton.uz${item?.imageurl}`}
+              alt={item?.productname}
+              width={80}
+              height={80}
+            />
             <div className="product-info">
               <div className="product-info__title">
-                <h4>{item?.name}</h4>
-                <p>{item?.desc}</p>
+                <h4>{item?.productname}</h4>
+                <p>{item?.unit}</p>
               </div>
-              <p className="product__text">{item?.price} UZS/m³</p>
-              <p className="product__text">{item?.quantity} m³</p>
+              <p className="product__text">
+                {(Number(item?.price) || 0).toLocaleString()} UZS/{item?.unit}
+              </p>
+              <p className="product__text">
+                {item?.quantity} {item?.unit}
+              </p>
             </div>
-            <div className="product-price">{item?.total} UZS</div>
+            <div className="product-price">
+              {(Number(item?.totalprice) || 0).toLocaleString()} UZS
+            </div>
           </div>
         ))}
       </div>

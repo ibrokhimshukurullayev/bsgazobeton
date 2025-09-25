@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import "./modal.scss";
 
-export default function Modal({ open, onClose, children }) {
+export default function EditModal({ open, onClose, children }) {
   // body scroll'ni bloklash
   useEffect(() => {
     if (open) {

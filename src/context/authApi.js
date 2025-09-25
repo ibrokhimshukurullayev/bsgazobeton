@@ -9,7 +9,8 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body,
         headers: {
-          "Accept-language": "uz_UZ",
+          "Content-Type": "application/json",
+          "Accept-Language": "uz_UZ",
         },
       }),
     }),
@@ -21,7 +22,8 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body,
         headers: {
-          "Accept-language": "uz_UZ",
+          "Content-Type": "application/json",
+          "Accept-Language": "uz_UZ",
         },
       }),
     }),
@@ -29,20 +31,63 @@ export const authApi = api.injectEndpoints({
     // Tizimga kirish (login)
     loginUser: build.mutation({
       query: (body) => ({
-        url: "/identity/login", // <-- bu endpoint backendga to‘g‘ri bo‘lishi kerak
+        url: "/identity/login",
         method: "POST",
         body,
         headers: {
-          "Accept-language": "uz_UZ",
+          "Content-Type": "application/json",
+          "Accept-Language": "uz_UZ",
+        },
+      }),
+    }),
+
+    // Parolni o‘zgartirish
+    changePassword: build.mutation({
+      query: (body) => ({
+        url: "/identity/change-password",
+        method: "POST",
+        body,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept-Language": "uz_UZ",
+        },
+      }),
+    }),
+
+    // Telefon raqamni o‘zgartirishni so‘rash (kod yuboriladi)
+    requestChangePhone: build.mutation({
+      query: (body) => ({
+        url: "/identity/request-change-phone",
+        method: "POST",
+        body,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept-Language": "uz_UZ",
+        },
+      }),
+    }),
+
+    // Telefon raqamni yangilash (tasdiqlashdan keyin)
+    changePhone: build.mutation({
+      query: (body) => ({
+        url: "/identity/change-phone",
+        method: "POST",
+        body,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept-Language": "uz_UZ",
         },
       }),
     }),
   }),
 });
 
-// Export qilinayotgan hooklar
+// Hooklarni export qilish
 export const {
   useRegisterUserMutation,
   useVerifyPhoneMutation,
-  useLoginUserMutation, // <-- login uchun hook qo‘shildi
+  useLoginUserMutation,
+  useChangePasswordMutation,
+  useRequestChangePhoneMutation,
+  useChangePhoneMutation,
 } = authApi;
