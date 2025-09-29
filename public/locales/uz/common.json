@@ -333,5 +333,20 @@
   },
   "home": {
     "welcome": "Bosh sahifa"
+  },
+   "profile": {
+    "title": "Profil",
+    "personal": "Shaxsiy ma’lumotlar",
+    "orders": "Buyurtmalar",
+    "logout": "Tizimdan chiqish"
+  },
+  "orderss": {
+    "title": "Buyurtmalar",
+    "back": "Ortga qaytish",
+    "id": "Buyurtma ID",
+    "date": "Buyurtma sanasi",
+    "total": "Umumiy summa",
+    "status": "Holat",
+    "address": "Manzil"
   }
 }

@@ -11,7 +11,7 @@ const AboutGazabetonHeaderLink = ({ title, link }) => {
     <div id="aboutlink">
       <div className="container aboutlink">
         <div className="aboutlink__link">
-          <Link href={"/profile"}>Profile</Link>
+          <Link href={"/profile"}>{t("profile.title")}</Link>
           <span>
             <ChevronRight className="icon" />
           </span>

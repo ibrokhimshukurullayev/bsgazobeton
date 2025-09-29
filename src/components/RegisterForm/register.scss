@@ -54,7 +54,7 @@
     text-align: left;
     margin-bottom: 20px;
   }
-  button {
+  .button {
     color: rgb(255, 255, 255);
     font-size: 15px;
     font-weight: 600;
@@ -81,4 +81,46 @@
       color: #708dff;
     }
   }
+}
+
+/* login.scss (qo'shimcha qoidalar) */
+
+.login__form {
+  position: relative;
+  /* mavjud qoidalaringiz bo'lsa saqlang */
+}
+
+/* password wrapper to position the eye icon */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  /* agar siz inputlarni 100% kenglikda ishlatsangiz: */
+  .login__input--password {
+    padding-right: 3rem; /* tugma uchun joy qoldiring */
+  }
+}
+
+/* toggle button */
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 36%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 0;
+}
+
+/* tugma hover/focus styles */
+.password-toggle-btn:focus,
+.password-toggle-btn:hover {
+  outline: none;
+  opacity: 0.85;
 }

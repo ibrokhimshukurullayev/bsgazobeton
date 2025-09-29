@@ -99,7 +99,6 @@ export default function LoginForm() {
               }
             >
               {showPassword ? (
-                // eye-off SVG
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -116,7 +115,6 @@ export default function LoginForm() {
                   <path d="M1 1l22 22"></path>
                 </svg>
               ) : (
-                // eye SVG
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"

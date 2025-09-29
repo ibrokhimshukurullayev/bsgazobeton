@@ -14,14 +14,14 @@ const AboutGazabetonLink = () => {
   const dispatch = useDispatch();
 
   const links = [
-    { href: "/profile", label: t("Shaxsiy ma’lumotlar") },
+    { href: "/profile", label: t("profile.personal") },
     {
       href: "/profile/buyurtmalar",
-      label: t("Buyurtmalar"),
+      label: t("profile.orders"),
     },
     {
       href: "/",
-      label: t("Tizimdan chiqish"),
+      label: t("profile.logout"),
     },
   ];
 
@@ -36,7 +36,7 @@ const AboutGazabetonLink = () => {
   };
   return (
     <div className="aboutLinkCard">
-      <h3>Profile</h3>
+      <h3>{t("profile.title")}</h3>
       {links.map((link, index) => {
         const isActive = pathname === link.href;
         return (

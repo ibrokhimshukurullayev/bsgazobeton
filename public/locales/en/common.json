@@ -333,5 +333,20 @@
   },
   "home": {
     "welcome": "Home"
+  },
+  "profile": {
+    "title": "Profile",
+    "personal": "Personal information",
+    "orders": "Orders",
+    "logout": "Logout"
+  },
+  "orderss": {
+    "title": "Orders",
+    "back": "Back",
+    "id": "Order ID",
+    "date": "Order date",
+    "total": "Total amount",
+    "status": "Status",
+    "address": "Address"
   }
 }

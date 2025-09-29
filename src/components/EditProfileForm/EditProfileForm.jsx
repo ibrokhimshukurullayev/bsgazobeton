@@ -1,56 +1,69 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   useRequestChangePhoneMutation,
   useChangePhoneMutation,
   useChangePasswordMutation,
 } from "../../context/authApi";
+import { useUpdateUserProfileMutation } from "../../context/userApi";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./EditProfileForm.scss";
 
 export default function EditProfileForm({ onClose }) {
-  const [activeTab, setActiveTab] = useState("password");
+  const [activeTab, setActiveTab] = useState("profile");
 
-  // ===========================
-  // 🔑 Parol states
-  // ===========================
+  // 👤 Profil + Parol states
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [updateUserProfile, { isLoading: isProfileLoading }] =
+    useUpdateUserProfileMutation();
   const [changePassword, { isLoading: isPasswordLoading }] =
     useChangePasswordMutation();
 
-  // ===========================
   // 📱 Telefon states
-  // ===========================
   const [newPhone, setNewPhone] = useState("");
   const [otpCode, setOtpCode] = useState("");
-  const [step, setStep] = useState(1); // 1 = raqam yuborish, 2 = kod kiritish
+  const [step, setStep] = useState(1);
   const [secondsLeft, setSecondsLeft] = useState(0);
 
   const [requestChangePhone, { isLoading: isRequesting }] =
     useRequestChangePhoneMutation();
   const [changePhone, { isLoading: isPhoneLoading }] = useChangePhoneMutation();
 
-  // ===========================
-  // 🔑 Parolni o‘zgartirish
-  // ===========================
-  const handlePasswordChange = async (e) => {
+  // 👤 Profil + 🔑 Parolni birga update qilish
+  const handleProfileAndPassword = async (e) => {
     e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      toast.error("Yangi parol tasdiqlanmadi ❌");
-      return;
-    }
-    try {
-      await changePassword({
-        currentPassword: oldPassword,
-        newPassword,
-        confirmPassword,
-      }).unwrap();
 
-      toast.success("Parol muvaffaqiyatli o‘zgartirildi ✅");
+    try {
+      // 🔹 1. Profilni yangilash
+      if (firstName || lastName) {
+        await updateUserProfile({ firstName, lastName }).unwrap();
+        toast.success("Profil yangilandi ✅");
+      }
+
+      // 🔹 2. Parolni yangilash
+      if (oldPassword || newPassword || confirmPassword) {
+        if (newPassword !== confirmPassword) {
+          toast.error("Yangi parol tasdiqlanmadi ❌");
+          return;
+        }
+        await changePassword({
+          currentPassword: oldPassword,
+          newPassword,
+          confirmPassword,
+        }).unwrap();
+        toast.success("Parol yangilandi ✅");
+      }
+
+      // 🔹 Reset
+      setFirstName("");
+      setLastName("");
       setOldPassword("");
       setNewPassword("");
       setConfirmPassword("");
@@ -61,9 +74,7 @@ export default function EditProfileForm({ onClose }) {
     }
   };
 
-  // ===========================
-  // 1-bosqich: kod yuborish
-  // ===========================
+  // 📱 Telefon kod yuborish
   const handleRequestCode = async (e) => {
     e.preventDefault();
     if (!newPhone) {
@@ -74,24 +85,20 @@ export default function EditProfileForm({ onClose }) {
     try {
       const formattedPhone = newPhone.startsWith("+")
         ? newPhone
-        : `+${newPhone}`; // faqat +998... formatda yuboramiz
+        : `+${newPhone}`;
 
-      // ✅ backend `newphonenumber` ni kutyapti
-      await requestChangePhone({ newphonenumber: formattedPhone }).unwrap();
-
+      await requestChangePhone({ newPhoneNumber: formattedPhone }).unwrap();
       toast.success("Tasdiqlash kodi yuborildi ✅");
       setStep(2);
       setOtpCode("");
-      setSecondsLeft(60); // taymer 60s
+      setSecondsLeft(60);
     } catch (err) {
       console.error(err);
       toast.error(err?.data?.message || "Kod yuborishda xatolik ❌");
     }
   };
 
-  // ===========================
-  // 2-bosqich: kodni kiritish
-  // ===========================
+  // 📱 Telefonni tasdiqlash
   const handlePhoneChange = async (e) => {
     e.preventDefault();
     if (!otpCode) {
@@ -106,7 +113,7 @@ export default function EditProfileForm({ onClose }) {
 
       await changePhone({
         code: otpCode,
-        newphonenumber: formattedPhone, // ✅ backend shuni kutyapti
+        newPhoneNumber: formattedPhone,
       }).unwrap();
 
       toast.success("Telefon raqamingiz yangilandi ✅");
@@ -121,53 +128,16 @@ export default function EditProfileForm({ onClose }) {
     }
   };
 
-  // ===========================
-  // Kodni qayta yuborish
-  // ===========================
-  const handleResend = async () => {
-    if (secondsLeft > 0) return;
-    try {
-      const formattedPhone = newPhone.startsWith("+")
-        ? newPhone
-        : `+${newPhone}`;
-
-      await requestChangePhone({ newphonenumber: formattedPhone }).unwrap();
-      toast.success("Kod qayta yuborildi ✅");
-      setSecondsLeft(60);
-    } catch (err) {
-      console.error(err);
-      toast.error(err?.data?.message || "Qayta yuborishda xatolik ❌");
-    }
-  };
-
-  // ===========================
-  // Taymer
-  // ===========================
-  useEffect(() => {
-    if (secondsLeft <= 0) return;
-    const t = setInterval(() => {
-      setSecondsLeft((s) => {
-        if (s <= 1) {
-          clearInterval(t);
-          return 0;
-        }
-        return s - 1;
-      });
-    }, 1000);
-    return () => clearInterval(t);
-  }, [secondsLeft]);
-
   return (
     <div className="edit-profile-form">
       <h3>Shaxsiy ma’lumotlarni o‘zgartirish</h3>
 
-      {/* Tablar */}
       <div className="tabs">
         <button
-          className={activeTab === "password" ? "active" : ""}
-          onClick={() => setActiveTab("password")}
+          className={activeTab === "profile" ? "active" : ""}
+          onClick={() => setActiveTab("profile")}
         >
-          🔑 Parol
+          👤 Profil & Parol
         </button>
         <button
           className={activeTab === "phone" ? "active" : ""}
@@ -177,37 +147,53 @@ export default function EditProfileForm({ onClose }) {
         </button>
       </div>
 
-      {/* 🔑 Parol form */}
-      {activeTab === "password" && (
-        <form onSubmit={handlePasswordChange} className="form">
+      {/* 👤 Profil + 🔑 Parol */}
+      {activeTab === "profile" && (
+        <form onSubmit={handleProfileAndPassword} className="form">
+          <input
+            type="text"
+            placeholder="Ism"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Familiya"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+
           <input
             type="password"
             placeholder="Eski parol"
             value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)}
-            required
           />
           <input
             type="password"
             placeholder="Yangi parol"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            required
           />
           <input
             type="password"
             placeholder="Yangi parolni tasdiqlash"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
           />
-          <button type="submit" disabled={isPasswordLoading}>
-            {isPasswordLoading ? "Yuklanmoqda..." : "Saqlash"}
+
+          <button
+            type="submit"
+            disabled={isProfileLoading || isPasswordLoading}
+          >
+            {isProfileLoading || isPasswordLoading
+              ? "Yuklanmoqda..."
+              : "Saqlash"}
           </button>
         </form>
       )}
 
-      {/* 📱 Telefon form */}
+      {/* 📱 Telefon */}
       {activeTab === "phone" && (
         <div className="form">
           {step === 1 && (
@@ -227,25 +213,13 @@ export default function EditProfileForm({ onClose }) {
 
           {step === 2 && (
             <form onSubmit={handlePhoneChange}>
-              <div style={{ display: "flex", gap: 8 }}>
-                <input
-                  type="text"
-                  placeholder="Tasdiqlash kodi"
-                  value={otpCode}
-                  onChange={(e) => setOtpCode(e.target.value)}
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={handleResend}
-                  disabled={secondsLeft > 0}
-                >
-                  {secondsLeft > 0
-                    ? `Qayta yuborish ${secondsLeft}s`
-                    : "Qayta yuborish"}
-                </button>
-              </div>
-
+              <input
+                type="text"
+                placeholder="Tasdiqlash kodi"
+                value={otpCode}
+                onChange={(e) => setOtpCode(e.target.value)}
+                required
+              />
               <button type="submit" disabled={isPhoneLoading}>
                 {isPhoneLoading ? "Yangilanmoqda..." : "Yangilash"}
               </button>

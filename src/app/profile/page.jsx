@@ -48,15 +48,15 @@ export default function ProfilePage() {
             <strong>Telefon:</strong> +{user.phonenumber}
           </p>
         </div>
-        <div className="button">
+        {/* <div className="button">
           <button onClick={() => setOpen(true)}>Edit</button>
-        </div>
+        </div> */}
       </div>
 
       {/* Modal */}
-      <EditModal open={open} onClose={() => setOpen(false)}>
+      {/* <EditModal open={open} onClose={() => setOpen(false)}>
         <EditProfileForm onClose={() => setOpen(false)} />
-      </EditModal>
+      </EditModal> */}
     </div>
   );
 }

@@ -13,8 +13,8 @@ const ProfileLayoutClient = ({ children }) => {
   const { t } = useTranslation("global");
 
   const titles = {
-    "/profile": "Shaxsiy ma’lumotlar",
-    "/profile/buyurtmalar": "Buyurtmalar",
+    "/profile": t("profile.personal"),
+    "/profile/buyurtmalar": t("profile.orders"),
   };
 
   const title = titles[pathname] || "Profile";
