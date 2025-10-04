@@ -1,41 +1,78 @@
-import React from "react";
+"use client";
+import React, { useMemo } from "react";
 import logo from "../../assets/images/logo.svg";
 import Image from "next/image";
 import "./footer.scss";
 import instagram from "../../assets/images/social/intagram.svg";
 import facebook from "../../assets/images/social/facebook.svg";
 import yootube from "../../assets/images/social/youtube.svg";
-import twiter from "../../assets/images/social/twiter.svg";
-import linkedin from "../../assets/images/social/linkedin.svg";
 import telegram from "../../assets/images/social/telegram.svg";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { useGetCategoryQuery } from "../../context/categoryApi";
+
+function resolveLangKey(lng) {
+  const l = (lng || "").toLowerCase();
+  if (l.startsWith("uz")) return "uz_uz";
+  if (l.startsWith("ru")) return "ru_ru";
+  if (l.startsWith("en")) return "en_us";
+  return "uz_uz";
+}
 
 const Footer = () => {
-  const [t, i18n] = useTranslation("global");
+  const { t, i18n } = useTranslation("global");
+
+  // kategoriyalar API dan
+  const {
+    data: dataGetCategory,
+    isLoading,
+    error,
+  } = useGetCategoryQuery({
+    skip: 0,
+    take: 1000,
+  });
+
+  const katalogFromApi = useMemo(() => {
+    const list = dataGetCategory?.data?.list ?? [];
+    const langKey = resolveLangKey(i18n?.language);
+
+    const parents = list.filter((cat) => !cat.parentproductcategoryid);
+
+    const sorted = [...parents].sort((a, b) => {
+      const pa = a.position ?? a.order ?? 0;
+      const pb = b.position ?? b.order ?? 0;
+      return pa - pb;
+    });
+
+    return sorted.map((cat) => {
+      const id =
+        cat.productcategoryid ?? cat.id ?? cat.productCategoryId ?? null;
+
+      const trName = cat?.translations?.name;
+      let label =
+        typeof trName === "string"
+          ? trName
+          : trName?.[langKey] ??
+            Object.values(trName || {}).find(Boolean) ??
+            cat?.name ??
+            "";
+
+      return {
+        label: String(label),
+        href: id ? `/katalog?productcategoryid=${id}` : "/katalog",
+      };
+    });
+  }, [dataGetCategory, i18n?.language]);
+
   const dropdownItems = {
-    katalog: [
-      { label: t("menu.katalog.gazobloklar"), href: "#" },
-      { label: t("menu.katalog.panellar"), href: "#" },
-      { label: t("menu.katalog.kleylar"), href: "#" },
-      {
-        label: t("menu.katalog.instrumentlar"),
-        href: "#",
-      },
-    ],
+    katalog: katalogFromApi,
     xizmatlar: [
       { label: t("menu.xizmatlar.konsultatsiya"), href: "/services" },
       { label: t("menu.xizmatlar.montaj"), href: "/services/gazablokmantaji" },
-      {
-        label: t("menu.xizmatlar.hisoblash"),
-        href: "/services/calculator",
-      },
+      { label: t("menu.xizmatlar.hisoblash"), href: "/services/calculator" },
     ],
     sotuvlar: [
-      {
-        label: t("menu.sotuvlar.buyurtma"),
-        href: "/sotuvlar",
-      },
+      { label: t("menu.sotuvlar.buyurtma"), href: "/sotuvlar" },
       { label: t("menu.sotuvlar.tolov"), href: "/sotuvlar/tolovUsullari" },
       { label: t("menu.sotuvlar.manzillar"), href: "/joylashuv" },
     ],
@@ -61,18 +98,15 @@ const Footer = () => {
         label: t("menu.gazobeton.farqi"),
         href: "/aboutGazabeton/aboutMaterialardanFarqi",
       },
-      {
-        label: t("menu.gazobeton.faq"),
-        href: "/aboutGazabeton/aboutFaq",
-      },
+      { label: t("menu.gazobeton.faq"), href: "/aboutGazabeton/aboutFaq" },
     ],
     about: [
       { label: t("menu.about.kompaniya"), href: "/about" },
       { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
       { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
       { label: t("menu.about.oav"), href: "/about/aboutOAV" },
-      { label: t("menu.about.yangiliklar"), href: "#" },
-      { label: t("menu.about.vakansiyalar"), href: "#" },
+      { label: t("menu.about.yangiliklar"), href: "/about/news" },
+      { label: t("menu.about.vakansiyalar"), href: "/about/vakansiyalar" },
     ],
   };
 
@@ -99,8 +133,7 @@ const Footer = () => {
 
           <div>
             <h4>{t("footer.email")}</h4>
-            <p>info@bsgazobeton.uz</p>
-            <p>tuymuratov.sardor@bsgroup.uz</p>
+            <p>info@bsgroup.uz</p>
           </div>
 
           <div className="footer__socials">
@@ -116,23 +149,21 @@ const Footer = () => {
             <a href="https://www.youtube.com/@bsgazobeton">
               <Image src={yootube} alt="youtube" />
             </a>
-            {/* <a href="#">
-              <Image src={twiter} alt="twitter" />
-            </a> */}
-            {/* <a href="#">
-              <Image src={linkedin} alt="linkedin" />
-            </a> */}
           </div>
         </div>
 
         <div className="footer__column">
           <h4>{t("header.catalog")}</h4>
           <ul>
-            {dropdownItems.katalog.map((item, i) => (
-              <li key={i}>
-                <Link href={item.href}>{item.label}</Link>
-              </li>
-            ))}
+            {isLoading ? (
+              <li>Yuklanmoqda...</li>
+            ) : (
+              dropdownItems.katalog.map((item, i) => (
+                <li key={i}>
+                  <Link href={item.href}>{item.label}</Link>
+                </li>
+              ))
+            )}
           </ul>
 
           <h4>{t("header.services")}</h4>

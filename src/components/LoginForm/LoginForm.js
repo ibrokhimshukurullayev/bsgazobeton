@@ -7,8 +7,11 @@ import Image from "next/image";
 import logo from "../../assets/images/logo.svg";
 import Link from "next/link";
 import { toast, ToastContainer } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 export default function LoginForm() {
+  const { t, i18n } = useTranslation("global");
+
   const router = useRouter();
   const [login, { isLoading }] = useLoginUserMutation();
 
@@ -27,13 +30,13 @@ export default function LoginForm() {
       const response = await login({ phoneNumber, password }).unwrap();
 
       localStorage.setItem("token", response.data.token);
-      toast.success("Tizimga muvaffaqiyatli kirdingiz!");
+      toast.success(t("login.success"));
 
       if (response.data.token) {
         router.push("/profile");
       }
     } catch (err) {
-      toast.error(err?.data?.message || "Xatolik yuz berdi");
+      toast.error(err?.data?.message || t("login.error"));
     }
   };
 
@@ -61,20 +64,19 @@ export default function LoginForm() {
       <div className="login container">
         <form className="login__form" onSubmit={handleLogin}>
           <Image src={logo} alt="logo" />
-          <h2>Telefon raqamingiz hamda parolingizni kiriting</h2>
+          <h2>{t("login.title")}</h2>
 
-          <label htmlFor="phone">Telefon raqamingiz</label>
+          <label htmlFor="phone">{t("login.phoneLabel")}</label>
           <input
             id="phone"
             className="login__input"
             type="tel"
-            placeholder="+998 (__) ___-__-__"
             value={phoneNumber}
             onChange={handlePhoneChange}
             required
           />
 
-          <label htmlFor="password">Parolingiz</label>
+          <label htmlFor="password">{t("login.passwordLabel")}</label>
 
           {/* Password wrapper: input + toggle button */}
           <div className="password-wrapper">
@@ -82,7 +84,7 @@ export default function LoginForm() {
               id="password"
               className="login__input login__input--password"
               type={showPassword ? "text" : "password"}
-              placeholder="Parol"
+              placeholder={t("login.passwordPlaceholder")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -95,7 +97,9 @@ export default function LoginForm() {
               className="password-toggle-btn"
               onClick={() => setShowPassword((s) => !s)}
               aria-label={
-                showPassword ? "Parolni yashirish" : "Parolni ko'rsatish"
+                showPassword
+                  ? t("login.toggleHidePassword")
+                  : t("login.toggleShowPassword")
               }
             >
               {showPassword ? (
@@ -137,12 +141,12 @@ export default function LoginForm() {
           {error && <p style={{ color: "red" }}>{error}</p>}
 
           <button className="button" type="submit" disabled={isLoading}>
-            {isLoading ? "Kutilmoqda..." : "Kirish"}
+            {isLoading ? t("login.loading") : t("login.submit")}
           </button>
 
           <p>
-            Agar sahifangiz bo'lmasa yangi sahifa ochishingiz mumkin.{" "}
-            <Link href={"/register"}>Yangi sahifa ochish</Link>
+            {t("login.noAccount")}
+            <Link href={"/register"}>{t("login.registerLink")}</Link>
           </p>
         </form>
       </div>

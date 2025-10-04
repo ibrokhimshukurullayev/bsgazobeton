@@ -8,9 +8,11 @@ import Image from "next/image";
 import logo from "../../assets/images/logo.svg";
 import Link from "next/link";
 import { toast, ToastContainer } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 export default function RegisterForm() {
   const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const { t, i18n } = useTranslation("global");
 
   const [form, setForm] = useState({
     firstName: "",
@@ -66,50 +68,47 @@ export default function RegisterForm() {
       <div className="register">
         <form className="register__form" onSubmit={handleSubmit}>
           <Image src={logo} alt="logo" />
-          <h2>
-            Ro'yxatdan o'tish uchun ozingiz haqingizdagi ma'lumotlarni kiriting
-          </h2>
+          <h2>{t("register.title")}</h2>
 
-          <label htmlFor="">Ism</label>
+          <label htmlFor="">{t("register.firstNameLabel")}</label>
           <input
             className="register__input"
             type="text"
             name="firstName"
-            placeholder="Ism"
+            placeholder={t("register.firstNameLabel")}
             value={form.firstName}
             onChange={handleChange}
             required
           />
 
-          <label htmlFor="">Familiya</label>
+          <label htmlFor="">{t("register.firstNamePlaceholder")}</label>
           <input
             className="register__input"
             type="text"
             name="lastName"
-            placeholder="Familiya"
+            placeholder={t("register.firstNamePlaceholder")}
             value={form.lastName}
             onChange={handleChange}
             required
           />
 
-          <label htmlFor="">Telefon raqamingiz</label>
+          <label htmlFor="">{t("register.phoneLabel")}</label>
           <input
             className="register__input"
             type="tel"
             name="phoneNumber"
-            placeholder="+998 (__) ___-__-__"
             value={form.phoneNumber}
             onChange={handlePhoneChange}
             required
           />
 
-          <label htmlFor="">Parolingiz</label>
+          <label htmlFor="">{t("register.passwordLabel")}</label>
           <div className="password-wrapper">
             <input
               className="register__input"
               type={showPassword ? "text" : "password"}
               name="password"
-              placeholder="Parol"
+              placeholder={t("register.passwordPlaceholder")}
               value={form.password}
               onChange={handleChange}
               required
@@ -159,13 +158,13 @@ export default function RegisterForm() {
             </button>
           </div>
 
-          <label htmlFor="">Parolni tasdiqlang</label>
+          <label htmlFor="">{t("register.confirmPasswordPlaceholder")}</label>
           <div className="password-wrapper">
             <input
               className="register__input"
               type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
-              placeholder="Parolni tasdiqlang"
+              placeholder={t("register.confirmPasswordPlaceholder")}
               value={form.confirmPassword}
               onChange={handleChange}
               required
@@ -216,13 +215,13 @@ export default function RegisterForm() {
           </div>
 
           <button className="button" type="submit" disabled={isLoading}>
-            {isLoading ? "Yuborilmoqda..." : "Ro'yxatdan o'tish"}
+            {isLoading ? t("register.loading") : t("register.submit")}
           </button>
 
           <p>
-            Agar sahifangiz bo'lsa kirishingiz mumkin
+            {t("register.hasAccount")}
             <br />
-            <Link href={"/login"}>Tizimga kirish</Link>
+            <Link href={"/login"}>{t("register.loginLink")}</Link>
           </p>
         </form>
       </div>

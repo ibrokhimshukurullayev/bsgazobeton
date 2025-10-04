@@ -191,7 +191,7 @@
     "title": "You can select the material and calculate the required amount for your construction, or get assistance from our specialists.",
     "section1title": "Placing an order",
     "section1text": "Если вам неудобно приехать в наш офис, вы можете самостоятельно оформить заказ через форму на сайте, указав объем продукции и ваши контактные данные. Менеджер обязательно свяжется с вами и отправит счет-фактуру по электронной почте.",
-    "section1text2": "Оплату за товары можно произвести дистанционно, а услуги и блоки будут доставлены непосредственно на строительную площадку. Также вы можете связаться с менеджером нашей компании по следующему адресу: электронная почта — для подробной информации или консультации sales@arton.uz.",
+    "section1text2": "Оплату за товары можно произвести дистанционно, а услуги и блоки будут доставлены непосредственно на строительную площадку. Также вы можете связаться с менеджером нашей компании по следующему адресу: электронная почта — для подробной информации или консультации info@bsgroup.uz.",
     "section2title": "Delivery terms",
     "section2text": "Delivery is available across all cities and regions. Depending on the minimum order quantity, delivery may be free or subject to a contract. Estimated delivery time — typically 1–2 business days.",
     "section3title": "Consultation and estimation",
@@ -329,7 +329,9 @@
   "taqqoslash":{
   "title": "Product Comparison",
   "features": "Features",
-  "addProduct": "Add Product"
+  "addProduct": "Add Product",
+  "title1": "Add to compare",
+  "title2": "Go to compare"
   },
   "home": {
     "welcome": "Home"
@@ -348,5 +350,67 @@
     "total": "Total amount",
     "status": "Status",
     "address": "Address"
-  }
+  },
+  "login": {
+  "title": "Enter your phone number and password",
+  "phoneLabel": "Phone number",
+  "passwordLabel": "Password",
+  "passwordPlaceholder": "Password",
+  "toggleShowPassword": "Show password",
+  "toggleHidePassword": "Hide password",
+  "submit": "Login",
+  "loading": "Loading...",
+  "success": "You have successfully logged in!",
+  "error": "An error occurred",
+  "noAccount": "If you don’t have an account, you can create a new one.",
+  "registerLink": "Create account"
+},
+"register": {
+  "title": "Enter your personal information to register",
+  "firstNameLabel": "First name",
+  "firstNamePlaceholder": "First name",
+  "lastNameLabel": "Last name",
+  "lastNamePlaceholder": "Last name",
+  "phoneLabel": "Phone number",
+  "phonePlaceholder": "+998 (__) ___-__-__",
+  "passwordLabel": "Password",
+  "passwordPlaceholder": "Password",
+  "confirmPasswordLabel": "Confirm password",
+  "confirmPasswordPlaceholder": "Confirm password",
+  "toggleShowPassword": "Show password",
+  "toggleHidePassword": "Hide password",
+  "submit": "Register",
+  "loading": "Sending...",
+  "error": "Error: Server error",
+  "hasAccount": "If you already have an account, you can login",
+  "loginLink": "Login"
+},
+"profiles": {
+  "title": "Profile Management",
+  "subtitle": "Manage your personal information and security settings",
+  "uploadPhoto": "Upload Photo",
+  "removePhoto": "X Remove",
+  "recommended": "Recommended: Square image, at least 400x400px",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "saveChanges": "Save Changes",
+  "saving": "Saving...",
+  "phoneNumber": "Phone Number",
+  "verifyPhone": "Verify Phone",
+  "sending": "Sending...",
+  "password": "Password",
+  "changePassword": "Change Password",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "cancel": "Cancel",
+  "updatePassword": "Update Password",
+  "updating": "Updating...",
+  "verifyPhoneTitle": "Verify Phone Number",
+  "verifyPhoneText": "We’ve sent a 6-digit code to:",
+  "verifyCode": "Verify Code",
+  "verifying": "Verifying...",
+  "close": "Close"
+}
+
 }

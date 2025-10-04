@@ -3,18 +3,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import "./compareBar.scss";
+import { useTranslation } from "react-i18next";
 
 const CompareBar = () => {
-  // const wishlist = useSelector((state) => state.wishlist.value);
-
-  // if (!wishlist.length) return null;
+  const { t, i18n } = useTranslation("global");
 
   return (
     <div className="compare__bar">
       <div className="container bar">
-        <p>Mahsulotlarni taqqoslashga qo‘shilgan: </p>
+        <p>{t("taqqoslash.title1")}</p>
         <Link href="/taqqoslash" className="compare__btn">
-          Taqqoslashga o‘tish →
+          {t("taqqoslash.title2")} →
         </Link>
       </div>
     </div>

@@ -24,7 +24,7 @@ const steps = [
     id: 2,
     img: img2,
     title: "2. Maxsus elimdan foydalaning",
-    desc: "Oddiy sement emas, gazoblok uchun maxsus yupqa qatlamli elim ishlating.",
+    desc: "Oddiy sement emas, gazoblok uchun maxsus yupqa qatlamli yelim ishlating.",
   },
   {
     id: 3,

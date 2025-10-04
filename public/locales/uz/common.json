@@ -191,7 +191,7 @@
     "title": "Siz materialni tanlashingiz va uy qurish uchun kerakli miqdorni hisoblashingiz yoki mutaxassislarimiz yordamidan foydalanishingiz mumkin.",
     "section1title": "Buyurtma berish",
     "section1text": "Agar ofisimizga yetib borish siz uchun noqulay bo‘lsa, kerakli tovarlar hajmi va kontaktlaringizni ko‘rsatgan holda veb-saytdagi shakl orqali o‘zingiz buyurtma berishingiz mumkin. Menejer albatta siz bilan bog‘lanadi va elektron pochta orqali hisob-faktura beradi.",
-    "section1text2": " Tovarlar uchun masofadan turib to‘lashingiz mumkin, xizmatlar va bloklar sizga qurilish maydonchasida yetkaziladi. Shuningdek, kompaniyamiz menejeri bilan quyidagi manzil orqali bog‘lanishingiz mumkin. elektron pochta – Batafsil ma’lumot yoki maslahat uchun sales@arton.uz.",
+    "section1text2": " Tovarlar uchun masofadan turib to‘lashingiz mumkin, xizmatlar va bloklar sizga qurilish maydonchasida yetkaziladi. Shuningdek, kompaniyamiz menejeri bilan quyidagi manzil orqali bog‘lanishingiz mumkin. elektron pochta – Batafsil ma’lumot yoki maslahat uchun info@bsgroup.uz.",
     "section2title": "Yetkazib berish tartibi",
     "section2text": "Yetkazib berish butun shahar va viloyatlar bo‘yicha amalga oshiriladi. Minimal buyurtma miqdoriga qarab bepul yoki shartnoma asosida yetkazib berish xizmati ko‘rsatiladi. Yetkazish muddati — odatda 1–2 ish kuni.",
     "section3title": "Maslahat va hisoblash",
@@ -329,7 +329,9 @@
   "taqqoslash":{
   "title": "Mahsulotlarni taqqoslash",
   "features": "Xususiyatlar",
-  "addProduct": "Mahsulot qo‘shish"
+  "addProduct": "Mahsulot qo‘shish",
+  "title1": "Mahsulotlarni taqqoslashga qo‘shish",
+  "title2": "Taqqoslashga o‘tish"
   },
   "home": {
     "welcome": "Bosh sahifa"
@@ -348,5 +350,66 @@
     "total": "Umumiy summa",
     "status": "Holat",
     "address": "Manzil"
-  }
+  },
+  "login": {
+  "title": "Telefon raqamingiz hamda parolingizni kiriting",
+  "phoneLabel": "Telefon raqamingiz",
+  "passwordLabel": "Parolingiz",
+  "passwordPlaceholder": "Parol",
+  "toggleShowPassword": "Parolni ko‘rsatish",
+  "toggleHidePassword": "Parolni yashirish",
+  "submit": "Kirish",
+  "loading": "Kutilmoqda...",
+  "success": "Tizimga muvaffaqiyatli kirdingiz!",
+  "error": "Xatolik yuz berdi",
+  "noAccount": "Agar sahifangiz bo'lmasa yangi sahifa ochishingiz mumkin.",
+  "registerLink": "Yangi sahifa ochish"
+},
+"register": {
+  "title": "Ro'yxatdan o'tish uchun o'zingiz haqingizdagi ma'lumotlarni kiriting",
+  "firstNameLabel": "Ism",
+  "firstNamePlaceholder": "Ism",
+  "lastNameLabel": "Familiya",
+  "lastNamePlaceholder": "Familiya",
+  "phoneLabel": "Telefon raqamingiz",
+  "passwordLabel": "Parolingiz",
+  "passwordPlaceholder": "Parol",
+  "confirmPasswordLabel": "Parolni tasdiqlang",
+  "confirmPasswordPlaceholder": "Parolni tasdiqlang",
+  "toggleShowPassword": "Parolni ko‘rsatish",
+  "toggleHidePassword": "Parolni yashirish",
+  "submit": "Ro'yxatdan o'tish",
+  "loading": "Yuborilmoqda...",
+  "error": "Xatolik: Server xatosi",
+  "hasAccount": "Agar sahifangiz bo'lsa kirishingiz mumkin",
+  "loginLink": "Tizimga kirish"
+},
+"profiles": {
+  "title": "Profil boshqaruvi",
+  "subtitle": "Shaxsiy ma'lumotlaringiz va xavfsizlik sozlamalaringizni boshqaring",
+  "uploadPhoto": "Rasm yuklash",
+  "removePhoto": "X O'chirish",
+  "recommended": "Tavsiya etiladi: kvadrat rasm, kamida 400x400px",
+  "firstName": "Ism",
+  "lastName": "Familiya",
+  "saveChanges": "O‘zgarishlarni saqlash",
+  "saving": "Saqlanmoqda...",
+  "phoneNumber": "Telefon raqam",
+  "verifyPhone": "Telefonni tasdiqlash",
+  "sending": "Yuborilmoqda...",
+  "password": "Parol",
+  "changePassword": "Parolni o‘zgartirish",
+  "currentPassword": "Joriy parol",
+  "newPassword": "Yangi parol",
+  "confirmNewPassword": "Yangi parolni tasdiqlash",
+  "cancel": "Bekor qilish",
+  "updatePassword": "Parolni yangilash",
+  "updating": "Yangilanmoqda...",
+  "verifyPhoneTitle": "Telefon raqamni tasdiqlash",
+  "verifyPhoneText": "Biz 6 xonali kodni quyidagi raqamga yubordik:",
+  "verifyCode": "Kod tasdiqlash",
+  "verifying": "Tekshirilmoqda...",
+  "close": "Yopish"
+}
+
 }
