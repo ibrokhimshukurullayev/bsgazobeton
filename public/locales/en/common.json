@@ -3,12 +3,13 @@
     "catalog": "Catalog",
     "services": "Services",
     "sales": "Sales",
-    "gazabetonabout": "About Gazabeton",
+    "gazabetonabout": "About aerated concrete",
     "about": "About us",
-    "contact": "Contact"
+    "contact": "Contact",
+    "priceUnit": "uzs"
   },
   "aboutkompany": {
-    "title1": "– is one of the leading manufacturers of high-quality gazobeton products in Uzbekistan. Our production plant is located in the Syrdarya region. Our mission is to provide the construction industry with innovative, eco-friendly, and durable building materials.",
+    "title1": "– is one of the leading manufacturers of high-quality aerated concrete products in Uzbekistan. Our production plant is located in the Syrdarya region. Our mission is to provide the construction industry with innovative, eco-friendly, and durable building materials.",
     "title2": "Our history",
     "title3": "BS Gazobeton was established in early 2023. Since then, we have remained committed to the principles of quality and innovation in building materials. Our extensive experience in the construction industry has helped us grow into a trusted and successful brand. We offer products developed with modern technologies and made to meet the highest standards.",
     "title4": "Our mission and values",
@@ -19,7 +20,7 @@
     "cardtitle1": "High quality",
     "cardlist1": "Our products meet industry standards",
     "cardtitle2": "Eco-friendliness",
-    "cardlist2": "gazobeton is safe for both people and the environment.",
+    "cardlist2": "Aerated concrete is safe for both people and the environment.",
     "cardtitle3": "Energy efficiency",
     "cardlist3": "Our materials provide excellent thermal insulation",
     "cardtitle4": "Innovation",
@@ -31,16 +32,16 @@
   },
   "menu": {
     "katalog": {
-      "gazobloklar": "Gazobloklar",
+      "gazobloklar": "Aerated concrete",
       "panellar": "gazobeton panels",
-      "kleylar": "Adhesives for gazobloklar",
-      "instrumentlar": "Tools and materials for gazobloklar"
+      "kleylar": "Adhesives for aerated concrete",
+      "instrumentlar": "Tools and materials for aerated concrete"
     },
     "xizmatlar": {
       "xizmatlar": "Services",
       "konsultatsiya": "Product consultation",
-      "montaj": "Gazobloklar installation",
-      "hisoblash": "Calculate quantity and price of gazobloklar"
+      "montaj": "Aerated concrete installation",
+      "hisoblash": "Calculate quantity and price of aerated concrete"
     },
     "sotuvlar": {
       "sotuvlar": "Sales",
@@ -49,12 +50,12 @@
       "manzillar": "Addresses"
     },
     "gazobeton": {
-      "gazobeton": "About gazobeton",
-      "haqida": "Detailed information about gazobeton",
+      "gazobeton": "About aerated concrete",
+      "haqida": "Detailed information about aerated concrete",
       "testlar": "Test results",
       "sertifikat": "Certificates and licenses",
-      "qollanilishi": "Application areas of gazobeton",
-      "qollanma": "User guide for gazobloklar",
+      "qollanilishi": "Application areas of aerated concrete",
+      "qollanma": "User guide for aerated concrete",
       "farqi": "Difference from other materials",
       "faq": "Frequently Asked Questions"
     },
@@ -190,8 +191,8 @@
   "deliveryinfo": {
     "title": "You can select the material and calculate the required amount for your construction, or get assistance from our specialists.",
     "section1title": "Placing an order",
-    "section1text": "Если вам неудобно приехать в наш офис, вы можете самостоятельно оформить заказ через форму на сайте, указав объем продукции и ваши контактные данные. Менеджер обязательно свяжется с вами и отправит счет-фактуру по электронной почте.",
-    "section1text2": "Оплату за товары можно произвести дистанционно, а услуги и блоки будут доставлены непосредственно на строительную площадку. Также вы можете связаться с менеджером нашей компании по следующему адресу: электронная почта — для подробной информации или консультации info@bsgroup.uz.",
+    "section1text": "If visiting our office is inconvenient, you can place an order using the form on our website, specifying the product volume and your contact information. A manager will contact you and send you an invoice via email.",
+    "section1text2": "Payment for goods can be made remotely, and services and components will be delivered directly to the construction site. You can also contact our manager at the following address: email info@bsgroup.uz for more information or consultation.",
     "section2title": "Delivery terms",
     "section2text": "Delivery is available across all cities and regions. Depending on the minimum order quantity, delivery may be free or subject to a contract. Estimated delivery time — typically 1–2 business days.",
     "section3title": "Consultation and estimation",
@@ -247,7 +248,9 @@
     "calculateButton": "CALCULATE",
     "resultTitle": "Result",
     "blockCount": "Required number of blocks:",
-    "volume": "Total volume:"
+    "volume": "Total volume:",
+    "palletCount": "Number of pallets",
+    "thickness": "Area of door and window openings"
   },
   "advantages": {
     "title": "Advantages of aerated concrete",

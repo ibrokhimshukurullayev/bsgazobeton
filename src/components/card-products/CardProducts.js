@@ -10,6 +10,8 @@ import {
 } from "../../context/cartSlice";
 import { useTranslation } from "react-i18next";
 
+import { units } from "../../data/unit";
+
 import { toggleToWishes } from "../../context/wishlistSlice";
 import Link from "next/link";
 import Image from "next/image";
@@ -42,6 +44,13 @@ const CardProducts = ({ el }) => {
     debounceMs: 1000,
   });
 
+  const lang = (localStorage.getItem("language") || "uz_UZ").toLowerCase();
+
+  // el.unit masalan "m3", "bag", "piece" va hokazo
+  const unitData = units[el.unit?.toLowerCase()];
+
+  // Agar topilsa — tanlangan tilni olamiz, bo‘lmasa el.unitni o‘zini chiqaramiz
+  const unitText = unitData ? unitData[lang] || unitData.uz_uz : el.unit;
   const productId = el.productid;
 
   const serverItem = useMemo(
@@ -129,7 +138,7 @@ const CardProducts = ({ el }) => {
             );
           })}
         <h4 className="product__price">
-          {el.price} {el.unit}
+          {el.price} {t("header.priceUnit")}/{unitText}
         </h4>
 
         {!hasQty ? (
@@ -143,7 +152,7 @@ const CardProducts = ({ el }) => {
               <Image src={minus} alt="minus" />
             </button>
             <p className="quantity-value">
-              {uiQty} <span>m³</span>
+              {uiQty} <span>{unitText}</span>
             </p>
             <button className="quantity-btn" onClick={handleInc}>
               <Image src={plus} alt="plus" />

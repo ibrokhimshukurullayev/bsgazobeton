@@ -1,0 +1,18 @@
+export const units = {
+  kg: { uz_uz: "kg", ru_ru: "кг", en_us: "kg" },
+  m: { uz_uz: "m", ru_ru: "м", en_us: "m" },
+  m2: { uz_uz: "m²", ru_ru: "м²", en_us: "m²" },
+  m3: { uz_uz: "m³", ru_ru: "м³", en_us: "m³" },
+  liter: { uz_uz: "litr", ru_ru: "литр", en_us: "liter" },
+  ton: { uz_uz: "tonna", ru_ru: "тонна", en_us: "ton" },
+  bag: { uz_uz: "qop", ru_ru: "мешок", en_us: "bag" },
+  piece: { uz_uz: "dona", ru_ru: "штука", en_us: "piece" },
+  package: { uz_uz: "paket", ru_ru: "пакет", en_us: "package" },
+  set: { uz_uz: "to‘plam", ru_ru: "набор", en_us: "set" },
+  roll: { uz_uz: "rulon", ru_ru: "рулон", en_us: "roll" },
+  block: { uz_uz: "blok", ru_ru: "блок", en_us: "block" },
+  carton: { uz_uz: "karton", ru_ru: "коробка", en_us: "carton" },
+  hour: { uz_uz: "soat", ru_ru: "час", en_us: "hour" },
+  day: { uz_uz: "kun", ru_ru: "день", en_us: "day" },
+  month: { uz_uz: "oy", ru_ru: "месяц", en_us: "month" },
+};

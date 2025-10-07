@@ -7,20 +7,19 @@ import "./services.scss";
 import Image from "next/image";
 
 const Calculator = () => {
-  const [uzunlik, setUzunlik] = useState("");
-  const [balandlik, setBalandlik] = useState("");
-  const [qalinlik, setQalinlik] = useState("50");
+  const [length, setLength] = useState();
+  const [holeOfDoorAndWindowArea, setHoleOfDoorAndWindowArea] = useState(null);
+  const [height, setHeight] = useState("");
+  const [thickness, setThickness] = useState(50);
   const [natija, setNatija] = useState({ dona: 0, hajm: 0, paddon: 0 });
   const [t, i18n] = useTranslation("global");
 
   const handleSubmit = () => {
-    const u = parseFloat(uzunlik);
-    const b = parseFloat(balandlik);
-    const q = parseFloat(qalinlik) / 1000;
+    const thicknessInMeter = thickness / 1000;
 
-    if (!u || !b || !q) return;
+    if (!length || !height || !thicknessInMeter) return;
 
-    const hajm = u * b * q; // umumiy hajm (float)
+    const hajm = (length * height - holeOfDoorAndWindowArea) * thicknessInMeter; // umumiy hajm (float)
     const hajmFixed = hajm.toFixed(2);
 
     const blokHajmi = 0.6 * 0.3 * 0.2;
@@ -41,10 +40,14 @@ const Calculator = () => {
           <div>
             <input
               type="number"
-              value={uzunlik}
-              onChange={(e) => setUzunlik(e.target.value)}
+              placeholder="0"
+              value={length ?? ""} // if null → show empty string
+              onChange={(e) => {
+                const value = e.target.value;
+                setLength(value ? Number(value) : null);
+              }}
             />
-            <span>m</span>
+            <span className="span">m</span>
           </div>
         </div>
 
@@ -53,10 +56,14 @@ const Calculator = () => {
           <div>
             <input
               type="number"
-              value={balandlik}
-              onChange={(e) => setBalandlik(e.target.value)}
+              placeholder="0"
+              value={height ?? ""} // if null → show empty string
+              onChange={(e) => {
+                const value = e.target.value;
+                setHeight(value ? Number(value) : null);
+              }}
             />
-            <span>m</span>
+            <span className="span">m</span>
           </div>
         </div>
 
@@ -64,11 +71,15 @@ const Calculator = () => {
           <label>{t("calculator.thicknessLabel")}</label>
           <div className="select-wrapper">
             <select
-              value={qalinlik}
-              onChange={(e) => setQalinlik(e.target.value)}
+              value={thickness ?? 50} // if null → show 50
+              onChange={(e) => {
+                const value = e.target.value;
+                setThickness(value ? Number(value) : null);
+              }}
             >
               <option value="50">50 mm</option>
               <option value="100">100 mm</option>
+              <option value="125">125 mm</option>
               <option value="150">150 mm</option>
               <option value="200">200 mm</option>
               <option value="250">250 mm</option>
@@ -77,6 +88,22 @@ const Calculator = () => {
               <option value="400">400 mm</option>
             </select>
             <Image src={arrow} alt="arrow" className="custom-arrow" />
+          </div>
+        </div>
+
+        <div className="input-group ">
+          <label>{t("calculator.thickness")} (m²)</label>
+          <div className="selects">
+            <input
+              type="number"
+              placeholder="0"
+              value={holeOfDoorAndWindowArea ?? ""} // if null → show empty string
+              onChange={(e) => {
+                const value = e.target.value;
+                setHoleOfDoorAndWindowArea(value ? Number(value) : null);
+              }}
+            />
+            <span className="spans">m²</span>
           </div>
         </div>
       </div>
@@ -96,7 +123,7 @@ const Calculator = () => {
           {t("calculator.volume")} <strong>{natija.hajm} m³</strong>
         </p>
         <p>
-          Paddonlar soni: <strong>{natija.paddon} dona</strong>
+          {t("calculator.palletCount")}: <strong>{natija.paddon} dona</strong>
         </p>
       </div>
     </div>
