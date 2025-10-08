@@ -8,6 +8,14 @@
     "contact": "Aloqa",
     "priceUnit": "so'm"
   },
+  "units": {
+    "m": "m",
+    "m2": "m²",
+    "m3": "m³",
+    "mm": "mm",
+    "piece": "dona",
+    "pallet": "paddon"
+  },
   "aboutkompany": {
     "title1": "– O‘zbekiston bozorida yuqori sifatli gazobeton mahsulotlarini ishlab chiqaruvchi yetakchi kompaniyalardan biridir. Ishlab chiqarish zavodi Sirdaryo viloyatida joylashgan. Bizning maqsadimiz qurilish industriyasiga innovatsion, ekologik toza va mustahkam qurilish materiallarini taqdim etishdir.",
     "title2": "Bizning tariximiz",

@@ -8,6 +8,14 @@
     "contact": "Contact",
     "priceUnit": "uzs"
   },
+  "units": {
+    "m": "m",
+    "m2": "m²",
+    "m3": "m³",
+    "mm": "mm",
+    "piece": "piece",
+    "pallet": "pallet"
+  },
   "aboutkompany": {
     "title1": "– is one of the leading manufacturers of high-quality aerated concrete products in Uzbekistan. Our production plant is located in the Syrdarya region. Our mission is to provide the construction industry with innovative, eco-friendly, and durable building materials.",
     "title2": "Our history",

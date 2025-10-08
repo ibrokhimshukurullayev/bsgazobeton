@@ -18,13 +18,12 @@ import {
   incCart,
   removeFromCart,
 } from "../../../context/cartSlice";
+import { units } from "../../../data/unit"; // ✅ qo‘shildi
 
 import "./single.scss";
 
-// i18n (frontend) uchun: "uz_Uz" -> "uz"
 const toI18nCode = (lang) => (lang || "uz_Uz").slice(0, 2).toLowerCase();
 
-// backend kalitlari uchun: "uz_Uz" | "uz" -> "uz_uz"
 const resolveLangKey = (lng) => {
   const s = String(lng || "").toLowerCase();
   if (s.startsWith("uz")) return "uz_uz";
@@ -33,13 +32,10 @@ const resolveLangKey = (lng) => {
   return "uz_uz";
 };
 
-// i18n obyektidan qiymatni xavfsiz o‘qish
 const readI18n = (obj, lng) => {
   if (!obj || typeof obj !== "object") return "";
-  const key = resolveLangKey(lng); // masalan "uz_uz"
+  const key = resolveLangKey(lng);
   if (obj[key]) return obj[key];
-
-  // qisqa (uz/ru/en) bo‘lsa
   const short = key.slice(0, 2);
   return (
     obj[short] ||
@@ -66,14 +62,12 @@ const ProductDetail = ({ productId }) => {
     return localStorage.getItem("language") || "uz_Uz";
   });
 
-  // Server cart (agar token bo‘lsa)
   const { data: serverCart } = useGetUserOrdersQuery(undefined, {
     skip: !token,
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });
 
-  // Mahsulotni olish
   const {
     data: product,
     isLoading,
@@ -83,16 +77,13 @@ const ProductDetail = ({ productId }) => {
     skip: !productId,
   });
 
-  // Serverga batch saqlash
   const { saveLater, isSyncing } = useDebouncedCartSaver({
     token,
     debounceMs: 1000,
   });
 
-  // Joriy mahsulot cartdagi yozuvi
   const serverItem = useMemo(() => {
     if (!token) return null;
-    // serverCart tuzilmasi: data yoki list bo‘lishi mumkin — moslashuvchan o‘qiymiz
     const rows =
       serverCart?.data?.list ||
       serverCart?.data ||
@@ -113,7 +104,6 @@ const ProductDetail = ({ productId }) => {
     [localCart, productId]
   );
 
-  // Serverdagi bazaviy qty + bu sessiyada qilgan o‘zgarishlar
   const baseQty = Number(serverItem?.quantity ?? 0);
   const [delta, setDelta] = useState(0);
 
@@ -127,7 +117,6 @@ const ProductDetail = ({ productId }) => {
   const nextState = (prev, next) =>
     next === 0 ? "Delete" : prev === 0 ? "Create" : "Update";
 
-  // Qo‘shish
   const handleAdd = () => {
     if (!token) {
       if (product?.data) dispatch(addToCart(product.data));
@@ -139,7 +128,6 @@ const ProductDetail = ({ productId }) => {
     saveLater(productId, next, nextState(prev, next));
   };
 
-  // +
   const handleInc = () => {
     if (!token) {
       if (product?.data) dispatch(incCart(product.data));
@@ -151,7 +139,6 @@ const ProductDetail = ({ productId }) => {
     saveLater(productId, next, nextState(prev, next));
   };
 
-  // -
   const handleDec = () => {
     if (!token) {
       const cur = Number(localItem?.quantity || 0);
@@ -168,7 +155,6 @@ const ProductDetail = ({ productId }) => {
     saveLater(productId, next, nextState(prev, next));
   };
 
-  // Til o‘zgarganda i18n va refetch
   useEffect(() => {
     const handleLanguageChange = (e) => {
       const newLang = e?.detail || localStorage.getItem("language") || "uz_Uz";
@@ -189,6 +175,13 @@ const ProductDetail = ({ productId }) => {
   if (!product || !product.data) return <p>Mahsulot topilmadi</p>;
 
   const productData = product.data;
+
+  // ✅ UNIT tarjima
+  const langKey = resolveLangKey(language);
+  const unitData = units[productData.unit?.toLowerCase()];
+  const unitText = unitData
+    ? unitData[langKey] || unitData.uz_uz
+    : productData.unit;
 
   return (
     <div>
@@ -219,7 +212,12 @@ const ProductDetail = ({ productId }) => {
 
           <div className="description">
             <h3>{t("products.aboutproducts")}</h3>
-            <p>{productData.description}</p>
+            <div
+              className="product-description"
+              dangerouslySetInnerHTML={{
+                __html: productData.description || "",
+              }}
+            ></div>
             <h4>{t("products.moreprops")}</h4>
             <div className="catalog-button">
               <button>{t("products.downloadcatalog")}</button>
@@ -228,7 +226,11 @@ const ProductDetail = ({ productId }) => {
         </div>
 
         <div className="info-section">
-          <div className="price">{productData.price} UZS/m³</div>
+          {/* ✅ Narxda unit qo‘shildi */}
+          <div className="price">
+            {productData.price} {t("header.priceUnit")}/{unitText}
+          </div>
+
           <h4 className="info-section__title">
             {t("products.technicalprops")}
           </h4>
@@ -249,7 +251,7 @@ const ProductDetail = ({ productId }) => {
                 <Image src={minus} alt="minus" />
               </button>
               <p className="quantity-value">
-                {uiQty} <span>m³</span>
+                {uiQty} <span>{unitText}</span>
               </p>
               <button className="quantity-btn" onClick={handleInc}>
                 <Image src={plus} alt="plus" />

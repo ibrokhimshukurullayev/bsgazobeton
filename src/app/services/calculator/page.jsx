@@ -47,7 +47,7 @@ const Calculator = () => {
                 setLength(value ? Number(value) : null);
               }}
             />
-            <span className="span">m</span>
+            <span className="span">{t("units.m")}</span>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ const Calculator = () => {
                 setHeight(value ? Number(value) : null);
               }}
             />
-            <span className="span">m</span>
+            <span className="span">{t("units.m")}</span>
           </div>
         </div>
 
@@ -77,22 +77,24 @@ const Calculator = () => {
                 setThickness(value ? Number(value) : null);
               }}
             >
-              <option value="50">50 mm</option>
-              <option value="100">100 mm</option>
-              <option value="125">125 mm</option>
-              <option value="150">150 mm</option>
-              <option value="200">200 mm</option>
-              <option value="250">250 mm</option>
-              <option value="300">300 mm</option>
-              <option value="350">350 mm</option>
-              <option value="400">400 mm</option>
+              <option value="50">50 {t("units.mm")}</option>
+              <option value="100">100 {t("units.mm")}</option>
+              <option value="125">125 {t("units.mm")}</option>
+              <option value="150">150 {t("units.mm")}</option>
+              <option value="200">200 {t("units.mm")}</option>
+              <option value="250">250 {t("units.mm")}</option>
+              <option value="300">300 {t("units.mm")}</option>
+              <option value="350">350 {t("units.mm")}</option>
+              <option value="400">400 {t("units.mm")}</option>
             </select>
             <Image src={arrow} alt="arrow" className="custom-arrow" />
           </div>
         </div>
 
         <div className="input-group ">
-          <label>{t("calculator.thickness")} (m²)</label>
+          <label>
+            {t("calculator.thickness")} ({t("units.m2")})
+          </label>
           <div className="selects">
             <input
               type="number"
@@ -103,7 +105,7 @@ const Calculator = () => {
                 setHoleOfDoorAndWindowArea(value ? Number(value) : null);
               }}
             />
-            <span className="spans">m²</span>
+            <span className="spans">{t("units.m2")}</span>
           </div>
         </div>
       </div>
@@ -117,13 +119,22 @@ const Calculator = () => {
       <div className="result">
         <h4>{t("calculator.resultTitle")}</h4>
         <p>
-          {t("calculator.blockCount")} <strong>{natija.dona} dona</strong>
+          {t("calculator.blockCount")}{" "}
+          <strong>
+            {natija.dona} {t("units.piece")}
+          </strong>
         </p>
         <p>
-          {t("calculator.volume")} <strong>{natija.hajm} m³</strong>
+          {t("calculator.volume")}{" "}
+          <strong>
+            {natija.hajm} {t("units.m3")}
+          </strong>
         </p>
         <p>
-          {t("calculator.palletCount")}: <strong>{natija.paddon} dona</strong>
+          {t("calculator.palletCount")}:{" "}
+          <strong>
+            {natija.paddon} {t("units.piece")}
+          </strong>
         </p>
       </div>
     </div>
