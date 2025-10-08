@@ -169,9 +169,9 @@ const CardProducts = ({ el }) => {
             } else if (wishlist.length < 3) {
               // 3tadan kam bo‘lsa qo‘shadi
               dispatch(toggleToWishes(el));
-              toast.success("Mahsulot taqqoslashga qo‘shildi");
+              toast.success(t("compares.added"));
             } else {
-              toast.warn("Faqat 3 ta mahsulotni taqqoslash mumkin!");
+              toast.warn(t("compares.limit"));
             }
           }}
         >

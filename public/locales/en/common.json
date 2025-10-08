@@ -437,5 +437,10 @@
   "technical_data": "Technical data",
   "no_products": "No products available",
   "news": "No news available"
-}
+},
+"compares": {
+    "title": "Add to compare",
+    "added": "Product added to comparison",
+    "limit": "You can only compare 3 products!"
+  }
 }

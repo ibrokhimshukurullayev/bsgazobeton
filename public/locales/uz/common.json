@@ -436,5 +436,10 @@
   "technical_data": "Texnik ma’lumotlar",
   "no_products": "Mahsulotlar mavjud emas",
   "news": "Hozircha yangiliklar yo‘q"
-}
+},
+"compares": {
+    "title": "Taqqoslashga qo‘shish",
+    "added": "Mahsulot taqqoslashga qo‘shildi",
+    "limit": "Faqat 3 ta mahsulotni taqqoslash mumkin!"
+  }
 }
