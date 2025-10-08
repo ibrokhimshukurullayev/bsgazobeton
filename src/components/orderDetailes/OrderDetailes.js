@@ -62,14 +62,16 @@ const OrderDetailes = ({ order, onBack }) => {
                 <h4>{item?.productname}</h4>
               </div>
               <p className="product__text">
-                {(Number(item?.price) || 0).toLocaleString()} UZS/{item?.unit}
+                {(Number(item?.price) || 0).toLocaleString()}{" "}
+                {t("header.priceUnit")}/{item?.unit}
               </p>
               <p className="product__text">
                 {item?.quantity} {item?.unit}
               </p>
             </div>
             <div className="product-price">
-              {(Number(item?.totalprice) || 0).toLocaleString()} UZS
+              {(Number(item?.totalprice) || 0).toLocaleString()}{" "}
+              {t("header.priceUnit")}
             </div>
           </div>
         ))}

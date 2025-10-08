@@ -15,17 +15,17 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { units } from "../../data/unit";
 import "./productPicker.scss";
-
 import product1 from "../../assets/images/product1.svg";
 
-function getName(cat, lang = "uz_uz") {
-  if (!cat) return "";
-  if (typeof cat.name === "string" && cat.name) return cat.name;
+// 🔹 Kategoriya nomini tilga qarab chiqarish
+function getTranslatedName(category, lang = "uz_UZ") {
+  if (!category) return "";
+  if (typeof category.name === "string" && category.name) return category.name;
   return (
-    cat?.name?.[lang] ||
-    cat?.name?.uz_uz ||
-    cat?.name?.ru_ru ||
-    cat?.name?.en_us ||
+    category?.translations?.name?.[lang] ||
+    category?.translations?.name?.uz_UZ ||
+    category?.translations?.name?.ru_RU ||
+    category?.translations?.name?.en_US ||
     ""
   );
 }
@@ -34,16 +34,27 @@ export default function ProductPicker() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.value);
   const wishlist = useSelector((state) => state.wishlist.value);
-  const [t, i18n] = useTranslation("global");
+  const { t, i18n } = useTranslation("global");
 
-  const [language, setLanguage] = useState(
-    typeof window !== "undefined"
-      ? localStorage.getItem("language")?.toLowerCase() || "uz_uz"
-      : "uz_uz"
-  );
+  // ✅ To‘g‘ri til state
+  const [language, setLanguage] = useState(i18n.language.toLowerCase() || "uz");
+
+  // ✅ i18n languageChanged event bilan tinglash
+  useEffect(() => {
+    const handleLangChange = (lng) => setLanguage(lng.toLowerCase());
+    i18n.on("languageChanged", handleLangChange);
+    return () => i18n.off("languageChanged", handleLangChange);
+  }, [i18n]);
+
+  // ✅ i18next tili backend formatiga mos
+  const langMap = {
+    uz: "uz_UZ",
+    ru: "ru_RU",
+    en: "en_US",
+  };
+  const lang = langMap[language] || "uz_UZ";
 
   const [selectedRoot, setSelectedRoot] = useState("");
-
   const { data: catRes } = useGetCategoryQuery({ skip: 0, take: 1000 });
   const { data: prodRes } = useGetProductQuery({ skip: 0, take: 1000 });
 
@@ -79,6 +90,15 @@ export default function ProductPicker() {
     return map;
   }, [products]);
 
+  // 🔹 Unit tarjimasi
+  function getUnitText(unitKey) {
+    if (!unitKey) return "";
+    const unitData = units[unitKey.toLowerCase()];
+    if (!unitData) return unitKey;
+    return unitData[lang.toLowerCase()] || unitData.uz_uz;
+  }
+
+  // 🔹 Texnik ma'lumotlar
   function renderTechnicalData(prod) {
     if (!prod.technicaldata) return null;
     let tech;
@@ -103,16 +123,9 @@ export default function ProductPicker() {
     return cart.find((item) => item.productid === prod.productid);
   }
 
-  // ✅ Yangi funksiya — birlikni tilga qarab chiqarish
-  function getUnitText(unitKey) {
-    if (!unitKey) return "";
-    const unitData = units[unitKey.toLowerCase()];
-    if (!unitData) return unitKey;
-    return unitData[language] || unitData.uz_uz;
-  }
-
   return (
     <div className="product-picker">
+      {/* 🔹 Root kategoriyalar */}
       <ul className="picker__roots">
         {rootCategories.map((root) => (
           <li
@@ -124,26 +137,27 @@ export default function ProductPicker() {
             }`}
             onClick={() => setSelectedRoot(String(root.productcategoryid))}
           >
-            {root?.imageurl ? (
+            {root?.translations?.imageUrl ? (
               <Image
-                src={`https://api.bsgazobeton.uz${root.imageurl}`}
-                alt={getName(root, language)}
+                src={`https://api.bsgazobeton.uz${root.translations.imageUrl[lang]}`}
+                alt={getTranslatedName(root, lang)}
                 width={80}
                 height={50}
               />
             ) : (
               <Image src={product1} alt="product" width={80} height={50} />
             )}
-            <p>{getName(root, language)}</p>
+            <p>{getTranslatedName(root, lang)}</p>
           </li>
         ))}
       </ul>
 
+      {/* 🔹 Kategoriyalar bo‘yicha mahsulotlar */}
       <div className="picker__body">
         {childCategories.length > 0 ? (
           childCategories.map((child) => (
             <div key={child.productcategoryid} className="picker__category">
-              <h4>{getName(child, language)}</h4>
+              <h4>{getTranslatedName(child, lang)}</h4>
               <div className="picker__products">
                 {(
                   productsByCategory.get(String(child.productcategoryid)) || []
@@ -152,7 +166,6 @@ export default function ProductPicker() {
                   const inWishlist = wishlist.some(
                     (w) => w.productid === prod.productid
                   );
-
                   const unitText = getUnitText(prod.unit);
 
                   return (

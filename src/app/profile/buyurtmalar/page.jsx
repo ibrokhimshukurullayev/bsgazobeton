@@ -126,7 +126,8 @@ export default function Buyurtmalar() {
                     #{order?.ordernumber || order?.orderNumber}
                   </p>
                   <p className="order-total">
-                    {(Number(order?.totalprice) || 0).toLocaleString()} UZS
+                    {(Number(order?.totalprice) || 0).toLocaleString()}{" "}
+                    {t("header.priceUnit")}
                   </p>
                 </div>
 

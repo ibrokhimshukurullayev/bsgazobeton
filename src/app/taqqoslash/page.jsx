@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import "./taqqoslash.scss";
@@ -11,42 +11,84 @@ import ProductPicker from "../../components/ProductPicker/ProductPicker";
 import { toggleToWishes } from "../../context/wishlistSlice";
 import { useTranslation } from "react-i18next";
 
+// ✅ Carddagi kabi funksiya — obyekt ichidan mos tildagi qiymatni olish
+function getName(item, language = "uz_UZ") {
+  if (!item) return "";
+  if (typeof item === "string" && item) return item;
+  const value =
+    (item &&
+      (item[language.toLowerCase()] ||
+        item.uz_uz ||
+        item.ru_ru ||
+        item.en_us)) ||
+    "";
+  return String(value);
+}
+
 export default function ProductComparison() {
   const wishlist = useSelector((state) => state.wishlist.value);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const { t, i18n } = useTranslation("global");
+  const { t } = useTranslation("global");
 
-  // Tilni backend formatiga o‘tkazamiz
-  const langMap = {
-    uz: "uz_uz",
-    ru: "ru_ru",
-    en: "en_us",
-  };
-  const lang = langMap[i18n.language] || "uz_uz";
+  // ✅ Carddagi kabi tilni olish
+  const [language, setLanguage] = useState(() => {
+    return (
+      (typeof window !== "undefined" && localStorage.getItem("language")) ||
+      "uz_UZ"
+    );
+  });
 
-  // Barcha unikal label'larni olish
+  useEffect(() => {
+    const onLang = (e) => {
+      const newLang =
+        (e && e.detail) ||
+        (typeof window !== "undefined" && localStorage.getItem("language")) ||
+        "uz_UZ";
+      setLanguage(newLang);
+    };
+    window.addEventListener("languageChanged", onLang);
+    return () => window.removeEventListener("languageChanged", onLang);
+  }, []);
+
+  // ✅ Barcha unikal label’larni olish
   const allLabels = Array.from(
     new Set(
       wishlist.flatMap(
         (product) =>
-          product.technicaldata?.map((item) => item.key?.[lang]) || []
+          product.technicaldata?.map((item) => getName(item.key, language)) ||
+          []
       )
     )
   );
 
-  // Jadval uchun data
+  // ✅ Jadval uchun data
   const specifications = allLabels.map((label) => ({
     label,
     value1:
-      wishlist[0]?.technicaldata?.find((item) => item.key?.[lang] === label)
-        ?.value?.[lang] || "-",
+      wishlist[0]?.technicaldata?.find(
+        (item) => getName(item.key, language) === label
+      )?.value?.[language.toLowerCase()] ||
+      wishlist[0]?.technicaldata?.find(
+        (item) => getName(item.key, language) === label
+      )?.value?.uz_uz ||
+      "-",
     value2:
-      wishlist[1]?.technicaldata?.find((item) => item.key?.[lang] === label)
-        ?.value?.[lang] || "-",
+      wishlist[1]?.technicaldata?.find(
+        (item) => getName(item.key, language) === label
+      )?.value?.[language.toLowerCase()] ||
+      wishlist[1]?.technicaldata?.find(
+        (item) => getName(item.key, language) === label
+      )?.value?.uz_uz ||
+      "-",
     value3:
-      wishlist[2]?.technicaldata?.find((item) => item.key?.[lang] === label)
-        ?.value?.[lang] || "-",
+      wishlist[2]?.technicaldata?.find(
+        (item) => getName(item.key, language) === label
+      )?.value?.[language.toLowerCase()] ||
+      wishlist[2]?.technicaldata?.find(
+        (item) => getName(item.key, language) === label
+      )?.value?.uz_uz ||
+      "-",
   }));
 
   return (
@@ -74,19 +116,21 @@ export default function ProductComparison() {
                   <div className="product__image__wrapper">
                     <img
                       src={`https://api.bsgazobeton.uz${product?.imageurl}`}
-                      alt={product.name}
+                      alt={getName(product.name, language)}
                       width={130}
                       height={70}
                       className="product__image"
                     />
                   </div>
-                  <div className="product__title">{product.name}</div>
+                  <div className="product__title">
+                    {getName(product.name, language)}
+                  </div>
                   <div className="product__size">
-                    {product.technicaldata?.find(
-                      (item) =>
-                        item.key?.[lang]?.toLowerCase() ===
-                        "o‘lchami, mm".toLowerCase()
-                    )?.value?.[lang] || "-"}
+                    {product.technicaldata?.find((item) =>
+                      getName(item.key, language)
+                        .toLowerCase()
+                        .includes("o‘lchami")
+                    )?.value?.[language.toLowerCase()] || "-"}
                   </div>
                 </div>
               </div>
