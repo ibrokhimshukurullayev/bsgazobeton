@@ -207,7 +207,8 @@
     "section3text": "Mutaxassislarimizdan shaxsan maslahat olishingiz mumkin. Buning uchun siz bizning kompaniya ofisimizga kelishingiz kerak. Savdo bo‘yicha mutaxassislarimiz buyurtmangizni hisoblash va joylashtirishda yordam beradi.",
     "bottomtext": "Agar sizda qo‘shimcha savollar bo‘lsa bizga qo‘ng‘iroq qiling yoki ofisimizga tashrif buyuring.",
     "button1": "BIZ BILAN BOG‘LANISH",
-    "button2": "OFIS MANZILLARI"
+    "button2": "OFIS MANZILLARI",
+    "job": "Hozirda bo‘sh ish o‘rinlari mavjud emas."
   },
   "paymentinfo": {
     "title": "Shartnoma tuzilgandan so‘ng sizga to‘lov uchun hisob-faktura beriladi, uni ikki usulda ham olish mumkin",
@@ -421,6 +422,19 @@
   "verifyCode": "Kod tasdiqlash",
   "verifying": "Tekshirilmoqda...",
   "close": "Yopish"
+},
+"notifications": {
+  "fillAllFields": "Iltimos, barcha maydonlarni to‘ldiring!",
+  "success": "Xabar muvaffaqiyatli yuborildi!",
+  "error": "Xatolik yuz berdi, qayta urinib ko‘ring!"
+},
+"compare":{
+  "add_to_cart": "Savatchaga qo‘shish",
+  "remove_from_cart": "Savatchadan olish",
+  "compare_add": "Taqqoslashga qo‘shish",
+  "compare_remove": "Taqqoslashdan olish",
+  "technical_data": "Texnik ma’lumotlar",
+  "no_products": "Mahsulotlar mavjud emas",
+  "news": "Hozircha yangiliklar yo‘q"
 }
-
 }

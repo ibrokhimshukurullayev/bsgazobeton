@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import "./sotuv.scss";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useCreateContactMutation } from "../../context/contactApi";
@@ -32,16 +31,16 @@ const Joylashuv = () => {
     e.preventDefault();
 
     if (!formData.fullName || !formData.phoneNumber || !formData.message) {
-      toast.error("Iltimos, barcha maydonlarni to‘ldiring!");
+      toast.error(t("notifications.fillAllFields"));
       return;
     }
 
     try {
-      const res = await createContact(formData).unwrap();
-      toast.success("Xabar muvaffaqiyatli yuborildi!");
+      await createContact(formData).unwrap();
+      toast.success(t("notifications.success"));
       setFormData({ fullName: "", phoneNumber: "", message: "" });
     } catch (err) {
-      toast.error("Xatolik yuz berdi, qayta urinib ko‘ring!");
+      toast.error(t("notifications.error"));
       console.error(err);
     }
   };
@@ -125,7 +124,7 @@ const Joylashuv = () => {
           referrerPolicy="no-referrer-when-downgrade"
         />
       </div>
-      <ToastContainer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

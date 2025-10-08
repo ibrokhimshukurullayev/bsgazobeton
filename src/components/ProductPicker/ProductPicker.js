@@ -12,6 +12,8 @@ import {
 } from "../../context/cartSlice";
 import { toggleToWishes } from "../../context/wishlistSlice";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
+import { units } from "../../data/unit";
 import "./productPicker.scss";
 
 import product1 from "../../assets/images/product1.svg";
@@ -32,12 +34,14 @@ export default function ProductPicker() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.value);
   const wishlist = useSelector((state) => state.wishlist.value);
+  const [t, i18n] = useTranslation("global");
 
   const [language, setLanguage] = useState(
     typeof window !== "undefined"
-      ? localStorage.getItem("language") || "uz_uz"
+      ? localStorage.getItem("language")?.toLowerCase() || "uz_uz"
       : "uz_uz"
   );
+
   const [selectedRoot, setSelectedRoot] = useState("");
 
   const { data: catRes } = useGetCategoryQuery({ skip: 0, take: 1000 });
@@ -46,22 +50,17 @@ export default function ProductPicker() {
   const categories = catRes?.data?.list || [];
   const products = prodRes?.data?.list || [];
 
-  console.log(products);
-
-  // Root kategoriyalar
   const rootCategories = useMemo(
     () => categories.filter((c) => !c.parentproductcategoryid),
     [categories]
   );
 
-  // Birinchi rootni default tanlab qo‘yish
   useEffect(() => {
     if (!selectedRoot && rootCategories.length) {
       setSelectedRoot(String(rootCategories[0].productcategoryid));
     }
   }, [rootCategories, selectedRoot]);
 
-  // Child kategoriyalar
   const childCategories = useMemo(
     () =>
       categories.filter(
@@ -70,7 +69,6 @@ export default function ProductPicker() {
     [categories, selectedRoot]
   );
 
-  // Mahsulotlarni categoryId bo‘yicha olish
   const productsByCategory = useMemo(() => {
     const map = new Map();
     for (const p of products) {
@@ -81,7 +79,6 @@ export default function ProductPicker() {
     return map;
   }, [products]);
 
-  // Texnik ma’lumotni faqat 3 ta chiqarish
   function renderTechnicalData(prod) {
     if (!prod.technicaldata) return null;
     let tech;
@@ -104,6 +101,14 @@ export default function ProductPicker() {
 
   function getCartItem(prod) {
     return cart.find((item) => item.productid === prod.productid);
+  }
+
+  // ✅ Yangi funksiya — birlikni tilga qarab chiqarish
+  function getUnitText(unitKey) {
+    if (!unitKey) return "";
+    const unitData = units[unitKey.toLowerCase()];
+    if (!unitData) return unitKey;
+    return unitData[language] || unitData.uz_uz;
   }
 
   return (
@@ -134,7 +139,6 @@ export default function ProductPicker() {
         ))}
       </ul>
 
-      {/* Child kategoriyalar va mahsulotlar */}
       <div className="picker__body">
         {childCategories.length > 0 ? (
           childCategories.map((child) => (
@@ -148,6 +152,9 @@ export default function ProductPicker() {
                   const inWishlist = wishlist.some(
                     (w) => w.productid === prod.productid
                   );
+
+                  const unitText = getUnitText(prod.unit);
+
                   return (
                     <div key={prod.productid} className="product-card">
                       <Image
@@ -158,18 +165,18 @@ export default function ProductPicker() {
                       />
                       <h3 className="product-title">{prod.name}</h3>
                       <p className="product-price">
-                        {prod.price} UZS/m<sup>3</sup>
+                        {prod.price} UZS / {unitText}
                       </p>
+
                       {renderTechnicalData(prod)}
 
                       <div className="card-actions">
-                        {/* Savat */}
                         {!cartItem ? (
                           <button
                             className="btn-cart"
                             onClick={() => dispatch(addToCart(prod))}
                           >
-                            Savatchaga qo‘shish
+                            {t("products.addcards")}
                           </button>
                         ) : (
                           <div className="quantity-control">
@@ -183,7 +190,9 @@ export default function ProductPicker() {
                             >
                               -
                             </button>
-                            <span>{cartItem.quantity} m³</span>
+                            <span>
+                              {cartItem.quantity} {unitText}
+                            </span>
                             <button
                               className="quantity-btn"
                               onClick={() => dispatch(incCart(prod))}
@@ -193,7 +202,6 @@ export default function ProductPicker() {
                           </div>
                         )}
 
-                        {/* Taqqoslash */}
                         <button
                           className={`btn-compare ${
                             inWishlist ? "active" : ""
@@ -201,8 +209,8 @@ export default function ProductPicker() {
                           onClick={() => dispatch(toggleToWishes(prod))}
                         >
                           {inWishlist
-                            ? "Taqqoslashdan olish"
-                            : "Taqqoslashga qo‘shish"}
+                            ? t("products.removecompare")
+                            : t("products.addcompare")}
                         </button>
                       </div>
                     </div>
@@ -219,6 +227,8 @@ export default function ProductPicker() {
                 const inWishlist = wishlist.some(
                   (w) => w.productid === prod.productid
                 );
+                const unitText = getUnitText(prod.unit);
+
                 return (
                   <div key={prod.productid} className="product-card">
                     <Image
@@ -229,18 +239,18 @@ export default function ProductPicker() {
                     />
                     <h3 className="product-title">{prod.name}</h3>
                     <p className="product-price">
-                      {prod.price} UZS/m<sup>3</sup>
+                      {prod.price} {t("header.priceUnit")}/{unitText}
                     </p>
+
                     {renderTechnicalData(prod)}
 
                     <div className="card-actions">
-                      {/* Savat */}
                       {!cartItem ? (
                         <button
                           className="btn-cart"
                           onClick={() => dispatch(addToCart(prod))}
                         >
-                          Savatchaga qo‘shish
+                          {t("products.addcards")}
                         </button>
                       ) : (
                         <div className="quantity-control">
@@ -254,7 +264,9 @@ export default function ProductPicker() {
                           >
                             -
                           </button>
-                          <span>{cartItem.quantity} m³</span>
+                          <span>
+                            {cartItem.quantity} {unitText}
+                          </span>
                           <button
                             className="quantity-btn"
                             onClick={() => dispatch(incCart(prod))}
@@ -264,14 +276,13 @@ export default function ProductPicker() {
                         </div>
                       )}
 
-                      {/* Taqqoslash */}
                       <button
                         className={`btn-compare ${inWishlist ? "active" : ""}`}
                         onClick={() => dispatch(toggleToWishes(prod))}
                       >
                         {inWishlist
-                          ? "Taqqoslashdan olish"
-                          : "Taqqoslashga qo‘shish"}
+                          ? t("products.removecompare")
+                          : t("products.addcompare")}
                       </button>
                     </div>
                   </div>

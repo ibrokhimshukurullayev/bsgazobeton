@@ -5,6 +5,7 @@ import { useGetVakansiyalarQuery } from "../../../context/vakansiyaApi";
 import { useRouter } from "next/navigation";
 import "./vakansiyalar.scss";
 import Loading from "../../../components/loading/Loading";
+import { useTranslation } from "react-i18next";
 
 const Vakansiyalar = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const Vakansiyalar = () => {
   });
 
   const [activeIndex, setActiveIndex] = useState(null);
+  const { t, i18n } = useTranslation("global");
 
   useEffect(() => {
     if (data?.data?.list?.length > 0) {
@@ -42,9 +44,7 @@ const Vakansiyalar = () => {
   return (
     <div className="vakansiyalar">
       {vakansiyalar.length === 0 ? (
-        <p className="vakansiyalar__empty">
-          Hozirda bo‘sh ish o‘rinlari mavjud emas
-        </p>
+        <p className="vakansiyalar__empty">{t("deliveryinfo.job")}</p>
       ) : (
         vakansiyalar.map((item, index) => (
           <div className="vakansiya" key={item.vacancyId}>
@@ -67,7 +67,7 @@ const Vakansiyalar = () => {
                   }}
                 />
                 <button onClick={handleButtonClick} className="vakansiya__btn">
-                  BIZ BILAN BOG‘LANISH
+                  {t("deliveryinfo.button1")}
                 </button>
               </div>
             )}

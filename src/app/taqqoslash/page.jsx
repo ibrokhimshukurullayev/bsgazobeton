@@ -75,8 +75,8 @@ export default function ProductComparison() {
                     <img
                       src={`https://api.bsgazobeton.uz${product?.imageurl}`}
                       alt={product.name}
-                      width={100}
-                      height={60}
+                      width={130}
+                      height={70}
                       className="product__image"
                     />
                   </div>

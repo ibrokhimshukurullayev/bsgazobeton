@@ -41,7 +41,7 @@ const WhyChooseUs = () => {
 
   return (
     <section className="why-choose-us">
-      <h2>Nima uchun bizni tanlashadi?</h2>
+      <h2>{t("aboutkompany.title8")}</h2>
       <div className="features">
         {features.map((item, index) => (
           <div className="feature" key={index}>

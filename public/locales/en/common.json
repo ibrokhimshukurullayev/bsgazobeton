@@ -188,14 +188,14 @@
     "title": "© 2023–2025 “BS Gazobeton” — Manufacturer of construction materials and accessories"
   },
   "cantact": {
-    "title1": "CALL NOW!",
-    "formtitle1": "Оставить сообщение",
-    "input1": "Ваше имя*",
-    "input2": "Ваш номер телефона*",
-    "input3": "Текст сообщения...",
-    "button": "Отправить",
-    "formtitle2": "Нажимая кнопку отправки, вы соглашаетесь с политикой конфиденциальности."
-  },
+  "title1": "CALL NOW!",
+  "formtitle1": "Leave a message",
+  "input1": "Your name*",
+  "input2": "Your phone number*",
+  "input3": "Message text...",
+  "button": "Send",
+  "formtitle2": "By clicking the send button, you agree to the privacy policy."
+},
   "deliveryinfo": {
     "title": "You can select the material and calculate the required amount for your construction, or get assistance from our specialists.",
     "section1title": "Placing an order",
@@ -207,7 +207,8 @@
     "section3text": "You can get in-person advice from our specialists. To do so, please visit our company office. Our sales consultants will help you estimate and place your order.",
     "bottomtext": "If you have additional questions, feel free to call us or visit our office.",
     "button1": "CONTACT US",
-    "button2": "OFFICE LOCATIONS"
+    "button2": "OFFICE LOCATIONS",
+    "job": "There are currently no job openings."
   },
   "paymentinfo": {
     "title": "After signing the contract, an invoice will be issued for payment, which can be received in two ways",
@@ -422,6 +423,19 @@
   "verifyCode": "Verify Code",
   "verifying": "Verifying...",
   "close": "Close"
+},
+"notifications": {
+  "fillAllFields": "Please fill in all fields!",
+  "success": "Message sent successfully!",
+  "error": "An error occurred, please try again!"
+},
+"compare":{
+  "add_to_cart": "Add to cart",
+  "remove_from_cart": "Remove from cart",
+  "compare_add": "Add to compare",
+  "compare_remove": "Remove from compare",
+  "technical_data": "Technical data",
+  "no_products": "No products available",
+  "news": "No news available"
 }
-
 }
