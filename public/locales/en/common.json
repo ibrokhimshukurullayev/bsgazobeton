@@ -442,5 +442,19 @@
     "title": "Add to compare",
     "added": "Product added to comparison",
     "limit": "You can only compare 3 products!"
-  }
+  },
+  "toasts": {
+  "profileUpdated": "Profile updated successfully ✅",
+  "profileError": "Profile update failed",
+  "imageTooLarge": "Image size must not exceed 3MB!",
+  "passwordMismatch": "Passwords do not match!",
+  "passwordUpdated": "Password updated ✅",
+  "passwordError": "Password update failed",
+  "codeSent": "Verification code sent 📩",
+  "codeError": "Code not sent",
+  "phoneVerified": "Phone number verified ✅",
+  "wrongCode": "Invalid code",
+  "uploadError": "Image upload failed!"
+}
+
 }

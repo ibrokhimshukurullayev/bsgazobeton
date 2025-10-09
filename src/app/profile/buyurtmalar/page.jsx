@@ -96,7 +96,6 @@ export default function Buyurtmalar() {
     return "uz-UZ";
   }
 
-  // ✅ Agar order tanlangan bo‘lsa faqat detailes chiqadi
   if (selectedOrder) {
     return (
       <OrderDetailes

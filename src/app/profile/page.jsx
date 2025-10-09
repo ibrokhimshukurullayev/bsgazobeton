@@ -2,17 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  useGetUserInfoQuery,
-  useUpdateUserProfileMutation,
-} from "../../context/userApi";
+import { useGetUserInfoQuery } from "../../context/userApi";
 import {
   useChangePasswordMutation,
   useRequestChangePhoneMutation,
   useChangePhoneMutation,
 } from "../../context/authApi";
 import { useTranslation } from "react-i18next";
-
 import "./profile.scss";
 import Loading from "../../components/loading/Loading";
 import { toast, ToastContainer } from "react-toastify";
@@ -26,12 +22,10 @@ export default function ProfilePage() {
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
   useEffect(() => {
-    if (!token) {
-      router.push("/login");
-    }
-  }, [token]);
+    if (!token) router.push("/login");
+  }, [token, router]);
 
-  const { data, isLoading, error } = useGetUserInfoQuery(undefined, {
+  const { data, isLoading, error, refetch } = useGetUserInfoQuery(undefined, {
     skip: !token,
   });
 
@@ -41,7 +35,8 @@ export default function ProfilePage() {
     firstname: "",
     lastname: "",
     phonenumber: "",
-    avatar: null,
+    avatar: null, // yangi yuklangan fayl
+    profileImageUrl: null, // hozirgi rasm yoki preview
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -52,9 +47,6 @@ export default function ProfilePage() {
   const [verifyModal, setVerifyModal] = useState(false);
   const [otpCode, setOtpCode] = useState("");
 
-  // Mutations
-  const [updateProfile, { isLoading: updatingProfile }] =
-    useUpdateUserProfileMutation();
   const [changePassword, { isLoading: updatingPassword }] =
     useChangePasswordMutation();
   const [requestPhoneChange, { isLoading: requestingPhone }] =
@@ -62,6 +54,7 @@ export default function ProfilePage() {
   const [verifyPhoneChange, { isLoading: verifyingPhone }] =
     useChangePhoneMutation();
 
+  // ✅ Backenddan foydalanuvchi ma'lumotlarini olish
   useEffect(() => {
     if (user) {
       setFormData((prev) => ({
@@ -69,7 +62,13 @@ export default function ProfilePage() {
         firstname: user.firstname || "",
         lastname: user.lastname || "",
         phonenumber: user.phonenumber || "",
+        avatar: null,
+        profileImageUrl: user.profileimageurl || null, // ✅ to‘g‘ridan backenddagi nom
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
       }));
+      setIsChanged(false);
     }
   }, [user]);
 
@@ -77,34 +76,100 @@ export default function ProfilePage() {
   if (isLoading) return <Loading />;
   if (error) return <div>Xatolik yuz berdi</div>;
 
-  // Input change
+  // Input o‘zgarishi
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setIsChanged(true);
+  };
+
+  // ✅ Rasm tanlanganda darhol preview
+  const handleImageChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 3 * 1024 * 1024) {
+      toast.error(t("toasts.imageTooLarge"));
+      return;
+    }
+
+    const previewUrl = URL.createObjectURL(file);
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      avatar: file,
+      profileImageUrl: previewUrl,
     }));
     setIsChanged(true);
   };
 
-  // Profil yangilash
+  const handleRemoveImage = () => {
+    setFormData((prev) => ({
+      ...prev,
+      avatar: null,
+      profileImageUrl: user?.profileimageurl || null,
+    }));
+    setIsChanged(true);
+  };
+
+  // ✅ Saqlash: rasm bo‘lsa upload → so‘ng PUT profil yangilash
   const handleSave = async () => {
     try {
-      await updateProfile({
-        firstName: formData.firstname,
-        lastName: formData.lastname,
-      }).unwrap();
-      toast.success("Profil yangilandi ✅");
-      setIsChanged(false);
+      let uploadedImageUrl = user?.profileimageurl || null;
+
+      // Fayl yuklangan bo‘lsa upload qilamiz
+      if (formData.avatar) {
+        const form = new FormData();
+        form.append("File", formData.avatar);
+
+        const uploadResponse = await fetch(
+          "https://api.bsgazobeton.uz/api/upload/file",
+          { method: "POST", body: form }
+        );
+
+        if (!uploadResponse.ok) throw new Error(t("toasts.uploadError"));
+        const uploadData = await uploadResponse.json();
+
+        uploadedImageUrl = uploadData?.data
+          ? `https://api.bsgazobeton.uz${uploadData.data}`
+          : null;
+
+        if (!uploadedImageUrl) throw new Error("Yuklangan rasm URL topilmadi!");
+      }
+
+      // 🔹 Profilni yangilash
+      const response = await fetch(
+        "https://api.bsgazobeton.uz/api/users/profile",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            firstName: formData.firstname,
+            lastName: formData.lastname,
+            profileImageUrl: uploadedImageUrl,
+          }),
+        }
+      );
+
+      if (!response.ok) throw new Error(t("toasts.passwordError"));
+
+      toast.success(t("toasts.profileUpdated"));
+      setFormData((prev) => ({ ...prev, avatar: null }));
+      refetch(); // yangilangan ma'lumotni qayta olish
     } catch (err) {
-      toast.error("Xatolik: " + (err?.data?.message || "Profil yangilanmadi"));
+      toast.error(
+        "Xatolik: " +
+          (err?.data?.message || err.message || t("toasts.passwordError"))
+      );
     }
   };
 
-  // Parol yangilash
+  // Parolni yangilash
   const handlePasswordUpdate = async () => {
     if (formData.newPassword !== formData.confirmPassword) {
-      toast.error("Parollar mos emas!");
+      toast.error(t("toasts.passwordMismatch"));
       return;
     }
     try {
@@ -113,7 +178,7 @@ export default function ProfilePage() {
         newPassword: formData.newPassword,
         confirmPassword: formData.confirmPassword,
       }).unwrap();
-      toast.success("Parol yangilandi ✅");
+      toast.success(t("toasts.passwordUpdated"));
       setShowPasswordFields(false);
       setFormData((prev) => ({
         ...prev,
@@ -122,15 +187,17 @@ export default function ProfilePage() {
         confirmPassword: "",
       }));
     } catch (err) {
-      toast.error("Xatolik: " + (err?.data?.message || "Parol yangilanmadi"));
+      toast.error(
+        "Xatolik: " + (err?.data?.message || t("toasts.passwordError"))
+      );
     }
   };
 
-  // Telefon raqamga kod yuborish (request-change-phone)
+  // Telefon raqam o‘zgartirish
   const handleRequestPhoneChange = async () => {
     try {
       await requestPhoneChange({
-        newPhoneNumber: formData.phonenumber.replace("+", ""), // ✅ plus belgisisiz yuboramiz
+        newPhoneNumber: formData.phonenumber.replace("+", ""),
       }).unwrap();
       toast.info("Tasdiqlash kodi yuborildi 📩");
       setVerifyModal(true);
@@ -139,12 +206,12 @@ export default function ProfilePage() {
     }
   };
 
-  // Telefon raqamni tasdiqlash (change-phone)
+  // Kodni tasdiqlash
   const handleVerifyCode = async () => {
     try {
       await verifyPhoneChange({
-        newPhoneNumber: formData.phonenumber.replace("+", ""), // ✅
-        code: otpCode, // SMS orqali kelgan kod
+        newPhoneNumber: formData.phonenumber.replace("+", ""),
+        code: otpCode,
       }).unwrap();
       toast.success("Telefon raqam tasdiqlandi ✅");
       setVerifyModal(false);
@@ -161,44 +228,48 @@ export default function ProfilePage() {
       <p className="subtitle">{t("profiles.subtitle")}</p>
 
       <div className="profile-card">
+        {/* ✅ Avatar */}
         <div className="profile__avatar__section">
           <div className="profile-avatar">
             {formData.avatar ? (
               <img src={URL.createObjectURL(formData.avatar)} alt="avatar" />
+            ) : formData.profileImageUrl ? (
+              <img
+                src={
+                  formData.profileImageUrl.startsWith("http")
+                    ? formData.profileImageUrl
+                    : `https://api.bsgazobeton.uz${formData.profileImageUrl}`
+                }
+                alt="avatar"
+              />
             ) : (
-              <span>{formData.firstname[0]}</span>
+              <span>{formData.firstname?.[0]?.toUpperCase() || "?"}</span>
             )}
           </div>
+
           <div className="avatar-actions">
             <input
               type="file"
               id="avatarUpload"
               hidden
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  avatar: e.target.files[0],
-                }))
-              }
+              accept="image/*"
+              onChange={handleImageChange}
             />
             <label htmlFor="avatarUpload" className="upload-btn">
               {t("profiles.uploadPhoto")}
             </label>
-            {formData.avatar && (
-              <button
-                className="remove-btn"
-                onClick={() =>
-                  setFormData((prev) => ({ ...prev, avatar: null }))
-                }
-              >
+
+            {(formData.avatar || formData.profileImageUrl) && (
+              <button className="remove-btn" onClick={handleRemoveImage}>
                 {t("profiles.removePhoto")}
               </button>
             )}
           </div>
         </div>
+
         <small>{t("profiles.recommended")}</small>
 
-        {/* Full Name */}
+        {/* Ism familiya */}
         <div className="profile__forms">
           <div className="profile__forms__left">
             <label>{t("profiles.firstName")}</label>
@@ -219,16 +290,17 @@ export default function ProfilePage() {
               onChange={handleChange}
             />
           </div>
+
           <button
             className="save-btn"
-            disabled={!isChanged || updatingProfile}
+            disabled={!isChanged}
             onClick={handleSave}
           >
-            {updatingProfile ? t("profiles.saving") : t("profiles.saveChanges")}
+            {t("profiles.saveChanges")}
           </button>
         </div>
 
-        {/* Phone */}
+        {/* Telefon */}
         <div className="profile-form">
           <label>{t("profiles.phoneNumber")}</label>
           <div className="phone-input">
@@ -251,7 +323,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Password */}
+        {/* Parol o‘zgarishi */}
         <div className="profile-form">
           {!showPasswordFields ? (
             <div className="password__change">
@@ -314,6 +386,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      {/* Tasdiqlash oynasi */}
       {verifyModal && (
         <div className="verify-modal">
           <div className="modal-content">

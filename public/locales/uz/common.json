@@ -441,5 +441,18 @@
     "title": "Taqqoslashga qo‘shish",
     "added": "Mahsulot taqqoslashga qo‘shildi",
     "limit": "Faqat 3 ta mahsulotni taqqoslash mumkin!"
-  }
+  },
+  "toasts": {
+  "profileUpdated": "Profil muvaffaqiyatli yangilandi ✅",
+  "profileError": "Profil yangilanmadi",
+  "imageTooLarge": "Rasm hajmi 3MB dan oshmasligi kerak!",
+  "passwordMismatch": "Parollar mos emas!",
+  "passwordUpdated": "Parol yangilandi ✅",
+  "passwordError": "Parol yangilanmadi",
+  "codeSent": "Tasdiqlash kodi yuborildi 📩",
+  "codeError": "Kod yuborilmadi",
+  "phoneVerified": "Telefon raqam tasdiqlandi ✅",
+  "wrongCode": "Kod xato",
+  "uploadError": "Rasm yuklanmadi!"
+}
 }

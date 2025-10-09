@@ -30,23 +30,41 @@ function getTranslatedName(category, lang = "uz_UZ") {
   );
 }
 
+// 🔹 Unit tarjimasi — CardProducts bilan bir xil
+function getUnitText(unitKey, lang = "uz_UZ") {
+  if (!unitKey) return "";
+  const unitData = units[unitKey.toLowerCase()];
+  if (!unitData) return unitKey;
+  return unitData[lang.toLowerCase()] || unitData.uz_uz;
+}
+
 export default function ProductPicker() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.value);
   const wishlist = useSelector((state) => state.wishlist.value);
   const { t, i18n } = useTranslation("global");
 
-  // ✅ To‘g‘ri til state
-  const [language, setLanguage] = useState(i18n.language.toLowerCase() || "uz");
+  // ✅ To‘g‘ri til holatini saqlash
+  const [language, setLanguage] = useState(
+    typeof window !== "undefined"
+      ? localStorage.getItem("language")?.toLowerCase() ||
+          i18n.language.toLowerCase() ||
+          "uz"
+      : "uz"
+  );
 
-  // ✅ i18n languageChanged event bilan tinglash
+  // ✅ Til o‘zgarsa avtomatik yangilanishi uchun listener
   useEffect(() => {
-    const handleLangChange = (lng) => setLanguage(lng.toLowerCase());
+    const handleLangChange = (lng) => {
+      const lower = lng.toLowerCase();
+      localStorage.setItem("language", lower);
+      setLanguage(lower);
+    };
+
     i18n.on("languageChanged", handleLangChange);
     return () => i18n.off("languageChanged", handleLangChange);
   }, [i18n]);
 
-  // ✅ i18next tili backend formatiga mos
   const langMap = {
     uz: "uz_UZ",
     ru: "ru_RU",
@@ -90,15 +108,7 @@ export default function ProductPicker() {
     return map;
   }, [products]);
 
-  // 🔹 Unit tarjimasi
-  function getUnitText(unitKey) {
-    if (!unitKey) return "";
-    const unitData = units[unitKey.toLowerCase()];
-    if (!unitData) return unitKey;
-    return unitData[lang.toLowerCase()] || unitData.uz_uz;
-  }
-
-  // 🔹 Texnik ma'lumotlar
+  // 🔹 Texnik ma'lumotlar (3tasi)
   function renderTechnicalData(prod) {
     if (!prod.technicaldata) return null;
     let tech;
@@ -166,7 +176,7 @@ export default function ProductPicker() {
                   const inWishlist = wishlist.some(
                     (w) => w.productid === prod.productid
                   );
-                  const unitText = getUnitText(prod.unit);
+                  const unitText = getUnitText(prod.unit, lang);
 
                   return (
                     <div key={prod.productid} className="product-card">
@@ -178,7 +188,7 @@ export default function ProductPicker() {
                       />
                       <h3 className="product-title">{prod.name}</h3>
                       <p className="product-price">
-                        {prod.price} UZS / {unitText}
+                        {prod.price} {t("header.priceUnit")} / {unitText}
                       </p>
 
                       {renderTechnicalData(prod)}
@@ -233,6 +243,7 @@ export default function ProductPicker() {
             </div>
           ))
         ) : (
+          // 🔹 Faqat bitta root kategoriyada mahsulotlar
           <div className="picker__products">
             {(productsByCategory.get(String(selectedRoot)) || []).map(
               (prod) => {
@@ -240,7 +251,7 @@ export default function ProductPicker() {
                 const inWishlist = wishlist.some(
                   (w) => w.productid === prod.productid
                 );
-                const unitText = getUnitText(prod.unit);
+                const unitText = getUnitText(prod.unit, lang);
 
                 return (
                   <div key={prod.productid} className="product-card">
@@ -252,7 +263,7 @@ export default function ProductPicker() {
                     />
                     <h3 className="product-title">{prod.name}</h3>
                     <p className="product-price">
-                      {prod.price} {t("header.priceUnit")}/{unitText}
+                      {prod.price} {t("header.priceUnit")} / {unitText}
                     </p>
 
                     {renderTechnicalData(prod)}
