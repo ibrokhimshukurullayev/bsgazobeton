@@ -30,12 +30,11 @@ function getTranslatedName(category, lang = "uz_UZ") {
   );
 }
 
-// 🔹 Unit tarjimasi — CardProducts bilan bir xil
+// 🔹 Unit tarjimasi (har doim 3 tilda ishlaydi)
 function getUnitText(unitKey, lang = "uz_UZ") {
   if (!unitKey) return "";
-  const unitData = units[unitKey.toLowerCase()];
-  if (!unitData) return unitKey;
-  return unitData[lang.toLowerCase()] || unitData.uz_uz;
+  const unitData = units[unitKey?.toLowerCase()];
+  return unitData ? unitData[lang.toLowerCase()] || unitData.uz_uz : unitKey;
 }
 
 export default function ProductPicker() {
@@ -44,31 +43,37 @@ export default function ProductPicker() {
   const wishlist = useSelector((state) => state.wishlist.value);
   const { t, i18n } = useTranslation("global");
 
-  // ✅ To‘g‘ri til holatini saqlash
+  // 🔹 Hozirgi tilni kuzatish uchun state
   const [language, setLanguage] = useState(
     typeof window !== "undefined"
-      ? localStorage.getItem("language")?.toLowerCase() ||
-          i18n.language.toLowerCase() ||
-          "uz"
-      : "uz"
+      ? (
+          localStorage.getItem("language") ||
+          i18n.language ||
+          "uz_UZ"
+        ).toLowerCase()
+      : "uz_uz"
   );
 
-  // ✅ Til o‘zgarsa avtomatik yangilanishi uchun listener
+  // 🔹 i18n tili o‘zgarsa — avtomatik yangilanish
   useEffect(() => {
     const handleLangChange = (lng) => {
-      const lower = lng.toLowerCase();
-      localStorage.setItem("language", lower);
-      setLanguage(lower);
+      const newLang = lng?.toLowerCase() || "uz_uz";
+      localStorage.setItem("language", newLang);
+      setLanguage(newLang);
     };
 
     i18n.on("languageChanged", handleLangChange);
     return () => i18n.off("languageChanged", handleLangChange);
   }, [i18n]);
 
+  // 🔹 i18n til kodini bizning JSON formatga moslashtiramiz
   const langMap = {
     uz: "uz_UZ",
     ru: "ru_RU",
     en: "en_US",
+    uz_uz: "uz_UZ",
+    ru_ru: "ru_RU",
+    en_us: "en_US",
   };
   const lang = langMap[language] || "uz_UZ";
 
@@ -147,9 +152,9 @@ export default function ProductPicker() {
             }`}
             onClick={() => setSelectedRoot(String(root.productcategoryid))}
           >
-            {root?.translations?.imageUrl ? (
+            {root?.imageurl ? (
               <Image
-                src={`https://api.bsgazobeton.uz${root.translations.imageUrl[lang]}`}
+                src={`https://api.bsgazobeton.uz${root.imageurl}`}
                 alt={getTranslatedName(root, lang)}
                 width={80}
                 height={50}
@@ -176,7 +181,7 @@ export default function ProductPicker() {
                   const inWishlist = wishlist.some(
                     (w) => w.productid === prod.productid
                   );
-                  const unitText = getUnitText(prod.unit, lang);
+                  const unitText = getUnitText(prod.unit, lang); // ✅ endi to‘g‘ri yangilanadi
 
                   return (
                     <div key={prod.productid} className="product-card">
@@ -243,7 +248,6 @@ export default function ProductPicker() {
             </div>
           ))
         ) : (
-          // 🔹 Faqat bitta root kategoriyada mahsulotlar
           <div className="picker__products">
             {(productsByCategory.get(String(selectedRoot)) || []).map(
               (prod) => {
@@ -251,7 +255,7 @@ export default function ProductPicker() {
                 const inWishlist = wishlist.some(
                   (w) => w.productid === prod.productid
                 );
-                const unitText = getUnitText(prod.unit, lang);
+                const unitText = getUnitText(prod.unit, lang); // ✅ hamma joyda bir xil ishlaydi
 
                 return (
                   <div key={prod.productid} className="product-card">

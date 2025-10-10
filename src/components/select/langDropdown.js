@@ -20,7 +20,6 @@ export default function LangDropdown() {
   const [open, setOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState("");
 
-  // Sahifa yuklanganda localStorage dan tilni set qilish
   useEffect(() => {
     const storedLang = localStorage.getItem("language") || "uz_Uz";
     i18n.changeLanguage(storedLang);
