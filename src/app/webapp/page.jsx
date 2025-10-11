@@ -1,60 +1,61 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Home from "./home/page"; // Home komponenting shu yerdan import qilinadi
 
-export default function TelegramWebAppPage() {
-  const [initData, setInitData] = useState("");
-  const [requestBody, setRequestBody] = useState("");
-  const [responseData, setResponseData] = useState("");
-  const [error, setError] = useState("");
+export default function TelegramWebAppLogin() {
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-web-app.js";
     script.async = true;
+
     script.onload = async () => {
       try {
         const tg = window.Telegram?.WebApp;
         if (!tg) {
-          setError("Telegram WebApp mavjud emas!");
-          setLoading(false);
-          return;
-        }
-
-        tg.expand();
-        const data = tg.initData;
-
-        if (!data) {
-          setError(
-            "initData topilmadi (Telegram ichidan ochilmagan bo'lishi mumkin)"
+          console.warn(
+            "Telegram WebApp topilmadi, odatiy holatda ishga tushadi"
           );
           setLoading(false);
           return;
         }
 
-        // initData ni ekranda ko‘rsatish uchun saqlaymiz
-        setInitData(data);
+        tg.expand();
+        const initData = tg.initData;
 
-        // Body tayyorlaymiz
-        const body = JSON.stringify({ initData: data }, null, 2);
-        setRequestBody(body);
+        if (!initData) {
+          console.warn(
+            "initData topilmadi — Telegram ichida ochilmagan bo'lishi mumkin"
+          );
+          setLoading(false);
+          return;
+        }
 
-        // Fetch yuboramiz
+        // Telegram initData orqali login qilish
         const res = await fetch(
-          "http://api.bsgazobeton.uz/api/identity/telegram/login",
+          "https://api.bsgazobeton.uz/api/identity/telegram/login",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body,
+            body: JSON.stringify({ initData }),
           }
         );
 
         const json = await res.json();
-        setResponseData(JSON.stringify(json, null, 2));
+
+        if (json?.data?.token || json?.token) {
+          const token = json.data?.token || json.token;
+          localStorage.setItem("token", token);
+          console.log("Telegram token saqlandi ✅");
+        } else {
+          console.warn("Token topilmadi ❌", json);
+        }
       } catch (err) {
-        console.error(err);
-        setError(err.message || "Xatolik yuz berdi");
+        console.error("Xato:", err);
       } finally {
         setLoading(false);
       }
@@ -65,71 +66,24 @@ export default function TelegramWebAppPage() {
     return () => {
       if (script && script.parentNode) script.parentNode.removeChild(script);
     };
-  }, []);
+  }, [router]);
 
-  return (
-    <div style={{ padding: 20, fontFamily: "monospace" }}>
-      <h2> Telegram WebApp Debug</h2>
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          fontSize: "18px",
+        }}
+      >
+        Yuklanmoqda...
+      </div>
+    );
+  }
 
-      {loading && <p> Yuklanmoqda...</p>}
-
-      {error && (
-        <p style={{ color: "red", whiteSpace: "pre-wrap" }}> Xato: {error}</p>
-      )}
-
-      {initData && (
-        <>
-          <h3>
-            Telegramdan olingan <code>initData</code>:
-          </h3>
-          <pre
-            style={{
-              background: "#f5f5f5",
-              padding: "10px",
-              borderRadius: "6px",
-              wordBreak: "break-all",
-              whiteSpace: "pre-wrap",
-              overflowX: "auto",
-            }}
-          >
-            {initData}
-          </pre>
-        </>
-      )}
-
-      {requestBody && (
-        <>
-          <h3>Bekendga yuborilgan body:</h3>
-          <pre
-            style={{
-              background: "#eef7ff",
-              padding: "10px",
-              borderRadius: "6px",
-              whiteSpace: "pre-wrap",
-              overflowX: "auto",
-            }}
-          >
-            {requestBody}
-          </pre>
-        </>
-      )}
-
-      {responseData && (
-        <>
-          <h3>Bekendan kelgan javob:</h3>
-          <pre
-            style={{
-              background: "#e8ffe8",
-              padding: "10px",
-              borderRadius: "6px",
-              whiteSpace: "pre-wrap",
-              overflowX: "auto",
-            }}
-          >
-            {responseData}
-          </pre>
-        </>
-      )}
-    </div>
-  );
+  // ✅ Telegram orqali login tugagach, Home sahifani render qilamiz
+  return <Home />;
 }
