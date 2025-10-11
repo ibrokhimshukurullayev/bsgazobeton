@@ -15,11 +15,16 @@ export default function RootLayout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
 
+  // /webapp ichida bo‘lsa header/footer ko‘rsatilmasin
+  const isWebApp = pathname?.startsWith("/webapp");
+
   useEffect(() => {
     let mounted = true;
     setIsLoading(true);
 
-    const id = setTimeout(() => mounted && setIsLoading(false), 350);
+    const id = setTimeout(() => {
+      if (mounted) setIsLoading(false);
+    }, 350);
 
     return () => {
       mounted = false;
@@ -32,9 +37,9 @@ export default function RootLayout({ children }) {
       <body>
         <Provider store={store}>
           <I18nextProvider i18n={i18n}>
-            <Header />
+            {!isWebApp && <Header />}
             {isLoading ? <Loading /> : children}
-            <Footer />
+            {!isWebApp && <Footer />}
           </I18nextProvider>
         </Provider>
       </body>

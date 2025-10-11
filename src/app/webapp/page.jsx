@@ -3,56 +3,71 @@
 import { useEffect, useState } from "react";
 
 export default function TelegramWebAppPage() {
-  const [user, setUser] = useState(null);
+  const [initData, setInitData] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    // Telegram skriptini yuklash
+    // Telegram WebApp scriptini yuklaymiz
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-web-app.js";
     script.async = true;
     script.onload = () => {
-      const tg = window.Telegram.WebApp;
-      tg.expand();
+      try {
+        const tg = window.Telegram?.WebApp;
+        if (!tg) {
+          setError("Telegram WebApp mavjud emas!");
+          return;
+        }
 
-      // Telegramdan foydalanuvchi ma'lumotlarini olish
-      const initData = tg.initData;
-      const initDataUnsafe = tg.initDataUnsafe;
+        tg.expand(); // Ekranni to‘liq ochish
+        const data = tg.initData;
 
-      console.log("Telegram foydalanuvchi:", initDataUnsafe);
-
-      if (!initData) {
-        console.error("initData bo'sh, Telegram WebApp ichidan ochilmagan!");
-        return;
+        if (!data) {
+          setError(
+            "initData topilmadi (Telegram ichidan ochilmagan bo‘lishi mumkin)"
+          );
+        } else {
+          console.log("initData:", data);
+          setInitData(data);
+        }
+      } catch (err) {
+        console.error(err);
+        setError("Xatolik yuz berdi!");
       }
-
-      fetch("http://api.bsgazobeton.uz/api/identity/telegram/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ initData }),
-      })
-        .then((r) => r.json())
-        .then((res) => {
-          console.log("Login javobi:", res);
-          setUser(res?.data || res);
-        })
-        .catch((err) => console.error("Auth xatosi:", err));
     };
-
     document.body.appendChild(script);
-  }, []);
 
-  if (!user)
-    return (
-      <div style={{ padding: 20 }}>
-        Telegramdan foydalanuvchi yuklanmoqda...
-      </div>
-    );
+    return () => {
+      if (script && script.parentNode) script.parentNode.removeChild(script);
+    };
+  }, []);
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Salom, {user.first_name || user.name} 👋</h1>
-      <p>ID: {user.id}</p>
-      {user.username && <p>@{user.username}</p>}
+      <h2>Telegram initData testi</h2>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {initData ? (
+        <>
+          <p>
+            <b>initData:</b>
+          </p>
+          <pre
+            style={{
+              background: "#f3f3f3",
+              padding: "10px",
+              borderRadius: "6px",
+              wordBreak: "break-all",
+              whiteSpace: "pre-wrap",
+            }}
+          >
+            {initData}
+          </pre>
+        </>
+      ) : (
+        !error && <p>Yuklanmoqda... Telegram WebApp kutilyapti...</p>
+      )}
     </div>
   );
 }

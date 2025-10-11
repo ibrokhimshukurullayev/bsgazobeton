@@ -2,17 +2,17 @@
 import React from "react";
 import Image from "next/image";
 import "./home.scss";
-import main from "../../assets/images/webappImages/main.svg";
-import cart from "../../assets/images/webappImages/cart.svg";
-import order from "../../assets/images/webappImages/order.svg";
-import profile from "../../assets/images/webappImages/profile.svg";
-import logo from "../../assets/images/webappImages/logo.svg";
-import notifacation from "../../assets/images/webappImages/notifacation.svg";
-import card1 from "../../assets/images/webappImages/card1.svg";
-import panel from "../../assets/images/webappImages/panel.svg";
-import kley from "../../assets/images/webappImages/kley.svg";
-import card4 from "../../assets/images/webappImages/card4.svg";
-import rights from "../../assets/images/webappImages/rights.svg";
+import main from "../../../assets/images/webappImages/main.svg";
+import cart from "../../../assets/images/webappImages/cart.svg";
+import order from "../../../assets/images/webappImages/order.svg";
+import profile from "../../../assets/images/webappImages/profile.svg";
+import logo from "../../../assets/images/webappImages/logo.svg";
+import notifacation from "../../../assets/images/webappImages/notifacation.svg";
+import card1 from "../../../assets/images/webappImages/card1.svg";
+import panel from "../../../assets/images/webappImages/panel.svg";
+import kley from "../../../assets/images/webappImages/kley.svg";
+import card4 from "../../../assets/images/webappImages/card4.svg";
+import rights from "../../../assets/images/webappImages/rights.svg";
 
 const Home = () => {
   return (
