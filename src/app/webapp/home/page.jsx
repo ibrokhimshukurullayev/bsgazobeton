@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "./home.scss";
 import main from "../../../assets/images/webappImages/main.svg";
@@ -15,52 +16,39 @@ import card4 from "../../../assets/images/webappImages/card4.svg";
 import rights from "../../../assets/images/webappImages/rights.svg";
 
 const Home = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.replace("/profile"); // ✅ token bo‘lsa profil sahifasiga
+    }
+  }, [router]);
+
   return (
     <div className="container">
       <div className="home__header">
+        {/* footer navigatsiya */}
         <ul className="home__footer__list">
           <li>
-            <Image
-              className="home__footer__list__img"
-              src={main}
-              alt="main"
-              width={24}
-              height={24}
-            />
+            <Image src={main} alt="main" width={24} height={24} />
             <span>Main</span>
           </li>
           <li>
-            <Image
-              className="home__footer__list__img"
-              src={cart}
-              alt="cart"
-              width={24}
-              height={24}
-            />
+            <Image src={cart} alt="cart" width={24} height={24} />
             <span>Cart</span>
           </li>
           <li>
-            <Image
-              className="home__footer__list__img"
-              src={order}
-              alt="order"
-              width={24}
-              height={24}
-            />
+            <Image src={order} alt="order" width={24} height={24} />
             <span>Orders</span>
           </li>
-          <li>
-            <Image
-              className="home__footer__list__img"
-              src={profile}
-              alt="profile"
-              width={24}
-              height={24}
-            />
+          <li onClick={() => router.push("/profile")}>
+            <Image src={profile} alt="profile" width={24} height={24} />
             <span>Profile</span>
           </li>
         </ul>
 
+        {/* header */}
         <ul className="home__header__list">
           <li>
             <Image src={logo} alt="logo" width={100} height={40} />
@@ -75,7 +63,7 @@ const Home = () => {
           </li>
         </ul>
 
-        {/* Product cards */}
+        {/* mahsulotlar */}
         <div className="home__cards">
           <h3 className="home__cards__title">Mahsulotlar</h3>
           <div className="home__box">
@@ -107,9 +95,7 @@ const Home = () => {
                 width={80}
                 height={80}
               />
-              <p className="home__card__text">
-                Gazoblok <br /> kley
-              </p>
+              <p className="home__card__text">Gazoblok kley</p>
             </div>
             <div className="home__card">
               <Image
@@ -126,7 +112,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Calculator section */}
+        {/* kalkulyator */}
         <div className="home__calculator">
           <h3 className="home__calculator__title">Kalkulyator</h3>
           <div className="home__calculator__card">
