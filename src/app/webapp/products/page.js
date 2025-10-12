@@ -13,11 +13,6 @@ import left from "../../../assets/images/webappImages/left.svg";
 import productleft from "../../../assets/images/webappImages/productleft.svg";
 import { useTranslation } from "react-i18next";
 
-import main from "../../../assets/images/webappImages/main.svg";
-import cart from "../../../assets/images/webappImages/cart.svg";
-import order from "../../../assets/images/webappImages/order.svg";
-import profile from "../../../assets/images/webappImages/profile.svg";
-
 const Products = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -61,7 +56,6 @@ const Products = () => {
 
   if (isLoading) return <Loading />;
 
-  // 🔥 Tilga qarab to‘g‘ri matnni olish funksiyasi
   const getLocalizedValue = (obj) => {
     if (!obj) return "";
     if (typeof obj === "string") return obj;
@@ -94,7 +88,6 @@ const Products = () => {
         </h2>
       )}
 
-      {/* Mahsulotlar */}
       <div className="cart__box">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => {
@@ -103,7 +96,7 @@ const Products = () => {
               : [];
 
             return (
-              <button key={product.productid} className="cart__item">
+              <div key={product.productid} className="cart__item">
                 <Image
                   className="cart__item__img"
                   src={
@@ -140,16 +133,25 @@ const Products = () => {
                           ? "/" + getLocalizedValue(product.unit)
                           : ""
                       }`}
-                      <Image
-                        src={productleft}
-                        alt="left"
-                        width={14}
-                        height={14}
-                      />
+                      {/* ✅ Faqat ikonka bosilganda o'tish */}
+                      <span
+                        className="product-detail-btn"
+                        onClick={(e) => {
+                          e.stopPropagation(); // asosiy div clickni to‘xtatadi
+                          router.push(`/webapp/product/${product.productid}`);
+                        }}
+                      >
+                        <Image
+                          src={productleft}
+                          alt="left"
+                          width={14}
+                          height={14}
+                        />
+                      </span>
                     </p>
                   )}
                 </div>
-              </button>
+              </div>
             );
           })
         ) : (

@@ -38,7 +38,7 @@ export default function WebappFooter() {
               style={{
                 filter: isActive
                   ? "invert(28%) sepia(95%) saturate(5951%) hue-rotate(355deg) brightness(96%) contrast(97%)"
-                  : "none", // 🔥 rangni #DC2626 ga o‘zgartiradi
+                  : "none",
               }}
             />
             <span>{item.label}</span>

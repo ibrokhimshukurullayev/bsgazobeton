@@ -226,7 +226,6 @@ const ProductDetail = ({ productId }) => {
         </div>
 
         <div className="info-section">
-          {/* ✅ Narxda unit qo‘shildi */}
           <div className="price">
             {productData.price} {t("header.priceUnit")}/{unitText}
           </div>
