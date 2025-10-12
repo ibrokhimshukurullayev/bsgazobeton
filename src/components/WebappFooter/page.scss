@@ -1,0 +1,42 @@
+.home__footer__list {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 72px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  z-index: 99;
+  background-color: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.home__footer__list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.home__footer__list li span {
+  color: rgb(145, 136, 136);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 10px;
+  text-align: center;
+}
+
+/* ✅ Active holat */
+.home__footer__list li.active span {
+  color: #dc2626;
+  font-weight: 600;
+}

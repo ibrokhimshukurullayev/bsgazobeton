@@ -1,0 +1,44 @@
+.calculte__header {
+  display: flex;
+  align-items: center;
+  gap: 120px;
+  box-sizing: border-box;
+  padding: 13px 0 45px 0;
+}
+
+.calculte__header__title {
+  color: rgb(33, 34, 34);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: -0.7%;
+  text-align: center;
+}
+
+.calculate__end {
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 16px;
+  background: rgb(255, 255, 255);
+  margin: 32px 0 10px 0;
+}
+
+.calculate__end__title {
+  color: rgb(33, 34, 34);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -1.2%;
+  text-align: left;
+  padding-bottom: 16px;
+}
+
+.calculate__end__text {
+  color: rgb(75, 85, 99);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -1.2%;
+  text-align: left;
+}

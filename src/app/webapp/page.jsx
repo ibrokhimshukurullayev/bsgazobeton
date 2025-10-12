@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Home from "./home/page"; // Home komponenting shu yerdan import qilinadi
+import "./page.scss";
 
 export default function TelegramWebAppLogin() {
   const [loading, setLoading] = useState(true);

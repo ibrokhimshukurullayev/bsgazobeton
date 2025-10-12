@@ -1,54 +1,76 @@
 "use client";
-import React, { useEffect } from "react";
+
+import React, { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "./home.scss";
+import "../page.scss";
+
 import main from "../../../assets/images/webappImages/main.svg";
 import cart from "../../../assets/images/webappImages/cart.svg";
 import order from "../../../assets/images/webappImages/order.svg";
 import profile from "../../../assets/images/webappImages/profile.svg";
 import logo from "../../../assets/images/webappImages/logo.svg";
 import notifacation from "../../../assets/images/webappImages/notifacation.svg";
-import card1 from "../../../assets/images/webappImages/card1.svg";
-import panel from "../../../assets/images/webappImages/panel.svg";
-import kley from "../../../assets/images/webappImages/kley.svg";
-import card4 from "../../../assets/images/webappImages/card4.svg";
 import rights from "../../../assets/images/webappImages/rights.svg";
+import product1 from "../../../assets/images/webappImages/card1.svg";
+
+import { useGetCategoryQuery } from "../../../context/categoryApi";
+import Loading from "../../../components/loading/Loading";
+
+function getName(cat, language = "uz_Uz") {
+  if (!cat) return "";
+  if (typeof cat.name === "string" && cat.name) return cat.name;
+  const n =
+    (cat.name && (cat.name.uz_uz || cat.name.ru_ru || cat.name.en_us)) || "";
+  return String(n);
+}
 
 const Home = () => {
   const router = useRouter();
+  const [language, setLanguage] = useState(() => {
+    return (
+      (typeof window !== "undefined" && localStorage.getItem("language")) ||
+      "uz_Uz"
+    );
+  });
+
+  const {
+    data: catRes,
+    isLoading,
+    error,
+    refetch,
+  } = useGetCategoryQuery({ skip: 0, take: 1000 });
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      router.replace("/profile"); // ✅ token bo‘lsa profil sahifasiga
-    }
-  }, [router]);
+    const onLang = (e) => {
+      const newLang =
+        (e && e.detail) ||
+        (typeof window !== "undefined" && localStorage.getItem("language")) ||
+        "uz_Uz";
+      setLanguage(newLang);
+    };
+    window.addEventListener("languageChanged", onLang);
+    return () => window.removeEventListener("languageChanged", onLang);
+  }, []);
+
+  useEffect(() => {
+    refetch();
+  }, [language, refetch]);
+
+  const categories = useMemo(() => catRes?.data?.list || [], [catRes]);
+  const rootCategories = useMemo(
+    () => categories.filter((c) => c.parentproductcategoryid == null),
+    [categories]
+  );
+
+  if (isLoading) return <Loading />;
+  if (error) return <div>Xatolik yuz berdi</div>;
 
   return (
     <div className="container">
       <div className="home__header">
-        {/* footer navigatsiya */}
-        <ul className="home__footer__list">
-          <li>
-            <Image src={main} alt="main" width={24} height={24} />
-            <span>Main</span>
-          </li>
-          <li>
-            <Image src={cart} alt="cart" width={24} height={24} />
-            <span>Cart</span>
-          </li>
-          <li>
-            <Image src={order} alt="order" width={24} height={24} />
-            <span>Orders</span>
-          </li>
-          <li onClick={() => router.push("/profile")}>
-            <Image src={profile} alt="profile" width={24} height={24} />
-            <span>Profile</span>
-          </li>
-        </ul>
-
-        {/* header */}
+        {/* Header */}
         <ul className="home__header__list">
           <li>
             <Image src={logo} alt="logo" width={100} height={40} />
@@ -63,56 +85,44 @@ const Home = () => {
           </li>
         </ul>
 
-        {/* mahsulotlar */}
+        {/* Mahsulot kategoriyalari */}
         <div className="home__cards">
           <h3 className="home__cards__title">Mahsulotlar</h3>
           <div className="home__box">
-            <div className="home__card">
-              <Image
-                className="home__card__img"
-                src={card1}
-                alt="card1"
-                width={80}
-                height={80}
-              />
-              <p className="home__card__text">Gazobeton bloklari</p>
-            </div>
-            <div className="home__card">
-              <Image
-                className="home__card__img"
-                src={panel}
-                alt="panel"
-                width={80}
-                height={80}
-              />
-              <p className="home__card__text">Gazobeton panellari</p>
-            </div>
-            <div className="home__card">
-              <Image
-                className="home__card__img"
-                src={kley}
-                alt="kley"
-                width={80}
-                height={80}
-              />
-              <p className="home__card__text">Gazoblok kley</p>
-            </div>
-            <div className="home__card">
-              <Image
-                className="home__card__img"
-                src={card4}
-                alt="card4"
-                width={80}
-                height={80}
-              />
-              <p className="home__card__text">
-                Gazoblok uchun maxsus vositalar
-              </p>
-            </div>
+            {rootCategories.length > 0 ? (
+              rootCategories.map((el) => (
+                <div
+                  key={el.productcategoryid}
+                  className="home__card"
+                  onClick={() =>
+                    router.push(
+                      `/webapp/products?productcategoryid=${el.productcategoryid}`
+                    )
+                  }
+                >
+                  <Image
+                    className="home__card__img"
+                    src={
+                      el?.imageurl
+                        ? `https://api.bsgazobeton.uz${el.imageurl}`
+                        : product1
+                    }
+                    alt={getName(el, language)}
+                    width={133}
+                    height={92}
+                  />
+                  <p className="home__card__text">{getName(el, language)}</p>
+                </div>
+              ))
+            ) : (
+              <div className="no__category">
+                <p>Kategoriyalar mavjud emas</p>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* kalkulyator */}
+        {/* Kalkulyator */}
         <div className="home__calculator">
           <h3 className="home__calculator__title">Kalkulyator</h3>
           <div className="home__calculator__card">
@@ -125,8 +135,11 @@ const Home = () => {
                 hisoblang!
               </p>
               <div className="home__calculator__card__end">
-                <button className="home__calculator__card__button">
-                  Hisoblash{" "}
+                <button
+                  onClick={() => router.push("/webapp/calculate")}
+                  className="home__calculator__card__button"
+                >
+                  Hisoblash
                   <Image src={rights} alt="right" width={16} height={16} />
                 </button>
               </div>
