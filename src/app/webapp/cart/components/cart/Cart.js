@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import {
   incCart,
   decCart,
   removeFromCart,
-  clearCart,
 } from "../../../../../context/cartSlice";
 import { useTranslation } from "react-i18next";
 import { useGetUserOrdersQuery } from "../../../../../context/orderApi";
@@ -17,6 +16,7 @@ import cardImg from "../../../../../assets/images/webappImages/card1.svg";
 import minusIcon from "../../../../../assets/images/webappImages/minus.svg";
 import plusIcon from "../../../../../assets/images/webappImages/plus.svg";
 import deleteIcon from "../../../../../assets/images/webappImages/delete.svg";
+
 import "./cart.scss";
 
 const CartContent = ({ onCheckout }) => {
@@ -28,43 +28,51 @@ const CartContent = ({ onCheckout }) => {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-  // API orqali user cart
+  // Agar foydalanuvchi avtorizatsiyadan o‘tgan bo‘lsa, serverdagi cartni olayapmiz
   const { data: serverCart } = useGetUserOrdersQuery(undefined, {
     skip: !token,
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });
 
-  const items = token ? serverCart?.data : cart;
+  // Foydalanuvchi kirgan/kirmagan holatga qarab cart tanlanadi
+  const items = token ? serverCart?.data || [] : cart || [];
+  console.log("Cart items:", items);
 
+  // === ✅ Miqdorni oshirish yoki kamaytirish ===
   const updateQuantity = (productid, delta) => {
-    const item = cart?.find((el) => el.productid === productid);
+    const item = items.find((el) => el.productid === productid);
     if (!item) return;
 
-    if (delta === 1) dispatch(incCart(item));
-    else if (delta === -1) {
-      if (item.quantity <= 1) dispatch(removeFromCart(item));
-      else dispatch(decCart(item));
+    if (delta === 1) {
+      dispatch(incCart(item));
+    } else if (delta === -1) {
+      if (item.quantity > 1) dispatch(decCart(item));
+      else dispatch(removeFromCart(item));
     }
   };
 
+  // === ✅ Mahsulotni o‘chirish ===
   const removeItem = (productid) => {
-    const item = cart.find((el) => el.productid === productid);
+    const item = items.find((el) => el.productid === productid);
     if (item) dispatch(removeFromCart(item));
   };
 
+  // === ✅ Umumiy summa ===
   const totalSum = useMemo(
-    () => items?.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    () =>
+      items.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0),
     [items]
   );
 
+  // === ✅ Agar cart bo‘sh bo‘lsa ===
   if (!items || items.length === 0)
-    return <div className="container">Savat bo'sh</div>;
+    return <div className="container empty__cart">Savat bo‘sh</div>;
 
   return (
     <div className="container">
       <div className="cart">
-        <h2 className="cart__title">Cart: {items.length}</h2>
+        <h2 className="cart__title">Savat: {items.length} ta mahsulot</h2>
 
         <div className="cart__box">
           {items.map((item) => (
@@ -73,19 +81,22 @@ const CartContent = ({ onCheckout }) => {
                 className="cart__item__img"
                 src={
                   item.imageurl
-                    ? "https://api.bsgazobeton.uz" + item.imageurl
+                    ? `https://api.bsgazobeton.uz${item.imageurl}`
                     : cardImg
                 }
                 alt={item.name || "Product"}
                 width={100}
                 height={80}
               />
+
               <div className="cart__details">
-                <h3 className="cart__details__title">{item.name}</h3>
-                <p className="cart__details__text">{item.desc || ""}</p>
+                <h3 className="cart__details__title">
+                  <h4 className="cart__category">{item.productname}</h4>
+                </h3>
                 <span className="cart__price">
                   {item.price?.toLocaleString()} UZS
                 </span>
+
                 <div className="cart__quantity">
                   <button
                     className="cart__quantity__add"
@@ -97,7 +108,9 @@ const CartContent = ({ onCheckout }) => {
                       alt="minus"
                     />
                   </button>
+
                   <span className="cart__quantity__text">{item.quantity}</span>
+
                   <button
                     className="cart__quantity__add"
                     onClick={() => updateQuantity(item.productid, 1)}
@@ -110,18 +123,19 @@ const CartContent = ({ onCheckout }) => {
                   </button>
                 </div>
               </div>
+
               <button
                 className="cart__remove"
                 onClick={() => removeItem(item.productid)}
               >
-                <Image src={deleteIcon} alt="delete" />
+                <Image src={deleteIcon} alt="delete" width={22} height={22} />
               </button>
             </div>
           ))}
         </div>
 
         <div className="cart__total">
-          Umumiy: {totalSum?.toLocaleString()} UZS
+          Umumiy: {totalSum?.toLocaleString()} UZS{" "}
         </div>
 
         <button

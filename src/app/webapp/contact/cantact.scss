@@ -1,0 +1,63 @@
+.cantacts {
+  padding: 20px 0 0 0;
+}
+
+.cantacts__title {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 38px;
+  letter-spacing: -1.3%;
+  color: rgba(33, 34, 34, 1);
+  padding: 16px 0;
+}
+.phone-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(33, 34, 34, 1);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.6%;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 0 0 0;
+}
+
+.socials img {
+  width: 24px;
+}
+
+.cantact {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 1);
+  justify-content: space-between;
+  border-radius: 10px;
+  text-decoration: none;
+  padding: 12px;
+  margin-bottom: 14px;
+  box-shadow: 0px 8px 16px 0px rgba(15, 23, 42, 0.02);
+  box-shadow: 0px 4px 8px 0px rgba(15, 23, 42, 0.03);
+}
+
+.cantacts__text {
+  color: rgba(75, 85, 99, 1);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.6%;
+  padding-bottom: 16px;
+}
+
+.cantacts__text span {
+  color: rgba(220, 38, 38, 1);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: -1.2%;
+}
