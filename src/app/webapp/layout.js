@@ -23,9 +23,9 @@ export default function WebappLayout({ children }) {
         setLoading(false);
         return;
       }
-      tg.requestFullscreen();
       tg.ready();
       tg.expand();
+      tg.requestFullscreen();
 
       // 🔹 Har safar yo‘l o‘zgarganda tugmalarni yangilash
       const updateButton = () => {
