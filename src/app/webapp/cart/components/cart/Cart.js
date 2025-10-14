@@ -1,16 +1,18 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import {
   incCart,
   decCart,
   removeFromCart,
+  clearCart,
 } from "../../../../../context/cartSlice";
 import { useTranslation } from "react-i18next";
 import { useGetUserOrdersQuery } from "../../../../../context/orderApi";
 import { useRouter } from "next/navigation";
+import useDebouncedCartSaver from "../../../../../hooks/useDebouncedCartSaver";
 
 import cardImg from "../../../../../assets/images/webappImages/card1.svg";
 import minusIcon from "../../../../../assets/images/webappImages/minus.svg";
@@ -23,56 +25,87 @@ const CartContent = ({ onCheckout }) => {
   const [t] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.value);
 
+  const cart = useSelector((state) => state.cart.value);
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-  // Agar foydalanuvchi avtorizatsiyadan o‘tgan bo‘lsa, serverdagi cartni olayapmiz
   const { data: serverCart } = useGetUserOrdersQuery(undefined, {
     skip: !token,
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });
 
-  // Foydalanuvchi kirgan/kirmagan holatga qarab cart tanlanadi
   const items = token ? serverCart?.data || [] : cart || [];
-  console.log("Cart items:", items);
+
+  // 🔹 Debounce saver hook — serverga bosim bermaslik uchun
+  const { saveLater } = useDebouncedCartSaver({
+    token,
+    debounceMs: 600,
+  });
 
   // === ✅ Miqdorni oshirish yoki kamaytirish ===
   const updateQuantity = (productid, delta) => {
     const item = items.find((el) => el.productid === productid);
     if (!item) return;
 
+    let nextQuantity = item.quantity + delta;
+    if (nextQuantity < 0) nextQuantity = 0;
+
     if (delta === 1) {
       dispatch(incCart(item));
     } else if (delta === -1) {
-      if (item.quantity > 1) dispatch(decCart(item));
-      else dispatch(removeFromCart(item));
+      if (item.quantity <= 1) {
+        dispatch(removeFromCart(item));
+      } else {
+        dispatch(decCart(item));
+      }
+    }
+
+    // 🔹 serverga yuborish (agar token mavjud bo‘lsa)
+    if (token) {
+      const state =
+        nextQuantity <= 0
+          ? "Delete"
+          : item.quantity === 0
+          ? "Create"
+          : "Update";
+      saveLater(productid, nextQuantity, state);
     }
   };
 
   // === ✅ Mahsulotni o‘chirish ===
   const removeItem = (productid) => {
     const item = items.find((el) => el.productid === productid);
-    if (item) dispatch(removeFromCart(item));
+    if (item) {
+      dispatch(removeFromCart(item));
+      if (token) saveLater(productid, 0, "Delete");
+    }
   };
 
-  // === ✅ Umumiy summa ===
   const totalSum = useMemo(
     () =>
       items.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0),
     [items]
   );
 
-  // === ✅ Agar cart bo‘sh bo‘lsa ===
   if (!items || items.length === 0)
-    return <div className="container empty__cart">Savat bo‘sh</div>;
+    return (
+      <div className="container">
+        <h2 className="cart__titles">Cart</h2>
+        <div className="empty__cart">Empty cart!</div>
+      </div>
+    );
 
   return (
     <div className="container">
       <div className="cart">
-        <h2 className="cart__title">Savat: {items.length} ta mahsulot</h2>
+        <div className="cart__header">
+          <h2 className="cart__title">Cart: {items.length}</h2>
+          <button className="cart__clear" onClick={() => dispatch(clearCart())}>
+            Clear all
+          </button>
+        </div>
 
         <div className="cart__box">
           {items.map((item) => (
@@ -90,36 +123,28 @@ const CartContent = ({ onCheckout }) => {
               />
 
               <div className="cart__details">
-                <h3 className="cart__details__title">
-                  <h4 className="cart__category">{item.productname}</h4>
-                </h3>
+                <h4 className="cart__category">{item.productname}</h4>
                 <span className="cart__price">
                   {item.price?.toLocaleString()} UZS
                 </span>
 
                 <div className="cart__quantity">
                   <button
+                    type="button"
                     className="cart__quantity__add"
                     onClick={() => updateQuantity(item.productid, -1)}
                   >
-                    <Image
-                      className="cart__quantity__add__img"
-                      src={minusIcon}
-                      alt="minus"
-                    />
+                    <Image src={minusIcon} alt="minus" width={15} height={15} />
                   </button>
 
                   <span className="cart__quantity__text">{item.quantity}</span>
 
                   <button
+                    type="button"
                     className="cart__quantity__add"
                     onClick={() => updateQuantity(item.productid, 1)}
                   >
-                    <Image
-                      className="cart__quantity__add__img"
-                      src={plusIcon}
-                      alt="plus"
-                    />
+                    <Image src={plusIcon} alt="plus" width={15} height={15} />
                   </button>
                 </div>
               </div>
@@ -135,7 +160,7 @@ const CartContent = ({ onCheckout }) => {
         </div>
 
         <div className="cart__total">
-          Umumiy: {totalSum?.toLocaleString()} UZS{" "}
+          <span>Umumiy:</span> {totalSum?.toLocaleString()} UZS
         </div>
 
         <button
