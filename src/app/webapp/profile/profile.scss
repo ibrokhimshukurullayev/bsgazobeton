@@ -9,7 +9,10 @@
 .user-info {
   margin-bottom: 24px;
   padding: 25px 20px;
-  background-color: rgb(33, 34, 34);
+  background-color: #fff;
+  box-shadow: 0 -2px 10px #0000000d;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .avatar {
@@ -26,7 +29,7 @@
 }
 
 .user__info__header h3 {
-  color: rgb(255, 255, 255);
+  color: #36414f;
   font-size: 28px;
   font-weight: 500;
   line-height: 22px;
@@ -35,7 +38,7 @@
 }
 
 .user__info__footer__end h4 {
-  color: rgb(255, 255, 255);
+  color: #36414f;
   font-size: 16px;
   font-weight: 600;
   text-align: left;
@@ -43,7 +46,7 @@
 }
 
 .user__info__footer__end p {
-  color: rgba(255, 255, 255, 0.6);
+  color: #36414f;
   font-size: 14px;
   font-weight: 500;
   text-align: left;

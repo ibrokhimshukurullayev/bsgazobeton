@@ -25,7 +25,13 @@ export default function WebappLayout({ children }) {
       }
       tg.ready();
       tg.expand();
-      tg.requestFullscreen();
+      try {
+        if (tg.requestFullscreen) {
+          tg.requestFullscreen();
+        }
+      } catch (e) {
+        console.warn("Fullscreen mode not supported in this version");
+      }
 
       // 🔹 Har safar yo‘l o‘zgarganda tugmalarni yangilash
       const updateButton = () => {
