@@ -25,6 +25,7 @@ export default function TelegramWebAppLogin() {
           return;
         }
 
+        tg.requestFullscreen();
         tg.expand();
         const initData = tg.initData;
 
