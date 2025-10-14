@@ -14,7 +14,7 @@
 
 .setting__top__title {
   color: rgb(33, 34, 34);
-  font-size: 16px;
+  font-size: 26px;
   font-weight: 600;
   line-height: 22px;
   letter-spacing: -0.7%;
@@ -54,7 +54,7 @@
 .setting__top {
   display: flex;
   align-items: center;
-  gap: 120px;
+  justify-content: center;
   box-sizing: border-box;
   padding: 20px 0;
 }

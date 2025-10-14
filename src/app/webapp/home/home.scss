@@ -43,16 +43,14 @@
   list-style-type: none;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0;
   padding: 20px;
   position: fixed;
-  top: 0;
+  top: 40px;
   left: 0;
   right: 0;
-  background-color: white;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   height: 70px;
   overflow: hidden;
 }

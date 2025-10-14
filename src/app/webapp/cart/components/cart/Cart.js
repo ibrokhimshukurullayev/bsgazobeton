@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -21,6 +21,42 @@ import deleteIcon from "../../../../../assets/images/webappImages/delete.svg";
 
 import "./cart.scss";
 
+// 🔸 LocalStorage’da saqlash funksiyasi
+function writeLocalCart(productid, nextQuantity, patch) {
+  try {
+    const raw = localStorage.getItem("carts");
+    const list = raw ? JSON.parse(raw) : [];
+    const idx = list.findIndex((x) => x && x.productid === productid);
+
+    if (nextQuantity <= 0) {
+      const next =
+        idx === -1 ? list : list.filter((x) => x.productid !== productid);
+      localStorage.setItem("carts", JSON.stringify(next));
+    } else {
+      if (idx === -1) {
+        localStorage.setItem(
+          "carts",
+          JSON.stringify([
+            ...list,
+            { productid, quantity: nextQuantity, ...(patch || {}) },
+          ])
+        );
+      } else {
+        const next = list.map((x, i) =>
+          i === idx ? { ...x, quantity: nextQuantity, ...(patch || {}) } : x
+        );
+        localStorage.setItem("carts", JSON.stringify(next));
+      }
+    }
+
+    window.dispatchEvent(
+      new CustomEvent("cart:sync", { detail: { source: "cart" } })
+    );
+  } catch (e) {
+    console.error("localStorage carts yozishda xato:", e);
+  }
+}
+
 const CartContent = ({ onCheckout }) => {
   const [t] = useTranslation("global");
   const router = useRouter();
@@ -36,53 +72,61 @@ const CartContent = ({ onCheckout }) => {
     refetchOnReconnect: true,
   });
 
-  const items = token ? serverCart?.data || [] : cart || [];
-
-  // 🔹 Debounce saver hook — serverga bosim bermaslik uchun
+  // 🔹 Server bilan sinxronlash uchun debounce hook
   const { saveLater } = useDebouncedCartSaver({
     token,
     debounceMs: 600,
   });
 
-  // === ✅ Miqdorni oshirish yoki kamaytirish ===
-  const updateQuantity = (productid, delta) => {
-    const item = items.find((el) => el.productid === productid);
-    if (!item) return;
+  const items = token ? serverCart?.data || [] : cart || [];
 
-    let nextQuantity = item.quantity + delta;
-    if (nextQuantity < 0) nextQuantity = 0;
+  // === ✅ Miqdorni oshirish ===
+  const handleIncrease = (item) => {
+    const nextQty = (Number(item.quantity) || 0) + 1;
+    const productid = item.productid;
 
-    if (delta === 1) {
-      dispatch(incCart(item));
-    } else if (delta === -1) {
-      if (item.quantity <= 1) {
-        dispatch(removeFromCart(item));
-      } else {
-        dispatch(decCart(item));
-      }
+    // 🔹 LocalStorage + Redux
+    writeLocalCart(productid, nextQty, item);
+    dispatch(incCart(item));
+
+    // 🔹 Serverga yuborish
+    if (token) {
+      const state = item.quantity > 0 ? "Update" : "Create";
+      saveLater(productid, nextQty, state);
+    }
+  };
+
+  // === ✅ Miqdorni kamaytirish ===
+  const handleDecrease = (item) => {
+    const currentQty = Number(item.quantity) || 0;
+    const nextQty = Math.max(0, currentQty - 1);
+    const productid = item.productid;
+
+    // 🔹 LocalStorage + Redux
+    writeLocalCart(productid, nextQty, item);
+
+    if (nextQty <= 0) {
+      dispatch(removeFromCart(item));
+    } else {
+      dispatch(decCart(item));
     }
 
-    // 🔹 serverga yuborish (agar token mavjud bo‘lsa)
+    // 🔹 Serverga yuborish
     if (token) {
-      const state =
-        nextQuantity <= 0
-          ? "Delete"
-          : item.quantity === 0
-          ? "Create"
-          : "Update";
-      saveLater(productid, nextQuantity, state);
+      const state = nextQty <= 0 ? "Delete" : "Update";
+      saveLater(productid, nextQty, state);
     }
   };
 
   // === ✅ Mahsulotni o‘chirish ===
-  const removeItem = (productid) => {
-    const item = items.find((el) => el.productid === productid);
-    if (item) {
-      dispatch(removeFromCart(item));
-      if (token) saveLater(productid, 0, "Delete");
-    }
+  const handleRemove = (item) => {
+    const productid = item.productid;
+    writeLocalCart(productid, 0, item);
+    dispatch(removeFromCart(item));
+    if (token) saveLater(productid, 0, "Delete");
   };
 
+  // === ✅ Umumiy summa ===
   const totalSum = useMemo(
     () =>
       items.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0),
@@ -101,10 +145,9 @@ const CartContent = ({ onCheckout }) => {
     <div className="container">
       <div className="cart">
         <div className="cart__header">
-          <h2 className="cart__title">Cart: {items.length}</h2>
-          <button className="cart__clear" onClick={() => dispatch(clearCart())}>
-            Clear all
-          </button>
+          <h2 className="cart__title">
+            Cart: <span>{items.length}</span>
+          </h2>
         </div>
 
         <div className="cart__box">
@@ -117,7 +160,7 @@ const CartContent = ({ onCheckout }) => {
                     ? `https://api.bsgazobeton.uz${item.imageurl}`
                     : cardImg
                 }
-                alt={item.name || "Product"}
+                alt={item.productname || "Product"}
                 width={100}
                 height={80}
               />
@@ -132,7 +175,7 @@ const CartContent = ({ onCheckout }) => {
                   <button
                     type="button"
                     className="cart__quantity__add"
-                    onClick={() => updateQuantity(item.productid, -1)}
+                    onClick={() => handleDecrease(item)}
                   >
                     <Image src={minusIcon} alt="minus" width={15} height={15} />
                   </button>
@@ -142,7 +185,7 @@ const CartContent = ({ onCheckout }) => {
                   <button
                     type="button"
                     className="cart__quantity__add"
-                    onClick={() => updateQuantity(item.productid, 1)}
+                    onClick={() => handleIncrease(item)}
                   >
                     <Image src={plusIcon} alt="plus" width={15} height={15} />
                   </button>
@@ -151,7 +194,7 @@ const CartContent = ({ onCheckout }) => {
 
               <button
                 className="cart__remove"
-                onClick={() => removeItem(item.productid)}
+                onClick={() => handleRemove(item)}
               >
                 <Image src={deleteIcon} alt="delete" width={22} height={22} />
               </button>
@@ -159,10 +202,12 @@ const CartContent = ({ onCheckout }) => {
           ))}
         </div>
 
+        {/* TOTAL */}
         <div className="cart__total">
           <span>Umumiy:</span> {totalSum?.toLocaleString()} UZS
         </div>
 
+        {/* CHECKOUT BUTTON */}
         <button
           className="form__button"
           onClick={() => {

@@ -66,8 +66,7 @@ export default function Profile() {
       <div className="profile">
         <div className="user-info">
           <div className="user__info__header">
-            <h3>Profil</h3>
-            <Image src={settings} alt="Settings" width={20} height={20} />
+            <h3>Profile</h3>
           </div>
 
           <div className="user__info__footer">
@@ -120,17 +119,6 @@ export default function Profile() {
             </Link>
             <Image src={right} alt="" width={18} height={18} />
           </div>
-
-          <button
-            className="menu__logout__btn"
-            onClick={() => {
-              localStorage.removeItem("token");
-              window.location.href = "/login";
-            }}
-          >
-            <Image src={logout} alt="logout" width={20} height={20} />
-            Chiqish
-          </button>
         </div>
       </div>
     </div>

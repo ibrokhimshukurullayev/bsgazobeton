@@ -86,10 +86,6 @@ export default function Orders() {
     <div className="container">
       <div className="orders">
         <h3 className="orders__title">Orders</h3>
-        <a href="#" className="orders__phone">
-          <Image className="orders__phone__img" src={phone} alt="phone" />
-          Aloqa
-        </a>
       </div>
 
       <div className="orders__tabs">

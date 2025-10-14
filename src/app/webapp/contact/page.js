@@ -18,10 +18,6 @@ const Contact = () => {
   return (
     <div className="container">
       <div className="cantacts">
-        <div>
-          <Image src={left} alt="back" />
-        </div>
-
         <h2 className="cantacts__title">Biz bilan bog‘lanish</h2>
 
         <Link href="tel:+998991502222" className="cantact">

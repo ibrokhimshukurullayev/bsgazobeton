@@ -1,14 +1,14 @@
 .calculte__header {
   display: flex;
   align-items: center;
-  gap: 120px;
+  justify-content: center;
   box-sizing: border-box;
   padding: 13px 0 45px 0;
 }
 
 .calculte__header__title {
   color: rgb(33, 34, 34);
-  font-size: 16px;
+  font-size: 26px;
   font-weight: 600;
   line-height: 22px;
   letter-spacing: -0.7%;

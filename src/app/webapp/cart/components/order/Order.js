@@ -58,9 +58,6 @@ const OrderContent = ({ onBack }) => {
   return (
     <div className="container">
       <ToastContainer />
-      <button className="back-button" onClick={onBack}>
-        ← Savatga qaytish
-      </button>
       <h2>Buyurtmani rasmiylashtirish</h2>
 
       <form className="order__form" onSubmit={handleSubmit}>

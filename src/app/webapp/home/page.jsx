@@ -70,18 +70,9 @@ const Home = () => {
   return (
     <div className="container">
       <div className="home__header">
-        {/* Header */}
         <ul className="home__header__list">
           <li>
-            <Image src={logo} alt="logo" width={100} height={40} />
-          </li>
-          <li>
-            <Image
-              src={notifacation}
-              alt="notifacation"
-              width={24}
-              height={24}
-            />
+            <Image src={logo} alt="logo" width={105} height={32} />
           </li>
         </ul>
 

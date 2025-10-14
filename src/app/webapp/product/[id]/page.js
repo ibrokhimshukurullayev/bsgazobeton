@@ -78,117 +78,115 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div id="product__body">
-      <div className="container product__detail__content">
-        {/* HEADER */}
-        <div className="product__detail__header">
-          <div className="back-button" onClick={() => router.back()}>
-            <Image src={back} alt="back" width={24} height={24} />
+    <div>
+      <h3 className="product__detail__title">
+        {getLocalizedValue(product.name)}
+      </h3>
+      <div id="product__body">
+        <div className="container product__detail__content">
+          {/* HEADER */}
+          <div className="product__detail__header"></div>
+
+          {/* PRODUCT IMAGE */}
+          <div className="product-image-container">
+            <Image
+              src={
+                product?.imageurl
+                  ? `https://api.bsgazobeton.uz${product.imageurl}`
+                  : "/no-image.png"
+              }
+              alt={getLocalizedValue(product.name)}
+              width={300}
+              height={300}
+              className="product-image"
+            />
           </div>
-          <div className="share-button">
-            <Image src={share} alt="share" width={24} height={24} />
-          </div>
-        </div>
 
-        {/* PRODUCT IMAGE */}
-        <div className="product-image-container">
-          <Image
-            src={
-              product?.imageurl
-                ? `https://api.bsgazobeton.uz${product.imageurl}`
-                : "/no-image.png"
-            }
-            alt={getLocalizedValue(product.name)}
-            width={300}
-            height={300}
-            className="product-image"
-          />
-        </div>
+          {/* INFO */}
+          <div className="product-info">
+            <h1 className="product-title">{getLocalizedValue(product.name)}</h1>
 
-        {/* INFO */}
-        <div className="product-info">
-          <h1 className="product-title">{getLocalizedValue(product.name)}</h1>
+            <div className="product__specs">
+              <div className="product-price">
+                {product.price?.toLocaleString()} UZS
+                {product.unit ? "/" + getLocalizedValue(product.unit) : ""}
+              </div>
 
-          <div className="product__specs">
-            <div className="product-price">
-              {product.price?.toLocaleString()} UZS
-              {product.unit ? "/" + getLocalizedValue(product.unit) : ""}
+              <div className="spec-title">Texnik xususiyatlari</div>
+              {tech.length > 0 ? (
+                tech.map((item, idx) => (
+                  <div key={idx} className="spec-row">
+                    <div className="spec-label">
+                      {getLocalizedValue(item.key)}:
+                    </div>
+                    <div className="spec-value">
+                      {getLocalizedValue(item.value)}{" "}
+                      {getLocalizedValue(item.unit)}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="spec-empty">Maʼlumot mavjud emas</p>
+              )}
             </div>
 
-            <div className="spec-title">Texnik xususiyatlari</div>
-            {tech.length > 0 ? (
-              tech.map((item, idx) => (
-                <div key={idx} className="spec-row">
-                  <div className="spec-label">
-                    {getLocalizedValue(item.key)}:
-                  </div>
-                  <div className="spec-value">
-                    {getLocalizedValue(item.value)}{" "}
-                    {getLocalizedValue(item.unit)}
-                  </div>
-                </div>
-              ))
+            <div className="product-features">
+              <h2 className="features-title">Mahsulot haqida</h2>
+              <ul className="features-list">
+                {product.description ? (
+                  <li>
+                    <span className="feature-text">
+                      {getLocalizedValue(product.description)}
+                    </span>
+                  </li>
+                ) : (
+                  <>
+                    <li>
+                      <span className="feature-text">
+                        Gazobeton bloklari issiqlikni yaxshi saqlaydi va
+                        mustahkamlikka ega.
+                      </span>
+                    </li>
+                    <li>
+                      <span className="feature-text">
+                        Yengil material — o‘rnatish va tashish qulay.
+                      </span>
+                    </li>
+                    <li>
+                      <span className="feature-text">
+                        Energiya tejamkor va ekologik toza mahsulot.
+                      </span>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
+          </div>
+
+          {/* ACTIONS */}
+          <div className="product__actions">
+            {quantity > 0 ? (
+              <div className="product__quantity">
+                <button
+                  onClick={handleDecrease}
+                  className="cart__quantity__add product__quantity"
+                >
+                  <Image src={minusIcon} alt="minus" width={20} height={20} />
+                </button>
+                <span className="cart__quantity__text">{quantity}</span>
+                <button
+                  onClick={handleIncrease}
+                  className="cart__quantity__add product__quantity"
+                >
+                  <Image src={plusIcon} alt="plus" width={20} height={20} />
+                </button>
+              </div>
             ) : (
-              <p className="spec-empty">Maʼlumot mavjud emas</p>
+              <button className="form__button" onClick={handleAddToCart}>
+                Savatchaga qo‘shish
+              </button>
             )}
           </div>
-
-          <div className="product-features">
-            <h2 className="features-title">Mahsulot haqida</h2>
-            <ul className="features-list">
-              {product.description ? (
-                <li>
-                  <span className="feature-text">
-                    {getLocalizedValue(product.description)}
-                  </span>
-                </li>
-              ) : (
-                <>
-                  <li>
-                    <span className="feature-text">
-                      Gazobeton bloklari issiqlikni yaxshi saqlaydi va
-                      mustahkamlikka ega.
-                    </span>
-                  </li>
-                  <li>
-                    <span className="feature-text">
-                      Yengil material — o‘rnatish va tashish qulay.
-                    </span>
-                  </li>
-                  <li>
-                    <span className="feature-text">
-                      Energiya tejamkor va ekologik toza mahsulot.
-                    </span>
-                  </li>
-                </>
-              )}
-            </ul>
-          </div>
-        </div>
-
-        {/* ACTIONS */}
-        <div className="product__actions">
-          {quantity > 0 ? (
-            <div className="product__quantity">
-              <button
-                onClick={handleDecrease}
-                className="cart__quantity__add product__quantity"
-              >
-                <Image src={minusIcon} alt="minus" width={20} height={20} />
-              </button>
-              <span className="cart__quantity__text">{quantity}</span>
-              <button
-                onClick={handleIncrease}
-                className="cart__quantity__add product__quantity"
-              >
-                <Image src={plusIcon} alt="plus" width={20} height={20} />
-              </button>
-            </div>
-          ) : (
-            <button className="form__button" onClick={handleAddToCart}>
-              Savatchaga qo‘shish
-            </button>
-          )}
         </div>
       </div>
     </div>

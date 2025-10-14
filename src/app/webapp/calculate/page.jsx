@@ -40,11 +40,6 @@ const Calculate = () => {
         <div className="calculate">
           {/* Header */}
           <div className="calculte__header">
-            <Image
-              onClick={() => router.push("/webapp/home")}
-              src={left}
-              alt="left"
-            />
             <h3 className="calculte__header__title">Kalkulyator</h3>
           </div>
 

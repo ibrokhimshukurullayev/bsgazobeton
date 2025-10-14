@@ -66,14 +66,6 @@ const Products = () => {
     <div className="container">
       {/* Header */}
       <div className="product__header">
-        <Image
-          className="product__header__img"
-          src={left}
-          alt="back"
-          width={24}
-          height={24}
-          onClick={() => router.push("/webapp/home")}
-        />
         {currentCategory?.name && (
           <h2 className="product__header__title">
             {getLocalizedValue(currentCategory.name)}

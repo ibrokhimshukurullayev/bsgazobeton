@@ -201,13 +201,6 @@ const PersonalInformation = () => {
     <div className="container">
       <ToastContainer />
       <div className="setting__top">
-        <button className="setting__top__button" onClick={() => router.back()}>
-          <Image
-            onClick={() => router.push("/webapp/profile")}
-            src={left}
-            alt="back"
-          />
-        </button>
         <h3 className="setting__top__title">User settings</h3>
       </div>
 
