@@ -23,7 +23,7 @@ export default function WebappLayout({ children }) {
         setLoading(false);
         return;
       }
-
+      tg.requestFullscreen();
       tg.ready();
       tg.expand();
 
