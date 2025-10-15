@@ -31,6 +31,34 @@ a {
   text-decoration: none;
 }
 
+.webapp-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.webapp-content {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+.webapp-main {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 80px; // footer joyi uchun
+}
+
+.loading-overlay {
+  position: absolute;
+  inset: 0; // faqat mainni qoplaydi
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+}
+
 button {
   outline: none;
   cursor: pointer;

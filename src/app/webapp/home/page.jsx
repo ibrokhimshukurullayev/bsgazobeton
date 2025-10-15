@@ -64,7 +64,12 @@ const Home = () => {
     [categories]
   );
 
-  if (isLoading) return <Loading />;
+  // if (isLoading)
+  //   return (
+  //     <main style={{ position: "relative" }}>
+  //       <Loading />
+  //     </main>
+  //   );
   if (error) return <div>Xatolik yuz berdi</div>;
 
   return (

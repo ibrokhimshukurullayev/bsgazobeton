@@ -14,8 +14,6 @@ import "./globals.css";
 export default function RootLayout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
-
-  // /webapp ichida bo‘lsa header/footer ko‘rsatilmasin
   const isWebApp = pathname?.startsWith("/webapp");
 
   useEffect(() => {
@@ -33,12 +31,16 @@ export default function RootLayout({ children }) {
   }, [pathname]);
 
   return (
-    <html lang="uz_Uz">
+    <html lang="uz_UZ">
       <body>
         <Provider store={store}>
           <I18nextProvider i18n={i18n}>
             {!isWebApp && <Header />}
-            {isLoading ? <Loading /> : children}
+            <main style={{ position: "relative" }}>
+              {isLoading && <Loading />}
+              {children}
+            </main>
+
             {!isWebApp && <Footer />}
           </I18nextProvider>
         </Provider>

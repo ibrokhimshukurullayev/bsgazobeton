@@ -80,27 +80,44 @@ const CartContent = ({ onCheckout }) => {
 
   const items = token ? serverCart?.data || [] : cart || [];
 
+  // 🔹 Lokal miqdor (optimistik)
+  const [localQuantities, setLocalQuantities] = useState({});
+
+  // === Sync qilish ===
+  useEffect(() => {
+    if (items.length > 0) {
+      const qMap = {};
+      items.forEach((item) => {
+        qMap[item.productid] = Number(item.quantity) || 0;
+      });
+      setLocalQuantities(qMap);
+    }
+  }, [items]);
+
   // === ✅ Miqdorni oshirish ===
   const handleIncrease = (item) => {
-    const nextQty = (Number(item.quantity) || 0) + 1;
     const productid = item.productid;
+    const nextQty = (localQuantities[productid] || 0) + 1;
 
     // 🔹 LocalStorage + Redux
     writeLocalCart(productid, nextQty, item);
     dispatch(incCart(item));
 
+    // 🔹 Lokal state
+    setLocalQuantities((prev) => ({ ...prev, [productid]: nextQty }));
+
     // 🔹 Serverga yuborish
     if (token) {
-      const state = item.quantity > 0 ? "Update" : "Create";
+      const state = nextQty > 1 ? "Update" : "Create";
       saveLater(productid, nextQty, state);
     }
   };
 
   // === ✅ Miqdorni kamaytirish ===
   const handleDecrease = (item) => {
-    const currentQty = Number(item.quantity) || 0;
-    const nextQty = Math.max(0, currentQty - 1);
     const productid = item.productid;
+    const currentQty = localQuantities[productid] || 0;
+    const nextQty = Math.max(0, currentQty - 1);
 
     // 🔹 LocalStorage + Redux
     writeLocalCart(productid, nextQty, item);
@@ -110,6 +127,9 @@ const CartContent = ({ onCheckout }) => {
     } else {
       dispatch(decCart(item));
     }
+
+    // 🔹 Lokal state
+    setLocalQuantities((prev) => ({ ...prev, [productid]: nextQty }));
 
     // 🔹 Serverga yuborish
     if (token) {
@@ -123,15 +143,17 @@ const CartContent = ({ onCheckout }) => {
     const productid = item.productid;
     writeLocalCart(productid, 0, item);
     dispatch(removeFromCart(item));
+    setLocalQuantities((prev) => ({ ...prev, [productid]: 0 }));
     if (token) saveLater(productid, 0, "Delete");
   };
 
   // === ✅ Umumiy summa ===
-  const totalSum = useMemo(
-    () =>
-      items.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0),
-    [items]
-  );
+  const totalSum = useMemo(() => {
+    return items.reduce((sum, item) => {
+      const qty = localQuantities[item.productid] ?? item.quantity ?? 0;
+      return sum + Number(item.price) * qty;
+    }, 0);
+  }, [items, localQuantities]);
 
   if (!items || items.length === 0)
     return (
@@ -180,7 +202,9 @@ const CartContent = ({ onCheckout }) => {
                     <Image src={minusIcon} alt="minus" width={15} height={15} />
                   </button>
 
-                  <span className="cart__quantity__text">{item.quantity}</span>
+                  <span className="cart__quantity__text">
+                    {localQuantities[item.productid] ?? item.quantity}
+                  </span>
 
                   <button
                     type="button"

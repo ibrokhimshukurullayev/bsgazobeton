@@ -20,19 +20,19 @@ const Contact = () => {
       <div className="cantacts">
         <h2 className="cantacts__title">Biz bilan bog‘lanish</h2>
 
-        <Link href="tel:+998991502222" className="cantact">
+        <a href="tel:+998991502222" className="cantact">
           <div className="phone-box">
             <Image src={phone} alt="phone" /> +998 (99) 150–22–22
           </div>
           <Image src={right} alt="arrow" />
-        </Link>
+        </a>
 
-        <Link href="tel:+998712001022" className="cantact">
+        <a href="tel:+998712001022" className="cantact">
           <div className="phone-box">
             <Image src={phone} alt="phone" /> +998 (71) 200–10–22
           </div>
           <Image src={right} alt="arrow" />
-        </Link>
+        </a>
 
         <p className="cantacts__text">
           <span>Email:</span> <br />
@@ -46,24 +46,24 @@ const Contact = () => {
         </p>
 
         <div className="socials">
-          <Link href="#">
+          <a href="https://www.instagram.com/bs_gazobeton/">
             <Image src={instagram} alt="instagram" />
-          </Link>
-          <Link href="#">
+          </a>
+          <a href="https://t.me/bsgazobeton_uz">
             <Image src={telegram} alt="telegram" />
-          </Link>
-          <Link href="#">
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61575359537252">
             <Image src={facebook} alt="facebook" />
-          </Link>
-          <Link href="#">
+          </a>
+          <a href="https://www.youtube.com/@bsgazobeton">
             <Image src={youtube} alt="youtube" />
-          </Link>
-          <Link href="#">
+          </a>
+          {/* <a href="#">
             <Image src={twitter} alt="twitter" />
-          </Link>
-          <Link href="#">
+          </a>
+          <a href="#">
             <Image src={linkedin} alt="linkedin" />
-          </Link>
+          </a> */}
         </div>
       </div>
     </div>

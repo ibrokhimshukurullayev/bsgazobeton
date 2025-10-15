@@ -19,14 +19,18 @@ export const cartSlice = createSlice({
       const index = state.value.findIndex(
         (el) => el.productid === action.payload.productid
       );
+
       if (index < 0) {
-        state.value = [...state.value, { ...action.payload, quantity: 1 }];
+        state.value.push({ ...action.payload, quantity: 1 });
+      } else {
+        state.value[index].quantity += 1;
       }
 
       if (typeof window !== "undefined") {
         localStorage.setItem("carts", JSON.stringify(state.value));
       }
     },
+
     incCart(state, action) {
       const index = state.value.findIndex(
         (el) => el.productid === action.payload.productid
@@ -47,14 +51,24 @@ export const cartSlice = createSlice({
       const index = state.value.findIndex(
         (el) => el.productid === action.payload.productid
       );
-      state.value = state.value.map((product, inx) =>
-        index === inx ? { ...product, quantity: product.quantity - 1 } : product
-      );
+
+      if (index >= 0) {
+        const product = state.value[index];
+
+        if (product.quantity > 1) {
+          // faqat kamaytirish
+          state.value[index] = { ...product, quantity: product.quantity - 1 };
+        } else {
+          // 1 tadan kam bo‘lsa — o‘chir
+          state.value.splice(index, 1);
+        }
+      }
 
       if (typeof window !== "undefined") {
         localStorage.setItem("carts", JSON.stringify(state.value));
       }
     },
+
     removeFromCart(state, action) {
       state.value = state.value.filter(
         (product) => product.productid !== action.payload.productid

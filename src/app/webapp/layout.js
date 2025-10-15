@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import WebappFooter from "../../components/WebappFooter/WebappFooter";
 import "./page.scss";
+import Loading from "../../components/loading/Loading";
 
 export default function WebappLayout({ children }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
-  const prevPath = useRef(null); // oldingi sahifani saqlash
+  const prevPath = useRef(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -26,32 +27,23 @@ export default function WebappLayout({ children }) {
       tg.ready();
       tg.expand();
       try {
-        if (tg.requestFullscreen) {
-          tg.requestFullscreen();
-        }
-      } catch (e) {
-        console.warn("Fullscreen mode not supported in this version");
-      }
+        if (tg.requestFullscreen) tg.requestFullscreen();
+      } catch {}
 
-      // 🔹 Har safar yo‘l o‘zgarganda tugmalarni yangilash
       const updateButton = () => {
         if (pathname === "/webapp" || pathname === "/webapp/home") {
-          // 🟢 Home sahifada pastki tugmalar yo‘q
           tg.BackButton.hide();
           tg.MainButton.hide();
         } else {
-          // 🔙 Boshqa sahifalarda faqat Back tugmasi
           tg.MainButton.hide();
           tg.BackButton.show();
-          tg.BackButton.offClick(); // eski click’ni olib tashlash
+          tg.BackButton.offClick();
           tg.BackButton.onClick(() => {
-            // Agar oldingi sahifa mavjud bo‘lsa, unga qaytadi
             if (prevPath.current && prevPath.current !== pathname) {
               router.push(prevPath.current);
             } else if (window.history.length > 1) {
               router.back();
             } else {
-              // fallback — home sahifaga qaytish
               router.push("/webapp/home");
             }
           });
@@ -60,7 +52,6 @@ export default function WebappLayout({ children }) {
 
       updateButton();
 
-      // 🔹 Telegram login
       const initData = tg.initData;
       if (initData) {
         try {
@@ -86,7 +77,6 @@ export default function WebappLayout({ children }) {
     document.body.appendChild(script);
 
     return () => {
-      // tozalash
       if (script && script.parentNode) script.parentNode.removeChild(script);
       const tg = window.Telegram?.WebApp;
       if (tg) {
@@ -96,33 +86,24 @@ export default function WebappLayout({ children }) {
     };
   }, [pathname, router]);
 
-  // 🔹 Oldingi yo‘lni saqlab boramiz
   useEffect(() => {
     prevPath.current = pathname;
   }, [pathname]);
 
-  if (loading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          fontSize: "18px",
-        }}
-      >
-        Yuklanmoqda...
-      </div>
-    );
-  }
-
-  // 🔹 Footer faqat kerakli sahifalarda chiqadi
   const showFooter = !pathname.includes("calculate");
 
   return (
     <div className="webapp-layout">
-      <div className="webapp-content">{children}</div>
+      <div className="webapp-content">
+        <main className="webapp-main">
+          {children}
+          {loading && (
+            <div className="loading-overlay">
+              <Loading />
+            </div>
+          )}
+        </main>
+      </div>
       {showFooter && <WebappFooter />}
     </div>
   );

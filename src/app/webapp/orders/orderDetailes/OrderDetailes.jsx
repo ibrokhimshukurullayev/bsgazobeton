@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import leftIcon from "../../../../assets/images/webappImages/left.svg";
 import "./orderDetailes.scss";
 import { useTranslation } from "react-i18next";
 
@@ -13,19 +12,6 @@ export default function OrderDetailes({ order, onBack }) {
   return (
     <div className="orderdetailes">
       <div className="container">
-        {/* Ortga tugmasi */}
-        <div className="orderdetailes__box" onClick={onBack}>
-          <Image
-            className="orderdetailes__img"
-            src={leftIcon}
-            alt="back"
-            width={24}
-            height={24}
-          />
-          <p className="orderdetailes__text">{t("orderss.back")}</p>
-        </div>
-
-        {/* Buyurtma ID */}
         <h3 className="orderdetailes__title">
           {t("orderss.id")}:{" "}
           <strong>#{order?.ordernumber || order?.orderNumber}</strong>
