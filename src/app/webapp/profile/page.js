@@ -20,12 +20,6 @@ export default function Profile() {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-  useEffect(() => {
-    if (!token) {
-      window.location.href = "/login";
-    }
-  }, [token]);
-
   const { data, isLoading, isError } = useGetUserInfoQuery(undefined, {
     skip: !token,
   });
