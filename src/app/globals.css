@@ -6,6 +6,16 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
   transition: 0.3s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+li,
+div {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none; /* ixtiyoriy, matn tanlanmasin */
 }
 
 html {

@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: "Plus Jakarta Sans", sans-serif;
   transition: 0.5s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -17,6 +18,15 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+button,
+a,
+li,
+div {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none; /* ixtiyoriy, matn tanlanmasin */
 }
 
 body {
