@@ -134,6 +134,7 @@
 
 .product__actions {
   position: fixed;
+  height: 80px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -144,6 +145,7 @@
   background-color: white;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
+  border-radius: 12px;
 }
 
 .quantity-control {
@@ -163,10 +165,12 @@
   line-height: 22px;
   letter-spacing: -0.7%;
   text-align: center;
+  padding-top: 20px;
 }
 
 /* === ADD TO CART (birinchi holat) === */
 .add__to__cart__btn {
+  max-width: 131px;
   width: 100%;
   background: #e53935;
   color: #fff;
@@ -177,38 +181,41 @@
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s ease;
+  height: 48px;
 }
 
 .add__to__cart__btn:hover {
   background: #d32f2f;
 }
 
-/* === IKKINCHI HOLAT (qo‘shilgandan keyin) === */
 .product__action__box {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
+  width: 100%;
   padding: 8px 12px;
   border-radius: 14px;
-  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
   gap: 10px;
 }
 
 .product__quantity__box {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: #f5f6f8;
   border-radius: 12px;
-  padding: 6px 12px;
+  padding: 6px;
   gap: 10px;
+  max-width: 204px;
+  width: 100%;
+  height: 48px;
 }
 
 .qty__btn {
   background: #fff;
   border: none;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   display: flex;
   align-items: center;
