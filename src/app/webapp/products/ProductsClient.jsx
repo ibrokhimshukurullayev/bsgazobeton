@@ -22,11 +22,16 @@ const Products = () => {
   const langKey =
     currentLang === "uz" ? "uz_uz" : currentLang === "ru" ? "ru_ru" : "en_us";
 
-  const { data: categoriesData } = useGetCategoryQuery({ skip: 0, take: 1000 });
-  const { data: productsData, isLoading } = useGetProductQuery({
+  const { data: categoriesData, isLoading: catLoading } = useGetCategoryQuery({
     skip: 0,
     take: 1000,
   });
+  const { data: productsData, isLoading: prodLoading } = useGetProductQuery({
+    skip: 0,
+    take: 1000,
+  });
+
+  const isLoading = catLoading || prodLoading;
 
   const categories = useMemo(
     () => categoriesData?.data?.list || [],
@@ -49,10 +54,14 @@ const Products = () => {
       )
     : currentCategory;
 
-  const childCategories = categories.filter(
-    (c) =>
-      String(c.parentproductcategoryid) ===
-      String(parentCategory?.productcategoryid)
+  const childCategories = useMemo(
+    () =>
+      categories.filter(
+        (c) =>
+          String(c.parentproductcategoryid) ===
+          String(parentCategory?.productcategoryid)
+      ),
+    [categories, parentCategory]
   );
 
   const [activeChildId, setActiveChildId] = useState(null);
@@ -60,8 +69,11 @@ const Products = () => {
   useEffect(() => {
     if (childCategories.length > 0 && !activeChildId) {
       setActiveChildId(String(childCategories[0].productcategoryid));
+    } else if (childCategories.length === 0 && currentCategory) {
+      // agar child yo‘q bo‘lsa, o‘sha categoryni o‘zi ishlatiladi
+      setActiveChildId(String(currentCategory.productcategoryid));
     }
-  }, [childCategories, activeChildId]);
+  }, [childCategories, activeChildId, currentCategory]);
 
   if (isLoading) return <Loading />;
 
@@ -76,26 +88,15 @@ const Products = () => {
       (c) => String(c.productcategoryid) === String(activeChildId)
     ) || currentCategory;
 
-  // 🔹 TUZATILGAN QISM: Agar child yo‘q bo‘lsa, parent yoki currentCategory bo‘yicha mahsulotlar chiqadi
-  const selectedProducts = useMemo(() => {
-    if (childCategories.length > 0 && activeChildId) {
-      return products.filter(
-        (p) => String(p.productcategoryid) === String(activeChildId)
-      );
-    } else {
-      return products.filter(
-        (p) =>
-          String(p.productcategoryid) ===
-          String(parentCategory?.productcategoryid)
-      );
-    }
-  }, [products, activeChildId, childCategories, parentCategory]);
+  const selectedProducts = products.filter(
+    (p) => String(p.productcategoryid) === String(activeChildId)
+  );
 
   const getShortCategoryName = (fullName) => {
     if (!fullName) return "";
     const name = getLocalizedValue(fullName);
     const match = name.match(/D\d+/i);
-    return match ? match[0] : name;
+    return match ? match[0].toUpperCase() : name;
   };
 
   return (
@@ -107,7 +108,7 @@ const Products = () => {
       )}
 
       {childCategories.length > 0 && (
-        <div className="child__tabs">
+        <div className="child__tabs short__tabs">
           {childCategories.map((child) => (
             <button
               key={child.productcategoryid}
