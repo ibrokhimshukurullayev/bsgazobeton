@@ -206,21 +206,34 @@ const PersonalInformation = () => {
 
       <div className="profile-photo">
         <div className="photo-wrapper">
-          <Image
-            src={
-              formData.profileImageUrl
-                ? formData.profileImageUrl
-                : profileDefault
-            }
-            alt="User photo"
-            width={100}
-            height={100}
-            className="profile-image"
-          />
+          <div className="photo-container">
+            <Image
+              src={
+                formData.profileImageUrl
+                  ? formData.profileImageUrl
+                  : profileDefault
+              }
+              alt="User photo"
+              width={120}
+              height={120}
+              className="profile-image"
+            />
+
+            <label htmlFor="upload" className="edit-overlay">
+              <span className="edit-icon">📷</span>
+            </label>
+            <input
+              id="upload"
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={handleImageChange}
+            />
+          </div>
 
           <div className="photo-actions">
             <label htmlFor="upload" className="photo-btn change">
-              O‘zgartirish
+              Rasmni o‘zgartirish
             </label>
             {formData.profileImageUrl && (
               <button
@@ -235,19 +248,11 @@ const PersonalInformation = () => {
                   setIsChanged(true);
                 }}
               >
-                O‘chirish
+                Rasmni o‘chirish
               </button>
             )}
           </div>
         </div>
-
-        <input
-          id="upload"
-          type="file"
-          accept="image/*"
-          hidden
-          onChange={handleImageChange}
-        />
       </div>
 
       <form className="order__form" onSubmit={handleSave}>

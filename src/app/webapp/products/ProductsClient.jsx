@@ -71,48 +71,59 @@ const Products = () => {
     return obj[langKey] || obj.uz_uz || "";
   };
 
-  const selectedChild = childCategories.find(
-    (c) => String(c.productcategoryid) === String(activeChildId)
-  );
+  const selectedChild =
+    childCategories.find(
+      (c) => String(c.productcategoryid) === String(activeChildId)
+    ) || currentCategory;
 
-  const selectedProducts = products.filter(
-    (p) => String(p.productcategoryid) === String(activeChildId)
-  );
+  // 🔹 TUZATILGAN QISM: Agar child yo‘q bo‘lsa, parent yoki currentCategory bo‘yicha mahsulotlar chiqadi
+  const selectedProducts = useMemo(() => {
+    if (childCategories.length > 0 && activeChildId) {
+      return products.filter(
+        (p) => String(p.productcategoryid) === String(activeChildId)
+      );
+    } else {
+      return products.filter(
+        (p) =>
+          String(p.productcategoryid) ===
+          String(parentCategory?.productcategoryid)
+      );
+    }
+  }, [products, activeChildId, childCategories, parentCategory]);
 
   const getShortCategoryName = (fullName) => {
     if (!fullName) return "";
     const name = getLocalizedValue(fullName);
     const match = name.match(/D\d+/i);
-    return match ? match[0].toUpperCase() : name;
+    return match ? match[0] : name;
   };
 
   return (
     <div className="container">
-      {/* 🔹 Katta parent nomi */}
       {parentCategory?.name && (
         <h2 className="product__header__title">
           {getLocalizedValue(parentCategory.name)}
         </h2>
       )}
 
-      {/* 🔹 Qisqa child tugmalar (D300, D400, D500) */}
-      <div className="child__tabs short__tabs">
-        {childCategories.map((child) => (
-          <button
-            key={child.productcategoryid}
-            className={`child__tab ${
-              String(activeChildId) === String(child.productcategoryid)
-                ? "active"
-                : ""
-            }`}
-            onClick={() => setActiveChildId(String(child.productcategoryid))}
-          >
-            {getShortCategoryName(child.name)}
-          </button>
-        ))}
-      </div>
+      {childCategories.length > 0 && (
+        <div className="child__tabs">
+          {childCategories.map((child) => (
+            <button
+              key={child.productcategoryid}
+              className={`child__tab ${
+                String(activeChildId) === String(child.productcategoryid)
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() => setActiveChildId(String(child.productcategoryid))}
+            >
+              {getShortCategoryName(child.name)}
+            </button>
+          ))}
+        </div>
+      )}
 
-      {/* 🔹 Mahsulotlar */}
       {selectedChild && (
         <div className="cart__box">
           <h3 className="category-group__title">

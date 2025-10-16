@@ -87,7 +87,9 @@ export default function Profile() {
               <Image src={person} alt="" width={40} height={40} />
               Shaxsiy ma‘lumotlar
             </Link>
-            <Image src={right} alt="" width={18} height={18} />
+            <Link href="/webapp/personalinformation">
+              <Image src={right} alt="" width={18} height={18} />
+            </Link>
           </div>
 
           <div className="menu__hero">
@@ -95,7 +97,9 @@ export default function Profile() {
               <Image src={language} alt="" width={40} height={40} />
               Tilni o‘zgartirish
             </Link>
-            <Image src={right} alt="" width={18} height={18} />
+            <Link href="/webapp/language">
+              <Image src={right} alt="" width={18} height={18} />
+            </Link>
           </div>
 
           <div className="menu__hero">
@@ -103,7 +107,9 @@ export default function Profile() {
               <Image src={cantact} alt="" width={40} height={40} />
               Biz bilan bog‘lanish
             </Link>
-            <Image src={right} alt="" width={18} height={18} />
+            <Link href="/webapp/contact">
+              <Image src={right} alt="" width={18} height={18} />
+            </Link>
           </div>
 
           <div className="menu__hero">
@@ -111,7 +117,9 @@ export default function Profile() {
               <Image src={manzil} alt="" width={40} height={40} />
               Manzillar
             </Link>
-            <Image src={right} alt="" width={18} height={18} />
+            <Link href="/webapp/addresses">
+              <Image src={right} alt="" width={18} height={18} />
+            </Link>
           </div>
         </div>
       </div>

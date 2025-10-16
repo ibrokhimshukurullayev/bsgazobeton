@@ -167,9 +167,7 @@ const CartContent = ({ onCheckout }) => {
     <div className="container">
       <div className="cart">
         <div className="cart__header">
-          <h2 className="cart__title">
-            Cart: <span>{items.length}</span>
-          </h2>
+          <h2 className="cart__title">Cart</h2>
         </div>
 
         <div className="cart__box">

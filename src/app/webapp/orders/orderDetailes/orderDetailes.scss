@@ -22,7 +22,7 @@
   font-size: 19px;
   line-height: 28px;
   letter-spacing: -1.2%;
-  padding: 29px 0 16px 0;
+  padding: 29px 0 32px 0;
   text-align: center;
 }
 
@@ -68,4 +68,105 @@
   line-height: 28px;
   letter-spacing: -1.2%;
   padding: 20px 0 8px 0;
+}
+.profile-photo {
+  display: flex;
+  justify-content: center;
+  margin: 32px 0;
+
+  .photo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .photo-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border: 3px solid #f1f1f1;
+    transition: 0.3s ease;
+
+    &:hover {
+      border-color: #dc2626;
+      .edit-overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .edit-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      .edit-icon {
+        font-size: 24px;
+        color: #fff;
+        transition: 0.3s;
+        transform: scale(1);
+      }
+
+      &:hover .edit-icon {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .photo-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+
+    .photo-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.25s ease;
+      font-weight: 500;
+    }
+
+    .change {
+      border: 1px solid #ccc;
+      background: #fff;
+      color: #333;
+
+      &:hover {
+        border-color: #999;
+        background: #f8f8f8;
+      }
+    }
+
+    .delete {
+      border: 1px solid #dc2626;
+      background: #fff;
+      color: #dc2626;
+
+      &:hover {
+        background: #dc2626;
+        color: #fff;
+      }
+    }
+  }
 }

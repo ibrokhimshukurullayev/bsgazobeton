@@ -30,7 +30,7 @@
 .home__footer__list li span {
   color: rgb(145, 136, 136);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 10px;
   text-align: center;
 }
@@ -39,4 +39,12 @@
 .home__footer__list li.active span {
   color: #dc2626;
   font-weight: 600;
+}
+
+.icon-wrapper {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

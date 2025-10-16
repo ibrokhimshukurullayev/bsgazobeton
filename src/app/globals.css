@@ -9,6 +9,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
 button,
 a,
 li,
