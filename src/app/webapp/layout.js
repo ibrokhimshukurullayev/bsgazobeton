@@ -90,11 +90,20 @@ export default function WebappLayout({ children }) {
     prevPath.current = pathname;
   }, [pathname]);
 
-  const showFooter = !pathname.includes("calculate");
+  // 🔹 Footer faqat shu sahifalarda chiqadi:
+  const mainPages = [
+    "/webapp/home",
+    "/webapp/cart",
+    "/webapp/orders",
+    "/webapp/profile",
+  ];
+
+  const showFooter = mainPages.includes(pathname);
 
   return (
     <div className="webapp-layout">
       <div className="webapp-content">
+        <div className="top-mask" />
         <main className="webapp-main">
           {children}
           {loading && (
@@ -104,6 +113,8 @@ export default function WebappLayout({ children }) {
           )}
         </main>
       </div>
+
+      {/* Faqat asosiy sahifalarda footer chiqadi */}
       {showFooter && <WebappFooter />}
     </div>
   );

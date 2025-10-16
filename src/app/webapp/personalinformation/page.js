@@ -8,8 +8,8 @@ import { useGetUserInfoQuery } from "../../../context/userApi";
 import "react-toastify/dist/ReactToastify.css";
 import "./personalinformation.scss";
 
-import left from "../../../assets/images/webappImages/left.svg";
 import profileDefault from "../../../assets/images/webappImages/profiles.svg";
+import editIcon from "../../../assets/images/webappImages/edit.svg"; // ✏️ yangi icon qo‘sh
 
 const PersonalInformation = () => {
   const router = useRouter();
@@ -25,27 +25,20 @@ const PersonalInformation = () => {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
-    phonenumber: "",
     avatar: null,
     profileImageUrl: "",
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
   });
 
   const [isChanged, setIsChanged] = useState(false);
+  const [showOptions, setShowOptions] = useState(false); // 🔹 yangi holat
 
   useEffect(() => {
     if (user) {
       setFormData({
         firstname: user.firstname || "",
         lastname: user.lastname || "",
-        phonenumber: user.phonenumber || "",
         avatar: null,
         profileImageUrl: user.profileimageurl || "",
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: "",
       });
     }
   }, [user]);
@@ -80,9 +73,19 @@ const PersonalInformation = () => {
       profileImageUrl: preview,
     }));
     setIsChanged(true);
+    setShowOptions(false);
   };
 
-  // 🔹 Ma'lumotni saqlash
+  const handleDeleteImage = () => {
+    setFormData((prev) => ({
+      ...prev,
+      avatar: null,
+      profileImageUrl: "",
+    }));
+    setIsChanged(true);
+    setShowOptions(false);
+  };
+
   const handleSave = async (e) => {
     e.preventDefault();
     try {
@@ -128,80 +131,11 @@ const PersonalInformation = () => {
     }
   };
 
-  // 🔹 Telefon raqamni yangilash
-  const handlePhoneChange = async (e) => {
-    e.preventDefault();
-
-    if (!formData.phonenumber.trim()) {
-      toast.error("Telefon raqamini kiriting!");
-      return;
-    }
-
-    try {
-      const res = await fetch("https://api.bsgazobeton.uz/api/users/profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          phoneNumber: formData.phonenumber,
-        }),
-      });
-
-      if (!res.ok) throw new Error("Telefon raqamni o‘zgartirishda xatolik");
-      toast.success("Telefon raqamingiz yangilandi ✅");
-      refetch();
-    } catch (err) {
-      toast.error("Xatolik: " + err.message);
-    }
-  };
-
-  // 🔹 Parolni yangilash
-  const handlePasswordChange = async (e) => {
-    e.preventDefault();
-
-    if (formData.newPassword !== formData.confirmPassword) {
-      toast.error("Yangi parollar mos emas!");
-      return;
-    }
-
-    try {
-      const res = await fetch(
-        "https://api.bsgazobeton.uz/api/auth/change-password",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            currentPassword: formData.currentPassword,
-            newPassword: formData.newPassword,
-            confirmPassword: formData.confirmPassword,
-          }),
-        }
-      );
-
-      if (!res.ok) throw new Error("Parolni o‘zgartirishda xatolik");
-      toast.success("Parolingiz muvaffaqiyatli o‘zgartirildi ✅");
-
-      setFormData((prev) => ({
-        ...prev,
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      }));
-    } catch (err) {
-      toast.error("Xatolik: " + err.message);
-    }
-  };
-
   return (
     <div className="container">
       <ToastContainer />
       <div className="setting__top">
-        <h3 className="setting__top__title">User settings</h3>
+        <h3 className="setting__top__title">Profil ma‘lumotlari</h3>
       </div>
 
       <div className="profile-photo">
@@ -219,37 +153,36 @@ const PersonalInformation = () => {
               className="profile-image"
             />
 
-            <label htmlFor="upload" className="edit-overlay">
-              <span className="edit-icon">📷</span>
-            </label>
-            <input
-              id="upload"
-              type="file"
-              accept="image/*"
-              hidden
-              onChange={handleImageChange}
-            />
-          </div>
+            <button
+              type="button"
+              className="edit-btn"
+              onClick={() => setShowOptions(!showOptions)}
+            >
+              <Image src={editIcon} alt="Edit" width={20} height={20} />
+            </button>
 
-          <div className="photo-actions">
-            <label htmlFor="upload" className="photo-btn change">
-              Rasmni o‘zgartirish
-            </label>
-            {formData.profileImageUrl && (
-              <button
-                type="button"
-                className="photo-btn delete"
-                onClick={() => {
-                  setFormData((prev) => ({
-                    ...prev,
-                    avatar: null,
-                    profileImageUrl: "",
-                  }));
-                  setIsChanged(true);
-                }}
-              >
-                Rasmni o‘chirish
-              </button>
+            {showOptions && (
+              <div className="edit-options">
+                <label htmlFor="upload" className="edit-option">
+                  Rasmni o‘zgartirish
+                </label>
+                {formData.profileImageUrl && (
+                  <button
+                    type="button"
+                    className="edit-option delete"
+                    onClick={handleDeleteImage}
+                  >
+                    Rasmni o‘chirish
+                  </button>
+                )}
+                <input
+                  id="upload"
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={handleImageChange}
+                />
+              </div>
             )}
           </div>
         </div>
@@ -282,74 +215,6 @@ const PersonalInformation = () => {
 
         <button type="submit" className="form__button" disabled={!isChanged}>
           Saqlash
-        </button>
-      </form>
-
-      <form className="order__form" onSubmit={handlePhoneChange}>
-        <h2 className="setting__top__title" style={{ marginTop: "30px" }}>
-          Telefon raqamni o‘zgartirish
-        </h2>
-
-        <div className="order__form__info">
-          <label className="form__group__label">Telefon raqam</label>
-          <input
-            name="phonenumber"
-            value={formData.phonenumber}
-            onChange={handleChange}
-            className="form__group__input"
-            type="text"
-            placeholder="+998 90 123 45 67"
-          />
-        </div>
-
-        <button type="submit" className="form__button">
-          Telefon raqamni saqlash
-        </button>
-      </form>
-
-      <form className="order__form" onSubmit={handlePasswordChange}>
-        <h2 className="setting__top__title" style={{ marginTop: "30px" }}>
-          Parolni o‘zgartirish
-        </h2>
-
-        <div className="order__form__info">
-          <label className="form__group__label">Joriy parol</label>
-          <input
-            name="currentPassword"
-            value={formData.currentPassword}
-            onChange={handleChange}
-            className="form__group__input"
-            type="password"
-            placeholder="Hozirgi parolingiz"
-          />
-        </div>
-
-        <div className="order__form__info">
-          <label className="form__group__label">Yangi parol</label>
-          <input
-            name="newPassword"
-            value={formData.newPassword}
-            onChange={handleChange}
-            className="form__group__input"
-            type="password"
-            placeholder="Yangi parolni kiriting"
-          />
-        </div>
-
-        <div className="order__form__info">
-          <label className="form__group__label">Parolni tasdiqlang</label>
-          <input
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className="form__group__input"
-            type="password"
-            placeholder="Yangi parolni qayta kiriting"
-          />
-        </div>
-
-        <button type="submit" className="form__button">
-          Parolni o‘zgartirish
         </button>
       </form>
     </div>

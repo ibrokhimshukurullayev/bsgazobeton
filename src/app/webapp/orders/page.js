@@ -84,7 +84,7 @@ export default function Orders() {
 
   return (
     <div className="container">
-      <div className="ooredr__tab__header">
+      <div className="order__tab__header">
         <div className="orders">
           <h3 className="orders__title">Orders</h3>
         </div>

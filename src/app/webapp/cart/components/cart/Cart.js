@@ -7,7 +7,6 @@ import {
   incCart,
   decCart,
   removeFromCart,
-  clearCart,
 } from "../../../../../context/cartSlice";
 import { useTranslation } from "react-i18next";
 import { useGetUserOrdersQuery } from "../../../../../context/orderApi";
@@ -21,44 +20,36 @@ import deleteIcon from "../../../../../assets/images/webappImages/delete.svg";
 
 import "./cart.scss";
 
-// 🔸 LocalStorage’da saqlash funksiyasi
-function writeLocalCart(productid, nextQuantity, patch) {
+// 🔸 localStorage funksiyasi
+function writeLocalCart(productid, quantity, patch = {}) {
   try {
     const raw = localStorage.getItem("carts");
-    const list = raw ? JSON.parse(raw) : [];
-    const idx = list.findIndex((x) => x && x.productid === productid);
+    const carts = raw ? JSON.parse(raw) : [];
 
-    if (nextQuantity <= 0) {
-      const next =
-        idx === -1 ? list : list.filter((x) => x.productid !== productid);
-      localStorage.setItem("carts", JSON.stringify(next));
+    const idx = carts.findIndex((x) => x.productid === productid);
+
+    let next;
+    if (quantity <= 0) {
+      next = carts.filter((x) => x.productid !== productid);
+    } else if (idx === -1) {
+      next = [...carts, { productid, quantity, ...patch }];
     } else {
-      if (idx === -1) {
-        localStorage.setItem(
-          "carts",
-          JSON.stringify([
-            ...list,
-            { productid, quantity: nextQuantity, ...(patch || {}) },
-          ])
-        );
-      } else {
-        const next = list.map((x, i) =>
-          i === idx ? { ...x, quantity: nextQuantity, ...(patch || {}) } : x
-        );
-        localStorage.setItem("carts", JSON.stringify(next));
-      }
+      next = carts.map((x) =>
+        x.productid === productid ? { ...x, quantity, ...patch } : x
+      );
     }
 
-    window.dispatchEvent(
-      new CustomEvent("cart:sync", { detail: { source: "cart" } })
-    );
-  } catch (e) {
-    console.error("localStorage carts yozishda xato:", e);
+    localStorage.setItem("carts", JSON.stringify(next));
+
+    // 🔹 Redux bilan sinxronlash uchun event
+    window.dispatchEvent(new CustomEvent("cart:sync"));
+  } catch (err) {
+    console.error("❌ localStorage yozishda xato:", err);
   }
 }
 
 const CartContent = ({ onCheckout }) => {
-  const [t] = useTranslation("global");
+  const { t } = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -72,20 +63,18 @@ const CartContent = ({ onCheckout }) => {
     refetchOnReconnect: true,
   });
 
-  // 🔹 Server bilan sinxronlash uchun debounce hook
   const { saveLater } = useDebouncedCartSaver({
     token,
-    debounceMs: 600,
+    debounceMs: 500,
   });
 
   const items = token ? serverCart?.data || [] : cart || [];
 
-  // 🔹 Lokal miqdor (optimistik)
   const [localQuantities, setLocalQuantities] = useState({});
 
-  // === Sync qilish ===
+  // 🔹 Sync quantities with current items
   useEffect(() => {
-    if (items.length > 0) {
+    if (items.length) {
       const qMap = {};
       items.forEach((item) => {
         qMap[item.productid] = Number(item.quantity) || 0;
@@ -94,68 +83,50 @@ const CartContent = ({ onCheckout }) => {
     }
   }, [items]);
 
-  // === ✅ Miqdorni oshirish ===
+  // 🔹 Increase quantity
   const handleIncrease = (item) => {
-    const productid = item.productid;
-    const nextQty = (localQuantities[productid] || 0) + 1;
+    const pid = item.productid;
+    const nextQty = (localQuantities[pid] || 0) + 1;
 
-    // 🔹 LocalStorage + Redux
-    writeLocalCart(productid, nextQty, item);
+    setLocalQuantities((prev) => ({ ...prev, [pid]: nextQty }));
     dispatch(incCart(item));
+    writeLocalCart(pid, nextQty, item);
 
-    // 🔹 Lokal state
-    setLocalQuantities((prev) => ({ ...prev, [productid]: nextQty }));
-
-    // 🔹 Serverga yuborish
-    if (token) {
-      const state = nextQty > 1 ? "Update" : "Create";
-      saveLater(productid, nextQty, state);
-    }
+    if (token) saveLater(pid, nextQty, nextQty > 1 ? "Update" : "Create");
   };
 
-  // === ✅ Miqdorni kamaytirish ===
+  // 🔹 Decrease quantity
   const handleDecrease = (item) => {
-    const productid = item.productid;
-    const currentQty = localQuantities[productid] || 0;
-    const nextQty = Math.max(0, currentQty - 1);
+    const pid = item.productid;
+    const curr = localQuantities[pid] || 0;
+    const nextQty = Math.max(0, curr - 1);
 
-    // 🔹 LocalStorage + Redux
-    writeLocalCart(productid, nextQty, item);
+    setLocalQuantities((prev) => ({ ...prev, [pid]: nextQty }));
+    if (nextQty === 0) dispatch(removeFromCart(item));
+    else dispatch(decCart(item));
 
-    if (nextQty <= 0) {
-      dispatch(removeFromCart(item));
-    } else {
-      dispatch(decCart(item));
-    }
-
-    // 🔹 Lokal state
-    setLocalQuantities((prev) => ({ ...prev, [productid]: nextQty }));
-
-    // 🔹 Serverga yuborish
-    if (token) {
-      const state = nextQty <= 0 ? "Delete" : "Update";
-      saveLater(productid, nextQty, state);
-    }
+    writeLocalCart(pid, nextQty, item);
+    if (token) saveLater(pid, nextQty, nextQty === 0 ? "Delete" : "Update");
   };
 
-  // === ✅ Mahsulotni o‘chirish ===
+  // 🔹 Remove item completely
   const handleRemove = (item) => {
-    const productid = item.productid;
-    writeLocalCart(productid, 0, item);
+    const pid = item.productid;
+    setLocalQuantities((prev) => ({ ...prev, [pid]: 0 }));
     dispatch(removeFromCart(item));
-    setLocalQuantities((prev) => ({ ...prev, [productid]: 0 }));
-    if (token) saveLater(productid, 0, "Delete");
+    writeLocalCart(pid, 0);
+    if (token) saveLater(pid, 0, "Delete");
   };
 
-  // === ✅ Umumiy summa ===
+  // 🔹 Total sum
   const totalSum = useMemo(() => {
     return items.reduce((sum, item) => {
       const qty = localQuantities[item.productid] ?? item.quantity ?? 0;
-      return sum + Number(item.price) * qty;
+      return sum + (Number(item.price) || 0) * qty;
     }, 0);
   }, [items, localQuantities]);
 
-  if (!items || items.length === 0)
+  if (!items?.length)
     return (
       <div className="container">
         <h2 className="cart__titles">Cart</h2>
@@ -188,7 +159,7 @@ const CartContent = ({ onCheckout }) => {
               <div className="cart__details">
                 <h4 className="cart__category">{item.productname}</h4>
                 <span className="cart__price">
-                  {item.price?.toLocaleString()} UZS
+                  {(item.price || 0).toLocaleString()} UZS
                 </span>
 
                 <div className="cart__quantity">
@@ -224,12 +195,10 @@ const CartContent = ({ onCheckout }) => {
           ))}
         </div>
 
-        {/* TOTAL */}
         <div className="cart__total">
-          <span>Umumiy:</span> {totalSum?.toLocaleString()} UZS
+          <span>Umumiy:</span> {totalSum.toLocaleString()} UZS
         </div>
 
-        {/* CHECKOUT BUTTON */}
         <button
           className="form__button"
           onClick={() => {

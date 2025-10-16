@@ -11,11 +11,9 @@ import {
   incCart,
   decCart,
   removeFromCart,
-} from "../../../../context/cartSlice"; // ✅ removeFromCart qo‘shildi
+} from "../../../../context/cartSlice";
 import Loading from "../../../../components/loading/Loading";
 
-import back from "../../../../assets/images/webappImages/left.svg";
-import share from "../../../../assets/images/webappImages/share.svg";
 import plusIcon from "../../../../assets/images/webappImages/plus.svg";
 import minusIcon from "../../../../assets/images/webappImages/minus.svg";
 
@@ -46,7 +44,6 @@ export default function ProductDetailPage() {
     return obj[langKey] || obj.uz_uz || "";
   };
 
-  // ✅ Cartdagi productni topamiz
   const productInCart = cart.find(
     (item) => item.productid === product?.productid
   );
@@ -64,25 +61,19 @@ export default function ProductDetailPage() {
     ? product.technicaldata
     : [];
 
-  // ✅ Savatchaga qo‘shish
   const handleAddToCart = () => {
-    if (!product) return;
     dispatch(addToCart({ ...product, quantity: 1 }));
     setQuantity(1);
   };
 
-  // ✅ Miqdorni oshirish
   const handleIncrease = () => {
-    if (!product) return;
     dispatch(incCart(product));
     setQuantity((prev) => prev + 1);
   };
 
-  // ✅ Miqdorni kamaytirish
   const handleDecrease = () => {
-    if (!product) return;
     if (quantity <= 1) {
-      dispatch(removeFromCart(product)); // 0 bo‘lsa tozalaymiz
+      dispatch(removeFromCart(product));
       setQuantity(0);
     } else {
       dispatch(decCart(product));
@@ -91,15 +82,16 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div>
+    <div className="product__detail__wrapper">
+      {/* 🔹 Bu overlay 40px joyni yopadi */}
+      <div className="fixed-top-overlay"></div>
+
       <h3 className="product__detail__title">
         {getLocalizedValue(product.name)}
       </h3>
 
       <div id="product__body">
         <div className="container product__detail__content">
-          <div className="product__detail__header"></div>
-
           <div className="product-image-container">
             <Image
               src={
@@ -174,7 +166,6 @@ export default function ProductDetailPage() {
             </div>
           </div>
 
-          {/* ACTIONS */}
           <div className="product__actions">
             {quantity > 0 ? (
               <div className="product__action__box">
