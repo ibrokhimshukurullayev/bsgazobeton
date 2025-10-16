@@ -84,23 +84,25 @@ export default function Orders() {
 
   return (
     <div className="container">
-      <div className="orders">
-        <h3 className="orders__title">Orders</h3>
-      </div>
+      <div className="ooredr__tab__header">
+        <div className="orders">
+          <h3 className="orders__title">Orders</h3>
+        </div>
 
-      <div className="orders__tabs">
-        <button
-          className={`orders__tab ${tab === "active" ? "active" : ""}`}
-          onClick={() => setTab("active")}
-        >
-          Active
-        </button>
-        <button
-          className={`orders__tab ${tab === "archive" ? "active" : ""}`}
-          onClick={() => setTab("archive")}
-        >
-          Archive
-        </button>
+        <div className="orders__tabs">
+          <button
+            className={`orders__tab ${tab === "active" ? "active" : ""}`}
+            onClick={() => setTab("active")}
+          >
+            Active
+          </button>
+          <button
+            className={`orders__tab ${tab === "archive" ? "active" : ""}`}
+            onClick={() => setTab("archive")}
+          >
+            Archive
+          </button>
+        </div>
       </div>
 
       <div className="orders__list">

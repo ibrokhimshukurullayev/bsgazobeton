@@ -127,10 +127,6 @@ const Products = () => {
 
       {selectedChild && (
         <div className="cart__box">
-          <h3 className="category-group__title">
-            {getLocalizedValue(selectedChild.name)}
-          </h3>
-
           {selectedProducts.length > 0 ? (
             selectedProducts.map((product) => {
               const techData = Array.isArray(product.technicaldata)
@@ -138,7 +134,14 @@ const Products = () => {
                 : [];
 
               return (
-                <div key={product.productid} className="cart__item">
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push(`/webapp/product/${product.productid}`);
+                  }}
+                  key={product.productid}
+                  className="cart__item"
+                >
                   <Image
                     className="cart__item__img"
                     src={
@@ -173,13 +176,7 @@ const Products = () => {
                             ? "/" + getLocalizedValue(product.unit)
                             : ""
                         }`}
-                        <span
-                          className="product-detail-btn"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            router.push(`/webapp/product/${product.productid}`);
-                          }}
-                        >
+                        <span className="product-detail-btn">
                           <Image
                             src={productleft}
                             alt="left"
