@@ -61,8 +61,10 @@ export default function ProductDetailPage() {
     ? product.technicaldata
     : [];
 
+  // ✅ Mahsulotni savatga qo‘shish
   const handleAddToCart = () => {
-    dispatch(addToCart({ ...product, quantity: 1 }));
+    const newItem = { ...product, quantity: 1 };
+    dispatch(addToCart(newItem));
     setQuantity(1);
   };
 
@@ -83,7 +85,6 @@ export default function ProductDetailPage() {
 
   return (
     <div className="product__detail__wrapper">
-      {/* 🔹 Bu overlay 40px joyni yopadi */}
       <div className="fixed-top-overlay"></div>
 
       <h3 className="product__detail__title">
