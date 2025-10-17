@@ -455,6 +455,22 @@
   "phoneVerified": "Phone number verified ✅",
   "wrongCode": "Invalid code",
   "uploadError": "Image upload failed!"
+},
+"homes": {
+  "products": "Products",
+  "no_categories": "No categories available",
+  "calculator": "Calculator",
+  "calc_title": "Do you know the number of aerated blocks?",
+  "calc_text": "Calculate online how many blocks and what cost you’ll need for your project!",
+  "calc_button": "Calculate",
+  "error": "An error occurred"
+},
+"footers":{
+  "main": "Home",
+  "cart": "Cart",
+  "orders": "Orders",
+  "profile": "Profile"
 }
+
 
 }

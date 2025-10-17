@@ -12,31 +12,33 @@ import arrowright from "../../../assets/images/webappImages/arrowright.svg";
 
 const languages = [
   { code: "uz_Uz", name: "Uzbek", flag: uzbflag },
-  { code: "en_Us", name: "English", flag: englishflag },
   { code: "ru_Ru", name: "Russian", flag: russionflag },
+  { code: "en_Us", name: "English", flag: englishflag },
 ];
 
 const Language = () => {
-  const { i18n } = useTranslation();
-  const [selectedLang, setSelectedLang] = useState("uz_Uz");
+  const { i18n, t } = useTranslation();
+  const [selectedLang, setSelectedLang] = useState("");
 
-  // localStorage'dan o‘qish
+  // localStorage'dan tilni o‘qish
   useEffect(() => {
     const storedLang = localStorage.getItem("language") || "uz_Uz";
-    setSelectedLang(storedLang);
     i18n.changeLanguage(storedLang);
+    setSelectedLang(storedLang);
   }, [i18n]);
 
   const handleSelectLang = (lang) => {
-    setSelectedLang(lang);
     i18n.changeLanguage(lang);
     localStorage.setItem("language", lang);
     window.dispatchEvent(new CustomEvent("languageChanged", { detail: lang }));
+    setSelectedLang(lang);
   };
 
   return (
     <div className="language-content container">
-      <h1 className="language__title">Language</h1>
+      <h1 className="language__title">
+        {t("settings.language") || "Language"}
+      </h1>
 
       <div className="language-list">
         {languages.map((lang) => (
@@ -50,7 +52,9 @@ const Language = () => {
             <div className="language-flag">
               <Image src={lang.flag} alt={lang.name} width={32} height={20} />
             </div>
+
             <span className="language-name">{lang.name}</span>
+
             <div className="language-checkbox">
               <div className="checkbox-circle">
                 {selectedLang === lang.code && (

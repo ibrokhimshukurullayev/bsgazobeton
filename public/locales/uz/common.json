@@ -454,5 +454,20 @@
   "phoneVerified": "Telefon raqam tasdiqlandi ✅",
   "wrongCode": "Kod xato",
   "uploadError": "Rasm yuklanmadi!"
+},
+"homes": {
+  "products": "Mahsulotlar",
+  "no_categories": "Kategoriyalar mavjud emas",
+  "calculator": "Kalkulyator",
+  "calc_title": "Gazobloklar sonini bilasizmi?",
+  "calc_text": "Loyihangiz uchun kerakli gazoblok miqdori va narxini onlayn hisoblang!",
+  "calc_button": "Hisoblash",
+  "error": "Xatolik yuz berdi"
+},
+"footers":{
+  "main": "Asosiy",
+  "cart": "Savat",
+  "orders": "Buyurtmalar",
+  "profile": "Profil"
 }
 }

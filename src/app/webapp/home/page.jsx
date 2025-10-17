@@ -6,6 +6,8 @@ import Image from "next/image";
 import "./home.scss";
 import "../page.scss";
 
+import { useTranslation } from "react-i18next";
+
 import main from "../../../assets/images/webappImages/main.svg";
 import cart from "../../../assets/images/webappImages/cart.svg";
 import order from "../../../assets/images/webappImages/order.svg";
@@ -27,6 +29,8 @@ function getName(cat, language = "uz_Uz") {
 }
 
 const Home = () => {
+  const { t, i18n } = useTranslation("global");
+
   const router = useRouter();
   const [language, setLanguage] = useState(() => {
     return (
@@ -70,7 +74,7 @@ const Home = () => {
   //       <Loading />
   //     </main>
   //   );
-  if (error) return <div>Xatolik yuz berdi</div>;
+  if (error) return <div>{t("homes.error")}</div>;
 
   return (
     <div className="container">
@@ -81,9 +85,8 @@ const Home = () => {
           </li>
         </ul>
 
-        {/* Mahsulot kategoriyalari */}
         <div className="home__cards">
-          <h3 className="home__cards__title">Mahsulotlar</h3>
+          <h3 className="home__cards__title">{t("homes.products")}</h3>
           <div className="home__box">
             {rootCategories.length > 0 ? (
               rootCategories.map((el) => (
@@ -112,30 +115,28 @@ const Home = () => {
               ))
             ) : (
               <div className="no__category">
-                <p>Kategoriyalar mavjud emas</p>
+                <p>{t("homes.no_categories")}</p>
               </div>
             )}
           </div>
         </div>
 
-        {/* Kalkulyator */}
         <div className="home__calculator">
-          <h3 className="home__calculator__title">Kalkulyator</h3>
+          <h3 className="home__calculator__title">{t("homes.calculator")}</h3>
           <div className="home__calculator__card">
             <div className="home__calculator__content">
               <h4 className="home__calculator__content__title">
-                Gazobloklar sonini bilasizmi?
+                {t("homes.calc_title")}
               </h4>
               <p className="home__calculator__content__text">
-                Loyihangiz uchun kerakli gazoblok miqdori va narxini onlayn
-                hisoblang!
+                {t("homes.calc_text")}
               </p>
               <div className="home__calculator__card__end">
                 <button
                   onClick={() => router.push("/webapp/calculate")}
                   className="home__calculator__card__button"
                 >
-                  Hisoblash
+                  {t("homes.calc_button")}
                   <Image src={rights} alt="right" width={16} height={16} />
                 </button>
               </div>
