@@ -470,7 +470,55 @@
   "cart": "Cart",
   "orders": "Orders",
   "profile": "Profile"
-}
-
+},
+"addresses": {
+    "title": "Addresses",
+    "office1_title": "1. Head Office",
+    "office1_address": "Tashkent, Yakkasaray District, Choponota Street, 17",
+    "office2_title": "2. Branch",
+    "office2_address": "Tashkent, Chilonzor District, Bunyodkor Street, 56"
+  },
+  "contact": {
+    "title": "Contact us",
+    "phone1": "+998 (99) 150–22–22",
+    "phone2": "+998 (71) 200–10–22",
+    "email_label": "Email:",
+    "office_label": "Head office:",
+    "office_address": "Sirdarya region, Sirdarya district, Sobir Rahimov SIU, Chibantay settlement"
+  },
+  "profiless": {
+    "title": "Profile",
+    "loading": "Loading...",
+    "error": "An error occurred!",
+    "no_name": "No name available",
+    "personal_info": "Personal Information",
+    "change_language": "Change Language",
+    "contact_us": "Contact Us",
+    "addresses": "Addresses"
+  },
+  "personal_info": {
+    "title": "Profile Information",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "first_name": "First Name",
+    "first_name_placeholder": "Enter your first name",
+    "last_name": "Last Name",
+    "last_name_placeholder": "Enter your last name",
+    "save": "Save",
+    "change_photo": "Change Photo",
+    "delete_photo": "Delete Photo",
+    "photo_error": "Image must not exceed 3MB",
+    "update_success": "Profile information updated ✅",
+    "update_error": "Error during update",
+    "upload_error": "Image upload failed!"
+  },
+  "ordersss": {
+    "id": "Order ID",
+    "date": "Date",
+    "status": "Status",
+    "total": "Total",
+    "address": "Address",
+    "products": "Products"
+  }
 
 }

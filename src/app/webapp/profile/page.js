@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import "./profile.scss";
+import { useTranslation } from "react-i18next";
 
 import settings from "../../../assets/images/webappImages/settings.svg";
 import person from "../../../assets/images/webappImages/person.svg";
@@ -17,6 +18,8 @@ import defaultAvatar from "../../../assets/images/webappImages/profiles.svg";
 import { useGetUserInfoQuery } from "../../../context/userApi";
 
 export default function Profile() {
+  const { t } = useTranslation("global");
+
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
@@ -39,7 +42,7 @@ export default function Profile() {
     return (
       <div className="container containers">
         <div className="profile">
-          <p>Yuklanmoqda...</p>
+          <p>{t("profile.loading")}</p>
         </div>
       </div>
     );
@@ -49,7 +52,7 @@ export default function Profile() {
     return (
       <div className="container containers">
         <div className="profile">
-          <p>Xatolik yuz berdi!</p>
+          <p>{t("profile.error")}</p>
         </div>
       </div>
     );
@@ -60,7 +63,7 @@ export default function Profile() {
       <div className="profile">
         <div className="user-info">
           <div className="user__info__header">
-            <h3>Profile</h3>
+            <h3>{t("profiless.title")}</h3>
           </div>
 
           <div className="user__info__footer">
@@ -72,7 +75,7 @@ export default function Profile() {
               className="avatar"
             />
             <div className="user__info__footer__end">
-              <h4>{fullName || "Ism mavjud emas"}</h4>
+              <h4>{fullName || t("profiless.no_name")}</h4>
               <p>+{phone}</p>
             </div>
           </div>
@@ -85,7 +88,7 @@ export default function Profile() {
               href="/webapp/personalinformation"
             >
               <Image src={person} alt="" width={40} height={40} />
-              Shaxsiy ma‘lumotlar
+              {t("profiless.personal_info")}
             </Link>
             <Link href="/webapp/personalinformation">
               <Image src={right} alt="" width={18} height={18} />
@@ -95,7 +98,7 @@ export default function Profile() {
           <div className="menu__hero">
             <Link className="menu__hero__link" href="/webapp/language">
               <Image src={language} alt="" width={40} height={40} />
-              Tilni o‘zgartirish
+              {t("profiless.change_language")}
             </Link>
             <Link href="/webapp/language">
               <Image src={right} alt="" width={18} height={18} />
@@ -105,7 +108,7 @@ export default function Profile() {
           <div className="menu__hero">
             <Link className="menu__hero__link" href="/webapp/contact">
               <Image src={cantact} alt="" width={40} height={40} />
-              Biz bilan bog‘lanish
+              {t("profiless.contact_us")}
             </Link>
             <Link href="/webapp/contact">
               <Image src={right} alt="" width={18} height={18} />
@@ -115,7 +118,7 @@ export default function Profile() {
           <div className="menu__hero">
             <Link className="menu__hero__link" href="/webapp/addresses">
               <Image src={manzil} alt="" width={40} height={40} />
-              Manzillar
+              {t("profiless.addresses")}
             </Link>
             <Link href="/webapp/addresses">
               <Image src={right} alt="" width={18} height={18} />

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { useTranslation } from "react-i18next";
+
 import Image from "next/image";
 import left from "../../../assets/images/webappImages/left.svg";
 import arrow from "../../../assets/images/webappImages/arrov.svg";
@@ -15,6 +17,7 @@ const Calculate = () => {
   const [holeArea, setHoleArea] = useState(null); // eshik va deraza joyi
   const [thickness, setThickness] = useState(50);
   const [natija, setNatija] = useState({ dona: 0, hajm: 0, paddon: 0 });
+  const [t, i18n] = useTranslation("global");
 
   const router = useRouter();
   const handleSubmit = (e) => {
@@ -40,13 +43,15 @@ const Calculate = () => {
         <div className="calculate">
           {/* Header */}
           <div className="calculte__header">
-            <h3 className="calculte__header__title">Kalkulyator</h3>
+            <h3 className="calculte__header__title">{t("calculator.title")}</h3>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="order__form">
             <div className="order__form__info">
-              <label className="form__group__label">Devor uzunligi (m)</label>
+              <label className="form__group__label">
+                {t("calculator.lengthLabel")}
+              </label>
               <input
                 className="form__group__input"
                 type="number"
@@ -59,7 +64,9 @@ const Calculate = () => {
             </div>
 
             <div className="order__form__info">
-              <label className="form__group__label">Devor balandligi (m)</label>
+              <label className="form__group__label">
+                {t("calculator.heightLabel")}
+              </label>
               <input
                 className="form__group__input"
                 type="number"
@@ -73,7 +80,7 @@ const Calculate = () => {
 
             <div className="order__form__info">
               <label className="form__group__label">
-                Eshik va deraza maydoni (m²)
+                {t("calculator.thickness")} ({t("units.m2")})
               </label>
               <input
                 className="form__group__input"
@@ -87,21 +94,23 @@ const Calculate = () => {
             </div>
 
             <div className="order__form__info form__select__hudud">
-              <label className="form__group__label">Devor qalinligi (mm)</label>
+              <label className="form__group__label">
+                {t("calculator.thicknessLabel")}
+              </label>
               <select
                 className="form__group__input form__select"
                 value={thickness}
                 onChange={(e) => setThickness(Number(e.target.value))}
               >
-                <option value="50">50mm</option>
-                <option value="100">100mm</option>
-                <option value="125">125mm</option>
-                <option value="150">150mm</option>
-                <option value="200">200mm</option>
-                <option value="250">250mm</option>
-                <option value="300">300mm</option>
-                <option value="350">350mm</option>
-                <option value="400">400mm</option>
+                <option value="50">50 {t("units.mm")}</option>
+                <option value="100">100 {t("units.mm")}</option>
+                <option value="125">125 {t("units.mm")}</option>
+                <option value="150">150 {t("units.mm")}</option>
+                <option value="200">200 {t("units.mm")}</option>
+                <option value="250">250 {t("units.mm")}</option>
+                <option value="300">300 {t("units.mm")}</option>
+                <option value="350">350 {t("units.mm")}</option>
+                <option value="400">400 {t("units.mm")}</option>
               </select>
               <Image
                 className="order__form__info__img"
@@ -111,25 +120,31 @@ const Calculate = () => {
             </div>
 
             <button type="submit" className="form__button">
-              Hisoblash
+              {t("calculator.calculateButton")}
             </button>
           </form>
 
           {/* Natija */}
           <div className="calculate__end">
-            <h3 className="calculate__end__title">Natija</h3>
+            <h3 className="calculate__end__title">
+              {t("calculator.resultTitle")}
+            </h3>
             <p className="calculate__end__text">
-              Kerakli gazobloklar soni:{" "}
-              <strong>{natija.dona ? `${natija.dona} dona` : "0 dona"}</strong>
-            </p>
-            <p className="calculate__end__text">
-              Umumiy hajmi:{" "}
-              <strong>{natija.hajm ? `${natija.hajm} m³` : "0 m³"}</strong>
-            </p>
-            <p className="calculate__end__text">
-              Paddon soni:{" "}
+              {t("calculator.blockCount")}{" "}
               <strong>
-                {natija.paddon ? `${natija.paddon} dona` : "0 dona"}
+                {natija.dona} {t("units.piece")}
+              </strong>
+            </p>
+            <p className="calculate__end__text">
+              {t("calculator.volume")}{" "}
+              <strong>
+                {natija.hajm} {t("units.m3")}
+              </strong>
+            </p>
+            <p className="calculate__end__text">
+              {t("calculator.palletCount")}:{" "}
+              <strong>
+                {natija.paddon} {t("units.piece")}
               </strong>
             </p>
           </div>

@@ -5,11 +5,14 @@ import React from "react";
 import "./addresses.scss";
 import location from "../../../assets/images/webappImages/location.svg";
 import right from "../../../assets/images/webappImages/right.svg";
+import { useTranslation } from "react-i18next";
 
 const Addresses = () => {
+  const { t } = useTranslation("global");
+
   return (
     <div className="container location">
-      <div className="location__title">Manzillar</div>
+      <div className="location__title">{t("addresses.title")}</div>
 
       <div className="location__card">
         <div className="location__card-content">
@@ -17,10 +20,8 @@ const Addresses = () => {
             <Image src={location} alt="location" width={24} height={24} />
           </div>
           <div className="location__text">
-            <h3 className="location__list">1. Bosh ofis</h3>
-            <p className="location__list2">
-              Toshkent, Yakkasaroy tumani, Cho'ponota ko'chasi, 17
-            </p>
+            <h3 className="location__list">{t("addresses.office1_title")}</h3>
+            <p className="location__list2">{t("addresses.office1_address")}</p>
           </div>
         </div>
         <div className="location__right">
@@ -28,17 +29,14 @@ const Addresses = () => {
         </div>
       </div>
 
-      {/* 2-karta */}
       <div className="location__card">
         <div className="location__card-content">
           <div className="location__icon">
             <Image src={location} alt="location" width={24} height={24} />
           </div>
           <div className="location__text">
-            <h3 className="location__list">2. Filial</h3>
-            <p className="location__list2">
-              Toshkent, Chilonzor tumani, Bunyodkor ko‘chasi, 56
-            </p>
+            <h3 className="location__list">{t("addresses.office2_title")}</h3>
+            <p className="location__list2">{t("addresses.office2_address")}</p>
           </div>
         </div>
         <div className="location__right">

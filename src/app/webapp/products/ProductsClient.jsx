@@ -19,9 +19,12 @@ const Products = () => {
 
   const { i18n } = useTranslation();
   const currentLang = i18n.language;
-  const langKey =
-    currentLang === "uz" ? "uz_uz" : currentLang === "ru" ? "ru_ru" : "en_us";
 
+  // 🔹 Til kalitlari
+  const langKey =
+    currentLang === "ru" ? "ru_ru" : currentLang === "en" ? "en_us" : "uz_uz";
+
+  // 🔹 API chaqiruvlar
   const { data: categoriesData, isLoading: catLoading } = useGetCategoryQuery({
     skip: 0,
     take: 1000,
@@ -42,6 +45,14 @@ const Products = () => {
     [productsData]
   );
 
+  // 🔹 Foydali funksiya: har qanday lokalizatsiyani to‘g‘ri olish
+  const getLocalizedValue = (obj) => {
+    if (!obj) return "";
+    if (typeof obj === "string") return obj;
+    return obj[langKey] || obj.uz_uz || obj.ru_ru || obj.en_us || "";
+  };
+
+  // 🔹 Kategoriyalarni ajratish
   const currentCategory = categories.find(
     (c) => String(c.productcategoryid) === String(categoryId)
   );
@@ -70,18 +81,11 @@ const Products = () => {
     if (childCategories.length > 0 && !activeChildId) {
       setActiveChildId(String(childCategories[0].productcategoryid));
     } else if (childCategories.length === 0 && currentCategory) {
-      // agar child yo‘q bo‘lsa, o‘sha categoryni o‘zi ishlatiladi
       setActiveChildId(String(currentCategory.productcategoryid));
     }
   }, [childCategories, activeChildId, currentCategory]);
 
   if (isLoading) return <Loading />;
-
-  const getLocalizedValue = (obj) => {
-    if (!obj) return "";
-    if (typeof obj === "string") return obj;
-    return obj[langKey] || obj.uz_uz || "";
-  };
 
   const selectedChild =
     childCategories.find(
@@ -92,11 +96,21 @@ const Products = () => {
     (p) => String(p.productcategoryid) === String(activeChildId)
   );
 
+  // 🔹 Kategoriya nomini qisqartirish
   const getShortCategoryName = (fullName) => {
     if (!fullName) return "";
     const name = getLocalizedValue(fullName);
     const match = name.match(/D\d+/i);
     return match ? match[0].toUpperCase() : name;
+  };
+
+  // 🔹 Narxdagi birlikni to‘g‘ri olish (masalan: sum/bag, sum/мешок)
+  const getLocalizedUnit = (unitObj) => {
+    if (!unitObj) return "";
+    if (typeof unitObj === "string") return unitObj;
+    return (
+      unitObj[langKey] || unitObj.uz_uz || unitObj.ru_ru || unitObj.en_us || ""
+    );
   };
 
   return (
@@ -158,6 +172,7 @@ const Products = () => {
                       {getLocalizedValue(product.name)}
                     </h3>
 
+                    {/* Texnik ma’lumotlar */}
                     {techData.map((item, idx) => (
                       <p
                         key={idx}
@@ -169,11 +184,18 @@ const Products = () => {
                       </p>
                     ))}
 
+                    {/* Narx va birlik */}
                     {product.price && (
                       <p className="cart__price product__price">
-                        {`${product.price.toLocaleString()} UZS${
+                        {`${product.price.toLocaleString()} ${
+                          currentLang === "ru"
+                            ? "сум"
+                            : currentLang === "en"
+                            ? "sum"
+                            : "so‘m"
+                        }${
                           product.unit
-                            ? "/" + getLocalizedValue(product.unit)
+                            ? "/" + getLocalizedUnit(product.unit)
                             : ""
                         }`}
                         <span className="product-detail-btn">
@@ -191,7 +213,13 @@ const Products = () => {
               );
             })
           ) : (
-            <p className="no-products">Bu kategoriyada mahsulotlar yo‘q.</p>
+            <p className="no-products">
+              {currentLang === "ru"
+                ? "В этой категории нет продуктов."
+                : currentLang === "en"
+                ? "No products in this category."
+                : "Bu kategoriyada mahsulotlar yo‘q."}
+            </p>
           )}
         </div>
       )}

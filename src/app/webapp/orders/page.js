@@ -86,7 +86,7 @@ export default function Orders() {
     <div className="container">
       <div className="order__tab__header">
         <div className="orders">
-          <h3 className="orders__title">Orders</h3>
+          <h3 className="orders__title">{t("footers.orders")}</h3>
         </div>
 
         <div className="orders__tabs">

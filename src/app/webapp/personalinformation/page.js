@@ -4,14 +4,16 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import { useGetUserInfoQuery } from "../../../context/userApi";
 import "react-toastify/dist/ReactToastify.css";
 import "./personalinformation.scss";
 
 import profileDefault from "../../../assets/images/webappImages/profiles.svg";
-import editIcon from "../../../assets/images/webappImages/edit.svg"; // ✏️ yangi icon qo‘sh
+import editIcon from "../../../assets/images/webappImages/edit.svg";
 
 const PersonalInformation = () => {
+  const { t } = useTranslation("global");
   const router = useRouter();
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
@@ -30,7 +32,7 @@ const PersonalInformation = () => {
   });
 
   const [isChanged, setIsChanged] = useState(false);
-  const [showOptions, setShowOptions] = useState(false); // 🔹 yangi holat
+  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -48,22 +50,20 @@ const PersonalInformation = () => {
     return null;
   }
 
-  if (isLoading) return <p className="loading">Yuklanmoqda...</p>;
-  if (error) return <p className="error">Xatolik yuz berdi</p>;
+  if (isLoading) return <p className="loading">{t("personal_info.loading")}</p>;
+  if (error) return <p className="error">{t("personal_info.error")}</p>;
 
-  // 🔹 Input o'zgarishlari
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setIsChanged(true);
   };
 
-  // 🔹 Rasm tanlanganda
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.size > 3 * 1024 * 1024) {
-      toast.error("Rasm 3MB dan oshmasligi kerak");
+      toast.error(t("personal_info.photo_error"));
       return;
     }
     const preview = URL.createObjectURL(file);
@@ -102,7 +102,7 @@ const PersonalInformation = () => {
         const uploadData = await uploadRes.json();
 
         if (!uploadRes.ok || !uploadData?.data) {
-          toast.error("Rasm yuklanmadi!");
+          toast.error(t("personal_info.upload_error"));
           return;
         }
 
@@ -122,12 +122,12 @@ const PersonalInformation = () => {
         }),
       });
 
-      if (!res.ok) throw new Error("Yangilashda xatolik");
-      toast.success("Profil ma'lumotlari yangilandi ✅");
+      if (!res.ok) throw new Error(t("personal_info.update_error"));
+      toast.success(t("personal_info.update_success"));
       refetch();
       setIsChanged(false);
     } catch (err) {
-      toast.error("Xatolik: " + err.message);
+      toast.error(t("personal_info.update_error"));
     }
   };
 
@@ -135,7 +135,7 @@ const PersonalInformation = () => {
     <div className="container">
       <ToastContainer />
       <div className="setting__top">
-        <h3 className="setting__top__title">Profil ma‘lumotlari</h3>
+        <h3 className="setting__top__title">{t("personal_info.title")}</h3>
       </div>
 
       <div className="profile-photo">
@@ -164,7 +164,7 @@ const PersonalInformation = () => {
             {showOptions && (
               <div className="edit-options">
                 <label htmlFor="upload" className="edit-option">
-                  Rasmni o‘zgartirish
+                  {t("personal_info.change_photo")}
                 </label>
                 {formData.profileImageUrl && (
                   <button
@@ -172,7 +172,7 @@ const PersonalInformation = () => {
                     className="edit-option delete"
                     onClick={handleDeleteImage}
                   >
-                    Rasmni o‘chirish
+                    {t("personal_info.delete_photo")}
                   </button>
                 )}
                 <input
@@ -190,31 +190,35 @@ const PersonalInformation = () => {
 
       <form className="order__form" onSubmit={handleSave}>
         <div className="order__form__info">
-          <label className="form__group__label">Ismingiz</label>
+          <label className="form__group__label">
+            {t("personal_info.first_name")}
+          </label>
           <input
             name="firstname"
             value={formData.firstname}
             onChange={handleChange}
             className="form__group__input"
             type="text"
-            placeholder="Ismingizni kiriting"
+            placeholder={t("personal_info.first_name_placeholder")}
           />
         </div>
 
         <div className="order__form__info">
-          <label className="form__group__label">Familiya</label>
+          <label className="form__group__label">
+            {t("personal_info.last_name")}
+          </label>
           <input
             name="lastname"
             value={formData.lastname}
             onChange={handleChange}
             className="form__group__input"
             type="text"
-            placeholder="Familiyangizni kiriting"
+            placeholder={t("personal_info.last_name_placeholder")}
           />
         </div>
 
         <button type="submit" className="form__button" disabled={!isChanged}>
-          Saqlash
+          {t("personal_info.save")}
         </button>
       </form>
     </div>

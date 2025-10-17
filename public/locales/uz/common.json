@@ -313,7 +313,7 @@
     "addcards": "SAVATGA QO‘SHISH",
     "addcompare": "Taqqoslashga qo‘shish",
     "removecompare": "Taqqoslashdan olish",
-    "downloadcatalog": "KATALOGNI YUKLAB OLISH"
+    "downloadcatalog": "KATALOGNI YUKLAsB OLISH"
   },
   "card": {
     "title": "Savatcha",
@@ -469,5 +469,55 @@
   "cart": "Savat",
   "orders": "Buyurtmalar",
   "profile": "Profil"
-}
+},
+"addresses": {
+    "title": "Manzillar",
+    "office1_title": "1. Bosh ofis",
+    "office1_address": "Toshkent, Yakkasaroy tumani, Cho'ponota ko'chasi, 17",
+    "office2_title": "2. Filial",
+    "office2_address": "Toshkent, Chilonzor tumani, Bunyodkor ko‘chasi, 56"
+  },
+  "contact": {
+    "title": "Biz bilan bog‘lanish",
+    "phone1": "+998 (99) 150–22–22",
+    "phone2": "+998 (71) 200–10–22",
+    "email_label": "Email:",
+    "office_label": "Bosh ofis:",
+    "office_address": "Sirdaryo viloyati, Sirdaryo tumani, Sobir Rahimov SIU, Chibantay qo‘rg‘oni"
+  },
+  "profiless": {
+    "title": "Profil",
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi!",
+    "no_name": "Ism mavjud emas",
+    "personal_info": "Shaxsiy ma‘lumotlar",
+    "change_language": "Tilni o‘zgartirish",
+    "contact_us": "Biz bilan bog‘lanish",
+    "addresses": "Manzillar"
+  },
+  "personal_info": {
+    "title": "Profil ma‘lumotlari",
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi",
+    "first_name": "Ismingiz",
+    "first_name_placeholder": "Ismingizni kiriting",
+    "last_name": "Familiya",
+    "last_name_placeholder": "Familiyangizni kiriting",
+    "save": "Saqlash",
+    "change_photo": "Rasmni o‘zgartirish",
+    "delete_photo": "Rasmni o‘chirish",
+    "photo_error": "Rasm 3MB dan oshmasligi kerak",
+    "update_success": "Profil ma'lumotlari yangilandi ✅",
+    "update_error": "Yangilashda xatolik",
+    "upload_error": "Rasm yuklanmadi!"
+  },
+  "ordersss": {
+    "id": "Buyurtma raqami",
+    "date": "Buyurtma sanasi",
+    "status": "Holati",
+    "total": "Jami",
+    "address": "Manzil",
+    "products": "Mahsulotlar"
+  }
+
 }
