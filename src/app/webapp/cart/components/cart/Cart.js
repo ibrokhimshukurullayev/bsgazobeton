@@ -16,10 +16,11 @@ import cardImg from "../../../../../assets/images/webappImages/card1.svg";
 import minusIcon from "../../../../../assets/images/webappImages/minus.svg";
 import plusIcon from "../../../../../assets/images/webappImages/plus.svg";
 import deleteIcon from "../../../../../assets/images/webappImages/delete.svg";
-import { units } from "../../../../../data/unit"; // ✅ birlik tarjimalari
+import { units } from "../../../../../data/unit";
 
 import "./cart.scss";
 
+// 🔹 localStorage bilan sinxronlash funksiyasi
 function writeLocalCart(productid, quantity, patch = {}) {
   try {
     const raw = localStorage.getItem("carts");
@@ -61,9 +62,21 @@ export default function CartContent({ onCheckout }) {
   const items = cart || [];
   const [localQuantities, setLocalQuantities] = useState({});
 
-  // 🔹 Initial log & quantity sync
+  // 🔹 Tarjima funksiyasi (Products dagidek)
+  const getLocalizedValue = (obj) => {
+    if (!obj) return "";
+    const lang = i18n.language?.toLowerCase();
+    if (typeof obj === "string") return obj;
+    if (typeof obj === "object") {
+      return (
+        obj[lang] || obj.uz_uz || obj.ru_ru || obj.en_us || obj.default || ""
+      );
+    }
+    return "";
+  };
+
+  // 🔹 Boshlang‘ich quantitylarni sinxronlash
   useEffect(() => {
-    console.log("🛒 CART PAGE LOADED:", items);
     if (items.length) {
       const qMap = {};
       items.forEach((item) => {
@@ -73,7 +86,7 @@ export default function CartContent({ onCheckout }) {
     }
   }, [items]);
 
-  // 🔹 Increase quantity
+  // 🔹 Quantity +1
   const handleIncrease = (item) => {
     const pid = item.productid;
     const nextQty = (localQuantities[pid] || 0) + 1;
@@ -84,7 +97,7 @@ export default function CartContent({ onCheckout }) {
     if (token) saveLater(pid, nextQty, nextQty > 1 ? "Update" : "Create");
   };
 
-  // 🔹 Decrease quantity
+  // 🔹 Quantity -1
   const handleDecrease = (item) => {
     const pid = item.productid;
     const curr = localQuantities[pid] || 0;
@@ -98,7 +111,7 @@ export default function CartContent({ onCheckout }) {
     if (token) saveLater(pid, nextQty, nextQty === 0 ? "Delete" : "Update");
   };
 
-  // 🔹 Remove item
+  // 🔹 Mahsulotni olib tashlash
   const handleRemove = (item) => {
     const pid = item.productid;
     setLocalQuantities((prev) => ({ ...prev, [pid]: 0 }));
@@ -107,7 +120,7 @@ export default function CartContent({ onCheckout }) {
     if (token) saveLater(pid, 0, "Delete");
   };
 
-  // 🔹 Total sum
+  // 🔹 Jami narx
   const totalSum = useMemo(() => {
     return items.reduce((sum, item) => {
       const qty = localQuantities[item.productid] ?? item.quantity ?? 0;
@@ -116,6 +129,7 @@ export default function CartContent({ onCheckout }) {
     }, 0);
   }, [items, localQuantities]);
 
+  // 🔹 Bo‘sh savat holati
   if (!items?.length)
     return (
       <div className="container">
@@ -124,6 +138,9 @@ export default function CartContent({ onCheckout }) {
       </div>
     );
 
+  console.log(items);
+
+  // 🔹 Asosiy render
   return (
     <div className="container">
       <div className="cart">
@@ -133,7 +150,6 @@ export default function CartContent({ onCheckout }) {
 
         <div className="cart__box">
           {items.map((item) => {
-            // ✅ UNIT tarjimasi
             const lang = i18n.language?.toLowerCase() || "uz_uz";
             const unitData = units[item?.unit?.toLowerCase()];
             const unitText = unitData
@@ -149,13 +165,31 @@ export default function CartContent({ onCheckout }) {
                       ? `https://api.bsgazobeton.uz${item.imageurl}`
                       : cardImg
                   }
-                  alt={item.name?.uz_uz || item.productname || "Product"}
+                  alt={getLocalizedValue(item.name) || "Product"}
                   width={100}
                   height={80}
                 />
 
                 <div className="cart__details">
-                  <h4 className="cart__category">{item.name}</h4>
+                  <h4 className="cart__category">
+                    {(() => {
+                      const lang = i18n.language?.toLowerCase();
+                      if (
+                        item.translations &&
+                        item.translations.name &&
+                        typeof item.translations.name === "object"
+                      ) {
+                        return (
+                          item.translations.name[lang] ||
+                          item.translations.name.uz_uz ||
+                          item.translations.name.ru_ru ||
+                          item.translations.name.en_us
+                        );
+                      }
+
+                      return item.name || "Product";
+                    })()}
+                  </h4>
 
                   <span className="cart__price">
                     {(item.price || 0).toLocaleString()} {t("header.priceUnit")}

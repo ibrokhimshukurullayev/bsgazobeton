@@ -535,7 +535,23 @@
   "success": "Buyurtma muvaffaqiyatli yuborildi!",
   "error": "Xatolik",
   "failed": "Buyurtma yuborilmadi"
+},
+"orderses": {
+  "title": "Buyurtmalar",
+  "active": "Faol",
+  "archive": "Arxiv",
+  "noActive": "Faol buyurtmalar topilmadi.",
+  "noArchive": "Arxivda buyurtmalar yo‘q.",
+  "showMore": "Ko‘proq ko‘rsatish",
+  "status": {
+    "cart": "Savatda",
+    "new": "Yangi",
+    "pending": "Kutilmoqda",
+    "confirmed": "Tasdiqlangan",
+    "inprogress": "Jarayonda",
+    "completed": "Tugallangan",
+    "cancelled": "Bekor qilingan"
+  }
 }
-
 
 }

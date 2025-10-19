@@ -23,7 +23,7 @@ const OrderContent = ({ onBack }) => {
 
   const [form, setForm] = useState({
     fullName: "",
-    phoneNumber: "",
+    phoneNumber: "+998",
     email: "",
     address: "",
   });
@@ -60,6 +60,19 @@ const OrderContent = ({ onBack }) => {
         `${t("order.error")}: ${err?.data?.message || t("order.failed")}`
       );
     }
+    let value = e.target.value;
+
+    if (!value.startsWith("+998")) {
+      value = "+998" + value.replace(/\D/g, "");
+    }
+
+    value = "+998" + value.slice(4).replace(/\D/g, "");
+
+    if (value.length > 13) {
+      value = value.slice(0, 13);
+    }
+
+    setPhoneNumber(value);
   };
 
   return (

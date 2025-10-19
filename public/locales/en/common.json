@@ -536,7 +536,25 @@
   "success": "Order submitted successfully!",
   "error": "Error",
   "failed": "Order submission failed"
+},
+"orderses": {
+  "title": "Orders",
+  "active": "Active",
+  "archive": "Archive",
+  "noActive": "No active orders found.",
+  "noArchive": "No orders in archive.",
+  "showMore": "Show more",
+  "status": {
+    "cart": "In cart",
+    "new": "New",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "inprogress": "In progress",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  }
 }
+
 
 
 }

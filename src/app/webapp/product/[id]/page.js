@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useGetProductQuery } from "../../../../context/productApi";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -19,10 +19,34 @@ import minusIcon from "../../../../assets/images/webappImages/minus.svg";
 
 import "./single.scss";
 
+const resolveLangKey = (lng) => {
+  const s = String(lng || "").toLowerCase();
+  if (s.startsWith("uz")) return "uz_uz";
+  if (s.startsWith("ru")) return "ru_ru";
+  if (s.startsWith("en")) return "en_us";
+  return "uz_uz";
+};
+
+const readI18n = (obj, lng) => {
+  if (!obj || typeof obj !== "object") return obj || "";
+  const key = resolveLangKey(lng);
+  return (
+    obj[key] ||
+    obj[key.slice(0, 2)] ||
+    obj.uz_uz ||
+    obj.ru_ru ||
+    obj.en_us ||
+    obj.uz ||
+    obj.ru ||
+    obj.en ||
+    ""
+  );
+};
+
 export default function ProductDetailPage() {
   const router = useRouter();
   const { id } = useParams();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation("global");
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.value);
 
@@ -31,18 +55,7 @@ export default function ProductDetailPage() {
     (p) => String(p.productid) === String(id)
   );
 
-  const langKey =
-    i18n.language === "uz"
-      ? "uz_uz"
-      : i18n.language === "ru"
-      ? "ru_ru"
-      : "en_us";
-
-  const getLocalizedValue = (obj) => {
-    if (!obj) return "";
-    if (typeof obj === "string") return obj;
-    return obj[langKey] || obj.uz_uz || "";
-  };
+  const lang = i18n.language || "uz";
 
   const productInCart = cart.find(
     (item) => item.productid === product?.productid
@@ -55,7 +68,8 @@ export default function ProductDetailPage() {
   }, [productInCart?.quantity]);
 
   if (isLoading) return <Loading />;
-  if (!product) return <div>Mahsulot topilmadi</div>;
+  if (!product)
+    return <div>{t("products.notFound") || "Mahsulot topilmadi"}</div>;
 
   const tech = Array.isArray(product.technicaldata)
     ? product.technicaldata
@@ -82,13 +96,16 @@ export default function ProductDetailPage() {
     }
   };
 
+  // 💡 Til bo‘yicha barcha joyni readI18n orqali ko‘rsatamiz:
+  const name = readI18n(product.name, lang);
+  const desc = readI18n(product.description, lang);
+  const unit = readI18n(product.unit, lang);
+
   return (
     <div className="product__detail__wrapper">
       <div className="fixed-top-overlay"></div>
 
-      <h3 className="product__detail__title">
-        {getLocalizedValue(product.name)}
-      </h3>
+      <h3 className="product__detail__title">{name}</h3>
 
       <div id="product__body">
         <div className="container product__detail__content">
@@ -99,7 +116,7 @@ export default function ProductDetailPage() {
                   ? `https://api.bsgazobeton.uz${product.imageurl}`
                   : "/no-image.png"
               }
-              alt={getLocalizedValue(product.name)}
+              alt={name}
               width={300}
               height={300}
               className="product-image"
@@ -107,40 +124,44 @@ export default function ProductDetailPage() {
           </div>
 
           <div className="product-info">
-            <h1 className="product-title">{getLocalizedValue(product.name)}</h1>
+            <h1 className="product-title">{name}</h1>
 
             <div className="product__specs">
               <div className="product-price">
-                {product.price?.toLocaleString()} UZS
-                {product.unit ? "/" + getLocalizedValue(product.unit) : ""}
+                {product.price?.toLocaleString("uz-UZ")} UZS
+                {unit ? "/" + unit : ""}
               </div>
 
-              <div className="spec-title">Texnik xususiyatlari</div>
+              <div className="spec-title">
+                {t("products.technicalprops") || "Texnik xususiyatlari"}
+              </div>
               {tech.length > 0 ? (
                 tech.map((item, idx) => (
                   <div key={idx} className="spec-row">
                     <div className="spec-label">
-                      {getLocalizedValue(item.key)}:
+                      {readI18n(item.key, lang)}:
                     </div>
                     <div className="spec-value">
-                      {getLocalizedValue(item.value)}{" "}
-                      {item.unit ? getLocalizedValue(item.unit) : ""}
+                      {readI18n(item.value, lang)}{" "}
+                      {item.unit ? readI18n(item.unit, lang) : ""}
                     </div>
                   </div>
                 ))
               ) : (
-                <p className="spec-empty">Maʼlumot mavjud emas</p>
+                <p className="spec-empty">
+                  {t("products.nodata") || "Maʼlumot mavjud emas"}
+                </p>
               )}
             </div>
 
             <div className="product-features">
-              <h2 className="features-title">Mahsulot haqida</h2>
+              <h2 className="features-title">
+                {t("products.aboutproducts") || "Mahsulot haqida"}
+              </h2>
               <ul className="features-list">
-                {product.description ? (
+                {desc ? (
                   <li>
-                    <span className="feature-text">
-                      {getLocalizedValue(product.description)}
-                    </span>
+                    <span className="feature-text">{desc}</span>
                   </li>
                 ) : (
                   <>
@@ -185,12 +206,12 @@ export default function ProductDetailPage() {
                   className="cart__checkoutBtn"
                   onClick={() => router.push("/webapp/cart")}
                 >
-                  🛒 Savat: {quantity}
+                  🛒 {t("footers.cart") || "Savat"}: {quantity}
                 </button>
               </div>
             ) : (
               <button className="add__to__cart__btn" onClick={handleAddToCart}>
-                Savatga qo‘shish
+                {t("products.addcards") || "Savatga qo‘shish"}
               </button>
             )}
           </div>

@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useGetAllOrdersQuery } from "../../../context/orderApi";
 import OrderDetailes from "./orderDetailes/OrderDetailes";
-import left from "../../../assets/images/webappImages/left.svg";
-import phone from "../../../assets/images/webappImages/phone.svg";
 import Image from "next/image";
 import "./orders.scss";
 import { useTranslation } from "react-i18next";
@@ -58,7 +56,6 @@ export default function Orders() {
 
   const allOrders = data?.data?.list || [];
 
-  // faqat active (New, Pending, Confirmed, InProgress, Cancelled)
   const activeOrders = allOrders.filter((o) => {
     const s = normalizeStatus(o.status);
     return ["New", "Pending", "Confirmed", "InProgress", "Cancelled"].includes(
@@ -66,7 +63,6 @@ export default function Orders() {
     );
   });
 
-  // faqat archive (Completed)
   const archiveOrders = allOrders.filter(
     (o) => normalizeStatus(o.status) === "Completed"
   );
@@ -82,11 +78,16 @@ export default function Orders() {
     );
   }
 
+  const translateStatus = (status) => {
+    const key = normalizeStatus(status);
+    return t(`orderses.status.${key.toLowerCase()}`) || key;
+  };
+
   return (
     <div className="container">
       <div className="order__tab__header">
         <div className="orders">
-          <h3 className="orders__title">{t("footers.orders")}</h3>
+          <h3 className="orders__title">{t("orderses.title")}</h3>
         </div>
 
         <div className="orders__tabs">
@@ -94,13 +95,13 @@ export default function Orders() {
             className={`orders__tab ${tab === "active" ? "active" : ""}`}
             onClick={() => setTab("active")}
           >
-            Active
+            {t("orderses.active")}
           </button>
           <button
             className={`orders__tab ${tab === "archive" ? "active" : ""}`}
             onClick={() => setTab("archive")}
           >
-            Archive
+            {t("orderses.archive")}
           </button>
         </div>
       </div>
@@ -109,8 +110,8 @@ export default function Orders() {
         {currentOrders.length === 0 ? (
           <p>
             {tab === "archive"
-              ? "Arxivda buyurtmalar yo‘q."
-              : "Faol buyurtmalar topilmadi."}
+              ? t("orderses.noArchive")
+              : t("orderses.noActive")}
           </p>
         ) : (
           currentOrders.map((order) => {
@@ -126,7 +127,7 @@ export default function Orders() {
                 <div className="orders__header">
                   <strong>#{order.ordernumber || order.orderNumber}</strong>
                   <span className={`status-badge ${cls}`}>
-                    {order.status || "Yangi"}
+                    {translateStatus(order.status)}
                   </span>
                 </div>
                 <p className="orders__date">
@@ -148,7 +149,7 @@ export default function Orders() {
           className="show-more"
           onClick={() => setTake((prev) => prev + 5)}
         >
-          {t("orders.showMore")}
+          {t("orderses.showMore")}
         </button>
       )}
     </div>

@@ -11,12 +11,15 @@
   }
 
   .form {
-    display: flex;
-    // flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(257px, 1fr));
     gap: 1rem;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
+    @media (min-width: 767px) {
+      grid-template-columns: repeat(4, 207px);
+    }
   }
 
   .input-group {
@@ -31,10 +34,9 @@
       padding: 14px 20px;
       font-size: 1rem;
       border-radius: 6px;
-      width: 120px;
       border: 1px solid rgb(228, 228, 231);
       border-radius: 12px;
-      width: 207px;
+      width: 300px;
       background: rgb(255, 255, 255);
       color: rgba(17, 24, 39, 0.9);
       font-size: 16px;
@@ -42,6 +44,9 @@
       line-height: 28px;
       letter-spacing: 2%;
       text-align: left;
+      @media (min-width: 767px) {
+        width: 207px;
+      }
     }
     select {
       appearance: none;

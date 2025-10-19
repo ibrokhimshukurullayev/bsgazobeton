@@ -49,6 +49,30 @@
     0px 4px 8px 0px rgba(15, 23, 42, 0.03);
 }
 
+.show-more {
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    color: white;
+    background-color: #dc2626;
+    transition: 0.5s;
+  }
+  &:active {
+    color: #dc2626;
+    background-color: white;
+    transition: 0.5s;
+  }
+}
+
 .orders__tab.active {
   background: #fff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
@@ -146,7 +170,7 @@
 }
 
 .orders__list {
-  padding: 150px 0 50px 0;
+  padding: 150px 0 15px 0;
 }
 
 .title {
