@@ -134,7 +134,7 @@ export default function CartContent({ onCheckout }) {
     return (
       <div className="container">
         <h2 className="cart__titles">{t("card.title") || "Cart"}</h2>
-        <div className="empty__cart">Savat bo‘sh!</div>
+        <div className="empty__cart">{t("card.empty")}</div>
       </div>
     );
 

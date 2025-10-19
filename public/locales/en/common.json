@@ -319,7 +319,8 @@
     "title": "Cart",
     "clearcard": "Clearing the cart",
     "total": "Total",
-    "checkout": "Proceed to Checkout"
+    "checkout": "Proceed to Checkout",
+    "empty": "Cart is empty"
   },
   "auth": { "loginFirst": "Please log in first" },
   "common": { "loading": "Loading...", "error": "Something went wrong" },

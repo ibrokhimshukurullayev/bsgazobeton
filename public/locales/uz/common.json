@@ -319,7 +319,8 @@
     "title": "Savatcha",
     "clearcard": "Savatchani tozalash",
     "total": "Umumiy",
-    "checkout": "Buyurtmani rasmiylashtirish"
+    "checkout": "Buyurtmani rasmiylashtirish",
+    "empty": "Savat bo‘sh"
   },
   "auth": { "loginFirst": "Avval login qiling" },
   "common": { "loading": "Yuklanmoqda...", "error": "Xatolik yuz berdi" },
