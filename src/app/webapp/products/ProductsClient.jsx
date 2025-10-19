@@ -11,20 +11,18 @@ import Loading from "../../../components/loading/Loading";
 import product1 from "../../../assets/images/webappImages/card1.svg";
 import productleft from "../../../assets/images/webappImages/productleft.svg";
 import { useTranslation } from "react-i18next";
+import { units } from "../../../data/unit";
 
 const Products = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("productcategoryid");
 
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation("global");
   const currentLang = i18n.language;
-
-  // 🔹 Til kalitlari
   const langKey =
     currentLang === "ru" ? "ru_ru" : currentLang === "en" ? "en_us" : "uz_uz";
 
-  // 🔹 API chaqiruvlar
   const { data: categoriesData, isLoading: catLoading } = useGetCategoryQuery({
     skip: 0,
     take: 1000,
@@ -45,14 +43,15 @@ const Products = () => {
     [productsData]
   );
 
-  // 🔹 Foydali funksiya: har qanday lokalizatsiyani to‘g‘ri olish
   const getLocalizedValue = (obj) => {
     if (!obj) return "";
     if (typeof obj === "string") return obj;
-    return obj[langKey] || obj.uz_uz || obj.ru_ru || obj.en_us || "";
+    if (typeof obj === "object") {
+      return obj[langKey] || obj.uz_uz || obj.ru_ru || obj.en_us || "";
+    }
+    return "";
   };
 
-  // 🔹 Kategoriyalarni ajratish
   const currentCategory = categories.find(
     (c) => String(c.productcategoryid) === String(categoryId)
   );
@@ -96,21 +95,11 @@ const Products = () => {
     (p) => String(p.productcategoryid) === String(activeChildId)
   );
 
-  // 🔹 Kategoriya nomini qisqartirish
   const getShortCategoryName = (fullName) => {
     if (!fullName) return "";
     const name = getLocalizedValue(fullName);
     const match = name.match(/D\d+/i);
     return match ? match[0].toUpperCase() : name;
-  };
-
-  // 🔹 Narxdagi birlikni to‘g‘ri olish (masalan: sum/bag, sum/мешок)
-  const getLocalizedUnit = (unitObj) => {
-    if (!unitObj) return "";
-    if (typeof unitObj === "string") return unitObj;
-    return (
-      unitObj[langKey] || unitObj.uz_uz || unitObj.ru_ru || unitObj.en_us || ""
-    );
   };
 
   return (
@@ -142,62 +131,61 @@ const Products = () => {
       {selectedChild && (
         <div className="cart__box">
           {selectedProducts.length > 0 ? (
-            selectedProducts.map((product) => {
-              const techData = Array.isArray(product.technicaldata)
-                ? product.technicaldata.slice(0, 3)
-                : [];
+            selectedProducts.map((el) => {
+              const lang =
+                localStorage.getItem("language")?.toLowerCase() || "uz_uz";
+
+              const unitKey = el.unit ? el.unit.toLowerCase() : "";
+              const unitData = units[unitKey];
+              const unitText =
+                unitData?.[lang] || unitData?.uz_uz || el.unit || "-";
 
               return (
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
-                    router.push(`/webapp/product/${product.productid}`);
+                    router.push(`/webapp/product/${el.productid}`);
                   }}
-                  key={product.productid}
+                  key={el.productid}
                   className="cart__item"
                 >
                   <Image
                     className="cart__item__img"
                     src={
-                      product?.imageurl
-                        ? `https://api.bsgazobeton.uz${product.imageurl}`
+                      el?.imageurl
+                        ? `https://api.bsgazobeton.uz${el.imageurl}`
                         : product1
                     }
-                    alt={getLocalizedValue(product.name)}
+                    alt={getLocalizedValue(el.name)}
                     width={90}
                     height={90}
                   />
                   <div className="cart__details">
                     <h3 className="cart__details__title">
-                      {getLocalizedValue(product.name)}
+                      {getLocalizedValue(el.name)}
                     </h3>
 
-                    {/* Texnik ma’lumotlar */}
-                    {techData.map((item, idx) => (
-                      <p
-                        key={idx}
-                        className="cart__details__text product__details"
-                      >
-                        {getLocalizedValue(item.key)}:{" "}
-                        {getLocalizedValue(item.value)}{" "}
-                        {getLocalizedValue(item.unit)}
-                      </p>
-                    ))}
+                    {/* 🔹 CardProduct dagi bilan aynan bir xil */}
+                    {el.technicaldata &&
+                      Array.isArray(el.technicaldata) &&
+                      el.technicaldata.slice(0, 3).map((item, idx) => {
+                        const lang =
+                          localStorage.getItem("language")?.toLowerCase() ||
+                          "uz_uz";
+                        return (
+                          <div className="product__card__text" key={idx}>
+                            <p className="cart__details__text product__details">
+                              {item.key?.[lang] || "-"}:{" "}
+                              {item.value?.[lang] || "-"}
+                            </p>
+                          </div>
+                        );
+                      })}
 
-                    {/* Narx va birlik */}
-                    {product.price && (
+                    {el.price && (
                       <p className="cart__price product__price">
-                        {`${product.price.toLocaleString()} ${
-                          currentLang === "ru"
-                            ? "сум"
-                            : currentLang === "en"
-                            ? "sum"
-                            : "so‘m"
-                        }${
-                          product.unit
-                            ? "/" + getLocalizedUnit(product.unit)
-                            : ""
-                        }`}
+                        {el.price.toLocaleString()}
+                        {t("header.priceUnit")}/{unitText}
                         <span className="product-detail-btn">
                           <Image
                             src={productleft}

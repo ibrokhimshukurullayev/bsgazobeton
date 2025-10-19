@@ -519,6 +519,24 @@
     "total": "Total",
     "address": "Address",
     "products": "Products"
-  }
+  },
+  "order": {
+  "title": "Place an Order",
+  "full_name": "Full Name",
+  "full_name_placeholder": "Enter your name",
+  "phone": "Phone Number",
+  "phone_placeholder": "+998 (__) ___-__-__",
+  "email_placeholder": "Enter your email",
+  "address": "Address",
+  "address_placeholder": "Enter your address",
+  "delivery": "Delivery",
+  "delivery_method": "Delivery",
+  "pickup_method": "Pick up from factory",
+  "submit": "Submit",
+  "success": "Order submitted successfully!",
+  "error": "Error",
+  "failed": "Order submission failed"
+}
+
 
 }

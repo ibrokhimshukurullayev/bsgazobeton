@@ -519,6 +519,24 @@
     "total": "Итого",
     "address": "Адрес",
     "products": "Товары"
-  }
+  },
+  "order": {
+  "title": "Оформление заказа",
+  "full_name": "Полное имя",
+  "full_name_placeholder": "Введите ваше имя",
+  "phone": "Номер телефона",
+  "phone_placeholder": "+998 (__) ___-__-__",
+  "email_placeholder": "Введите email",
+  "address": "Адрес",
+  "address_placeholder": "Введите адрес",
+  "delivery": "Доставка",
+  "delivery_method": "Доставка",
+  "pickup_method": "Самовывоз с завода",
+  "submit": "Отправить",
+  "success": "Заказ успешно оформлен!",
+  "error": "Ошибка",
+  "failed": "Не удалось оформить заказ"
+}
+
 
 }

@@ -518,6 +518,24 @@
     "total": "Jami",
     "address": "Manzil",
     "products": "Mahsulotlar"
-  }
+  },
+  "order": {
+  "title": "Buyurtmani rasmiylashtirish",
+  "full_name": "To‘liq ismingiz",
+  "full_name_placeholder": "Ismingizni kiriting",
+  "phone": "Telefon raqamingiz",
+  "phone_placeholder": "+998 (__) ___-__-__",
+  "email_placeholder": "Emailni kiriting",
+  "address": "Manzil",
+  "address_placeholder": "Manzilni kiriting",
+  "delivery": "Yetkazib berish",
+  "delivery_method": "Yetkazib berish",
+  "pickup_method": "Zavoddan olib ketish",
+  "submit": "Yuborish",
+  "success": "Buyurtma muvaffaqiyatli yuborildi!",
+  "error": "Xatolik",
+  "failed": "Buyurtma yuborilmadi"
+}
+
 
 }

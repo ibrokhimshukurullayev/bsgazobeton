@@ -16,15 +16,17 @@ import { useRouter } from "next/navigation";
 import "./CartPage.scss";
 
 const CartPage = ({ onCheckout }) => {
-  const [t, i18n] = useTranslation("global");
+  const { t } = useTranslation("global");
   const router = useRouter();
 
-  const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.value);
 
+  // Token borligini tekshirish
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
+  // Foydalanuvchi buyurtmalari
   const { data: serverCart, isFetching: cartFetching } = useGetUserOrdersQuery(
     undefined,
     {
@@ -34,6 +36,7 @@ const CartPage = ({ onCheckout }) => {
     }
   );
 
+  // Mahsulot sonini yangilash
   const updateQuantity = (productid, delta) => {
     const item = cart?.find((el) => el.productid === productid);
     if (!item) return;
@@ -49,45 +52,58 @@ const CartPage = ({ onCheckout }) => {
     }
   };
 
+  // Mahsulotni o‘chirish
   const removeItem = (productid) => {
     const item = cart.find((el) => el.productid === productid);
     if (item) dispatch(removeFromCart(item));
   };
 
-  const totalSum = (token ? serverCart?.data : cart)?.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  // Tanlangan cart ro‘yxati (token bilan yoki localsdan)
+  const currentCart = token ? serverCart?.data || [] : cart || [];
+
+  // Umumiy summa
+  const totalSum = currentCart.reduce((sum, item) => {
+    const price = Number(item.price) || 0;
+    const quantity = Number(item.quantity) || 0;
+    return sum + price * quantity;
+  }, 0);
 
   return (
     <div className="cart-page container">
       <div className="cart-header">
         <div style={{ display: "flex", alignItems: "center" }}>
           <h2>{t("card.title")}</h2>
-          <span className="item-count">
-            {token ? serverCart?.data.length : cart.length}
-          </span>
+          <span className="item-count">{currentCart.length}</span>
         </div>
-        <div className="clear-cart" onClick={() => dispatch(clearCart())}>
-          {t("card.clearcard")}
-        </div>
+        {currentCart.length > 0 && (
+          <div className="clear-cart" onClick={() => dispatch(clearCart())}>
+            {t("card.clearcard")}
+          </div>
+        )}
       </div>
+
       <div className="cart-items">
-        {(token ? serverCart?.data : cart)?.map((item) => (
-          <CartItem
-            key={item.productid}
-            item={item}
-            onIncrease={() => updateQuantity(item.productid, 1)}
-            onDecrease={() => updateQuantity(item.productid, -1)}
-            onRemove={() => removeItem(item.productid)}
-          />
-        ))}
+        {currentCart.length > 0 ? (
+          currentCart.map((item) => (
+            <CartItem
+              key={item.productid}
+              item={item}
+              onIncrease={() => updateQuantity(item.productid, 1)}
+              onDecrease={() => updateQuantity(item.productid, -1)}
+              onRemove={() => removeItem(item.productid)}
+            />
+          ))
+        ) : (
+          <p className="empty-text">{t("card.empty")}</p>
+        )}
       </div>
+
       <div className="cart-summary">
         <h3 className="total">
-          <span>{t("card.total")}</span> {totalSum.toLocaleString()} UZS
+          <span>{t("card.total")}</span> {totalSum.toLocaleString("uz-UZ")} UZS
         </h3>
-        {(serverCart?.data?.length || cart.length > 0) && (
+
+        {currentCart.length > 0 && (
           <Button
             title={t("card.checkout")}
             onClick={() => {
@@ -98,7 +114,7 @@ const CartPage = ({ onCheckout }) => {
               }
             }}
           />
-        )}{" "}
+        )}
       </div>
     </div>
   );

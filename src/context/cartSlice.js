@@ -1,93 +1,65 @@
+// context/cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: [],
+  value:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("cart") || "[]")
+      : [],
 };
 
-if (typeof window !== "undefined") {
-  const stored = localStorage.getItem("carts");
-  if (stored) {
-    initialState.value = JSON.parse(stored);
-  }
-}
-
-export const cartSlice = createSlice({
+const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart(state, action) {
-      const index = state.value.findIndex(
-        (el) => el.productid === action.payload.productid
+    addToCart: (state, action) => {
+      console.log("ADD_TO_CART CALLED:", action.payload);
+      const existing = state.value.find(
+        (item) => item.productid === action.payload.productid
       );
-
-      if (index < 0) {
-        state.value.push({ ...action.payload, quantity: 1 });
+      if (existing) {
+        existing.quantity += action.payload.quantity;
       } else {
-        state.value[index].quantity += 1;
+        state.value.push(action.payload);
       }
-
-      if (typeof window !== "undefined") {
-        localStorage.setItem("carts", JSON.stringify(state.value));
-      }
+      localStorage.setItem("cart", JSON.stringify(state.value));
+      console.log("UPDATED CART:", state.value);
     },
-
-    incCart(state, action) {
-      const index = state.value.findIndex(
-        (el) => el.productid === action.payload.productid
+    incCart: (state, action) => {
+      const item = state.value.find(
+        (i) => i.productid === action.payload.productid
       );
-      state.value = state.value.map((product, inx) => {
-        if (index === inx) {
-          return { ...product, quantity: product.quantity + 1 };
-        } else {
-          return product;
-        }
-      });
-
-      if (typeof window !== "undefined") {
-        localStorage.setItem("carts", JSON.stringify(state.value));
-      }
+      if (item) item.quantity++;
+      localStorage.setItem("cart", JSON.stringify(state.value));
+      console.log("INCREASE:", state.value);
     },
-    decCart(state, action) {
-      const index = state.value.findIndex(
-        (el) => el.productid === action.payload.productid
+    decCart: (state, action) => {
+      const item = state.value.find(
+        (i) => i.productid === action.payload.productid
       );
-
-      if (index >= 0) {
-        const product = state.value[index];
-
-        if (product.quantity > 1) {
-          // faqat kamaytirish
-          state.value[index] = { ...product, quantity: product.quantity - 1 };
-        } else {
-          // 1 tadan kam bo‘lsa — o‘chir
-          state.value.splice(index, 1);
-        }
-      }
-
-      if (typeof window !== "undefined") {
-        localStorage.setItem("carts", JSON.stringify(state.value));
-      }
+      if (item && item.quantity > 1) item.quantity--;
+      else
+        state.value = state.value.filter(
+          (i) => i.productid !== action.payload.productid
+        );
+      localStorage.setItem("cart", JSON.stringify(state.value));
+      console.log("DECREASE:", state.value);
     },
-
-    removeFromCart(state, action) {
+    removeFromCart: (state, action) => {
       state.value = state.value.filter(
-        (product) => product.productid !== action.payload.productid
+        (i) => i.productid !== action.payload.productid
       );
-
-      if (typeof window !== "undefined") {
-        localStorage.setItem("carts", JSON.stringify(state.value));
-      }
+      localStorage.setItem("cart", JSON.stringify(state.value));
+      console.log("REMOVE:", state.value);
     },
-    clearCart(state) {
+    clearCart: (state) => {
       state.value = [];
-
-      if (typeof window !== "undefined") {
-        localStorage.setItem("carts", JSON.stringify(state.value));
-      }
+      localStorage.removeItem("cart");
+      console.log("CLEAR CART");
     },
   },
 });
 
-export const { addToCart, clearCart, decCart, incCart, removeFromCart } =
+export const { addToCart, incCart, decCart, removeFromCart, clearCart } =
   cartSlice.actions;
 export default cartSlice.reducer;

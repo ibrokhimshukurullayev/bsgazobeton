@@ -61,7 +61,6 @@ export default function ProductDetailPage() {
     ? product.technicaldata
     : [];
 
-  // ✅ Mahsulotni savatga qo‘shish
   const handleAddToCart = () => {
     const newItem = { ...product, quantity: 1 };
     dispatch(addToCart(newItem));
@@ -125,7 +124,7 @@ export default function ProductDetailPage() {
                     </div>
                     <div className="spec-value">
                       {getLocalizedValue(item.value)}{" "}
-                      {getLocalizedValue(item.unit)}
+                      {item.unit ? getLocalizedValue(item.unit) : ""}
                     </div>
                   </div>
                 ))

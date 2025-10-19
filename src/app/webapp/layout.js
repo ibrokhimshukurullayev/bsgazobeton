@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { Provider } from "react-redux";
+import { store } from "../../context/store"; // ✅ aynan shu import kerak
 import WebappFooter from "../../components/WebappFooter/WebappFooter";
 import "./page.scss";
 import Loading from "../../components/loading/Loading";
@@ -90,7 +92,6 @@ export default function WebappLayout({ children }) {
     prevPath.current = pathname;
   }, [pathname]);
 
-  // 🔹 Footer faqat shu sahifalarda chiqadi:
   const mainPages = [
     "/webapp/home",
     "/webapp/cart",
@@ -101,21 +102,21 @@ export default function WebappLayout({ children }) {
   const showFooter = mainPages.includes(pathname);
 
   return (
-    <div className="webapp-layout">
-      <div className="webapp-content">
-        <div className="top-mask" />
-        <main className="webapp-main">
-          {children}
-          {loading && (
-            <div className="loading-overlay">
-              <Loading />
-            </div>
-          )}
-        </main>
+    <Provider store={store}>
+      <div className="webapp-layout">
+        <div className="webapp-content">
+          <div className="top-mask" />
+          <main className="webapp-main">
+            {children}
+            {loading && (
+              <div className="loading-overlay">
+                <Loading />
+              </div>
+            )}
+          </main>
+        </div>
+        {showFooter && <WebappFooter />}
       </div>
-
-      {/* Faqat asosiy sahifalarda footer chiqadi */}
-      {showFooter && <WebappFooter />}
-    </div>
+    </Provider>
   );
 }

@@ -17,7 +17,7 @@ const languages = [
 ];
 
 const Language = () => {
-  const { i18n, t } = useTranslation();
+  const { i18n, t } = useTranslation("global");
   const [selectedLang, setSelectedLang] = useState("");
 
   // localStorage'dan tilni o‘qish
@@ -36,9 +36,7 @@ const Language = () => {
 
   return (
     <div className="language-content container">
-      <h1 className="language__title">
-        {t("settings.language") || "Language"}
-      </h1>
+      <h1 className="language__title">{t("profiless.change_language")}</h1>
 
       <div className="language-list">
         {languages.map((lang) => (

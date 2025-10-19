@@ -18,7 +18,7 @@ import {
   incCart,
   removeFromCart,
 } from "../../../context/cartSlice";
-import { units } from "../../../data/unit"; // ✅ qo‘shildi
+import { units } from "../../../data/unit";
 
 import "./single.scss";
 
@@ -47,6 +47,20 @@ const readI18n = (obj, lng) => {
     obj.en ||
     ""
   );
+};
+
+const formatPrice = (value) => {
+  const n = Number(value);
+  if (!isFinite(n) || isNaN(n)) return "0";
+  // O‘zbekiston formatiga mos — "1 000" kabi bo‘ladi
+  return n.toLocaleString("uz-UZ");
+};
+
+const safeImageUrl = (url) => {
+  if (!url) return "";
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  // agar backend faqat path berayotgan bo‘lsa
+  return `https://api.bsgazobeton.uz${url}`;
 };
 
 const ProductDetail = ({ productId }) => {
@@ -82,8 +96,10 @@ const ProductDetail = ({ productId }) => {
     debounceMs: 1000,
   });
 
+  // serverCart ichidan productni topish (turlar farqi bo'lsa ham ishlasin)
   const serverItem = useMemo(() => {
-    if (!token) return null;
+    if (!token || !serverCart) return null;
+    // turli backend formatlari uchun umumiy qatorlar
     const rows =
       serverCart?.data?.list ||
       serverCart?.data ||
@@ -91,18 +107,24 @@ const ProductDetail = ({ productId }) => {
       serverCart?.items ||
       serverCart?.result ||
       [];
-    return Array.isArray(rows)
-      ? rows.find((x) => x.productid === productId)
-      : null;
+    if (!Array.isArray(rows)) return null;
+    return rows.find(
+      (x) =>
+        String(x?.productid) === String(productId) ||
+        String(x?.productId) === String(productId) ||
+        String(x?.id) === String(productId)
+    );
   }, [token, serverCart, productId]);
 
-  const localItem = useMemo(
-    () =>
-      Array.isArray(localCart)
-        ? localCart.find((x) => x.productid === productId)
-        : null,
-    [localCart, productId]
-  );
+  const localItem = useMemo(() => {
+    if (!Array.isArray(localCart)) return null;
+    return localCart.find(
+      (x) =>
+        String(x?.productid) === String(productId) ||
+        String(x?.productId) === String(productId) ||
+        String(x?.id) === String(productId)
+    );
+  }, [localCart, productId]);
 
   const baseQty = Number(serverItem?.quantity ?? 0);
   const [delta, setDelta] = useState(0);
@@ -118,8 +140,10 @@ const ProductDetail = ({ productId }) => {
     next === 0 ? "Delete" : prev === 0 ? "Create" : "Update";
 
   const handleAdd = () => {
+    if (!product?.data && !product) return;
+    const productObj = product?.data || product;
     if (!token) {
-      if (product?.data) dispatch(addToCart(product.data));
+      dispatch(addToCart(productObj));
       return;
     }
     const prev = baseQty + delta;
@@ -129,8 +153,10 @@ const ProductDetail = ({ productId }) => {
   };
 
   const handleInc = () => {
+    if (!product?.data && !product) return;
+    const productObj = product?.data || product;
     if (!token) {
-      if (product?.data) dispatch(incCart(product.data));
+      dispatch(incCart(productObj));
       return;
     }
     const prev = baseQty + delta;
@@ -140,12 +166,14 @@ const ProductDetail = ({ productId }) => {
   };
 
   const handleDec = () => {
+    if (!product?.data && !product) return;
+    const productObj = product?.data || product;
     if (!token) {
       const cur = Number(localItem?.quantity || 0);
       if (cur <= 1) {
-        if (product?.data) dispatch(removeFromCart(product.data));
+        dispatch(removeFromCart(productObj));
       } else {
-        if (product?.data) dispatch(decCart(product.data));
+        dispatch(decCart(productObj));
       }
       return;
     }
@@ -167,21 +195,33 @@ const ProductDetail = ({ productId }) => {
   }, [i18n]);
 
   useEffect(() => {
+    // til oʻzgarganda mahsulotni qayta yuklash
     refetchProduct();
   }, [language, refetchProduct]);
 
-  if (isLoading) return <p>Yuklanmoqda...</p>;
-  if (isError) return <p>Xatolik yuz berdi</p>;
-  if (!product || !product.data) return <p>Mahsulot topilmadi</p>;
+  if (isLoading) return <p>{t("common.loading") || "Yuklanmoqda..."}</p>;
+  if (isError) return <p>{t("common.error") || "Xatolik yuz berdi"}</p>;
 
-  const productData = product.data;
+  const productData = product?.data || product;
+  if (!productData)
+    return <p>{t("products.notFound") || "Mahsulot topilmadi"}</p>;
 
-  // ✅ UNIT tarjima
+  // UNIT tarjima (useMemo)
   const langKey = resolveLangKey(language);
-  const unitData = units[productData.unit?.toLowerCase()];
-  const unitText = unitData
-    ? unitData[langKey] || unitData.uz_uz
-    : productData.unit;
+  const unitData = useMemo(
+    () => units[String(productData.unit || "")?.toLowerCase()],
+    [productData.unit]
+  );
+  const unitText = useMemo(() => {
+    if (unitData)
+      return unitData[langKey] || unitData.uz_uz || productData.unit;
+    return productData.unit || "";
+  }, [unitData, langKey, productData.unit]);
+
+  // price formatting
+  const priceText = formatPrice(productData.price);
+
+  const imageUrl = safeImageUrl(productData.imageurl);
 
   return (
     <div>
@@ -201,33 +241,41 @@ const ProductDetail = ({ productId }) => {
       <div className="product-detail container">
         <div className="image-section">
           <div className="image-section__header">
-            <Image
-              className="main-image"
-              src={`https://api.bsgazobeton.uz${productData.imageurl}`}
-              alt={productData.name || "Product"}
-              width={200}
-              height={120}
-            />
+            {imageUrl ? (
+              <Image
+                className="main-image"
+                src={imageUrl}
+                alt={productData.name || "Product"}
+                width={400}
+                height={240}
+                // priority yoki placeholder qo`shmoqchi bo`lsangiz shu yerga
+              />
+            ) : (
+              <div className="no-image" aria-hidden>
+                {t("products.noImage") || "Rasm mavjud emas"}
+              </div>
+            )}
           </div>
 
           <div className="description">
             <h3>{t("products.aboutproducts")}</h3>
             <div
               className="product-description"
+              // Eslatma: agar backend HTML yuboradigan bo'lsa, u toza ekanligiga ishonch hosil qiling.
               dangerouslySetInnerHTML={{
                 __html: productData.description || "",
               }}
-            ></div>
+            />
             <h4>{t("products.moreprops")}</h4>
             <div className="catalog-button">
-              <button>{t("products.downloadcatalog")}</button>
+              <button type="button">{t("products.downloadcatalog")}</button>
             </div>
           </div>
         </div>
 
         <div className="info-section">
-          <div className="price">
-            {productData.price} {t("header.priceUnit")}/{unitText}
+          <div className="price" aria-live="polite">
+            {priceText} {t("header.priceUnit")}/{unitText}
           </div>
 
           <h4 className="info-section__title">
@@ -245,14 +293,28 @@ const ProductDetail = ({ productId }) => {
           </div>
 
           {hasQty ? (
-            <div className="quantity-control">
-              <button className="quantity-btn" onClick={handleDec}>
+            <div
+              className="quantity-control"
+              role="group"
+              aria-label={t("products.quantity")}
+            >
+              <button
+                className="quantity-btn"
+                onClick={handleDec}
+                aria-label={t("products.decrease")}
+                disabled={isSyncing && !!token}
+              >
                 <Image src={minus} alt="minus" />
               </button>
               <p className="quantity-value">
                 {uiQty} <span>{unitText}</span>
               </p>
-              <button className="quantity-btn" onClick={handleInc}>
+              <button
+                className="quantity-btn"
+                onClick={handleInc}
+                aria-label={t("products.increase")}
+                disabled={isSyncing && !!token}
+              >
                 <Image src={plus} alt="plus" />
               </button>
             </div>
@@ -261,12 +323,17 @@ const ProductDetail = ({ productId }) => {
               className="add-to-cart"
               onClick={handleAdd}
               disabled={isSyncing && !!token}
+              aria-disabled={isSyncing && !!token}
             >
               {t("products.addcards")}
             </button>
           )}
 
-          <a href="#" className="info-section__end">
+          <a
+            href="#"
+            className="info-section__end"
+            aria-label={t("products.addcompare")}
+          >
             <Image src={compare} alt="compare" />
             {t("products.addcompare")}
           </a>

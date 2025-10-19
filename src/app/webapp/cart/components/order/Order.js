@@ -9,9 +9,11 @@ import {
 import { clearCart } from "../../../../../context/cartSlice";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import "./order.scss";
 
 const OrderContent = ({ onBack }) => {
+  const { t } = useTranslation("global");
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -21,7 +23,7 @@ const OrderContent = ({ onBack }) => {
 
   const [form, setForm] = useState({
     fullName: "",
-    phone: "",
+    phoneNumber: "",
     email: "",
     address: "",
   });
@@ -34,12 +36,15 @@ const OrderContent = ({ onBack }) => {
     e.preventDefault();
 
     try {
+      // 1️⃣ Buyurtma yaratish
       const orderRes = await createOrder({
         ...form,
         isDeliverable: deliveryType === "delivery",
       }).unwrap();
 
+      // 2️⃣ orderid bilan mahsulotlarni yuborish
       const items = cart.map((item) => ({
+        orderid: orderRes.id, // 🔥 asosiy qo‘shimcha
         productid: item.productid,
         quantity: item.quantity,
         state: 1,
@@ -47,26 +52,28 @@ const OrderContent = ({ onBack }) => {
 
       await saveOrderItems(items).unwrap();
 
-      toast.success("Buyurtma muvaffaqiyatli yuborildi!");
+      toast.success(t("order.success"));
       dispatch(clearCart());
-      router.push("/katalog");
+      router.push("/webapp/home");
     } catch (err) {
-      toast.error("Xatolik: " + (err?.data?.message || "Buyurtma yuborilmadi"));
+      toast.error(
+        `${t("order.error")}: ${err?.data?.message || t("order.failed")}`
+      );
     }
   };
 
   return (
     <div className="container">
       <ToastContainer />
-      <h2>Buyurtmani rasmiylashtirish</h2>
+      <h2 className="order__header__title">{t("order.title")}</h2>
 
       <form className="order__form" onSubmit={handleSubmit}>
         <div className="order__form__info">
-          <label className="form__group__label">To‘liq ismingiz</label>
+          <label className="form__group__label">{t("order.full_name")}</label>
           <input
             className="form__group__input"
             type="text"
-            placeholder="Sohib"
+            placeholder={t("order.full_name_placeholder")}
             name="fullName"
             value={form.fullName}
             onChange={handleChange}
@@ -75,13 +82,13 @@ const OrderContent = ({ onBack }) => {
         </div>
 
         <div className="order__form__info">
-          <label className="form__group__label">Phone number</label>
+          <label className="form__group__label">{t("order.phone")}</label>
           <input
             className="form__group__input"
             type="tel"
-            placeholder="+998 (__) ___-__-__"
-            name="phone"
-            value={form.phone}
+            placeholder={t("order.phone_placeholder")}
+            name="phoneNumber"
+            value={form.phoneNumber}
             onChange={handleChange}
             required
           />
@@ -92,7 +99,7 @@ const OrderContent = ({ onBack }) => {
           <input
             className="form__group__input"
             type="email"
-            placeholder="Emailni kiriting"
+            placeholder={t("order.email_placeholder")}
             name="email"
             value={form.email}
             onChange={handleChange}
@@ -100,10 +107,10 @@ const OrderContent = ({ onBack }) => {
         </div>
 
         <div className="order__form__info">
-          <label className="form__group__label">Manzil</label>
+          <label className="form__group__label">{t("order.address")}</label>
           <textarea
             className="form__group__input"
-            placeholder="Manzilni kiriting"
+            placeholder={t("order.address_placeholder")}
             name="address"
             value={form.address}
             onChange={handleChange}
@@ -111,7 +118,7 @@ const OrderContent = ({ onBack }) => {
         </div>
 
         <div className="order__form__info">
-          <label className="form__group__label">Yetkazib berish</label>
+          <label className="form__group__label">{t("order.delivery")}</label>
           <div className="delivery__options">
             <button
               type="button"
@@ -120,7 +127,7 @@ const OrderContent = ({ onBack }) => {
               }`}
               onClick={() => setDeliveryType("delivery")}
             >
-              Yetkazib berish
+              {t("order.delivery_method")}
             </button>
             <button
               type="button"
@@ -129,13 +136,13 @@ const OrderContent = ({ onBack }) => {
               }`}
               onClick={() => setDeliveryType("pickup")}
             >
-              Zavoddan olib ketish
+              {t("order.pickup_method")}
             </button>
           </div>
         </div>
 
         <button type="submit" className="order__form__button">
-          Yuborish
+          {t("order.submit")}
         </button>
       </form>
     </div>

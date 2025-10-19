@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import useDebouncedCartSaver from "../../../../hooks/useDebouncedCartSaver";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+
 import { units } from "../../../../data/unit"; // <-- bu joyda unit tarjimalari saqlangan
 
 function writeLocalCart(productid, nextQuantity, patch) {
@@ -47,7 +48,6 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-  // 600ms ichida bosishlarni bitta batch qilib yuboradi
   const { saveLater /*, isSyncing*/ } = useDebouncedCartSaver({
     token,
     debounceMs: 600,
@@ -57,7 +57,6 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => {
     (item && (item.productid || item.productId || item.id)) || null;
   const unitPrice = Number(item && item.price) || 0;
 
-  // 🔴 Optimistik lokal quantity
   const [qty, setQty] = useState(Number(item && item.quantity) || 0);
 
   useEffect(() => {
@@ -76,7 +75,6 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => {
     desc: item && item.desc,
   };
 
-  // ✅ UNIT TARJIMASI
   const lang = i18n.language?.toLowerCase() || "uz_uz";
   const unitData = units[item?.unit?.toLowerCase()];
   const unitText = unitData ? unitData[lang] || unitData.uz_uz : item?.unit;
