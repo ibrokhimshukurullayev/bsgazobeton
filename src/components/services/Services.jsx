@@ -61,8 +61,8 @@ const Services = () => {
               <Image
                 src={item.image}
                 alt={item.title}
-                width={410}
-                height={560}
+                width={"auto"}
+                height={"auto"}
               />
             </div>
           ))}

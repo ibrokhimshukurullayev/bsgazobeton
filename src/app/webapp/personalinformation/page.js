@@ -1,31 +1,27 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { toast, ToastContainer } from "react-toastify";
 import { useGetUserInfoQuery } from "../../../context/userApi";
 import "react-toastify/dist/ReactToastify.css";
 import "./personalinformation.scss";
-
 import profileDefault from "../../../assets/images/webappImages/profiles.svg";
 import editIcon from "../../../assets/images/webappImages/edit.svg";
 
-const PersonalInformation = () => {
+export default function PersonalInformation() {
   const router = useRouter();
-
   const [token, setToken] = useState(null);
   const [mounted, setMounted] = useState(false);
 
-  // 🔹 Tokenni faqat clientda olish
+  // ✅ faqat clientda localStorage o‘qiladi
   useEffect(() => {
-    const t =
-      typeof window !== "undefined" ? localStorage.getItem("token") : null;
-    setToken(t);
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken);
     setMounted(true);
   }, []);
 
-  // 🔹 Faqat token bo‘lsa so‘rov yubor
   const { data, isLoading, error, refetch } = useGetUserInfoQuery(undefined, {
     skip: !token,
   });
@@ -38,11 +34,9 @@ const PersonalInformation = () => {
     avatar: null,
     profileImageUrl: "",
   });
-
   const [isChanged, setIsChanged] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
 
-  // 🔹 User ma’lumotlari yuklanganda formani to‘ldirish
   useEffect(() => {
     if (user) {
       setFormData({
@@ -54,36 +48,29 @@ const PersonalInformation = () => {
     }
   }, [user]);
 
-  // 🔹 Token yo‘q bo‘lsa login sahifaga yo‘naltirish
+  // 🔹 login redirect client mount bo‘lgandan keyin
   useEffect(() => {
     if (mounted && !token) {
       router.push("/login");
     }
   }, [mounted, token, router]);
 
-  if (!mounted) return null; // SSR paytida hech narsa ko‘rsatmaydi
+  // 🔹 SSR paytida hech narsa render qilma
+  if (!mounted) return null;
+
   if (!token) return <p className="loading">Yuborilmoqda...</p>;
   if (isLoading) return <p className="loading">Yuklanmoqda...</p>;
   if (error) return <p className="error">Xatolik yuz berdi</p>;
 
-  // 🔹 Input o‘zgarishlari
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setIsChanged(true);
-  };
-
-  // 🔹 Rasm tanlanganda
+  // Rasmni tanlash
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     if (file.size > 3 * 1024 * 1024) {
       toast.error("Rasm 3MB dan oshmasligi kerak");
       return;
     }
 
-    // Eski blob URLni tozalash
     if (formData.profileImageUrl?.startsWith("blob:")) {
       URL.revokeObjectURL(formData.profileImageUrl);
     }
@@ -98,7 +85,6 @@ const PersonalInformation = () => {
     setShowOptions(false);
   };
 
-  // 🔹 Rasmni o‘chirish
   const handleDeleteImage = () => {
     if (formData.profileImageUrl?.startsWith("blob:")) {
       URL.revokeObjectURL(formData.profileImageUrl);
@@ -112,21 +98,26 @@ const PersonalInformation = () => {
     setShowOptions(false);
   };
 
-  // 🔹 Ma’lumotlarni saqlash
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setIsChanged(true);
+  };
+
   const handleSave = async (e) => {
     e.preventDefault();
     try {
       let uploadedImageUrl = formData.profileImageUrl;
 
       if (formData.avatar) {
-        const imgForm = new FormData();
-        imgForm.append("File", formData.avatar);
+        const formDataImg = new FormData();
+        formDataImg.append("File", formData.avatar);
 
         const uploadRes = await fetch(
           "https://api.bsgazobeton.uz/api/upload/file",
           {
             method: "POST",
-            body: imgForm,
+            body: formDataImg,
           }
         );
         const uploadData = await uploadRes.json();
@@ -153,7 +144,7 @@ const PersonalInformation = () => {
       });
 
       if (!res.ok) throw new Error("Yangilashda xatolik");
-      toast.success("Profil ma'lumotlari yangilandi ✅");
+      toast.success("Profil yangilandi ✅");
       refetch();
       setIsChanged(false);
     } catch (err) {
@@ -172,11 +163,7 @@ const PersonalInformation = () => {
         <div className="photo-wrapper">
           <div className="photo-container">
             <Image
-              src={
-                formData.profileImageUrl
-                  ? formData.profileImageUrl
-                  : profileDefault
-              }
+              src={formData.profileImageUrl || profileDefault}
               alt="User photo"
               width={120}
               height={120}
@@ -249,6 +236,4 @@ const PersonalInformation = () => {
       </form>
     </div>
   );
-};
-
-export default PersonalInformation;
+}

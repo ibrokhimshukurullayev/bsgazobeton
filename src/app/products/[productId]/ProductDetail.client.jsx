@@ -208,16 +208,17 @@ const ProductDetail = ({ productId }) => {
 
   // UNIT tarjima (useMemo)
   const langKey = resolveLangKey(language);
-  // const unitData = useMemo(() => {
-  //   if (!productData?.unit || !units) return null;
-  //   return units[String(productData.unit).toLowerCase()] || null;
-  // }, [productData.unit, units]);
+  let unitData = null;
+  if (productData?.unit && units) {
+    unitData = units[String(productData.unit).toLowerCase()] || null;
+  }
 
-  // const unitText = useMemo(() => {
-  //   if (unitData)
-  //     return unitData[langKey] || unitData.uz_uz || productData.unit;
-  //   return productData.unit || "";
-  // }, [unitData, langKey, productData.unit]);
+  let unitText = "";
+  if (unitData) {
+    unitText = unitData[langKey] || unitData.uz_uz || productData.unit;
+  } else {
+    unitText = productData?.unit || "";
+  }
 
   // price formatting
   const priceText = formatPrice(productData.price);
@@ -276,7 +277,7 @@ const ProductDetail = ({ productId }) => {
 
         <div className="info-section">
           <div className="price" aria-live="polite">
-            {priceText} {t("header.priceUnit")}
+            {priceText} {t("header.priceUnit")}/{unitText}
           </div>
 
           <h4 className="info-section__title">
@@ -307,7 +308,9 @@ const ProductDetail = ({ productId }) => {
               >
                 <Image src={minus} alt="minus" />
               </button>
-              <p className="quantity-value">{uiQty}</p>
+              <p className="quantity-value">
+                {uiQty} <span>{unitText}</span>
+              </p>
               <button
                 className="quantity-btn"
                 onClick={handleInc}
