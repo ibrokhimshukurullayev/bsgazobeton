@@ -18,13 +18,17 @@ export default function ProfilePage() {
   const { t } = useTranslation("global");
   const router = useRouter();
 
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
+  // 🔹 Tokenni faqat browserda olish
+  const [token, setToken] = useState(null);
   useEffect(() => {
-    if (!token) router.push("/login");
-  }, [token, router]);
+    if (typeof window !== "undefined") {
+      const savedToken = localStorage.getItem("token");
+      if (savedToken) setToken(savedToken);
+      else router.push("/login");
+    }
+  }, [router]);
 
+  // 🔹 Token yo‘q bo‘lsa, hook’larni ishlatmaslik
   const { data, isLoading, error, refetch } = useGetUserInfoQuery(undefined, {
     skip: !token,
   });
@@ -35,8 +39,8 @@ export default function ProfilePage() {
     firstname: "",
     lastname: "",
     phonenumber: "",
-    avatar: null, // yangi yuklangan fayl
-    profileImageUrl: null, // hozirgi rasm yoki preview
+    avatar: null,
+    profileImageUrl: null,
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -54,36 +58,35 @@ export default function ProfilePage() {
   const [verifyPhoneChange, { isLoading: verifyingPhone }] =
     useChangePhoneMutation();
 
-  // ✅ Backenddan foydalanuvchi ma'lumotlarini olish
+  // ✅ Foydalanuvchi ma'lumotlarini set qilish
   useEffect(() => {
     if (user) {
-      setFormData((prev) => ({
-        ...prev,
+      setFormData({
         firstname: user.firstname || "",
         lastname: user.lastname || "",
         phonenumber: user.phonenumber || "",
         avatar: null,
-        profileImageUrl: user.profileimageurl || null, // ✅ to‘g‘ridan backenddagi nom
+        profileImageUrl: user.profileimageurl || null,
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
-      }));
+      });
       setIsChanged(false);
     }
   }, [user]);
 
-  if (!token) return <div>Yuborilmoqda...</div>;
+  // 🔸 Token hali olinmagan bo‘lsa
+  if (token === null) return <div>Yuklanmoqda...</div>;
   if (isLoading) return <Loading />;
   if (error) return <div>Xatolik yuz berdi</div>;
 
-  // Input o‘zgarishi
+  // 🔹 Inputlar
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setIsChanged(true);
   };
 
-  // ✅ Rasm tanlanganda darhol preview
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -111,12 +114,11 @@ export default function ProfilePage() {
     setIsChanged(true);
   };
 
-  // ✅ Saqlash: rasm bo‘lsa upload → so‘ng PUT profil yangilash
+  // ✅ Profilni yangilash
   const handleSave = async () => {
     try {
       let uploadedImageUrl = user?.profileimageurl || null;
 
-      // Fayl yuklangan bo‘lsa upload qilamiz
       if (formData.avatar) {
         const form = new FormData();
         form.append("File", formData.avatar);
@@ -136,7 +138,6 @@ export default function ProfilePage() {
         if (!uploadedImageUrl) throw new Error("Yuklangan rasm URL topilmadi!");
       }
 
-      // 🔹 Profilni yangilash
       const response = await fetch(
         "https://api.bsgazobeton.uz/api/users/profile",
         {
@@ -157,7 +158,7 @@ export default function ProfilePage() {
 
       toast.success(t("toasts.profileUpdated"));
       setFormData((prev) => ({ ...prev, avatar: null }));
-      refetch(); // yangilangan ma'lumotni qayta olish
+      refetch();
     } catch (err) {
       toast.error(
         "Xatolik: " +
@@ -166,7 +167,7 @@ export default function ProfilePage() {
     }
   };
 
-  // Parolni yangilash
+  // 🔸 Parolni yangilash
   const handlePasswordUpdate = async () => {
     if (formData.newPassword !== formData.confirmPassword) {
       toast.error(t("toasts.passwordMismatch"));
@@ -178,6 +179,7 @@ export default function ProfilePage() {
         newPassword: formData.newPassword,
         confirmPassword: formData.confirmPassword,
       }).unwrap();
+
       toast.success(t("toasts.passwordUpdated"));
       setShowPasswordFields(false);
       setFormData((prev) => ({
@@ -193,7 +195,7 @@ export default function ProfilePage() {
     }
   };
 
-  // Telefon raqam o‘zgartirish
+  // 🔸 Telefon raqamni o‘zgartirish
   const handleRequestPhoneChange = async () => {
     try {
       await requestPhoneChange({
@@ -206,7 +208,6 @@ export default function ProfilePage() {
     }
   };
 
-  // Kodni tasdiqlash
   const handleVerifyCode = async () => {
     try {
       await verifyPhoneChange({
@@ -231,9 +232,7 @@ export default function ProfilePage() {
         {/* ✅ Avatar */}
         <div className="profile__avatar__section">
           <div className="profile-avatar">
-            {formData.avatar ? (
-              <img src={URL.createObjectURL(formData.avatar)} alt="avatar" />
-            ) : formData.profileImageUrl ? (
+            {formData.profileImageUrl ? (
               <img
                 src={
                   formData.profileImageUrl.startsWith("http")
@@ -269,7 +268,7 @@ export default function ProfilePage() {
 
         <small>{t("profiles.recommended")}</small>
 
-        {/* Ism familiya */}
+        {/* 🟢 Ism familiya */}
         <div className="profile__forms">
           <div className="profile__forms__left">
             <label>{t("profiles.firstName")}</label>
@@ -300,7 +299,7 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        {/* Telefon */}
+        {/* 🟢 Telefon */}
         <div className="profile-form">
           <label>{t("profiles.phoneNumber")}</label>
           <div className="phone-input">
@@ -323,7 +322,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Parol o‘zgarishi */}
+        {/* 🟢 Parol */}
         <div className="profile-form">
           {!showPasswordFields ? (
             <div className="password__change">
@@ -386,7 +385,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Tasdiqlash oynasi */}
+      {/* 🟢 Tasdiqlash oynasi */}
       {verifyModal && (
         <div className="verify-modal">
           <div className="modal-content">
