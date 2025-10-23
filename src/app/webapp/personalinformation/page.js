@@ -167,7 +167,7 @@ export default function PersonalInformation() {
 
   return (
     <div className="container">
-      <ToastContainer />
+      <ToastContainer position="top-center" style={{ top: "50px" }} />
       <div className="setting__top">
         <h3 className="setting__top__title">Profil ma‘lumotlari</h3>
       </div>
