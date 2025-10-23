@@ -109,6 +109,7 @@ export default function PersonalInformation() {
     try {
       let uploadedImageUrl = formData.profileImageUrl;
 
+      // ✅ Agar yangi avatar tanlangan bo‘lsa — token bilan upload qilamiz
       if (formData.avatar) {
         const formDataImg = new FormData();
         formDataImg.append("File", formData.avatar);
@@ -117,10 +118,21 @@ export default function PersonalInformation() {
           "https://api.bsgazobeton.uz/api/upload/file",
           {
             method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`, // 🟢 Tokenni yuboramiz
+            },
             body: formDataImg,
           }
         );
-        const uploadData = await uploadRes.json();
+
+        // ✅ JSON parse xatoligini oldini olamiz
+        const text = await uploadRes.text();
+        let uploadData;
+        try {
+          uploadData = JSON.parse(text);
+        } catch {
+          throw new Error("Serverdan noto‘g‘ri javob keldi");
+        }
 
         if (!uploadRes.ok || !uploadData?.data) {
           toast.error("Rasm yuklanmadi!");
@@ -130,6 +142,7 @@ export default function PersonalInformation() {
         uploadedImageUrl = `https://api.bsgazobeton.uz${uploadData.data}`;
       }
 
+      // ✅ Profil ma’lumotlarini yangilaymiz
       const res = await fetch("https://api.bsgazobeton.uz/api/users/profile", {
         method: "PUT",
         headers: {

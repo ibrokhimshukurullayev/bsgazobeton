@@ -35,16 +35,16 @@ export default function OrderDetailes({ order, onBack }) {
     return status;
   };
 
+  console.log(order);
+
   return (
     <div className="orderdetailes">
       <div className="container">
-        {/* 🔹 Buyurtma sarlavhasi */}
         <h3 className="orderdetailes__title">
           {t("ordersss.id")}:{" "}
           <strong>#{order?.ordernumber || order?.orderNumber}</strong>
         </h3>
 
-        {/* 🔹 Buyurtma ma'lumotlari */}
         <div className="orderdetailes__info">
           <div className="orderdetailes__row">
             <p className="orderdetailes__row__title">{t("ordersss.date")}:</p>
@@ -85,7 +85,6 @@ export default function OrderDetailes({ order, onBack }) {
           </div>
         </div>
 
-        {/* 🔹 Mahsulotlar ro‘yxati */}
         <h4 className="orderdetailes__list">{t("ordersss.products")}</h4>
 
         <div className="cart__box">

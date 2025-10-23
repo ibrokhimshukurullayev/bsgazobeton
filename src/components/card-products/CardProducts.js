@@ -132,8 +132,15 @@ const CardProducts = ({ el }) => {
               localStorage.getItem("language")?.toLowerCase() || "uz_uz";
             return (
               <div className="product__card__text" key={idx}>
-                <p>{item.key?.[lang] || "-"}</p>
-                <p>{item.value?.[lang] || "-"}</p>
+                <p title={item.key?.[lang] || "-"}>
+                  {(item.key?.[lang] || "-")?.split(" ").slice(0, 2).join(" ")}
+                </p>
+                <p title={item.value?.[lang] || "-"}>
+                  {(item.value?.[lang] || "-")
+                    ?.split(" ")
+                    .slice(0, 2)
+                    .join(" ")}
+                </p>
               </div>
             );
           })}

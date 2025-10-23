@@ -44,6 +44,8 @@
     letter-spacing: 0%;
     text-align: left;
     margin: 8px 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 
   p {

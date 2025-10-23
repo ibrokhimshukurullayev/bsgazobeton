@@ -35,8 +35,8 @@ export default function ProfilePage() {
     firstname: "",
     lastname: "",
     phonenumber: "",
-    avatar: null, // yangi yuklangan fayl
-    profileImageUrl: null, // hozirgi rasm yoki preview
+    avatar: null,
+    profileImageUrl: null,
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -54,7 +54,7 @@ export default function ProfilePage() {
   const [verifyPhoneChange, { isLoading: verifyingPhone }] =
     useChangePhoneMutation();
 
-  // ✅ Backenddan foydalanuvchi ma'lumotlarini olish
+  // ✅ Foydalanuvchi ma'lumotlarini yuklash
   useEffect(() => {
     if (user) {
       setFormData((prev) => ({
@@ -63,7 +63,7 @@ export default function ProfilePage() {
         lastname: user.lastname || "",
         phonenumber: user.phonenumber || "",
         avatar: null,
-        profileImageUrl: user.profileimageurl || null, // ✅ to‘g‘ridan backenddagi nom
+        profileImageUrl: user.profileimageurl || null,
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
@@ -83,7 +83,7 @@ export default function ProfilePage() {
     setIsChanged(true);
   };
 
-  // ✅ Rasm tanlanganda darhol preview
+  // ✅ Rasm tanlanganda preview
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -111,24 +111,34 @@ export default function ProfilePage() {
     setIsChanged(true);
   };
 
-  // ✅ Saqlash: rasm bo‘lsa upload → so‘ng PUT profil yangilash
+  // ✅ Fayl yuklash va profilni yangilash
   const handleSave = async () => {
     try {
       let uploadedImageUrl = user?.profileimageurl || null;
 
-      // Fayl yuklangan bo‘lsa upload qilamiz
+      // Agar yangi rasm tanlangan bo‘lsa
       if (formData.avatar) {
         const form = new FormData();
         form.append("File", formData.avatar);
 
         const uploadResponse = await fetch(
           "https://api.bsgazobeton.uz/api/upload/file",
-          { method: "POST", body: form }
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: form,
+          }
         );
 
-        if (!uploadResponse.ok) throw new Error(t("toasts.uploadError"));
-        const uploadData = await uploadResponse.json();
+        if (!uploadResponse.ok) {
+          if (uploadResponse.status === 401)
+            throw new Error("Avtorizatsiya xatosi! Iltimos qayta kiring.");
+          throw new Error(t("toasts.uploadError"));
+        }
 
+        const uploadData = await uploadResponse.json();
         uploadedImageUrl = uploadData?.data
           ? `https://api.bsgazobeton.uz${uploadData.data}`
           : null;
@@ -136,7 +146,7 @@ export default function ProfilePage() {
         if (!uploadedImageUrl) throw new Error("Yuklangan rasm URL topilmadi!");
       }
 
-      // 🔹 Profilni yangilash
+      // 🔹 Profil ma'lumotlarini PUT orqali yangilash
       const response = await fetch(
         "https://api.bsgazobeton.uz/api/users/profile",
         {
@@ -153,20 +163,24 @@ export default function ProfilePage() {
         }
       );
 
-      if (!response.ok) throw new Error(t("toasts.passwordError"));
+      if (!response.ok) {
+        if (response.status === 401)
+          throw new Error("Sessiya tugagan! Iltimos qayta tizimga kiring.");
+        throw new Error(t("toasts.profileUpdateError"));
+      }
 
       toast.success(t("toasts.profileUpdated"));
       setFormData((prev) => ({ ...prev, avatar: null }));
-      refetch(); // yangilangan ma'lumotni qayta olish
+      refetch();
     } catch (err) {
       toast.error(
         "Xatolik: " +
-          (err?.data?.message || err.message || t("toasts.passwordError"))
+          (err?.data?.message || err.message || t("toasts.profileUpdateError"))
       );
     }
   };
 
-  // Parolni yangilash
+  // ✅ Parolni yangilash
   const handlePasswordUpdate = async () => {
     if (formData.newPassword !== formData.confirmPassword) {
       toast.error(t("toasts.passwordMismatch"));
@@ -193,7 +207,7 @@ export default function ProfilePage() {
     }
   };
 
-  // Telefon raqam o‘zgartirish
+  // ✅ Telefon raqam o‘zgartirish
   const handleRequestPhoneChange = async () => {
     try {
       await requestPhoneChange({
@@ -206,7 +220,7 @@ export default function ProfilePage() {
     }
   };
 
-  // Kodni tasdiqlash
+  // ✅ Telefon kodi tasdiqlash
   const handleVerifyCode = async () => {
     try {
       await verifyPhoneChange({
@@ -228,7 +242,7 @@ export default function ProfilePage() {
       <p className="subtitle">{t("profiles.subtitle")}</p>
 
       <div className="profile-card">
-        {/* ✅ Avatar */}
+        {/* ✅ Avatar bo‘limi */}
         <div className="profile__avatar__section">
           <div className="profile-avatar">
             {formData.avatar ? (
