@@ -42,7 +42,7 @@ export default function Profile() {
     return (
       <div className="container containers">
         <div className="profile">
-          <p>{t("profile.loading")}</p>
+          <p>{t("profiless.loading")}</p>
         </div>
       </div>
     );
@@ -52,7 +52,7 @@ export default function Profile() {
     return (
       <div className="container containers">
         <div className="profile">
-          <p>{t("profile.error")}</p>
+          <p>{t("profiless.error")}</p>
         </div>
       </div>
     );
@@ -63,7 +63,7 @@ export default function Profile() {
       <div className="profile">
         <div className="user-info">
           <div className="user__info__header">
-            <h3>{t("profile.title")}</h3>
+            <h3>{t("profiless.title")}</h3>
           </div>
 
           <div className="user__info__footer">
@@ -75,7 +75,7 @@ export default function Profile() {
               className="avatar"
             />
             <div className="user__info__footer__end">
-              <h4>{fullName || t("profile.no_name")}</h4>
+              <h4>{fullName || t("profiless.no_name")}</h4>
               <p>+{phone}</p>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function Profile() {
               href="/webapp/personalinformation"
             >
               <Image src={person} alt="" width={40} height={40} />
-              {t("profile.personal_info")}
+              {t("profiless.personal_info")}
             </Link>
             <Link href="/webapp/personalinformation">
               <Image src={right} alt="" width={18} height={18} />
@@ -98,7 +98,7 @@ export default function Profile() {
           <div className="menu__hero">
             <Link className="menu__hero__link" href="/webapp/language">
               <Image src={language} alt="" width={40} height={40} />
-              {t("profile.change_language")}
+              {t("profiless.change_language")}
             </Link>
             <Link href="/webapp/language">
               <Image src={right} alt="" width={18} height={18} />
@@ -108,7 +108,7 @@ export default function Profile() {
           <div className="menu__hero">
             <Link className="menu__hero__link" href="/webapp/contact">
               <Image src={cantact} alt="" width={40} height={40} />
-              {t("profile.contact_us")}
+              {t("profiless.contact_us")}
             </Link>
             <Link href="/webapp/contact">
               <Image src={right} alt="" width={18} height={18} />
@@ -118,7 +118,7 @@ export default function Profile() {
           <div className="menu__hero">
             <Link className="menu__hero__link" href="/webapp/addresses">
               <Image src={manzil} alt="" width={40} height={40} />
-              {t("profile.addresses")}
+              {t("profiless.addresses")}
             </Link>
             <Link href="/webapp/addresses">
               <Image src={right} alt="" width={18} height={18} />
