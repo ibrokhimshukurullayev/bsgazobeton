@@ -5,10 +5,10 @@ import Title from "../../../components/title/Title";
 import sertifikat1 from "../../../assets/images/sertikifat1.png";
 import sertifikat2 from "../../../assets/images/sertifikat2.png";
 
-export const metadata = {
-  title: "Sertifikat va litsenziyalar | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Sertifikat va litsenziyalar | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 const AboutSertifikat = () => {
   return (

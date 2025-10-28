@@ -4,10 +4,10 @@ import "./news.scss";
 import { useGetNewsQuery } from "../../../context/newsApi";
 import { useTranslation } from "react-i18next";
 
-export const metadata = {
-  title: "Yangiliklar | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Yangiliklar | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 export default function NewsPage() {
   const { data, error, isLoading } = useGetNewsQuery({ take: 100, skip: 0 });

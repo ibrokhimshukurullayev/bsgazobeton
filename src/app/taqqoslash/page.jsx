@@ -11,10 +11,10 @@ import ProductPicker from "../../components/ProductPicker/ProductPicker";
 import { toggleToWishes } from "../../context/wishlistSlice";
 import { useTranslation } from "react-i18next";
 
-export const metadata = {
-  title: "Taqqoslash | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Taqqoslash | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 // ✅ Carddagi kabi funksiya — obyekt ichidan mos tildagi qiymatni olish
 function getName(item, language = "uz_UZ") {

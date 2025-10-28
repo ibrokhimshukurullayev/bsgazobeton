@@ -11,10 +11,10 @@ import nazorat1 from "../../../assets/images/nazorat/nazorat1.jpg";
 import nazorat2 from "../../../assets/images/nazorat/nazorat2.jpg";
 import nazorat3 from "../../../assets/images/nazorat/nazorat3.jpg";
 
-export const metadata = {
-  title: "Sifat nazorati va laboratoriya | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Sifat nazorati va laboratoriya | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 const AboutSifat = () => {
   const [t, i18n] = useTranslation("global");

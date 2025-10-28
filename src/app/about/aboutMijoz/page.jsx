@@ -9,10 +9,10 @@ import caricon from "../../../assets/images/caricon.png";
 import Title from "../../../components/title/Title";
 import { useTranslation } from "react-i18next";
 
-export const metadata = {
-  title: "Mijozlar va hamkorlar | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Mijozlar va hamkorlar | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 const AboutMijoz = () => {
   const [t, i18n] = useTranslation("global");

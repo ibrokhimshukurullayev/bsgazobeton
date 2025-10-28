@@ -5,10 +5,10 @@ import "../../news/news.scss";
 import Image from "next/image";
 import Carusel from "../../../../components/carusel/Carusel";
 
-export const metadata = {
-  title: "Yangiliklar | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Yangiliklar | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 export default function NewsDetail({ params }) {
   // Next.js 15 da params Promise bo‘lib keladi, shu sabab use() bilan unwrap qilamiz

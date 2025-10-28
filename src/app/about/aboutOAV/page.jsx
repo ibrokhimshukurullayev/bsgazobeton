@@ -8,10 +8,10 @@ import { useGetNewsQuery } from "../../../context/newsApi";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
-export const metadata = {
-  title: "Biz haqimizda OAV",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Biz haqimizda OAV",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 const AboutOAV = () => {
   // API dan yangiliklarni olish

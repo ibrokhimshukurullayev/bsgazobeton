@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 import "./order.scss";
 import OrderDetailes from "../../../components/orderDetailes/OrderDetailes"; // shu yerda import
 
-export const metadata = {
-  title: "Buyurtmalar | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Buyurtmalar | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 const ENUM_BY_ID = {
   0: "Cart",

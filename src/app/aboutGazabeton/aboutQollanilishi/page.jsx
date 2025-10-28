@@ -8,10 +8,10 @@ import uy5 from "../../../assets/images/uy5.png";
 
 import "./about.scss";
 
-export const metadata = {
-  title: "Gazobetonning qo‘llanilish joylari | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Gazobetonning qo‘llanilish joylari | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 const steps = [
   {

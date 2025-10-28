@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next";
 
 import "./about.scss";
 
-export const metadata = {
-  title: "Kop beriladigan savollar | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Kop beriladigan savollar | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 const AboutFaq = () => {
   const [openId, setOpenId] = useState(1);

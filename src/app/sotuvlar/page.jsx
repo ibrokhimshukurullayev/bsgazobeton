@@ -6,10 +6,10 @@ import Button from "../../components/button/Button";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
-export const metadata = {
-  title: "Buyurtma berish va yetkazib berish tartibi | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "Buyurtma berish va yetkazib berish tartibi | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 const Sotuvlar = () => {
   const router = useRouter();

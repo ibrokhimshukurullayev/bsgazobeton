@@ -15,10 +15,10 @@ import naqd from "../../../assets/images/naqd.png";
 import Title from "../../../components/title/Title";
 import { useTranslation } from "react-i18next";
 
-export const metadata = {
-  title: "To'lov usullari | BS Gazobeton",
-  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-};
+// export const metadata = {
+//   title: "To'lov usullari | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
 
 const TolovUsullari = () => {
   const [t, i18n] = useTranslation("global");
