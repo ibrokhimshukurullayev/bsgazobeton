@@ -9,7 +9,14 @@ import Header from "../components/header/Header";
 import { Provider } from "react-redux";
 import { store } from "../context/store";
 import Loading from "../components/loading/Loading";
+import { Inter } from "next/font/google"; // ✅ FONT IMPORT
 import "./globals.css";
+
+// ✅ Google Fonts optimizatsiyasi
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +38,9 @@ export default function RootLayout({ children }) {
   }, [pathname]);
 
   return (
-    <html lang="uz">
+    <html lang="uz" className={inter.className}>
+      {" "}
+      {/* ✅ font shu yerda ishlaydi */}
       <body>
         <Provider store={store}>
           <I18nextProvider i18n={i18n}>
@@ -40,7 +49,6 @@ export default function RootLayout({ children }) {
               {isLoading && <Loading />}
               {children}
             </main>
-
             {!isWebApp && <Footer />}
           </I18nextProvider>
         </Provider>
