@@ -13,6 +13,11 @@ import facebook from "../../assets/images/social/facebook.svg";
 import youtube from "../../assets/images/social/youtube.svg";
 import telegram from "../../assets/images/social/telegram.svg";
 
+export const metadata = {
+  title: "Biz bilan bog'lanish | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const Joylashuv = () => {
   const [t] = useTranslation("global");
   const [createContact, { isLoading }] = useCreateContactMutation();

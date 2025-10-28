@@ -7,6 +7,11 @@ import "./vakansiyalar.scss";
 import Loading from "../../../components/loading/Loading";
 import { useTranslation } from "react-i18next";
 
+export const metadata = {
+  title: "Vakansiyalar | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const Vakansiyalar = () => {
   const router = useRouter();
   const { data, isLoading, error } = useGetVakansiyalarQuery({

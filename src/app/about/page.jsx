@@ -10,6 +10,11 @@ import Button from "../../components/button/Button";
 import Title from "../../components/title/Title";
 import { useTranslation } from "react-i18next";
 
+export const metadata = {
+  title: "Kompaniya haqida | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const About = () => {
   const [t, i18n] = useTranslation("global");
   return (

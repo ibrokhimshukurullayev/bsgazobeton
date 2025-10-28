@@ -42,11 +42,8 @@ const About = () => {
         </div>
         <div className="about__end__right">
           <iframe
-            src="https://www.youtube.com/embed/G8KEoAb876A?si=NMGmUAex_Aq-3wnD"
-            title="YouTube video player"
-            // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            // referrerpolicy="strict-origin-when-cross-origin"
-            // allowfullscreen
+            src="https://www.youtube-nocookie.com/embed/G8KEoAb876A?si=NMGmUAex_Aq-3wnD"
+            title="BSG Gazobeton video"
           ></iframe>
         </div>
       </div>

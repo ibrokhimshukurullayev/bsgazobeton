@@ -121,19 +121,19 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4>{t("footer.manzil")}</h4>
-            <p>{t("footer.manjil1")}</p>
+            <p className="">{t("footer.manzil")}</p>
+            <p className="footer__list__text">{t("footer.manjil1")}</p>
           </div>
 
           <div>
-            <h4>{t("footer.telefon")}</h4>
-            <p>+998 (99) 150-22-22</p>
-            <p>+998 (99) 150-22-22</p>
+            <p className="">{t("footer.telefon")}</p>
+            <p className="footer__list__text">+998 (99) 150-22-22</p>
+            <p className="footer__list__text">+998 (99) 150-22-22</p>
           </div>
 
           <div>
-            <h4>{t("footer.email")}</h4>
-            <p>info@bsgroup.uz</p>
+            <p className="">{t("footer.email")}</p>
+            <p className="footer__list__text">info@bsgroup.uz</p>
           </div>
 
           <div className="footer__socials">
@@ -153,7 +153,7 @@ const Footer = () => {
         </div>
 
         <div className="footer__column">
-          <h4>{t("header.catalog")}</h4>
+          <p className="">{t("header.catalog")}</p>
           <ul>
             {isLoading ? (
               <li>Yuklanmoqda...</li>
@@ -166,7 +166,7 @@ const Footer = () => {
             )}
           </ul>
 
-          <h4>{t("header.services")}</h4>
+          <p className="">{t("header.services")}</p>
           <ul>
             {dropdownItems.xizmatlar.map((item, i) => (
               <li key={i}>
@@ -177,7 +177,7 @@ const Footer = () => {
         </div>
 
         <div className="footer__column">
-          <h4>{t("header.about")}</h4>
+          <p className="">{t("header.about")}</p>
           <ul>
             {dropdownItems.about.map((item, i) => (
               <li key={i}>
@@ -186,7 +186,7 @@ const Footer = () => {
             ))}
           </ul>
 
-          <h4>{t("header.sales")}</h4>
+          <p className="">{t("header.sales")}</p>
           <ul>
             {dropdownItems.sotuvlar.map((item, i) => (
               <li key={i}>
@@ -197,7 +197,7 @@ const Footer = () => {
         </div>
 
         <div className="footer__column">
-          <h4>{t("header.gazabetonabout")}</h4>
+          <p className="">{t("header.gazabetonabout")}</p>
           <ul>
             {dropdownItems.gazobeton.map((item, i) => (
               <li key={i}>
@@ -209,7 +209,7 @@ const Footer = () => {
       </div>
 
       <div className="footer__bottom">
-        <p>{t("footer.title")}</p>
+        <p className="footer__list__text">{t("footer.title")}</p>
       </div>
     </footer>
   );

@@ -6,6 +6,11 @@ import { GazobetonAdvantages } from "./components/GazobetonAdvantages/GazobetonA
 import Title from "../../components/title/Title";
 import { useTranslation } from "react-i18next";
 
+export const metadata = {
+  title: "Gazobeton haqida batafsil | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const AboutGazabeton = () => {
   const [t, i18n] = useTranslation("global");
 

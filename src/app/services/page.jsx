@@ -9,6 +9,11 @@ import services from "../../assets/images/services.png";
 import Button from "../../components/button/Button";
 import { useRouter } from "next/navigation";
 
+export const metadata = {
+  title: "Mahsulot bo’yicha konsultatsiya | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const Services = () => {
   const router = useRouter();
 

@@ -6,6 +6,11 @@ import arrow from "../../../assets/images/arrow.svg";
 import "./services.scss";
 import Image from "next/image";
 
+export const metadata = {
+  title: "Kalkulyator | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const Calculator = () => {
   const [length, setLength] = useState();
   const [holeOfDoorAndWindowArea, setHoleOfDoorAndWindowArea] = useState(null);

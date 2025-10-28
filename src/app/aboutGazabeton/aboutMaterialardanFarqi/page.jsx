@@ -7,6 +7,11 @@ import peneblok from "../../../assets/images/peneblok.png";
 import beton from "../../../assets/images/beton.png";
 import Title from "../../../components/title/Title";
 
+export const metadata = {
+  title: "Gazobetonning boshqa materiallardan farqi | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const AboutMaterillardanFarqi = () => {
   const data = [
     {

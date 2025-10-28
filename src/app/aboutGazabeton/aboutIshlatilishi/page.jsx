@@ -13,6 +13,11 @@ import img7 from "../../../assets/images/ishlatilishi/7.png";
 import img8 from "../../../assets/images/ishlatilishi/6.png";
 import { useRouter } from "next/navigation";
 
+export const metadata = {
+  title: "Gazoblok ishlatish bo’yicha qo’llanma | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const steps = [
   {
     id: 1,

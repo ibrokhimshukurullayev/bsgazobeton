@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
   }, [pathname]);
 
   return (
-    <html lang="uz_UZ">
+    <html lang="uz">
       <body>
         <Provider store={store}>
           <I18nextProvider i18n={i18n}>

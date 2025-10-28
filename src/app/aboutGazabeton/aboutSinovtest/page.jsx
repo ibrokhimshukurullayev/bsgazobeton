@@ -5,6 +5,11 @@ import { TestList } from "../components/testlist/Testlist";
 import Title from "../../../components/title/Title";
 import { useTranslation } from "react-i18next";
 
+export const metadata = {
+  title: "Sinov testlari | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const AboutSinovtest = () => {
   const [t, i18n] = useTranslation("global");
   return (

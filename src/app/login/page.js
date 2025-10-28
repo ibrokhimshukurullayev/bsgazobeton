@@ -5,6 +5,11 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import LoginForm from "../../components/LoginForm/LoginForm";
 
+export const metadata = {
+  title: "Tizimga kirish | BS Gazobeton",
+  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+};
+
 const Login = () => {
   const router = useRouter();
 
