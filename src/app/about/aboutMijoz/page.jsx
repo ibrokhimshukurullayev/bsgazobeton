@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 export const metadata = {
   title: "Mijozlar va hamkorlar | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const AboutMijoz = () => {

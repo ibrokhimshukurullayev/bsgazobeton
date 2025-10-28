@@ -16,8 +16,8 @@ import Title from "../../../components/title/Title";
 import { useTranslation } from "react-i18next";
 
 export const metadata = {
-  title: "To’lov usullari | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  title: "To'lov usullari | BS Gazobeton",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const TolovUsullari = () => {

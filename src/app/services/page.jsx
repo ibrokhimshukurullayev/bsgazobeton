@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 export const metadata = {
   title: "Mahsulot bo’yicha konsultatsiya | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const Services = () => {

@@ -7,7 +7,7 @@ import Faq from "../components/faq/Faq";
 
 export const metadata = {
   title: "Bosh sahifa | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 export default function Home() {

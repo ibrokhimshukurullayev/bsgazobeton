@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 
 export const metadata = {
   title: "Kompaniya haqida | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const About = () => {

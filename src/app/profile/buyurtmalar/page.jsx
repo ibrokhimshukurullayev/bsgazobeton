@@ -7,7 +7,7 @@ import OrderDetailes from "../../../components/orderDetailes/OrderDetailes"; // 
 
 export const metadata = {
   title: "Buyurtmalar | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const ENUM_BY_ID = {

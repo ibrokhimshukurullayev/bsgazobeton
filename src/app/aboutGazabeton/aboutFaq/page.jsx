@@ -6,7 +6,7 @@ import "./about.scss";
 
 export const metadata = {
   title: "Kop beriladigan savollar | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const AboutFaq = () => {

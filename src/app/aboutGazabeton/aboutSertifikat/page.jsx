@@ -7,7 +7,7 @@ import sertifikat2 from "../../../assets/images/sertifikat2.png";
 
 export const metadata = {
   title: "Sertifikat va litsenziyalar | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const AboutSertifikat = () => {

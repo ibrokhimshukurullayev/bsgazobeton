@@ -10,7 +10,7 @@ import "./about.scss";
 
 export const metadata = {
   title: "Gazobetonning qo‘llanilish joylari | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const steps = [

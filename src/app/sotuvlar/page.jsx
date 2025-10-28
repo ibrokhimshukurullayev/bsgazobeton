@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export const metadata = {
   title: "Buyurtma berish va yetkazib berish tartibi | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const Sotuvlar = () => {

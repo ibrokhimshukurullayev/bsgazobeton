@@ -9,7 +9,7 @@ import Title from "../../../components/title/Title";
 
 export const metadata = {
   title: "Gazobetonning boshqa materiallardan farqi | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const AboutMaterillardanFarqi = () => {

@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 
 export const metadata = {
   title: "Taqqoslash | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 // ✅ Carddagi kabi funksiya — obyekt ichidan mos tildagi qiymatni olish

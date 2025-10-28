@@ -15,7 +15,7 @@ import telegram from "../../assets/images/social/telegram.svg";
 
 export const metadata = {
   title: "Biz bilan bog'lanish | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const Joylashuv = () => {

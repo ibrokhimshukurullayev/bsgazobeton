@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 export const metadata = {
   title: "Gazoblok montaji | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const Gazablokmantaji = () => {

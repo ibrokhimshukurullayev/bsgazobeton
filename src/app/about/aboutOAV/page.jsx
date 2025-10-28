@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 export const metadata = {
   title: "Biz haqimizda OAV",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const AboutOAV = () => {

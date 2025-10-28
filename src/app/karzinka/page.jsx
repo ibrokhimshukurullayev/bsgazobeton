@@ -7,7 +7,7 @@ import CheckoutForm from "./../../app/karzinka/components/checkoutForm/CheckoutF
 
 export const metadata = {
   title: "Karzinka | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const Karzinka = () => {

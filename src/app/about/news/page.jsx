@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export const metadata = {
   title: "Yangiliklar | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 export default function NewsPage() {

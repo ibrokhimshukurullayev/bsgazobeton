@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export const metadata = {
   title: "Kalkulyator | BS Gazobeton",
-  description: "O‘zbekistonning eng sifatli gazobeton mahsulotlari.",
+  description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
 };
 
 const Calculator = () => {
