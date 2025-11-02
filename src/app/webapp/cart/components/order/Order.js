@@ -77,10 +77,7 @@ const OrderContent = ({ onBack }) => {
 
   return (
     <div className="container">
-      <ToastContainer
-        position="bottom-center"
-        style={{ bottom: "50px" }} // 🔹 50px pastdan
-      />
+      <ToastContainer position="bottom-center" style={{ bottom: "50px" }} />
       <h2 className="order__header__title">{t("order.title")}</h2>
 
       <form className="order__form" onSubmit={handleSubmit}>

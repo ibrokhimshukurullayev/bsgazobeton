@@ -80,14 +80,14 @@ export default function Orders() {
 
   const translateStatus = (status) => {
     const key = normalizeStatus(status);
-    return t(`orderses.status.${key.toLowerCase()}`) || key;
+    return t(`orders.status.${key.toLowerCase()}`) || key;
   };
 
   return (
     <div className="container">
       <div className="order__tab__header">
         <div className="orders">
-          <h3 className="orders__title">{t("orderses.title")}</h3>
+          <h3 className="orders__title">{t("orders.title")}</h3>
         </div>
 
         <div className="orders__tabs">
@@ -95,13 +95,13 @@ export default function Orders() {
             className={`orders__tab ${tab === "active" ? "active" : ""}`}
             onClick={() => setTab("active")}
           >
-            {t("orderses.active")}
+            {t("orders.active")}
           </button>
           <button
             className={`orders__tab ${tab === "archive" ? "active" : ""}`}
             onClick={() => setTab("archive")}
           >
-            {t("orderses.archive")}
+            {t("orders.archive")}
           </button>
         </div>
       </div>
@@ -109,9 +109,7 @@ export default function Orders() {
       <div className="orders__list">
         {currentOrders.length === 0 ? (
           <p>
-            {tab === "archive"
-              ? t("orderses.noArchive")
-              : t("orderses.noActive")}
+            {tab === "archive" ? t("orders.noArchive") : t("orders.noActive")}
           </p>
         ) : (
           currentOrders.map((order) => {
@@ -149,7 +147,7 @@ export default function Orders() {
           className="show-more"
           onClick={() => setTake((prev) => prev + 5)}
         >
-          {t("orderses.showMore")}
+          {t("orders.showMore")}
         </button>
       )}
     </div>

@@ -81,17 +81,6 @@ export default function RegisterForm() {
             required
           />
 
-          <label htmlFor="">{t("register.firstNamePlaceholder")}</label>
-          <input
-            className="register__input"
-            type="text"
-            name="lastName"
-            placeholder={t("register.firstNamePlaceholder")}
-            value={form.lastName}
-            onChange={handleChange}
-            required
-          />
-
           <label htmlFor="">{t("register.phoneLabel")}</label>
           <input
             className="register__input"
