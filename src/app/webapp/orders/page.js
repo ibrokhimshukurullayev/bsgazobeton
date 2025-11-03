@@ -87,7 +87,7 @@ export default function Orders() {
     <div className="container">
       <div className="order__tab__header">
         <div className="orders">
-          <h3 className="orders__title">{t("orders.title")}</h3>
+          <h3 className="orders__title">{t("orderses.title")}</h3>
         </div>
 
         <div className="orders__tabs">
@@ -95,13 +95,13 @@ export default function Orders() {
             className={`orders__tab ${tab === "active" ? "active" : ""}`}
             onClick={() => setTab("active")}
           >
-            {t("orders.active")}
+            {t("orderses.active")}
           </button>
           <button
             className={`orders__tab ${tab === "archive" ? "active" : ""}`}
             onClick={() => setTab("archive")}
           >
-            {t("orders.archive")}
+            {t("orderses.archive")}
           </button>
         </div>
       </div>
@@ -147,7 +147,7 @@ export default function Orders() {
           className="show-more"
           onClick={() => setTake((prev) => prev + 5)}
         >
-          {t("orders.showMore")}
+          {t("orderses.showMore")}
         </button>
       )}
     </div>

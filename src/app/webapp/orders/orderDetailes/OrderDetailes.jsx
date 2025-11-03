@@ -35,8 +35,6 @@ export default function OrderDetailes({ order, onBack }) {
     return status;
   };
 
-  console.log(order);
-
   return (
     <div className="orderdetailes">
       <div className="container">

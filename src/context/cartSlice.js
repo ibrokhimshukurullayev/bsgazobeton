@@ -26,7 +26,6 @@ const cartSlice = createSlice({
         try {
           const raw = localStorage.getItem("cart");
           state.value = raw ? JSON.parse(raw) : [];
-          console.log("CART INIT FROM localStorage:", state.value);
         } catch (e) {
           console.error("cart init error:", e);
           state.value = [];
@@ -35,7 +34,6 @@ const cartSlice = createSlice({
     },
 
     addToCart: (state, action) => {
-      console.log("ADD_TO_CART CALLED:", action.payload);
       const existing = state.value.find(
         (item) => item.productid === action.payload.productid
       );
@@ -57,7 +55,6 @@ const cartSlice = createSlice({
           console.error("Failed to save cart:", e);
         }
       }
-      console.log("UPDATED CART:", state.value);
     },
 
     incCart: (state, action) => {
@@ -72,7 +69,6 @@ const cartSlice = createSlice({
           console.error("Failed to save cart:", e);
         }
       }
-      console.log("INCREASE:", state.value);
     },
 
     decCart: (state, action) => {
@@ -95,7 +91,6 @@ const cartSlice = createSlice({
           console.error("Failed to save cart:", e);
         }
       }
-      console.log("DECREASE:", state.value);
     },
 
     removeFromCart: (state, action) => {
@@ -109,7 +104,6 @@ const cartSlice = createSlice({
           console.error("Failed to save cart:", e);
         }
       }
-      console.log("REMOVE:", state.value);
     },
 
     clearCart: (state) => {
@@ -121,7 +115,6 @@ const cartSlice = createSlice({
           console.error("Failed to clear cart:", e);
         }
       }
-      console.log("CLEAR CART");
     },
   },
 });
