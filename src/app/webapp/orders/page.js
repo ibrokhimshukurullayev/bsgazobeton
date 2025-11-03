@@ -1,8 +1,8 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { useGetAllOrdersQuery } from "../../../context/orderApi";
 import OrderDetailes from "./orderDetailes/OrderDetailes";
-import Image from "next/image";
 import "./orders.scss";
 import { useTranslation } from "react-i18next";
 
@@ -69,6 +69,12 @@ export default function Orders() {
 
   const currentOrders = tab === "active" ? activeOrders : archiveOrders;
 
+  // ✅ Statusni tarjima qiluvchi funksiya (3 tilda)
+  const translateStatus = (status) => {
+    const key = normalizeStatus(status).toLowerCase();
+    return t(`orderses.status.${key}`) || key;
+  };
+
   if (selectedOrder) {
     return (
       <OrderDetailes
@@ -77,11 +83,6 @@ export default function Orders() {
       />
     );
   }
-
-  const translateStatus = (status) => {
-    const key = normalizeStatus(status);
-    return t(`orders.status.${key.toLowerCase()}`) || key;
-  };
 
   return (
     <div className="container">
@@ -109,7 +110,9 @@ export default function Orders() {
       <div className="orders__list">
         {currentOrders.length === 0 ? (
           <p>
-            {tab === "archive" ? t("orders.noArchive") : t("orders.noActive")}
+            {tab === "archive"
+              ? t("orderses.noArchive")
+              : t("orderses.noActive")}
           </p>
         ) : (
           currentOrders.map((order) => {
