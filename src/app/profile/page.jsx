@@ -144,9 +144,7 @@ export default function ProfilePage() {
         }
 
         const uploadData = await uploadResponse.json();
-        uploadedImageUrl = uploadData?.data
-          ? `https://api.bsgazobeton.uz${uploadData.data}`
-          : null;
+        uploadedImageUrl = uploadData?.data || null;
 
         if (!uploadedImageUrl) throw new Error("Yuklangan rasm URL topilmadi!");
       }
@@ -247,7 +245,6 @@ export default function ProfilePage() {
       <p className="subtitle">{t("profiles.subtitle")}</p>
 
       <div className="profile-card">
-        {/* ✅ Avatar bo‘limi */}
         <div className="profile__avatar__section">
           <div className="profile-avatar">
             {formData.avatar ? (
@@ -319,7 +316,6 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        {/* Telefon */}
         <div className="profile-form">
           <label>{t("profiles.phoneNumber")}</label>
           <div className="phone-input">
@@ -405,7 +401,6 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Tasdiqlash oynasi */}
       {verifyModal && (
         <div className="verify-modal">
           <div className="modal-content">
@@ -413,18 +408,45 @@ export default function ProfilePage() {
             <p>
               {t("profiles.verifyPhoneText")} {formData.phonenumber}
             </p>
+
+            {/* 6 ta OTP input */}
             <div className="code-inputs">
-              <input
-                type="text"
-                maxLength="6"
-                value={otpCode}
-                onChange={(e) => setOtpCode(e.target.value)}
-              />
+              {Array.from({ length: 6 }).map((_, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  maxLength="1"
+                  className="otp-input"
+                  value={otpCode[index] || ""}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/, ""); // faqat raqam
+                    if (!value) return;
+                    const newCode = otpCode.split("");
+                    newCode[index] = value;
+                    const joined = newCode.join("");
+                    setOtpCode(joined);
+
+                    // avtomatik keyingi inputga o'tish
+                    const next = e.target.nextElementSibling;
+                    if (next && value) next.focus();
+                  }}
+                  onKeyDown={(e) => {
+                    if (
+                      e.key === "Backspace" &&
+                      !otpCode[index] &&
+                      e.target.previousElementSibling
+                    ) {
+                      e.target.previousElementSibling.focus();
+                    }
+                  }}
+                />
+              ))}
             </div>
+
             <button
               className="verify-code-btn"
               onClick={handleVerifyCode}
-              disabled={verifyingPhone}
+              disabled={verifyingPhone || otpCode.length < 6}
             >
               {verifyingPhone
                 ? t("profiles.verifying")
