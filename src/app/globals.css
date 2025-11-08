@@ -15,7 +15,7 @@ li,
 div {
   outline: none;
   -webkit-tap-highlight-color: transparent;
-  user-select: none; /* ixtiyoriy, matn tanlanmasin */
+  user-select: none;
 }
 
 html {

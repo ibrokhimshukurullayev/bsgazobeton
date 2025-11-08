@@ -27,7 +27,7 @@ const OrderContent = ({ onBack }) => {
     email: "",
     address: "",
   });
-  const [deliveryType, setDeliveryType] = useState("delivery");
+  const [deliveryType, setDeliveryType] = useState("delivery"); // 🔹 default: yetkazib berish
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -44,7 +44,7 @@ const OrderContent = ({ onBack }) => {
 
       // 2️⃣ orderid bilan mahsulotlarni yuborish
       const items = cart.map((item) => ({
-        orderid: orderRes.id, // 🔥 asosiy qo‘shimcha
+        orderid: orderRes.id,
         productid: item.productid,
         quantity: item.quantity,
         state: 1,
@@ -60,19 +60,6 @@ const OrderContent = ({ onBack }) => {
         `${t("order.error")}: ${err?.data?.message || t("order.failed")}`
       );
     }
-    let value = e.target.value;
-
-    if (!value.startsWith("+998")) {
-      value = "+998" + value.replace(/\D/g, "");
-    }
-
-    value = "+998" + value.slice(4).replace(/\D/g, "");
-
-    if (value.length > 13) {
-      value = value.slice(0, 13);
-    }
-
-    setPhoneNumber(value);
   };
 
   return (
@@ -81,6 +68,7 @@ const OrderContent = ({ onBack }) => {
       <h2 className="order__header__title">{t("order.title")}</h2>
 
       <form className="order__form" onSubmit={handleSubmit}>
+        {/* Ism familiya */}
         <div className="order__form__info">
           <label className="form__group__label">{t("order.full_name")}</label>
           <input
@@ -94,6 +82,7 @@ const OrderContent = ({ onBack }) => {
           />
         </div>
 
+        {/* Telefon */}
         <div className="order__form__info">
           <label className="form__group__label">{t("order.phone")}</label>
           <input
@@ -107,6 +96,7 @@ const OrderContent = ({ onBack }) => {
           />
         </div>
 
+        {/* Email */}
         <div className="order__form__info">
           <label className="form__group__label">Email</label>
           <input
@@ -119,17 +109,7 @@ const OrderContent = ({ onBack }) => {
           />
         </div>
 
-        <div className="order__form__info">
-          <label className="form__group__label">{t("order.address")}</label>
-          <textarea
-            className="form__group__input"
-            placeholder={t("order.address_placeholder")}
-            name="address"
-            value={form.address}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-
+        {/* Yetkazib berish turi */}
         <div className="order__form__info">
           <label className="form__group__label">{t("order.delivery")}</label>
           <div className="delivery__options">
@@ -154,6 +134,22 @@ const OrderContent = ({ onBack }) => {
           </div>
         </div>
 
+        {/* 🏠 Manzil — faqat delivery bo‘lsa chiqadi */}
+        {deliveryType === "delivery" && (
+          <div className="order__form__info">
+            <label className="form__group__label">{t("order.address")}</label>
+            <textarea
+              className="form__group__input"
+              placeholder={t("order.address_placeholder")}
+              name="address"
+              value={form.address}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+        )}
+
+        {/* Submit tugmasi */}
         <button type="submit" className="order__form__button">
           {t("order.submit")}
         </button>
