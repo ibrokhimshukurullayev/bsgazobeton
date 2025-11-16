@@ -13,6 +13,8 @@ import {
   removeFromCart,
 } from "../../../../context/cartSlice";
 import Loading from "../../../../components/loading/Loading";
+import useDebouncedCartSaver from "../../../../hooks/useDebouncedCartSaver";
+import { useGetUserOrdersQuery } from "../../../../context/orderApi";
 
 import plusIcon from "../../../../assets/images/webappImages/plus.svg";
 import minusIcon from "../../../../assets/images/webappImages/minus.svg";
@@ -50,56 +52,123 @@ export default function ProductDetailPage() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.value);
 
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+  const lang = i18n.language || "uz";
+
   const { data, isLoading } = useGetProductQuery({ skip: 0, take: 1000 });
   const product = data?.data?.list?.find(
     (p) => String(p.productid) === String(id)
   );
 
-  const lang = i18n.language || "uz";
+  // 🧾 serverdagi cart holatini olish
+  const { data: serverCart } = useGetUserOrdersQuery(undefined, {
+    skip: !token,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+  });
 
-  const productInCart = cart.find(
-    (item) => item.productid === product?.productid
-  );
+  // 💾 Backend bilan cart sinxronlash hook
+  const { saveLater, isSyncing } = useDebouncedCartSaver({
+    token,
+    debounceMs: 1000,
+  });
 
-  const [quantity, setQuantity] = useState(productInCart?.quantity || 0);
+  // 🔍 Server va local cartdan item topish
+  const serverItem = useMemo(() => {
+    if (!token || !serverCart) return null;
+    const rows =
+      serverCart?.data?.list ||
+      serverCart?.data ||
+      serverCart?.list ||
+      serverCart?.items ||
+      serverCart?.result ||
+      [];
+    if (!Array.isArray(rows)) return null;
+    return rows.find(
+      (x) =>
+        String(x?.productid) === String(id) ||
+        String(x?.productId) === String(id) ||
+        String(x?.id) === String(id)
+    );
+  }, [token, serverCart, id]);
+
+  const localItem = useMemo(() => {
+    if (!Array.isArray(cart)) return null;
+    return cart.find(
+      (x) =>
+        String(x?.productid) === String(id) ||
+        String(x?.productId) === String(id) ||
+        String(x?.id) === String(id)
+    );
+  }, [cart, id]);
+
+  const baseQty = Number(serverItem?.quantity ?? 0);
+  const [delta, setDelta] = useState(0);
 
   useEffect(() => {
-    setQuantity(productInCart?.quantity || 0);
-  }, [productInCart?.quantity]);
+    setDelta(0);
+  }, [token, baseQty]);
+
+  const uiQty = token ? baseQty + delta : Number(localItem?.quantity ?? 0);
+  const hasQty = uiQty > 0;
+
+  const nextState = (prev, next) =>
+    next === 0 ? "Delete" : prev === 0 ? "Create" : "Update";
+
+  const handleAdd = () => {
+    if (!product) return;
+    if (!token) {
+      dispatch(addToCart(product));
+      return;
+    }
+    const prev = baseQty + delta;
+    const next = prev + 1;
+    setDelta((d) => d + 1);
+    saveLater(id, next, nextState(prev, next));
+  };
+
+  const handleInc = () => {
+    if (!product) return;
+    if (!token) {
+      dispatch(incCart(product));
+      return;
+    }
+    const prev = baseQty + delta;
+    const next = prev + 1;
+    setDelta((d) => d + 1);
+    saveLater(id, next, nextState(prev, next));
+  };
+
+  const handleDec = () => {
+    if (!product) return;
+    if (!token) {
+      const cur = Number(localItem?.quantity || 0);
+      if (cur <= 1) {
+        dispatch(removeFromCart(product));
+      } else {
+        dispatch(decCart(product));
+      }
+      return;
+    }
+    const prev = Math.max(0, baseQty + delta);
+    const next = Math.max(0, prev - 1);
+    setDelta((d) => Math.max(-baseQty, d - 1));
+    saveLater(id, next, nextState(prev, next));
+  };
 
   if (isLoading) return <Loading />;
   if (!product)
     return <div>{t("products.notFound") || "Mahsulot topilmadi"}</div>;
 
-  const tech = Array.isArray(product.technicaldata)
-    ? product.technicaldata
-    : [];
-
-  const handleAddToCart = () => {
-    const newItem = { ...product, quantity: 1 };
-    dispatch(addToCart(newItem));
-    setQuantity(1);
-  };
-
-  const handleIncrease = () => {
-    dispatch(incCart(product));
-    setQuantity((prev) => prev + 1);
-  };
-
-  const handleDecrease = () => {
-    if (quantity <= 1) {
-      dispatch(removeFromCart(product));
-      setQuantity(0);
-    } else {
-      dispatch(decCart(product));
-      setQuantity((prev) => prev - 1);
-    }
-  };
-
-  // 💡 Til bo‘yicha barcha joyni readI18n orqali ko‘rsatamiz:
   const name = readI18n(product.name, lang);
   const desc = readI18n(product.description, lang);
   const unit = readI18n(product.unit, lang);
+  const tech =
+    Array.isArray(product.technicaldata) && product.technicaldata.length > 0
+      ? product.technicaldata
+      : [];
 
   return (
     <div className="product__detail__wrapper">
@@ -188,16 +257,26 @@ export default function ProductDetailPage() {
           </div>
 
           <div className="product__actions">
-            {quantity > 0 ? (
+            {hasQty ? (
               <div className="product__action__box">
                 <div className="product__quantity__box">
-                  <button onClick={handleDecrease} className="qty__btn">
+                  <button
+                    onClick={handleDec}
+                    className="qty__btn"
+                    disabled={isSyncing && !!token}
+                  >
                     <Image src={minusIcon} alt="minus" width={18} height={18} />
                   </button>
 
-                  <span className="qty__count">{quantity}</span>
+                  <span className="qty__count">
+                    {uiQty} {unit ? unit : ""}
+                  </span>
 
-                  <button onClick={handleIncrease} className="qty__btn">
+                  <button
+                    onClick={handleInc}
+                    className="qty__btn"
+                    disabled={isSyncing && !!token}
+                  >
                     <Image src={plusIcon} alt="plus" width={18} height={18} />
                   </button>
                 </div>
@@ -206,11 +285,15 @@ export default function ProductDetailPage() {
                   className="cart__checkoutBtn"
                   onClick={() => router.push("/webapp/cart")}
                 >
-                  🛒 {t("footers.cart") || "Savat"}: {quantity}
+                  🛒 {t("footers.cart") || "Savat"}: {uiQty}
                 </button>
               </div>
             ) : (
-              <button className="add__to__cart__btn" onClick={handleAddToCart}>
+              <button
+                className="add__to__cart__btn"
+                onClick={handleAdd}
+                disabled={isSyncing && !!token}
+              >
                 {t("products.addcards") || "Savatga qo‘shish"}
               </button>
             )}

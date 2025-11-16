@@ -7,34 +7,36 @@ import {
   incCart,
   decCart,
   removeFromCart,
+  clearCart,
 } from "../../../../../context/cartSlice";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 import useDebouncedCartSaver from "../../../../../hooks/useDebouncedCartSaver";
+import { useGetUserOrdersQuery } from "../../../../../context/orderApi";
+import { units } from "../../../../../data/unit";
 
 import cardImg from "../../../../../assets/images/webappImages/card1.svg";
 import minusIcon from "../../../../../assets/images/webappImages/minus.svg";
 import plusIcon from "../../../../../assets/images/webappImages/plus.svg";
 import deleteIcon from "../../../../../assets/images/webappImages/delete.svg";
-import { units } from "../../../../../data/unit";
 
 import "./cart.scss";
 
-// 🔹 localStorage bilan sinxronlash funksiyasi
-function writeLocalCart(productid, quantity, patch = {}) {
+// 🔹 localStorage yozish funksiyasi
+function writeLocalCart(productid, nextQuantity, patch = {}) {
   try {
     const raw = localStorage.getItem("carts");
-    const carts = raw ? JSON.parse(raw) : [];
-    const idx = carts.findIndex((x) => x.productid === productid);
-
+    const list = raw ? JSON.parse(raw) : [];
+    const idx = list.findIndex((x) => x.productid === productid);
     let next;
-    if (quantity <= 0) {
-      next = carts.filter((x) => x.productid !== productid);
+
+    if (nextQuantity <= 0) {
+      next = list.filter((x) => x.productid !== productid);
     } else if (idx === -1) {
-      next = [...carts, { ...patch, productid, quantity }];
+      next = [...list, { productid, quantity: nextQuantity, ...patch }];
     } else {
-      next = carts.map((x) =>
-        x.productid === productid ? { ...x, quantity, ...patch } : x
+      next = list.map((x, i) =>
+        i === idx ? { ...x, quantity: nextQuantity, ...patch } : x
       );
     }
 
@@ -50,204 +52,210 @@ export default function CartContent({ onCheckout }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart.value);
+  const reduxCart = useSelector((state) => state.cart.value);
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-  const { saveLater } = useDebouncedCartSaver({
-    token,
-    debounceMs: 500,
+  const { saveLater } = useDebouncedCartSaver({ token, debounceMs: 600 });
+
+  // 🔹 Server cart hook
+  const { data: serverCart, isFetching } = useGetUserOrdersQuery(undefined, {
+    skip: !token,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
   });
 
-  const items = cart || [];
-  const [localQuantities, setLocalQuantities] = useState({});
+  // 🔹 LocalStorage cart
+  const [localCart, setLocalCart] = useState([]);
 
-  // 🔹 Tarjima funksiyasi (Products dagidek)
-  const getLocalizedValue = (obj) => {
-    if (!obj) return "";
-    const lang = i18n.language?.toLowerCase();
-    if (typeof obj === "string") return obj;
-    if (typeof obj === "object") {
-      return (
-        obj[lang] || obj.uz_uz || obj.ru_ru || obj.en_us || obj.default || ""
-      );
-    }
-    return "";
-  };
-
-  // 🔹 Boshlang‘ich quantitylarni sinxronlash
   useEffect(() => {
-    if (items.length) {
-      const qMap = {};
-      items.forEach((item) => {
-        qMap[item.productid] = Number(item.quantity) || 0;
-      });
-      setLocalQuantities(qMap);
-    }
-  }, [items]);
+    const raw = localStorage.getItem("carts");
+    setLocalCart(raw ? JSON.parse(raw) : []);
+    const sync = () => {
+      const updated = JSON.parse(localStorage.getItem("carts") || "[]");
+      setLocalCart(updated);
+    };
+    window.addEventListener("cart:sync", sync);
+    return () => window.removeEventListener("cart:sync", sync);
+  }, []);
 
-  // 🔹 Quantity +1
-  const handleIncrease = (item) => {
-    const pid = item.productid;
-    const nextQty = (localQuantities[pid] || 0) + 1;
-    setLocalQuantities((prev) => ({ ...prev, [pid]: nextQty }));
-
-    dispatch(incCart(item));
-    writeLocalCart(pid, nextQty, item);
-    if (token) saveLater(pid, nextQty, nextQty > 1 ? "Update" : "Create");
-  };
-
-  // 🔹 Quantity -1
-  const handleDecrease = (item) => {
-    const pid = item.productid;
-    const curr = localQuantities[pid] || 0;
-    const nextQty = Math.max(0, curr - 1);
-    setLocalQuantities((prev) => ({ ...prev, [pid]: nextQty }));
-
-    if (nextQty === 0) dispatch(removeFromCart(item));
-    else dispatch(decCart(item));
-
-    writeLocalCart(pid, nextQty, item);
-    if (token) saveLater(pid, nextQty, nextQty === 0 ? "Delete" : "Update");
-  };
-
-  // 🔹 Mahsulotni olib tashlash
-  const handleRemove = (item) => {
-    const pid = item.productid;
-    setLocalQuantities((prev) => ({ ...prev, [pid]: 0 }));
-    dispatch(removeFromCart(item));
-    writeLocalCart(pid, 0);
-    if (token) saveLater(pid, 0, "Delete");
-  };
-
-  // 🔹 Jami narx
-  const totalSum = useMemo(() => {
-    return items.reduce((sum, item) => {
-      const qty = localQuantities[item.productid] ?? item.quantity ?? 0;
-      const price = Number(item.price) || 0;
-      return sum + price * qty;
-    }, 0);
-  }, [items, localQuantities]);
-
-  // 🔹 Bo‘sh savat holati
-  if (!items?.length)
-    return (
-      <div className="container">
-        <h2 className="cart__titles">{t("card.title") || "Cart"}</h2>
-        <div className="empty__cart">{t("card.empty")}</div>
-      </div>
-    );
+  // 🔹 Tanlanadigan cart (token → server, aks holda → local)
+  const items = token ? serverCart?.data || [] : localCart || reduxCart || [];
 
   console.log(items);
 
-  // 🔹 Asosiy render
+  // 🔹 Quantity +
+  const handleIncrease = (item) => {
+    const id = item.productid || item.id;
+    const nextQty = (Number(item.quantity) || 0) + 1;
+
+    const patch = {
+      name: item.name,
+      imageurl: item.imageurl,
+      price: item.price,
+      desc: item.desc,
+      unit: item.unit,
+    };
+
+    writeLocalCart(id, nextQty, patch);
+    dispatch(incCart({ ...item, productid: id }));
+
+    if (token) saveLater(id, nextQty, nextQty > 1 ? "Update" : "Create");
+  };
+
+  // 🔹 Quantity -
+  const handleDecrease = (item) => {
+    const id = item.productid || item.id;
+    const current = Number(item.quantity) || 0;
+    const nextQty = Math.max(0, current - 1);
+
+    const patch = {
+      name: item.name,
+      imageurl: item.imageurl,
+      price: item.price,
+      desc: item.desc,
+      unit: item.unit,
+    };
+
+    writeLocalCart(id, nextQty, patch);
+
+    if (nextQty <= 0) {
+      dispatch(removeFromCart({ ...item, productid: id }));
+      if (token) saveLater(id, 0, "Delete");
+    } else {
+      dispatch(decCart({ ...item, productid: id }));
+      if (token) saveLater(id, nextQty, "Update");
+    }
+  };
+
+  // 🔹 O‘chirish
+  const handleRemove = (item) => {
+    const id = item.productid || item.id;
+    writeLocalCart(id, 0);
+    dispatch(removeFromCart({ ...item, productid: id }));
+    if (token) saveLater(id, 0, "Delete");
+  };
+
+  // 🔹 Tozalash
+  const handleClear = () => {
+    dispatch(clearCart());
+    localStorage.setItem("carts", "[]");
+    if (token && items.length > 0) {
+      items.forEach((el) => saveLater(el.productid, 0, "Delete"));
+    }
+  };
+
+  // 🔹 Umumiy summa
+  const totalSum = useMemo(() => {
+    return items.reduce((sum, item) => {
+      const price = Number(item.price) || 0;
+      const quantity = Number(item.quantity) || 0;
+      return sum + price * quantity;
+    }, 0);
+  }, [items]);
+
   return (
     <div className="container">
       <div className="cart">
         <div className="cart__header">
-          <h2 className="cart__title">{t("card.title") || "Cart"}</h2>
+          <h2 className="cart__title">{t("card.title")}</h2>
         </div>
 
-        <div className="cart__box">
-          {items.map((item) => {
-            const lang = i18n.language?.toLowerCase() || "uz_uz";
-            const unitData = units[item?.unit?.toLowerCase()];
-            const unitText = unitData
-              ? unitData[lang] || unitData.uz_uz
-              : item?.unit;
+        {items.length === 0 ? (
+          <div className="empty__cart">{t("card.empty")}</div>
+        ) : (
+          <div className="cart__box">
+            {items.map((item) => {
+              const lang = i18n.language?.toLowerCase() || "uz_uz";
+              const unitData = units[item?.unit?.toLowerCase()];
+              const unitText = unitData
+                ? unitData[lang] || unitData.uz_uz
+                : item?.unit;
 
-            return (
-              <div className="cart__item" key={item.productid}>
-                <Image
-                  className="cart__item__img"
-                  src={
-                    item.imageurl
-                      ? `https://api.bsgazobeton.uz${item.imageurl}`
-                      : cardImg
-                  }
-                  alt={getLocalizedValue(item.name) || "Product"}
-                  width={100}
-                  height={80}
-                />
-
-                <div className="cart__details">
-                  <h4 className="cart__category">
-                    {(() => {
-                      const lang = i18n.language?.toLowerCase();
-                      if (
-                        item.translations &&
-                        item.translations.name &&
-                        typeof item.translations.name === "object"
-                      ) {
-                        return (
-                          item.translations.name[lang] ||
-                          item.translations.name.uz_uz ||
-                          item.translations.name.ru_ru ||
-                          item.translations.name.en_us
-                        );
-                      }
-
-                      return item.name || "Product";
-                    })()}
-                  </h4>
-
-                  <span className="cart__price">
-                    {(item.price || 0).toLocaleString()} {t("header.priceUnit")}
-                    /{unitText}
-                  </span>
-
-                  <div className="cart__quantity">
-                    <button
-                      type="button"
-                      className="cart__quantity__add"
-                      onClick={() => handleDecrease(item)}
-                    >
-                      <Image
-                        src={minusIcon}
-                        alt="minus"
-                        width={15}
-                        height={15}
-                      />
-                    </button>
-
-                    <span className="cart__quantity__text">
-                      {localQuantities[item.productid] ?? item.quantity}
+              return (
+                <div className="cart__item" key={item.productid || item.id}>
+                  <Image
+                    className="cart__item__img"
+                    src={
+                      item.imageurl
+                        ? `https://api.bsgazobeton.uz${item.imageurl}`
+                        : cardImg
+                    }
+                    alt={item.name || "Product"}
+                    width={100}
+                    height={80}
+                  />
+                  <div className="cart__details">
+                    <h4 className="cart__category">{item.productname}</h4>
+                    <span className="cart__price">
+                      {(item.price || 0).toLocaleString()}{" "}
+                      {t("header.priceUnit")}/{unitText}
                     </span>
 
-                    <button
-                      type="button"
-                      className="cart__quantity__add"
-                      onClick={() => handleIncrease(item)}
-                    >
-                      <Image src={plusIcon} alt="plus" width={15} height={15} />
-                    </button>
+                    <div className="cart__quantity">
+                      <button
+                        type="button"
+                        onClick={() => handleDecrease(item)}
+                        className="cart__quantity__add"
+                      >
+                        <Image
+                          src={minusIcon}
+                          alt="minus"
+                          width={15}
+                          height={15}
+                        />
+                      </button>
+                      <span className="cart__quantity__text">
+                        {item.quantity}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleIncrease(item)}
+                        className="cart__quantity__add"
+                      >
+                        <Image
+                          src={plusIcon}
+                          alt="plus"
+                          width={15}
+                          height={15}
+                        />
+                      </button>
+                    </div>
                   </div>
+
+                  <button
+                    className="cart__remove"
+                    onClick={() => handleRemove(item)}
+                  >
+                    <Image
+                      src={deleteIcon}
+                      alt="delete"
+                      width={22}
+                      height={22}
+                    />
+                  </button>
                 </div>
+              );
+            })}
+          </div>
+        )}
 
-                <button
-                  className="cart__remove"
-                  onClick={() => handleRemove(item)}
-                >
-                  <Image src={deleteIcon} alt="delete" width={22} height={22} />
-                </button>
-              </div>
-            );
-          })}
-        </div>
+        {items.length > 0 && (
+          <>
+            <div className="cart__total">
+              <span>{t("card.total")}:</span> {totalSum.toLocaleString()} UZS
+            </div>
 
-        <div className="cart__total">
-          <span>{t("card.total")}:</span> {totalSum.toLocaleString()} UZS
-        </div>
-
-        <button
-          className="form__button"
-          onClick={() => {
-            if (!token) router.push("/login");
-            else onCheckout();
-          }}
-        >
-          {t("card.checkout")}
-        </button>
+            <button
+              className="form__button"
+              onClick={() => {
+                onCheckout && onCheckout();
+              }}
+            >
+              {t("card.checkout")}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

@@ -5,6 +5,21 @@ import { useTranslation } from "react-i18next";
 import "./order.scss";
 import OrderDetailes from "../../../components/orderDetailes/OrderDetailes";
 
+// export const metadata = {
+//   title: "Buyurtmalar | BS Gazobeton",
+//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
+// };
+
+const ENUM_BY_ID = {
+  0: "Cart",
+  1: "New",
+  2: "Pending",
+  3: "Confirmed",
+  4: "InProgress",
+  5: "Completed",
+  6: "Cancelled",
+};
+
 const STATUS_CLASS = {
   Cart: "is-cart",
   New: "is-new",
@@ -15,12 +30,14 @@ const STATUS_CLASS = {
   Cancelled: "is-cancelled",
 };
 
-// 🔹 Status normalize
 function normalizeStatus(s) {
+  if (typeof s === "number") return ENUM_BY_ID[s] || "New";
   if (!s) return "New";
   const pure = String(s).replace(/\s|_/g, "").toLowerCase();
   const map = {
     inprogress: "InProgress",
+    inprogresss: "InProgress",
+    in_progress: "InProgress",
     completed: "Completed",
     confirmed: "Confirmed",
     pending: "Pending",
@@ -38,21 +55,18 @@ export default function Buyurtmalar() {
 
   const { t, i18n } = useTranslation("global");
   const [take, setTake] = useState(5);
-  const [tab, setTab] = useState("Active");
-  const [selectedOrder, setSelectedOrder] = useState(null);
   const [language, setLanguage] = useState(() => {
     if (typeof window === "undefined") return "uz_Uz";
     return localStorage.getItem("language") || "uz_Uz";
   });
 
-  // 🔹 Query
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
   const { data, isLoading, error, refetch } = useGetAllOrdersQuery({
     skip: 0,
     take,
-    status: tab, // Backendga Active yoki Archived yuboriladi
   });
 
-  // 🔹 Til o‘zgarsa
   useEffect(() => {
     const code = toI18nCode(language);
     i18n.changeLanguage(code);
@@ -69,10 +83,9 @@ export default function Buyurtmalar() {
       window.removeEventListener("languageChanged", handleLanguageChange);
   }, []);
 
-  // 🔹 Tab o‘zgarganda yoki til o‘zgarganda refetch
   useEffect(() => {
     refetch();
-  }, [language, tab, refetch]);
+  }, [language, refetch]);
 
   if (!token) return <p>{t("auth.loginFirst")}</p>;
   if (isLoading) return <p>{t("common.loading")}</p>;
@@ -80,15 +93,6 @@ export default function Buyurtmalar() {
 
   const orders =
     (data && (data.data?.list || data.list || data.data || [])) || [];
-
-  // 🔹 Faqat Active / Archived mantiqni aniqlash (agar backend bu statusni bermasa)
-  const filteredOrders = orders.filter((o) => {
-    const s = normalizeStatus(o.status);
-    if (tab === "Active") {
-      return ["Cart", "New", "Pending", "Confirmed", "InProgress"].includes(s);
-    }
-    return ["Completed", "Cancelled"].includes(s);
-  });
 
   function toI18nCode(lang) {
     const m = String(lang || "").toLowerCase();
@@ -110,31 +114,12 @@ export default function Buyurtmalar() {
     <div className="order-history">
       <h2>{t("orders.title")}</h2>
 
-      {/* 🔹 Tabs */}
-      <div className="orders__tabs">
-        <button
-          className={`orders__tab ${tab === "Active" ? "active" : ""}`}
-          onClick={() => setTab("Active")}
-        >
-          {t("orders.active")}
-        </button>
-        <button
-          className={`orders__tab ${tab === "Archived" ? "active" : ""}`}
-          onClick={() => setTab("Archived")}
-        >
-          {t("orders.archive")}
-        </button>
-      </div>
-
-      {/* 🔹 Orders list */}
-      {filteredOrders.length === 0 ? (
-        <p>
-          {tab === "Archived" ? t("orders.noArchive") : t("orders.noActive")}
-        </p>
+      {orders.length === 0 ? (
+        <p>{t("orders.empty")}</p>
       ) : (
         <div className="orders-list">
-          {filteredOrders.map((order) => {
-            const statusKey = normalizeStatus(order.status);
+          {orders.map((order) => {
+            const statusKey = normalizeStatus(order && order.status);
             const cls = STATUS_CLASS[statusKey] || STATUS_CLASS.New;
             const label = t(`orders.status.${statusKey}`, statusKey);
 
@@ -160,7 +145,7 @@ export default function Buyurtmalar() {
                   <span className={`status-badge ${cls}`}>{label}</span>
                   <button
                     className="details-btn"
-                    onClick={() => setSelectedOrder(order)}
+                    onClick={() => setSelectedOrder(order)} // ✅ shu yerda ochiladi
                   >
                     {t("orders.details")}
                   </button>
@@ -170,9 +155,7 @@ export default function Buyurtmalar() {
           })}
         </div>
       )}
-
-      {/* 🔹 Show more */}
-      {filteredOrders.length >= take && (
+      {orders?.length >= take && (
         <button
           className="show-more"
           onClick={() => setTake((prev) => prev + 5)}

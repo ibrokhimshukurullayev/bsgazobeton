@@ -13,6 +13,8 @@ export default function NewsPage() {
   const { data, error, isLoading } = useGetNewsQuery({ take: 100, skip: 0 });
   const { t, i18n } = useTranslation("global");
 
+  console.log(data);
+
   if (isLoading) return <p>Yuklanmoqda...</p>;
   if (error) return <p>Xatolik yuz berdi</p>;
 
