@@ -15,16 +15,16 @@ import { useTranslation } from "react-i18next";
 
 const AboutOAV = () => {
   // API dan yangiliklarni olish
-  const { data, isLoading, error } = useGetNewsQuery({ take: 100, skip: 0 });
+  const { data, isLoading, error } = useGetNewsQuery({ take: 100, skip: 0, posttype: "massmedia" });
   const { t, i18n } = useTranslation("global");
 
   if (isLoading) return <p>Yuklanmoqda...</p>;
   if (error) return <p>Xatolik yuz berdi</p>;
 
-  // faqat `posttype = blog`
-  const blogPosts =
+  // faqat `posttype = massmedia`
+  const massmediaPosts =
     data?.data?.list?.filter(
-      (item) => item.posttype?.toLowerCase() === "blog"
+      (item) => item.posttype?.toLowerCase() === "massmedia"
     ) || [];
 
   return (
@@ -35,31 +35,41 @@ const AboutOAV = () => {
         }
       />
       <div className="aboutOAV__card">
-        {blogPosts.length === 0 ? (
+        {massmediaPosts.length === 0 ? (
           <p className="vakansiyalar__empty">{t("compare.news")}</p>
         ) : (
-          blogPosts.map((item) => (
-            <Link
-              key={item.postid}
-              href={`/about/news/${item.postid}`} // detail sahifaga yo‘naltirish
-              className="aboutOAV__box"
-            >
-              {item.thubnailimageurl && (
-                <Image
-                  className="img"
-                  src={`https://api.bsgazobeton.uz${item.thubnailimageurl}`}
-                  alt={item.title}
-                  width={300}
-                  height={200}
-                />
-              )}
-              <h3>{item.title}</h3>
-              <div>
-                <Image src={oav} alt="qayd" />
-                <p>{item.shortdescription}</p>
-              </div>
-            </Link>
-          ))
+          massmediaPosts.map((item) => {
+            const content = (
+              <>
+                {item.thubnailimageurl && (
+                  <Image
+                    className="img"
+                    src={`https://api.bsgazobeton.uz${item.thubnailimageurl}`}
+                    alt={item.title}
+                    width={300}
+                    height={200}
+                  />
+                )}
+                <h3>{item.title}</h3>
+                <div>
+                  <Image src={oav} alt="qayd" />
+                  <p>{item.externallinksource}</p>
+                </div>
+              </>
+            );
+
+            return (
+              <a
+                key={item.postid}
+                href={item.externallink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="aboutOAV__box"
+              >
+                {content}
+              </a>
+            );
+          })
         )}
       </div>
     </div>
