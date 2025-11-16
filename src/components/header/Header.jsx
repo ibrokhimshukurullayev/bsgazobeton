@@ -314,7 +314,9 @@ const Header = () => {
             </a>
 
             <div className="nav__actions">
-              <LangDropdown />
+              <div className="header__lang">
+                <LangDropdown />
+              </div>
               <button className="circle-btns" onClick={handleClick}>
                 <Image src={person} alt="person" />
               </button>
@@ -380,16 +382,7 @@ const Header = () => {
         <div className="nav__res">
           <div className="nav__actions">
             <LangDropdown />
-            <button className="circle-btn" onClick={toggleUserModal}>
-              <Image src={person} alt="person" />
-            </button>
-            <Link href="/karzinka" className="circle-btns">
-              <Image src={cart} alt="cart" />
-            </Link>
           </div>
-          <button className="circle__btn" onClick={toggleUserModal}>
-            <Image src={person} alt="person" />
-          </button>
         </div>
       </div>
     </>

@@ -17,6 +17,13 @@ header.with-compare-bar {
   padding-top: 56px; // CompareBar balandligiga qarab
 }
 
+.header__lang {
+  display: none;
+  @media (min-width: 600px) {
+    display: block;
+  }
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -187,7 +194,6 @@ header.with-compare-bar {
       line-height: 1;
     }
   }
-
 }
 
 #navbar-responsive {

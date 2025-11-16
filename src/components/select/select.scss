@@ -1,9 +1,6 @@
 .lang-select {
-  display: none;
-  @media (min-width: 600px) {
-    position: relative;
-    display: inline-block;
-  }
+  position: relative;
+  display: inline-block;
 }
 
 .lang-button {
