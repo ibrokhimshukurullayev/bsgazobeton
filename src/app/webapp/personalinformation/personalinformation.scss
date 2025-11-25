@@ -140,7 +140,7 @@
     background: #dc2626;
     color: #fff;
     &:disabled {
-      background: hsl(0, 72%, 51%, 0.7); // disabled holatdagi rang
+      background: hsl(0, 72%, 51%, 0.7);
       cursor: not-allowed;
     }
   }
