@@ -556,6 +556,34 @@
 },
 "abouts": {
     "oavTitle": "Bizning faoliyatimiz OAV, yangiliklar, qurilish sohasidagi gazeta-jurnallar va mahalliy telekanallar tomonidan yoritib boriladi. Biz haqimizda chop etilgan maqolalar:"
-  }
+  },
+  "privacy": {
+  "title": "Maxfiylik siyosati",
+  "updated": "Yangilangan sana",
+  "section1Title": "1. Ma’lumotlarni yig‘ish",
+  "section1Text": "Biz foydalanuvchilardan ism, telefon raqami, email va sayt orqali yuborilgan boshqa ma’lumotlarni yig‘ishimiz mumkin.",
+  
+  "section2Title": "2. Ma’lumotlardan foydalanish",
+  "section2Text": "Yig‘ilgan ma’lumotlar xizmatlarni ta’minlash, bog‘lanish va buyurtmalarni qayta ishlash uchun ishlatiladi.",
+  
+  "section3Title": "3. Ma’lumotlarni uchinchi tomonlarga berish",
+  "section3Text": "Ma’lumotlar faqat qonun talab qilganda yoki texnik xizmat ko‘rsatish uchun uchinchi tomonlarga berilishi mumkin.",
+  
+  "section4Title": "4. Cookie-fayllardan foydalanish",
+  "section4Text": "Sayt faoliyati va tahlil uchun cookie-fayllardan foydalaniladi. Brauzer sozlamalaridan ularni o‘chirishingiz mumkin.",
+  
+  "section5Title": "5. Ma’lumotlarni himoya qilish",
+  "section5Text": "Biz ma’lumotlarni himoya qilish uchun xavfsiz serverlar va shifrlangan ulanishlardan foydalanamiz.",
+  
+  "section6Title": "6. Uchinchi tomon havolalari",
+  "section6Text": "Saytda boshqa resurslarga havolalar bo‘lishi mumkin, va biz ularning siyosati uchun javobgar emasmiz.",
+  
+  "section7Title": "7. Foydalanuvchi huquqlari",
+  "section7Text": "Foydalanuvchi ma’lumotlarini o‘chirish, tahrirlash yoki ulardan foydalanishni cheklashni talab qilish huquqiga ega.",
+  
+  "section8Title": "8. Biz bilan bog‘lanish",
+  "section8Text": "Savollar yoki takliflar bo‘lsa, biz bilan bog‘laning."
+}
+
 
 }

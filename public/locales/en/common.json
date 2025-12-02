@@ -557,7 +557,35 @@
 },
 "abouts": {
     "oavTitle": "Our activities are regularly covered by the media, news portals, construction magazines, and local TV channels. Here are articles published about us:"
-  }
+  },
+  "privacy": {
+  "title": "Privacy Policy",
+  "updated": "Last updated",
+  "section1Title": "1. Data Collection",
+  "section1Text": "We may collect your name, phone number, email, and other information submitted through the website.",
+  
+  "section2Title": "2. Use of Data",
+  "section2Text": "Collected data is used to process orders, communicate with users, and improve service quality.",
+  
+  "section3Title": "3. Sharing Data with Third Parties",
+  "section3Text": "We do not sell your data. It may be shared only with authorities or technical service providers when necessary.",
+  
+  "section4Title": "4. Use of Cookies",
+  "section4Text": "Cookies are used for website functionality and analytics. You can disable them in your browser settings.",
+  
+  "section5Title": "5. Data Protection",
+  "section5Text": "We use secure servers and encrypted connections to protect your personal information.",
+  
+  "section6Title": "6. Third-Party Links",
+  "section6Text": "Our website may contain links to external sites. We are not responsible for their privacy policies.",
+  
+  "section7Title": "7. User Rights",
+  "section7Text": "You may request deletion, correction, or restriction of the use of your personal data.",
+  
+  "section8Title": "8. Contact Us",
+  "section8Text": "If you have any questions or suggestions, please contact us."
+}
+
 
 
 
