@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import "./services.scss";
 
-import services from "../../assets/images/services.png";
+import servicesnIstalation from "../../assets/images/services/services-instalation.webp";
 import Button from "../../components/button/Button";
 import { useRouter } from "next/navigation";
 
@@ -25,7 +25,7 @@ const Services = () => {
   return (
     <div className="services">
       <div className="services__img">
-        <Image src={services} alt="services" />
+        <Image src={servicesnIstalation} alt="services" />
       </div>
       <h2>{t("consultationinfo.title")}</h2>
       <h2>{t("consultationinfo.subtitle")}</h2>

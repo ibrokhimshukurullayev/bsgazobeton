@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
-import about1 from "../../assets/images/about1.svg";
+import aboutLaboratory from "../../assets/images/home/about-laboratory.webp";
 import "./about.scss";
 
 const About = () => {
@@ -33,7 +33,7 @@ const About = () => {
       <div className="about__end container">
         <div className="about__end__left">
           <div>
-            <Image src={about1} alt="about" />
+            <Image src={aboutLaboratory} alt="about" />
           </div>
           <div>
             <h3>{t("menu.about.sifat")}</h3>

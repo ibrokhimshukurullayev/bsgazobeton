@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import "./aboutMijoz.scss";
-import xonsaroy from "../../../assets/images/xonsaroy.png";
 import versal from "../../../assets/images/versal.png";
 import ClientCarousel from "../../../components/clientCarousel/ClientCarousel";
 import caricon from "../../../assets/images/caricon.png";

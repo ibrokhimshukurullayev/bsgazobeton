@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import uy1 from "../../../assets/images/uy1.png";
-import uy2 from "../../../assets/images/uy2.png";
-import uy3 from "../../../assets/images/uy3.png";
-import uy4 from "../../../assets/images/uy4.png";
-import uy5 from "../../../assets/images/uy5.png";
+import aboutInstruction1 from "../../../assets/images/aboutGazobeton/about-instruction1.webp";
+import aboutInstruction2 from "../../../assets/images/aboutGazobeton/about-instruction2.webp";
+import aboutInstruction3 from "../../../assets/images/aboutGazobeton/about-instruction3.webp";
+import aboutInstruction4 from "../../../assets/images/aboutGazobeton/about-instruction4.webp";
+import aboutInstruction5 from "../../../assets/images/aboutGazobeton/about-instruction5.webp";
 
 import "./about.scss";
 
@@ -19,35 +19,35 @@ const steps = [
     title: "Turar-joy binolari",
     description:
       "Uy-joy qurilishida tashqi va ichki devor materiali sifatida ishlatiladi",
-    image: uy1,
+    image: aboutInstruction1,
   },
   {
     id: 2,
     title: "Savdo va biznes markazlari",
     description:
       "Yirik tijorat obyektlarida issiqlik va ovoz izolyatsiyasi uchun qo‘llaniladi",
-    image: uy2,
+    image: aboutInstruction2,
   },
   {
     id: 3,
     title: "Zavod va fabrikalar",
     description:
       "Sanoat binolarida mustahkam va yengil material sifatida ishlatiladi",
-    image: uy3,
+    image: aboutInstruction3,
   },
   {
     id: 4,
     title: "Omborxona va sanoat markazlari",
     description:
       "Tez qurish va energiya tejash imkoniyatlari tufayli tanlanadi",
-    image: uy4,
+    image: aboutInstruction4,
   },
   {
     id: 5,
     title: "Xususiy uy-joy qurilishi",
     description:
       "Gazobetonning ishlov berish qulayligi va yengilligi xususiy uy qurilishida afzal qiladi",
-    image: uy5,
+    image: aboutInstruction5,
   },
 ];
 

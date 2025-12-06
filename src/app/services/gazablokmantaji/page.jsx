@@ -3,7 +3,7 @@
 import React from "react";
 import "./services.scss";
 import Image from "next/image";
-import mantaj from "../../../assets/images/mantaj.png";
+import servicesInstalation from "../../../assets/images/services/services-instalation.webp";
 import Button from "../../../components/button/Button";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
@@ -46,7 +46,7 @@ const Gazablokmantaji = () => {
   return (
     <div className="mantaj">
       <div className="mantaj__img">
-        <Image src={mantaj} alt="mantak" />
+        <Image src={servicesInstalation} alt="mantak" />
       </div>
       <p className="mantaj__text">{t("gazoblockinfo.title")}</p>
       <div className="taklif">

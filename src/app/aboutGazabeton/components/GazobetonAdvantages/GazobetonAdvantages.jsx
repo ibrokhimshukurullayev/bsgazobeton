@@ -14,7 +14,7 @@ import icon9 from "../../../../assets/images/featuresicon/icon9.png";
 import icon10 from "../../../../assets/images/featuresicon/icon10.png";
 import icon11 from "../../../../assets/images/featuresicon/icon11.png";
 import icon12 from "../../../../assets/images/featuresicon/icon12.png";
-import gazabeton from "../../../../assets/images/Containergaza.png";
+import gazobeton from "../../../../assets/images/aboutGazobeton/gazobeton.webp";
 
 export const GazobetonAdvantages = () => {
   const [t, i18n] = useTranslation("global");
@@ -42,7 +42,7 @@ export const GazobetonAdvantages = () => {
     },
     {
       type: "image",
-      src: gazabeton,
+      src: gazobeton,
     },
     {
       title: t("about.cardtitle5"),

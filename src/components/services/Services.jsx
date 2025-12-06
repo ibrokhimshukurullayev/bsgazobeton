@@ -6,9 +6,9 @@ import { useTranslation } from "react-i18next";
 
 import "./services.scss";
 
-import xizmat1 from "../../assets/images/xizmat1.png";
-import xizmat2 from "../../assets/images/xizmat2.png";
-import xizmat3 from "../../assets/images/xizmat3.png";
+import serviceConsulting from "../../assets/images/home/service-consulting.webp";
+import serviceInstallation from "../../assets/images/home/service-installation.webp";
+import serviceCalculator from "../../assets/images/home/service-calculator.webp";
 import Link from "next/link";
 
 const Services = () => {
@@ -20,7 +20,7 @@ const Services = () => {
       title: t("services.title1"),
       desc: t("services.desc1"),
       button: t("services.button1"),
-      image: xizmat1,
+      image: serviceConsulting,
       type: "konsultatsiya",
       link: "/joylashuv",
     },
@@ -29,7 +29,7 @@ const Services = () => {
       title: t("services.title2"),
       desc: t("services.desc2"),
       button: t("services.button2"),
-      image: xizmat2,
+      image: serviceInstallation,
       type: "montaj",
       link: "/aboutGazabeton/aboutIshlatilishi",
     },
@@ -38,7 +38,7 @@ const Services = () => {
       title: t("services.title3"),
       desc: t("services.desc3"),
       button: t("services.button3"),
-      image: xizmat3,
+      image: serviceCalculator,
       type: "hisoblash",
       link: "/services/calculator",
     },

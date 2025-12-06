@@ -3,14 +3,14 @@ import React from "react";
 import "./about.scss";
 import pdf from "../../../assets/images/pdf.svg";
 import Image from "next/image";
-import img1 from "../../../assets/images/ishlatilishi/1.png";
-import img2 from "../../../assets/images/ishlatilishi/2.png";
-import img3 from "../../../assets/images/ishlatilishi/3.png";
-import img4 from "../../../assets/images/ishlatilishi/4.png";
-import img5 from "../../../assets/images/ishlatilishi/5.png";
-import img6 from "../../../assets/images/ishlatilishi/8.png";
-import img7 from "../../../assets/images/ishlatilishi/7.png";
-import img8 from "../../../assets/images/ishlatilishi/6.png";
+import img1 from "../../../assets/images/instruction/about-instruction1.webp";
+import img2 from "../../../assets/images/instruction/about-instruction2.webp";
+import img3 from "../../../assets/images/instruction/about-instruction3.webp";
+import img4 from "../../../assets/images/instruction/about-instruction4.webp";
+import img5 from "../../../assets/images/instruction/about-instruction5.webp";
+import img6 from "../../../assets/images/services/services-instalation.webp";
+import img7 from "../../../assets/images/instruction/about-instruction6.webp";
+import img8 from "../../../assets/images/instruction/about-instruction7.webp";
 import { useRouter } from "next/navigation";
 
 // export const metadata = {

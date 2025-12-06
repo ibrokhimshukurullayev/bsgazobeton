@@ -4,12 +4,12 @@ import React from "react";
 import "./aboutSifat.scss";
 import Carusel from "../../../components/carusel/Carusel";
 import Image from "next/image";
-import labaratoriya from "../../../assets/images/labaratoriya.png";
+import labaratoriya from "../../../assets/images/home/about-laboratory.webp";
 import Title from "../../../components/title/Title";
 import { useTranslation } from "react-i18next";
-import nazorat1 from "../../../assets/images/nazorat/nazorat1.jpg";
-import nazorat2 from "../../../assets/images/nazorat/nazorat2.jpg";
-import nazorat3 from "../../../assets/images/nazorat/nazorat3.jpg";
+import control1 from "../../../assets/images/aboutControl/control1.webp";
+import control2 from "../../../assets/images/aboutControl/control2.webp";
+import control3 from "../../../assets/images/aboutControl/control3.webp";
 
 // export const metadata = {
 //   title: "Sifat nazorati va laboratoriya | BS Gazobeton",
@@ -30,19 +30,19 @@ const AboutSifat = () => {
       id: 2,
       title: t("sifat.cardtitle2"),
       description: t("sifat.cardlist2"),
-      image: nazorat1,
+      image: control1,
     },
     {
       id: 3,
       title: t("sifat.cardtitle3"),
       description: t("sifat.cardlist3"),
-      image: nazorat2,
+      image: control2,
     },
     {
       id: 4,
       title: t("sifat.cardtitle4"),
       description: t("sifat.cardlist24"),
-      image: nazorat3,
+      image: control1,
     },
   ];
 

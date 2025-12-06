@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import hero from "../../assets/images/hero.png";
-import bs1 from "../../assets/images/bs1.png";
-import bs2 from "../../assets/images/bs2.png";
-import bs3 from "../../assets/images/bs3.png";
+import hero from "../../assets/images/home/banner.webp";
+import bs1 from "../../assets/images/carusel/bs1.webp";
+import bs2 from "../../assets/images/carusel/bs2.webp";
+import bs3 from "../../assets/images/carusel/bs3.webp";
 import "./carusel.scss";
 
 const images = [hero, bs1, bs2, bs3];

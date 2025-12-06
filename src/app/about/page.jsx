@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import "./about.scss";
-import hero from "../../assets/images/hero.png";
+import hero from "../../assets/images/home/banner.webp";
 import Carusel from "../../components/carusel/Carusel";
 import Features from "../../components/features/Features";
 import Button from "../../components/button/Button";
