@@ -119,7 +119,7 @@ export default function ProductComparison() {
 
                 <div className="product-content">
                   <div className="product__image__wrapper">
-                    <img
+                    <Image
                       src={`https://api.bsgazobeton.uz${product?.imageurl}`}
                       alt={getName(product.name, language)}
                       width={130}
