@@ -5,13 +5,13 @@ import { ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const ServicesGazobetonHeaderLink = ({ title, link }) => {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   return (
     <div id="serviceslink">
       <div className="container serviceslink">
         <div className="serviceslink__link">
-          <Link href={"/services"}>{t("menu.xizmatlar.xizmatlar")}</Link>
+          <Link href={"/services"}>{t("menu.services.title")}</Link>
           <span>
             <ChevronRight className="icon" />
           </span>

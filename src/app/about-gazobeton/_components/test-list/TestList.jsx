@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import "./test-list.scss";
 
 export const TestList = () => {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const tests = [
     {
       number: 1,
@@ -25,12 +25,12 @@ export const TestList = () => {
     {
       number: 4,
       title: t("sinovtestlar.cardtitle4"),
-      description: t("sinovtestlar.cardlist3"),
+      description: t("sinovtestlar.cardlist4"),
     },
     {
       number: 5,
       title: t("sinovtestlar.cardtitle5"),
-      description: t("sinovtestlar.cardlist4"),
+      description: t("sinovtestlar.cardlist5"),
     },
   ];
   return (

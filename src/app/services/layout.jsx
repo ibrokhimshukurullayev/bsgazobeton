@@ -7,15 +7,15 @@ import { useTranslation } from "react-i18next";
 
 export default function ServicesLayout({ children }) {
   const pathname = usePathname();
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   const titles = {
-    "/services": t("menu.xizmatlar.konsultatsiya"),
-    "/services/gas-block-installation": t("menu.xizmatlar.montaj"),
-    "/services/calculator": t("menu.xizmatlar.hisoblash"),
+    "/services": t("menu.services.consultation"),
+    "/services/gas-block-installation": t("menu.services.installation"),
+    "/services/calculator": t("menu.services.calculator"),
   };
 
-  const title = titles[pathname] || t("menu.xizmatlar.xizmatlar");
+  const title = titles[pathname] || t("menu.services.title");
   return (
     <div id="servicesGazobeton">
       <ServicesGazobetonHeaderLink title={title} link={pathname} />

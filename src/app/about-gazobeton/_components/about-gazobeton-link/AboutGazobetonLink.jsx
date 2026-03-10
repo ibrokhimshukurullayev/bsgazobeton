@@ -12,33 +12,33 @@ const AboutGazabetonLink = () => {
   const [t] = useTranslation("global");
 
   const links = [
-    { href: "/about-gazobeton", label: t("menu.gazobeton.haqida") },
+    { href: "/about-gazobeton", label: t("menu.gazobeton.overview") },
     {
       href: "/about-gazobeton/tests",
-      label: t("menu.gazobeton.testlar"),
+      label: t("menu.gazobeton.tests"),
     },
     {
       href: "/about-gazobeton/certificates",
-      label: t("menu.gazobeton.sertifikat"),
+      label: t("menu.gazobeton.certificates"),
     },
     {
       href: "/about-gazobeton/applications",
-      label: t("menu.gazobeton.qollanilishi"),
+      label: t("menu.gazobeton.applications"),
     },
     {
       href: "/about-gazobeton/usage-guide",
-      label: t("menu.gazobeton.qollanma"),
+      label: t("menu.gazobeton.usageGuide"),
     },
     {
       href: "/about-gazobeton/material-differences",
-      label: t("menu.gazobeton.farqi"),
+      label: t("menu.gazobeton.materialDifferences"),
     },
     { href: "/about-gazobeton/faq", label: t("menu.gazobeton.faq") },
   ];
 
   return (
     <div className="aboutLinkCard">
-      <h3>{t("menu.gazobeton.gazobeton")}</h3>
+      <h3>{t("menu.gazobeton.title")}</h3>
       {links.map((link, index) => {
         const isActive = pathname === link.href;
         return (

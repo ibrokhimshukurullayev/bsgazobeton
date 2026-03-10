@@ -58,7 +58,7 @@ const Joylashuv = () => {
             <h3>{t("footer.telefon")}</h3>
             <a href="tel:+998991502222">+998 (99) 150-22-22</a>
             <a href="tel:+998712001022">+998 (71) 200-10-22</a>
-            <p>{t("cantact.title1")}</p>
+            <p>{t("contactForm.title")}</p>
           </div>
           <div className="cantact__email">
             <h3>{t("footer.email")}</h3>
@@ -66,7 +66,7 @@ const Joylashuv = () => {
           </div>
           <div className="cantact__ofis">
             <h3>{t("footer.manzil")}</h3>
-            <p>{t("footer.manjil1")}</p>
+            <p>{t("footer.addressLine1")}</p>
           </div>
           <div className="cantact__social">
             <a href="https://www.instagram.com/bs_gazobeton/" target="_blank">
@@ -89,31 +89,31 @@ const Joylashuv = () => {
 
         <div className="cantact__right">
           <form onSubmit={handleSubmit}>
-            <h3>{t("cantact.formtitle1")}</h3>
+            <h3>{t("contactForm.formTitle")}</h3>
             <input
               type="text"
-              placeholder={t("cantact.input1")}
+              placeholder={t("contactForm.namePlaceholder")}
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
             />
             <input
               type="tel"
-              placeholder={t("cantact.input2")}
+              placeholder={t("contactForm.phonePlaceholder")}
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
             />
             <textarea
               name="message"
-              placeholder={t("cantact.input3")}
+              placeholder={t("contactForm.messagePlaceholder")}
               value={formData.message}
               onChange={handleChange}
             ></textarea>
             <button type="submit" disabled={isLoading}>
-              {isLoading ? t("common.loading") : t("cantact.button")}
+              {isLoading ? t("common.loading") : t("contactForm.submit")}
             </button>
-            <p>{t("cantact.formtitle2")}</p>
+            <p>{t("contactForm.privacyNotice")}</p>
           </form>
         </div>
       </div>

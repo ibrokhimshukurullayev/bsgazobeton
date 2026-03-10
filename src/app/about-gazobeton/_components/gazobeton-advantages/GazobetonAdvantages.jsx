@@ -17,7 +17,7 @@ import icon12 from "../../../../assets/images/featuresicon/icon12.png";
 import gazobeton from "../../../../assets/images/aboutGazobeton/gazobeton.webp";
 
 export const GazobetonAdvantages = () => {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   const advantages = [
     {
@@ -36,7 +36,7 @@ export const GazobetonAdvantages = () => {
       icon: icon8,
     },
     {
-      title: t("about.cardtitle3"),
+      title: t("about.cardtitle4"),
       description: t("about.cardlist4"),
       icon: icon9,
     },

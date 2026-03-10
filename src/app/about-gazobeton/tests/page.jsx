@@ -6,7 +6,7 @@ import Title from "../../../components/title/Title";
 import { useTranslation } from "react-i18next";
 
 const TestsPage = () => {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   return (
     <div className="aboutSinovtest">
       <Title text={t("sinovtestlar.title")} title={"“BS gazobeton”"} />

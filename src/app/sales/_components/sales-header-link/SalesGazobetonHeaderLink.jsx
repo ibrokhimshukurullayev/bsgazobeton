@@ -11,7 +11,7 @@ const SalesGazobetonHeaderLink = ({ title, link }) => {
     <div id="sotuvlink">
       <div className="container sotuvlink">
         <div className="sotuvlink__link">
-          <Link href={"/sales"}>{t("menu.sotuvlar.sotuvlar")}</Link>
+          <Link href={"/sales"}>{t("menu.sales.title")}</Link>
           <span>
             <ChevronRight className="icon" />
           </span>

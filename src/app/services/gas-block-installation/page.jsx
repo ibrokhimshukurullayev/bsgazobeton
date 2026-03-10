@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 const Gazablokmantaji = () => {
   const router = useRouter();
 
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const handleButtonClick = () => {
     router.push("/contact");
   };

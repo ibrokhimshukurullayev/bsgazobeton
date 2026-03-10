@@ -2,9 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-
-import "./services.scss";
-
 import servicesnIstalation from "../../assets/images/services/services-instalation.webp";
 import Button from "../../components/button/Button";
 import { useRouter } from "next/navigation";
@@ -17,7 +14,7 @@ import { useRouter } from "next/navigation";
 const Services = () => {
   const router = useRouter();
 
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const handleButtonClick = () => {
     router.push("/contact");
   };

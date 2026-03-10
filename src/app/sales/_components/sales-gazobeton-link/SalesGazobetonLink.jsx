@@ -12,12 +12,12 @@ const SalesGazobetonLink = () => {
   const pathname = usePathname();
 
   const links = [
-    { href: "/sales", label: t("menu.sotuvlar.buyurtma") },
+    { href: "/sales", label: t("menu.sales.orderDelivery") },
     {
       href: "/sales/payment-methods",
-      label: t("menu.sotuvlar.tolov"),
+      label: t("menu.sales.paymentMethods"),
     },
-    { href: "/contact", label: t("menu.sotuvlar.manzillar") },
+    { href: "/contact", label: t("menu.sales.addresses") },
   ];
 
   if (pathname === "/contact") {
@@ -26,7 +26,7 @@ const SalesGazobetonLink = () => {
 
   return (
     <div className="sotuvLinkCard">
-      <h3>{t("menu.sotuvlar.sotuvlar")}</h3>
+      <h3>{t("menu.sales.title")}</h3>
       {links.map((link, index) => {
         const isActive = pathname === link.href;
         return (

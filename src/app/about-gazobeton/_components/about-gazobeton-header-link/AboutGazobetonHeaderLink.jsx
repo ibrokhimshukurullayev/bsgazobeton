@@ -12,7 +12,7 @@ const AboutGazabetonHeaderLink = ({ title, link }) => {
       <div className="container aboutlink">
         <div className="aboutlink__link">
           <Link href={"/about-gazobeton"}>
-            {t("menu.gazobeton.gazobeton")}
+            {t("menu.gazobeton.title")}
           </Link>
           <span>
             <ChevronRight className="icon" />

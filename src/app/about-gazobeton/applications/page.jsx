@@ -1,61 +1,55 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import aboutInstruction1 from "../../../assets/images/aboutGazobeton/about-instruction1.webp";
 import aboutInstruction2 from "../../../assets/images/aboutGazobeton/about-instruction2.webp";
 import aboutInstruction3 from "../../../assets/images/aboutGazobeton/about-instruction3.webp";
 import aboutInstruction4 from "../../../assets/images/aboutGazobeton/about-instruction4.webp";
 import aboutInstruction5 from "../../../assets/images/aboutGazobeton/about-instruction5.webp";
-
 import "./about.scss";
 
-// export const metadata = {
-//   title: "Gazobetonning qo‘llanilish joylari | BS Gazobeton",
-//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-// };
-
-const steps = [
-  {
-    id: 1,
-    title: "Turar-joy binolari",
-    description:
-      "Uy-joy qurilishida tashqi va ichki devor materiali sifatida ishlatiladi",
-    image: aboutInstruction1,
-  },
-  {
-    id: 2,
-    title: "Savdo va biznes markazlari",
-    description:
-      "Yirik tijorat obyektlarida issiqlik va ovoz izolyatsiyasi uchun qo‘llaniladi",
-    image: aboutInstruction2,
-  },
-  {
-    id: 3,
-    title: "Zavod va fabrikalar",
-    description:
-      "Sanoat binolarida mustahkam va yengil material sifatida ishlatiladi",
-    image: aboutInstruction3,
-  },
-  {
-    id: 4,
-    title: "Omborxona va sanoat markazlari",
-    description:
-      "Tez qurish va energiya tejash imkoniyatlari tufayli tanlanadi",
-    image: aboutInstruction4,
-  },
-  {
-    id: 5,
-    title: "Xususiy uy-joy qurilishi",
-    description:
-      "Gazobetonning ishlov berish qulayligi va yengilligi xususiy uy qurilishida afzal qiladi",
-    image: aboutInstruction5,
-  },
-];
-
 const AboutQollanilishi = () => {
+  const [t] = useTranslation("global");
+
+  const steps = [
+    {
+      id: 1,
+      title: t("aboutGazobetonApplications.step1.title"),
+      description: t("aboutGazobetonApplications.step1.description"),
+      image: aboutInstruction1,
+    },
+    {
+      id: 2,
+      title: t("aboutGazobetonApplications.step2.title"),
+      description: t("aboutGazobetonApplications.step2.description"),
+      image: aboutInstruction2,
+    },
+    {
+      id: 3,
+      title: t("aboutGazobetonApplications.step3.title"),
+      description: t("aboutGazobetonApplications.step3.description"),
+      image: aboutInstruction3,
+    },
+    {
+      id: 4,
+      title: t("aboutGazobetonApplications.step4.title"),
+      description: t("aboutGazobetonApplications.step4.description"),
+      image: aboutInstruction4,
+    },
+    {
+      id: 5,
+      title: t("aboutGazobetonApplications.step5.title"),
+      description: t("aboutGazobetonApplications.step5.description"),
+      image: aboutInstruction5,
+    },
+  ];
+
   return (
     <div className="timeline-wrapper">
       <h2 className="timeline-heading">
-        Gazobeton turli xil qurilish obyektlarida qo‘llaniladi:
+        {t("aboutGazobetonApplications.heading")}
       </h2>
       <div className="timeline">
         {steps.map((step, index) => (

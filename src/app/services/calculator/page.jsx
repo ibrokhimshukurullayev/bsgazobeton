@@ -17,7 +17,7 @@ const Calculator = () => {
   const [height, setHeight] = useState("");
   const [thickness, setThickness] = useState(50);
   const [natija, setNatija] = useState({ dona: 0, hajm: 0, paddon: 0 });
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   const handleSubmit = () => {
     const thicknessInMeter = thickness / 1000;

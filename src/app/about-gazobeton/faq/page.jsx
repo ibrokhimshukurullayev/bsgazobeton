@@ -11,7 +11,7 @@ import "./about.scss";
 
 const AboutFaq = () => {
   const [openId, setOpenId] = useState(1);
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   const faqData = [
     {

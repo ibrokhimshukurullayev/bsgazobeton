@@ -7,15 +7,15 @@ import { useTranslation } from "react-i18next";
 
 export default function AboutLayout({ children }) {
   const pathname = usePathname();
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   const titles = {
-    "/about-gazobeton": t("menu.gazobeton.haqida"),
-    "/about-gazobeton/tests": t("menu.gazobeton.testlar"),
-    "/about-gazobeton/certificates": t("menu.gazobeton.sertifikat"),
-    "/about-gazobeton/applications": t("menu.gazobeton.qollanilishi"),
-    "/about-gazobeton/usage-guide": t("menu.gazobeton.qollanma"),
-    "/about-gazobeton/material-differences": t("menu.gazobeton.farqi"),
+    "/about-gazobeton": t("menu.gazobeton.overview"),
+    "/about-gazobeton/tests": t("menu.gazobeton.tests"),
+    "/about-gazobeton/certificates": t("menu.gazobeton.certificates"),
+    "/about-gazobeton/applications": t("menu.gazobeton.applications"),
+    "/about-gazobeton/usage-guide": t("menu.gazobeton.usageGuide"),
+    "/about-gazobeton/material-differences": t("menu.gazobeton.materialDifferences"),
     "/about-gazobeton/faq": t("menu.gazobeton.faq"),
   };
 

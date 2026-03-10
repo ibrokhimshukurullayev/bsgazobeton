@@ -12,20 +12,20 @@ const ServicesGazobetonLink = () => {
   const pathname = usePathname();
 
   const links = [
-    { href: "/services", label: t("menu.xizmatlar.konsultatsiya") },
+    { href: "/services", label: t("menu.services.consultation") },
     {
       href: "/services/gas-block-installation",
-      label: t("menu.xizmatlar.montaj"),
+      label: t("menu.services.installation"),
     },
     {
       href: "/services/calculator",
-      label: t("menu.xizmatlar.hisoblash"),
+      label: t("menu.services.calculator"),
     },
   ];
 
   return (
     <div className="servicesLinkCard">
-      <h3>{t("menu.xizmatlar.xizmatlar")}</h3>
+      <h3>{t("menu.services.title")}</h3>
       {links.map((link, index) => {
         const isActive = pathname === link.href;
         return (

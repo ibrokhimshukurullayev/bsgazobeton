@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 // };
 
 const TolovUsullari = () => {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   const payments = [
     {

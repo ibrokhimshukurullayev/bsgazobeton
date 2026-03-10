@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 
 export default function SalesLayout({ children }) {
   const pathname = usePathname();
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   const titles = {
-    "/sales": t("menu.sotuvlar.buyurtma"),
-    "/sales/payment-methods": t("menu.sotuvlar.tolov"),
-    "/contact": t("menu.sotuvlar.manzillar"),
+    "/sales": t("menu.sales.orderDelivery"),
+    "/sales/payment-methods": t("menu.sales.paymentMethods"),
+    "/contact": t("menu.sales.addresses"),
   };
 
   const title = titles[pathname] || "Sotuvlar";

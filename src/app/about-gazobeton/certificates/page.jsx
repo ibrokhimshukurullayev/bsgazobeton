@@ -1,23 +1,21 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import "./about.scss";
 import Title from "../../../components/title/Title";
 import sertifikat1 from "../../../assets/images/sertikifat1.png";
 import sertifikat2 from "../../../assets/images/sertifikat2.png";
 
-// export const metadata = {
-//   title: "Sertifikat va litsenziyalar | BS Gazobeton",
-//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-// };
-
 const AboutSertifikat = () => {
+  const [t] = useTranslation("global");
+
   return (
     <div className="aboutSertifikat">
       <Title
-        title={"“BS gazobeton”"}
-        text={
-          " mahsulotlari barcha zaruriy sertifikatlarga ega bo‘lib, standartlarga javob beradi. Quyidagi sertifikat va litsenziyalarga ega:"
-        }
+        title={t("aboutGazobetonCertificates.title")}
+        text={t("aboutGazobetonCertificates.text")}
       />
       <div className="aboutSertifikat__box">
         <div className="aboutSertifikat__card">
@@ -29,10 +27,12 @@ const AboutSertifikat = () => {
               height={300}
             />
           </a>
-          <h3 className="aboutSertifikat__card__title">SERTIFIKAT GAZABLOK</h3>
+          <h3 className="aboutSertifikat__card__title">
+            {t("aboutGazobetonCertificates.certificate1")}
+          </h3>
         </div>
         <div className="aboutSertifikat__card">
-          <a href="LABARATORIYA XULOSASI.pdf" download>
+          <a href="/files/LABARATORIYA XULOSASI.pdf" download>
             <Image
               src={sertifikat2}
               alt="sertifikat"
@@ -41,7 +41,7 @@ const AboutSertifikat = () => {
             />
           </a>
           <h3 className="aboutSertifikat__card__title">
-            LABARATORIYA XULOSASI
+            {t("aboutGazobetonCertificates.certificate2")}
           </h3>
         </div>
       </div>

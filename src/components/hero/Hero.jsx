@@ -26,7 +26,7 @@ const Hero = () => {
               {t("hero.titlebutton1")}
             </Link>
             <Link href={"/about-gazobeton"} className="hero__left__button2">
-              {t("menu.gazobeton.gazobeton")}
+              {t("menu.gazobeton.title")}
             </Link>
           </div>
           <div className="hero__right">

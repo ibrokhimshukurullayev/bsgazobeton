@@ -5,13 +5,13 @@ import "./aboutlinks.scss";
 import { useTranslation } from "react-i18next";
 
 const Aboutlink = ({ title, link }) => {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   return (
     <div id="aboutlink">
       <div className="container aboutlink">
         <div className="aboutlink__link">
-          <Link href={"/about"}>{t("menu.about.about")}</Link>
+          <Link href={"/about"}>{t("menu.about.title")}</Link>
           <span>
             <ChevronRight className="icon" />
           </span>

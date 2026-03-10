@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import "./about.scss";
 import gazabetom from "../../../assets/images/gazabtonimg.png";
 import gisht from "../../../assets/images/gisht.png";
@@ -7,109 +10,65 @@ import peneblok from "../../../assets/images/peneblok.png";
 import beton from "../../../assets/images/beton.png";
 import Title from "../../../components/title/Title";
 
-// export const metadata = {
-//   title: "Gazobetonning boshqa materiallardan farqi | BS Gazobeton",
-//   description: "O'zbekistonning eng sifatli gazobeton mahsulotlari.",
-// };
+const ROW_KEYS = [
+  "weight",
+  "thermalInsulation",
+  "soundInsulation",
+  "workability",
+  "constructionSpeed",
+  "fireResistance",
+  "breathability",
+  "environmentalSafety",
+  "price",
+];
 
 const AboutMaterillardanFarqi = () => {
-  const data = [
-    {
-      name: "Og’irligi",
-      gazobeton: "Yengil",
-      gisht: "Og‘ir",
-      penobeton: "O‘rtacha",
-      betonBlok: "Juda og‘ir",
-    },
-    {
-      name: "Issiqlik izolyatsiyasi",
-      gazobeton: "Juda yaxshi",
-      gisht: "Past",
-      penobeton: "Yaxshi",
-      betonBlok: "Juda past",
-    },
-    {
-      name: "Ovoz izolyatsiyasi",
-      gazobeton: "Yaxshi",
-      gisht: "O‘rtacha",
-      penobeton: "Yaxshi",
-      betonBlok: "Past",
-    },
-    {
-      name: "Ishlov berish qulayligi",
-      gazobeton: "Juda oson",
-      gisht: "Qiyin",
-      penobeton: "Oson",
-      betonBlok: "Qiyin",
-    },
-    {
-      name: "Qurilish tezligi",
-      gazobeton: "Tez",
-      gisht: "Sekin",
-      penobeton: "Tez",
-      betonBlok: "O‘rtacha",
-    },
-    {
-      name: "Yong‘inga chidamlilik",
-      gazobeton: "Juda yuqori",
-      gisht: "Yuqori",
-      penobeton: "Yaxshi",
-      betonBlok: "Yuqori",
-    },
-    {
-      name: "“Nafas olishi”",
-      gazobeton: "Nafas oladi",
-      gisht: "Nafas olmaydi",
-      penobeton: "Nafas oladi",
-      betonBlok: "Nafas olmaydi",
-    },
-    {
-      name: "Ekologik xavfsizlik",
-      gazobeton: "Ekologik toza",
-      gisht: "Tabiiy",
-      penobeton: "Tabiiy",
-      betonBlok: "Sementli, sunʼiy",
-    },
-    {
-      name: "Narxi",
-      gazobeton: "Tejamkor",
-      gisht: "Yuqori",
-      penobeton: "O‘rtacha",
-      betonBlok: "O‘rtacha / yuqori",
-    },
-  ];
+  const [t] = useTranslation("global");
+
+  const data = ROW_KEYS.map((rowKey) => ({
+    name: t(`aboutGazobetonMaterialDifferences.rows.${rowKey}.name`),
+    gazobeton: t(
+      `aboutGazobetonMaterialDifferences.rows.${rowKey}.gazobeton`
+    ),
+    gisht: t(`aboutGazobetonMaterialDifferences.rows.${rowKey}.brick`),
+    penobeton: t(
+      `aboutGazobetonMaterialDifferences.rows.${rowKey}.foamConcrete`
+    ),
+    betonBlok: t(
+      `aboutGazobetonMaterialDifferences.rows.${rowKey}.concreteBlock`
+    ),
+  }));
+
   return (
     <div>
       <Title
-        title={"Gazobeton"}
-        text={
-          " zamonaviy qurilishda keng qo‘llanilayotgan material bo‘lib, u yengilligi, issiqlikni saqlash xususiyati va tejamkorligi bilan ajralib turadi. Quyidagi jadvalda gazobetonni boshqa mashhur qurilish materiallari bilan solishtirib ko‘rishingiz mumkin. Bu sizga to‘g‘ri tanlov qilishda yordam beradi."
-        }
+        title={t("aboutGazobetonMaterialDifferences.title")}
+        text={t("aboutGazobetonMaterialDifferences.text")}
       />
       <div className="table-container">
         <table className="comparison-table">
           <thead>
             <tr>
-              <th>Xususiyatlar</th>
+              <th>{t("aboutGazobetonMaterialDifferences.tableHeaders.features")}</th>
               <th>
-                <Image src={gazabetom} alt="gazabeton" />
+                <Image src={gazabetom} alt="gazobeton" />
                 <br />
-                Gazobeton
+                {t("aboutGazobetonMaterialDifferences.tableHeaders.gazobeton")}
               </th>
               <th>
-                <Image src={gisht} alt="gazabeton" />
+                <Image src={gisht} alt="brick" />
                 <br />
-                G‘isht
+                {t("aboutGazobetonMaterialDifferences.tableHeaders.brick")}
               </th>
               <th>
-                <Image src={peneblok} alt="gazabeton" />
+                <Image src={peneblok} alt="foam concrete" />
                 <br />
-                Penobeton
+                {t("aboutGazobetonMaterialDifferences.tableHeaders.foamConcrete")}
               </th>
               <th>
-                <Image src={beton} alt="gazabeton" />
+                <Image src={beton} alt="concrete block" />
                 <br />
-                Beton blok
+                {t("aboutGazobetonMaterialDifferences.tableHeaders.concreteBlock")}
               </th>
             </tr>
           </thead>

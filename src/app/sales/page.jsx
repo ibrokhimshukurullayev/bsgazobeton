@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import "./sales.scss";
 import Title from "../../components/title/Title";
 import Button from "../../components/button/Button";
 import { useTranslation } from "react-i18next";
@@ -8,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 const Sales = () => {
   const router = useRouter();
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   const handleButtonClick = () => {
     router.push("/contact");
