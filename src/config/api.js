@@ -1,5 +1,5 @@
 export const API_ORIGIN =
-  process.env.NEXT_PUBLIC_API_ORIGIN || "https://api.bsgazbeton.uz";
+  process.env.NEXT_PUBLIC_API_ORIGIN || "https://api.bsgazobeton.uz";
 
 export const API_BASE_URL = `${API_ORIGIN}/api`;
 
