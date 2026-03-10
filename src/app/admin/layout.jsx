@@ -1,15 +1,15 @@
 "use client";
 import "./admin.scss";
-import AdminGazabetonLink from "./components/adminGazabetonLink/adminGazabetonLink";
+import AdminGazobetonLink from "./_components/admin-gazobeton-link/AdminGazobetonLink";
 
 export default function AdminLayout({ children }) {
   return (
-    <div id="adminGazabeton">
-      <div className="adminGazabeton container">
-        <div className="adminGazabeton__left">
-          <AdminGazabetonLink />
+    <div id="adminGazobeton">
+      <div className="adminGazobeton container">
+        <div className="adminGazobeton__left">
+          <AdminGazobetonLink />
         </div>
-        <div className="adminGazabeton__right">{children}</div>
+        <div className="adminGazobeton__right">{children}</div>
       </div>
     </div>
   );

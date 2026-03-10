@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import "./news.scss";
 import { useGetNewsQuery } from "../../../context/newsApi";
 import { useTranslation } from "react-i18next";
+import { toApiUrl } from "../../../config/api";
 
 // export const metadata = {
 //   title: "Yangiliklar | BS Gazobeton",
@@ -38,7 +40,7 @@ export default function NewsPage() {
             >
               {/* Agar rasmni qo‘shmoqchi bo‘lsang ochib qo‘yasan */}
               <Image
-                src={`https://api.bsgazobeton.uz${item.thubnailimageurl}`}
+                src={toApiUrl(item.thubnailimageurl)}
                 alt={item.title}
                 width={300}
                 height={200}

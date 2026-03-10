@@ -3,7 +3,7 @@
     "catalog": "Katalog",
     "services": "Xizmatlar",
     "sales": "Sotuvlar",
-    "gazabetonabout": "Gazobeton haqida",
+    "gazobetonAbout": "Gazobeton haqida",
     "about": "Biz haqimizda",
     "contact": "Aloqa",
     "priceUnit": "so'm"
@@ -14,7 +14,7 @@
     "m3": "m³",
     "mm": "mm",
     "piece": "dona",
-    "pallet": "paddon"
+    "pallet": "poddon"
   },
   "aboutkompany": {
     "title1": "– O‘zbekiston bozorida yuqori sifatli gazobeton mahsulotlarini ishlab chiqaruvchi yetakchi kompaniyalardan biridir. Ishlab chiqarish zavodi Sirdaryo viloyatida joylashgan. Bizning maqsadimiz qurilish industriyasiga innovatsion, ekologik toza va mustahkam qurilish materiallarini taqdim etishdir.",
@@ -45,48 +45,48 @@
       "kleylar": "Gazoblok kleylari",
       "instrumentlar": "Gazoblokka tegishli instrumentlar va materiallar"
     },
-    "xizmatlar": {
-      "xizmatlar": "Xizmatlar",
-      "konsultatsiya": "Mahsulot bo’yicha konsultatsiya",
-      "montaj": "Gazoblok montaji",
-      "hisoblash": "Loyihangiz uchun gazobloklar miqdorini va narxini hisoblang (Kalkulyator)"
+    "services": {
+      "title": "Xizmatlar",
+      "consultation": "Mahsulot bo‘yicha konsultatsiya",
+      "installation": "Gazoblok montaji",
+      "calculator": "Gazobloklar miqdori va narxini hisoblash"
     },
-    "sotuvlar": {
-      "sotuvlar": "Sotuvlar",
-      "buyurtma": "Buyurtma berish va yetkazib berish tartibi",
-      "tolov": "To’lov usullari",
-      "manzillar": "Manzillar"
+    "sales": {
+      "title": "Sotuvlar",
+      "orderDelivery": "Buyurtma berish va yetkazib berish tartibi",
+      "paymentMethods": "To‘lov usullari",
+      "addresses": "Manzillar"
     },
     "gazobeton": {
-      "gazobeton": "Gazobeton haqida",
-      "haqida": "Gazobeton haqida batafsil",
-      "testlar": "Sinov testlari",
-      "sertifikat": "Sertifikat va litsenziyalar",
-      "qollanilishi": "Gazobetonning qo‘llanilish joylari",
-      "qollanma": "Gazoblok ishlatish bo’yicha qo’llanma",
-      "farqi": "Gazobetonning boshqa materiallardan farqi",
-      "faq": "Kop beriladigan savollar"
+      "title": "Gazobeton haqida",
+      "overview": "Gazobeton haqida batafsil",
+      "tests": "Sinov testlari",
+      "certificates": "Sertifikat va litsenziyalar",
+      "applications": "Gazobetonning qo‘llanilish joylari",
+      "usageGuide": "Gazoblokdan foydalanish bo‘yicha qo‘llanma",
+      "materialDifferences": "Gazobetonning boshqa materiallardan farqi",
+      "faq": "Ko‘p beriladigan savollar"
     },
     "about": {
-      "about": "Biz haqimizda",
-      "kompaniya": "Kompaniya haqida",
-      "sifat": "Sifat nazorati va laboratoriya",
-      "mijoz": "Mijozlar va hamkorlar",
-      "oav": "Biz haqimizda OAV",
-      "yangiliklar": "Yangiliklar",
-      "vakansiyalar": "Vakansiyalar"
+      "title": "Biz haqimizda",
+      "company": "Kompaniya haqida",
+      "quality": "Sifat nazorati va laboratoriya",
+      "clients": "Mijozlar va hamkorlar",
+      "media": "Biz haqimizda OAV",
+      "news": "Yangiliklar",
+      "vacancies": "Vakansiyalar"
     }
   },
   "hero": {
     "title1": "Kelajak uchun yaratilgan",
     "title2": "Gazobeton – Ishonchli",
     "title3": "Qurilish materiali!",
-    "titlebutton1": "Mahsulotlarni ko’rish",
+    "titlebutton1": "Mahsulotlarni ko‘rish",
     "titlebutton2": "Gollandiya texnologiyalari"
   },
   "1": {
     "question": "Gazobeton nima?",
-    "answer": "Gazobeton — bu yengil, g‘ovak tuzimli qurilish materiali bo‘lib, sement, qum, ohak va suv aralashmasidan tayyorlanadi. Ichidagi mayda pufakchalar uni issiqlikni saqlovchi va yengil qiladi."
+    "answer": "Gazobeton — bu yengil, g‘ovak tuzilmali qurilish materiali bo‘lib, sement, qum, ohak va suv aralashmasidan tayyorlanadi. Ichidagi mayda pufakchalar uni issiqlikni yaxshi saqlovchi va yengil qiladi."
   },
   "2": {
     "question": "Gazobeton devor issiq bo‘ladimi?",
@@ -182,19 +182,19 @@
   },
   "footer": {
     "manzil": "Manzil:",
-    "manjil1": "Sirdaryo viloyati, Sirdaryo tumani, Sobir Rahimov SIU, Chibantay qo'rg'oni",
+    "addressLine1": "Sirdaryo viloyati, Sirdaryo tumani, Sobir Rahimov SIU, Chibantay qo'rg'oni",
     "telefon": "Telefon:",
     "email": "Email:",
     "title": "© 2023–2025 «BS gazobeton» — Qurilish materiallari va aksessuarlar ishlab chiqaruvchi"
   },
-  "cantact": {
-    "title1": "HOZIROQ QO’NG’IROQ QILING!",
-    "formtitle1": "Xabar qoldirish",
-    "input1": "Ismingiz*",
-    "input2": "Telefon raqamingiz*",
-    "input3": "Xabar matni...",
-    "button": "Yuborish",
-    "formtitle2": "Yuborish tugmachasini bosish orqali siz maxfiylik siyosatiga rozilik bildirasiz."
+  "contactForm": {
+    "title": "HOZIROQ QO‘NG‘IROQ QILING!",
+    "formTitle": "Xabar qoldirish",
+    "namePlaceholder": "Ismingiz*",
+    "phonePlaceholder": "Telefon raqamingiz*",
+    "messagePlaceholder": "Xabar matni...",
+    "submit": "Yuborish",
+    "privacyNotice": "Yuborish tugmachasini bosish orqali siz maxfiylik siyosatiga rozilik bildirasiz."
   },
   "deliveryinfo": {
     "title": "Siz materialni tanlashingiz va uy qurish uchun kerakli miqdorni hisoblashingiz yoki mutaxassislarimiz yordamidan foydalanishingiz mumkin.",
@@ -211,7 +211,7 @@
     "job": "Hozirda bo‘sh ish o‘rinlari mavjud emas."
   },
   "paymentinfo": {
-    "title": "Shartnoma tuzilgandan so‘ng sizga to‘lov uchun hisob-faktura beriladi, uni ikki usulda ham olish mumkin",
+    "title": "Shartnoma tuzilgandan so‘ng sizga to‘lov uchun hisob-faktura beriladi va uni bir necha usulda to‘lashingiz mumkin",
     "method1title": "Bank o‘tkazmasi orqali to‘lov",
     "method1text": "Agar kerak bo‘lsa, jismoniy shaxslar xaridni bank orqali o‘tkazma yo‘li bilan to‘lashlari mumkin.",
     "method2title": "Naqd pulda to‘lov",
@@ -242,7 +242,7 @@
     "section1item4text": "Keyinchalik suvoqni minimallashtiradi.",
     "bottomtext": "Qurilish sifati siz tanlagan ustalarga bog‘liq. Biz bilan ishlang — ishonchli natijani kafolatlaymiz.",
     "bottomtext2": "Hoziroq bog‘laning va professional montaj xizmatimizga buyurtma bering!",
-    "button": "Biz bilan bog’lanish",
+    "button": "Biz bilan bog‘lanish",
     "title2": "Kimlar uchun foydali:",
     "text1": "Uy qurayotganlar.",
     "text2": "Qurilish firmalari uchun subpudrat xizmat."
@@ -258,7 +258,7 @@
     "resultTitle": "Natija",
     "blockCount": "Kerakli gazobloklar soni:",
     "volume": "Umumiy hajmi:",
-    "palletCount": "Paddonlar soni",
+    "palletCount": "Poddonlar soni",
     "thickness": "Eshik va deraza teshiklari maydoni"
   },
   "advantages": {
@@ -291,7 +291,7 @@
     "button1": "KONSULTATSIYA OLISH",
 
     "title2": "Gazoblok montaji",
-    "desc2": "Gazobloklarni to‘g‘ri o‘rnatish qurilishni mustahkamligini va uzoq xizmat qilishini ta’minlaydi.",
+    "desc2": "Gazobloklarni to‘g‘ri o‘rnatish qurilishning mustahkamligi va uzoq xizmat qilishini ta’minlaydi.",
     "button2": "XIZMAT HAQIDA BATAFSIL",
 
     "title3": "Gazobloklar sonini bilasizmi?",
@@ -313,7 +313,7 @@
     "addcards": "SAVATGA QO‘SHISH",
     "addcompare": "Taqqoslashga qo‘shish",
     "removecompare": "Taqqoslashdan olish",
-    "downloadcatalog": "KATALOGNI YUKLAsB OLISH"
+    "downloadcatalog": "KATALOGNI YUKLAB OLISH"
   },
   "card": {
     "title": "Savatcha",
@@ -583,7 +583,97 @@
   
   "section8Title": "8. Biz bilan bog‘lanish",
   "section8Text": "Savollar yoki takliflar bo‘lsa, biz bilan bog‘laning."
-}
-
-
+},
+  "aboutGazobetonApplications": {
+    "heading": "Gazobeton turli xil qurilish obyektlarida qo‘llaniladi:",
+    "step1": {
+      "title": "Turar-joy binolari",
+      "description": "Uy-joy qurilishida tashqi va ichki devor materiali sifatida ishlatiladi."
+    },
+    "step2": {
+      "title": "Savdo va biznes markazlari",
+      "description": "Yirik tijorat obyektlarida issiqlik va ovoz izolyatsiyasi uchun qo‘llaniladi."
+    },
+    "step3": {
+      "title": "Zavod va fabrikalar",
+      "description": "Sanoat binolarida mustahkam va yengil material sifatida ishlatiladi."
+    },
+    "step4": {
+      "title": "Omborxona va sanoat markazlari",
+      "description": "Tez qurish va energiya tejash imkoniyatlari tufayli tanlanadi."
+    },
+    "step5": {
+      "title": "Xususiy uy-joy qurilishi",
+      "description": "Gazobetonning ishlov berish qulayligi va yengilligi xususiy uy qurilishida ayniqsa qulaydir."
+    }
+  },
+  "aboutGazobetonCertificates": {
+    "title": "“BS gazobeton”",
+    "text": " mahsulotlari barcha zaruriy sertifikatlarga ega bo‘lib, standartlarga javob beradi. Quyidagi sertifikat va litsenziyalarga ega:",
+    "certificate1": "SERTIFIKAT GAZABLOK",
+    "certificate2": "LABORATORIYA XULOSASI"
+  },
+  "aboutGazobetonUsageGuide": {
+    "downloadTitle": "Gazoblokdan foydalanish bo‘yicha qo‘llanma",
+    "downloadMeta": "1.2 MB, PDF",
+    "downloadButton": "YUKLAB OLISH",
+    "consultationTitle": "Konsultatsiya",
+    "consultationText": "Ishni boshlashdan oldin qurilish mutaxassisi bilan maslahatlashish foydali bo‘ladi.",
+    "contactButton": "BIZ BILAN BOG‘LANISH",
+    "heading": "Gazobloklardan foydalanish bo‘yicha tavsiyalar",
+    "step1": {
+      "title": "1. Asosni tekis tayyorlang",
+      "description": "Devorlar cho‘kmasligi uchun mustahkam va tekis asos bo‘lishi shart."
+    },
+    "step2": {
+      "title": "2. Maxsus elimdan foydalaning",
+      "description": "Oddiy sement emas, gazoblok uchun maxsus yupqa qatlamli yelim ishlating."
+    },
+    "step3": {
+      "title": "3. Quruq holda o‘rnating",
+      "description": "Bloklarni namlamang, aks holda suv shimib, elim yaxshi yopishmasligi mumkin."
+    },
+    "step4": {
+      "title": "4. Armatura qatlamini qo‘shing",
+      "description": "Har 3-4 qatordan keyin mustahkamlik uchun temir armatura qo‘shing."
+    },
+    "step5": {
+      "title": "5. Maxsus arra bilan kesing",
+      "description": "Silliq va aniq kesish uchun gazoblok arrasidan foydalaning."
+    },
+    "step6": {
+      "title": "6. Choklar tekis bo‘lsin",
+      "description": "Bloklar orasidagi elim qatlami 2-3 mm dan oshmasligi kerak."
+    },
+    "step7": {
+      "title": "7. Tashqi himoya qoplamasini qo‘llang",
+      "description": "Suv o‘tkazmasligi uchun yuqori sifatli fasad qoplamasi bilan yoping."
+    },
+    "step8": {
+      "title": "8. Qo‘shimcha izolyatsiya qiling",
+      "description": "Sovuq hududlarda issiqlikni saqlash uchun qo‘shimcha izolyatsiya tavsiya etiladi."
+    }
+  },
+  "aboutGazobetonMaterialDifferences": {
+    "title": "Gazobeton",
+    "text": " zamonaviy qurilishda keng qo‘llanilayotgan material bo‘lib, yengilligi, issiqlikni saqlashi va tejamkorligi bilan ajralib turadi. Quyidagi jadvalda gazobetonni boshqa mashhur qurilish materiallari bilan solishtirib ko‘rishingiz mumkin.",
+    "tableHeaders": {
+      "features": "Xususiyatlar",
+      "gazobeton": "Gazobeton",
+      "brick": "G‘isht",
+      "foamConcrete": "Penobeton",
+      "concreteBlock": "Beton blok"
+    },
+    "rows": {
+      "weight": { "name": "Og‘irligi", "gazobeton": "Yengil", "brick": "Og‘ir", "foamConcrete": "O‘rtacha", "concreteBlock": "Juda og‘ir" },
+      "thermalInsulation": { "name": "Issiqlik izolyatsiyasi", "gazobeton": "Juda yaxshi", "brick": "Past", "foamConcrete": "Yaxshi", "concreteBlock": "Juda past" },
+      "soundInsulation": { "name": "Ovoz izolyatsiyasi", "gazobeton": "Yaxshi", "brick": "O‘rtacha", "foamConcrete": "Yaxshi", "concreteBlock": "Past" },
+      "workability": { "name": "Ishlov berish qulayligi", "gazobeton": "Juda oson", "brick": "Qiyin", "foamConcrete": "Oson", "concreteBlock": "Qiyin" },
+      "constructionSpeed": { "name": "Qurilish tezligi", "gazobeton": "Tez", "brick": "Sekin", "foamConcrete": "Tez", "concreteBlock": "O‘rtacha" },
+      "fireResistance": { "name": "Yong‘inga chidamlilik", "gazobeton": "Juda yuqori", "brick": "Yuqori", "foamConcrete": "Yaxshi", "concreteBlock": "Yuqori" },
+      "breathability": { "name": "Nafas olishi", "gazobeton": "Nafas oladi", "brick": "Nafas olmaydi", "foamConcrete": "Nafas oladi", "concreteBlock": "Nafas olmaydi" },
+      "environmentalSafety": { "name": "Ekologik xavfsizlik", "gazobeton": "Ekologik toza", "brick": "Tabiiy", "foamConcrete": "Tabiiy", "concreteBlock": "Sun’iy, sementli" },
+      "price": { "name": "Narxi", "gazobeton": "Tejamkor", "brick": "Yuqori", "foamConcrete": "O‘rtacha", "concreteBlock": "O‘rtacha / yuqori" }
+    }
+  }
 }

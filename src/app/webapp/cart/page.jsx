@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import CartContent from "./components/cart/Cart"; // sizning cart dizayni
-import OrderContent from "./components/order/Order"; // sizning order dizayni
+import CartContent from "./_components/cart/Cart";
+import OrderContent from "./_components/order/Order";
 
 const CartPage = () => {
   const [step, setStep] = useState("cart"); // cart yoki order

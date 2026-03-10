@@ -4,18 +4,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-  transition: 0.3s;
   -webkit-tap-highlight-color: transparent;
 }
 
 button,
 a,
-li,
-div {
+input,
+select,
+textarea {
   outline: none;
   -webkit-tap-highlight-color: transparent;
-  user-select: none;
+  transition:
+    color 0.3s,
+    background-color 0.3s,
+    border-color 0.3s,
+    opacity 0.3s;
 }
 
 html {
@@ -39,6 +42,7 @@ ul {
 
 body {
   overflow-x: hidden;
+  font-family: "Inter", sans-serif;
 }
 
 select,

@@ -1,16 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import "./faq.scss";
 import FaqAll from "../faqAll/FaqAll";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
 const Faq = () => {
-  const router = useRouter(); // 📍 Router hook
+  const router = useRouter();
+  const [t] = useTranslation("global");
 
-  const [t, i18n] = useTranslation("global");
   const handleButtonClick = () => {
-    router.push("/joylashuv"); // 📍 Sahifaga o‘tish
+    router.push("/contact");
   };
 
   return (

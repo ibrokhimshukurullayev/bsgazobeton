@@ -22,7 +22,7 @@ const Services = () => {
       button: t("services.button1"),
       image: serviceConsulting,
       type: "konsultatsiya",
-      link: "/joylashuv",
+      link: "/contact",
     },
     {
       id: 2,
@@ -31,7 +31,7 @@ const Services = () => {
       button: t("services.button2"),
       image: serviceInstallation,
       type: "montaj",
-      link: "/aboutGazabeton/aboutIshlatilishi",
+      link: "/about-gazobeton/usage-guide",
     },
     {
       id: 3,

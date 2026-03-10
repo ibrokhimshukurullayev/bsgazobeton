@@ -3,10 +3,10 @@
     "catalog": "Catalog",
     "services": "Services",
     "sales": "Sales",
-    "gazabetonabout": "About aerated concrete",
+    "gazobetonAbout": "About Gazobeton",
     "about": "About us",
     "contact": "Contact",
-    "priceUnit": "uzs"
+    "priceUnit": "UZS"
   },
   "units": {
     "m": "m",
@@ -41,40 +41,40 @@
   "menu": {
     "katalog": {
       "gazobloklar": "Aerated concrete",
-      "panellar": "gazobeton panels",
+      "panellar": "Aerated concrete panels",
       "kleylar": "Adhesives for aerated concrete",
       "instrumentlar": "Tools and materials for aerated concrete"
     },
-    "xizmatlar": {
-      "xizmatlar": "Services",
-      "konsultatsiya": "Product consultation",
-      "montaj": "Aerated concrete installation",
-      "hisoblash": "Calculate quantity and price of aerated concrete"
+    "services": {
+      "title": "Services",
+      "consultation": "Product consultation",
+      "installation": "Aerated block installation",
+      "calculator": "Aerated block quantity and price calculator"
     },
-    "sotuvlar": {
-      "sotuvlar": "Sales",
-      "buyurtma": "Ordering and delivery procedure",
-      "tolov": "Payment methods",
-      "manzillar": "Addresses"
+    "sales": {
+      "title": "Sales",
+      "orderDelivery": "Ordering and delivery procedure",
+      "paymentMethods": "Payment methods",
+      "addresses": "Addresses"
     },
     "gazobeton": {
-      "gazobeton": "About aerated concrete",
-      "haqida": "Detailed information about aerated concrete",
-      "testlar": "Test results",
-      "sertifikat": "Certificates and licenses",
-      "qollanilishi": "Application areas of aerated concrete",
-      "qollanma": "User guide for aerated concrete",
-      "farqi": "Difference from other materials",
+      "title": "About Gazobeton",
+      "overview": "Detailed information about Gazobeton",
+      "tests": "Laboratory tests",
+      "certificates": "Certificates and licenses",
+      "applications": "Application areas of aerated concrete",
+      "usageGuide": "Guide to using aerated blocks",
+      "materialDifferences": "Differences from other materials",
       "faq": "Frequently Asked Questions"
     },
     "about": {
-      "about": "About Us",
-      "kompaniya": "About the company",
-      "sifat": "Quality control and laboratory",
-      "mijoz": "Clients and partners",
-      "oav": "Press about us",
-      "yangiliklar": "News",
-      "vakansiyalar": "Vacancies"
+      "title": "About Us",
+      "company": "About the company",
+      "quality": "Quality control and laboratory",
+      "clients": "Clients and partners",
+      "media": "Press about us",
+      "news": "News",
+      "vacancies": "Vacancies"
     }
   },
   "hero": {
@@ -82,7 +82,7 @@
     "title2": "Aerated concrete – Reliable",
     "title3": "Building material!",
     "titlebutton1": "View products",
-    "titlebutton2": "Netherlands technologies"
+    "titlebutton2": "Dutch technology"
   },
   "1": {
     "question": "What is aerated concrete?",
@@ -182,19 +182,19 @@
   },
   "footer": {
     "manzil": "Address:",
-    "manjil1": "Sirdarya region, Sirdarya district, Sobir Rahimov SIU, Chibantay settlement",
+    "addressLine1": "Sirdarya region, Sirdarya district, Sobir Rahimov SIU, Chibantay settlement",
     "telefon": "Phone:",
     "email": "Email:",
     "title": "© 2023–2025 “BS Gazobeton” — Manufacturer of construction materials and accessories"
   },
-  "cantact": {
-  "title1": "CALL NOW!",
-  "formtitle1": "Leave a message",
-  "input1": "Your name*",
-  "input2": "Your phone number*",
-  "input3": "Message text...",
-  "button": "Send",
-  "formtitle2": "By clicking the send button, you agree to the privacy policy."
+  "contactForm": {
+  "title": "CALL NOW!",
+  "formTitle": "Leave a message",
+  "namePlaceholder": "Your name*",
+  "phonePlaceholder": "Your phone number*",
+  "messagePlaceholder": "Message text...",
+  "submit": "Send",
+  "privacyNotice": "By clicking the send button, you agree to the privacy policy."
 },
   "deliveryinfo": {
     "title": "You can select the material and calculate the required amount for your construction, or get assistance from our specialists.",
@@ -211,7 +211,7 @@
     "job": "There are currently no job openings."
   },
   "paymentinfo": {
-    "title": "After signing the contract, an invoice will be issued for payment, which can be received in two ways",
+    "title": "After signing the contract, you will receive an invoice and can pay for it using several available methods",
     "method1title": "Bank transfer payment",
     "method1text": "If necessary, individuals can make a purchase payment via bank transfer.",
     "method2title": "Cash payment",
@@ -230,10 +230,10 @@
     "button2": "OFFICE LOCATIONS"
   },
   "gazoblockinfo": {
-    "title": "If you're building with gas blocks, proper installation is the foundation of a strong and heat-retaining wall. We offer not just the product but a complete solution — professional gas block installation by experienced specialists.",
+    "title": "If you are building with aerated blocks, proper installation is the foundation of a strong and heat-retaining wall. We offer not only the product, but also a complete solution: professional installation by experienced specialists.",
     "section1title": "What we offer:",
     "section1item1title": "Full installation service",
-    "section1item1text": "From foundation to roof installation of gas blocks.",
+    "section1item1text": "Installation of aerated blocks from the foundation to the roof.",
     "section1item2title": "Professional builders",
     "section1item2text": "A team of experienced and trained construction workers.",
     "section1item3title": "Thin-joint technology",
@@ -243,9 +243,9 @@
     "bottomtext": "Construction quality depends on the workers you choose. Work with us — we guarantee reliable results.",
     "bottomtext2": "Contact us now and order our professional installation service!",
     "button": "Contact us",
-    "title2": "Who it's useful for:",
+    "title2": "Who is it useful for?",
     "text1": "People building a house.",
-    "text2": "Subcontracting service for construction companies."
+    "text2": "Construction companies looking for subcontract installation services."
   },
   "calculator": {
     "title": "CALCULATOR",
@@ -290,12 +290,12 @@
     "desc1": "Get technical advice on BS aerated concrete and its application technologies.",
     "button1": "GET CONSULTATION",
 
-    "title2": "Gas block installation",
-    "desc2": "Proper installation of gas blocks ensures durability and long-lasting performance of the construction.",
+    "title2": "Aerated block installation",
+    "desc2": "Proper installation of aerated blocks ensures structural strength and long-term durability.",
     "button2": "MORE ABOUT THE SERVICE",
 
-    "title3": "Do you know how many gas blocks you need?",
-    "desc3": "Calculate the quantity and cost of gas blocks needed for your project online!",
+    "title3": "Do you know how many aerated blocks you need?",
+    "desc3": "Calculate the quantity and cost of the aerated blocks needed for your project online.",
     "button3": "CALCULATE"
   },
   "mahsulot": {
@@ -313,7 +313,7 @@
     "addcards": "ADD TO CART",
     "addcompare": "Add to compare",
     "downloadcatalog": "DOWNLOAD CATALOG",
-    "removecompare": "To take from comparison"
+    "removecompare": "Remove from comparison"
   },
   "card": {
     "title": "Cart",
@@ -584,9 +584,97 @@
   
   "section8Title": "8. Contact Us",
   "section8Text": "If you have any questions or suggestions, please contact us."
-}
-
-
-
-
+},
+  "aboutGazobetonApplications": {
+    "heading": "Gazobeton can be used in many types of construction projects:",
+    "step1": {
+      "title": "Residential buildings",
+      "description": "Used as an exterior and interior wall material in housing construction."
+    },
+    "step2": {
+      "title": "Shopping and business centers",
+      "description": "Applied in large commercial facilities for heat and sound insulation."
+    },
+    "step3": {
+      "title": "Plants and factories",
+      "description": "Used in industrial buildings as a strong and lightweight material."
+    },
+    "step4": {
+      "title": "Warehouses and industrial hubs",
+      "description": "Chosen for its fast construction and energy-saving benefits."
+    },
+    "step5": {
+      "title": "Private house construction",
+      "description": "Its easy handling and low weight make Gazobeton especially convenient for private homes."
+    }
+  },
+  "aboutGazobetonCertificates": {
+    "title": "“BS Gazobeton”",
+    "text": " products have all the required certificates and comply with applicable standards. The following certificates and approvals are available:",
+    "certificate1": "GAZABLOK CERTIFICATE",
+    "certificate2": "LABORATORY REPORT"
+  },
+  "aboutGazobetonUsageGuide": {
+    "downloadTitle": "Guide to using aerated blocks",
+    "downloadMeta": "1.2 MB, PDF",
+    "downloadButton": "DOWNLOAD",
+    "consultationTitle": "Consultation",
+    "consultationText": "It is useful to consult a construction specialist before starting the work.",
+    "contactButton": "CONTACT US",
+    "heading": "Recommendations for using aerated blocks",
+    "step1": {
+      "title": "1. Prepare a level base",
+      "description": "The base must be strong and level so that the walls do not settle."
+    },
+    "step2": {
+      "title": "2. Use a special adhesive",
+      "description": "Do not use regular cement. Use a thin-layer adhesive made for aerated blocks."
+    },
+    "step3": {
+      "title": "3. Install them dry",
+      "description": "Do not soak the blocks. Otherwise they may absorb water and the adhesive may not bond well."
+    },
+    "step4": {
+      "title": "4. Add a reinforcement layer",
+      "description": "Add steel reinforcement every 3 to 4 rows for extra strength."
+    },
+    "step5": {
+      "title": "5. Cut with a special saw",
+      "description": "Use a dedicated aerated-block saw for smooth and accurate cuts."
+    },
+    "step6": {
+      "title": "6. Keep joints even",
+      "description": "The adhesive layer between blocks should not exceed 2 to 3 mm."
+    },
+    "step7": {
+      "title": "7. Apply exterior protection",
+      "description": "Use a high-quality facade coating to protect the wall from moisture."
+    },
+    "step8": {
+      "title": "8. Add extra insulation if needed",
+      "description": "In colder regions, additional insulation is recommended to retain heat."
+    }
+  },
+  "aboutGazobetonMaterialDifferences": {
+    "title": "Gazobeton",
+    "text": " is a widely used modern building material known for its light weight, thermal efficiency, and cost-effectiveness. The table below compares Gazobeton with other popular building materials.",
+    "tableHeaders": {
+      "features": "Features",
+      "gazobeton": "Gazobeton",
+      "brick": "Brick",
+      "foamConcrete": "Foam concrete",
+      "concreteBlock": "Concrete block"
+    },
+    "rows": {
+      "weight": { "name": "Weight", "gazobeton": "Light", "brick": "Heavy", "foamConcrete": "Medium", "concreteBlock": "Very heavy" },
+      "thermalInsulation": { "name": "Thermal insulation", "gazobeton": "Very good", "brick": "Low", "foamConcrete": "Good", "concreteBlock": "Very low" },
+      "soundInsulation": { "name": "Sound insulation", "gazobeton": "Good", "brick": "Medium", "foamConcrete": "Good", "concreteBlock": "Low" },
+      "workability": { "name": "Ease of processing", "gazobeton": "Very easy", "brick": "Difficult", "foamConcrete": "Easy", "concreteBlock": "Difficult" },
+      "constructionSpeed": { "name": "Construction speed", "gazobeton": "Fast", "brick": "Slow", "foamConcrete": "Fast", "concreteBlock": "Medium" },
+      "fireResistance": { "name": "Fire resistance", "gazobeton": "Very high", "brick": "High", "foamConcrete": "Good", "concreteBlock": "High" },
+      "breathability": { "name": "Breathability", "gazobeton": "Breathable", "brick": "Not breathable", "foamConcrete": "Breathable", "concreteBlock": "Not breathable" },
+      "environmentalSafety": { "name": "Environmental safety", "gazobeton": "Eco-friendly", "brick": "Natural", "foamConcrete": "Natural", "concreteBlock": "Artificial, cement-based" },
+      "price": { "name": "Price", "gazobeton": "Economical", "brick": "High", "foamConcrete": "Medium", "concreteBlock": "Medium / high" }
+    }
+  }
 }

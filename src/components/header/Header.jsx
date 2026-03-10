@@ -13,18 +13,14 @@ import { useTranslation } from "react-i18next";
 import LangDropdown from "../select/langDropdown";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import { useGetCategoryQuery } from "../../context/categoryApi";
 import { useGetUserOrdersQuery } from "../../context/orderApi";
 import "./style.scss";
 import useLoginCartSync from "../../hooks/useLoginCartSync";
-
-function resolveLangKey(lng) {
-  const l = (lng || "").toLowerCase();
-  if (l.startsWith("uz")) return "uz_uz";
-  if (l.startsWith("ru")) return "ru_ru";
-  if (l.startsWith("en")) return "en_us";
-  return "uz_uz";
-}
+import useCatalogLinks from "../../hooks/useCatalogLinks";
+import {
+  buildHeaderLinks,
+  buildNavigationGroups,
+} from "../../lib/navigation";
 
 const Header = () => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
@@ -141,11 +137,9 @@ const Header = () => {
   // ----- NAV -----
   const toggleNavbar = () => setNavbarOpen(!navbarOpen);
 
-  const {
-    data: dataGetCategory,
-    isLoading: categoryLoading,
-    error: categoryError,
-  } = useGetCategoryQuery({ skip: 0, take: 1000 });
+  const { links: katalogFromApi, isLoading: categoryLoading } = useCatalogLinks(
+    i18n?.language
+  );
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -161,107 +155,12 @@ const Header = () => {
     setActiveDropdown((prev) => (prev === key ? null : key));
   const toggleUserModal = () => setIsUserModalOpen((prev) => !prev);
 
-  // KATALOG DROPDOWN: faqat ROOT (parent) kategoriyalar
-  const katalogFromApi = useMemo(() => {
-    const list = dataGetCategory?.data?.list ?? [];
-    const langKey = resolveLangKey(i18n?.language);
-
-    const parents = list.filter((cat) => !cat.parentproductcategoryid);
-
-    const sorted = [...parents].sort((a, b) => {
-      const pa = a.position ?? a.order ?? 0;
-      const pb = b.position ?? b.order ?? 0;
-      return pa - pb;
-    });
-
-    return sorted.map((cat) => {
-      const id =
-        cat.productcategoryid ?? cat.id ?? cat.productCategoryId ?? null;
-
-      const trName = cat?.translations?.name;
-      let label =
-        typeof trName === "string"
-          ? trName
-          : trName?.[langKey] ??
-            Object.values(trName || {}).find(Boolean) ??
-            cat?.name ??
-            "";
-
-      return {
-        label: String(label),
-        href: id ? `/katalog?productcategoryid=${id}` : "/katalog",
-      };
-    });
-  }, [dataGetCategory, i18n?.language]);
-
   const dropdownItems = useMemo(
-    () => ({
-      katalog:
-        !categoryLoading &&
-        !categoryError &&
-        katalogFromApi.length &&
-        katalogFromApi,
-      xizmatlar: [
-        { label: t("menu.xizmatlar.konsultatsiya"), href: "/services" },
-        {
-          label: t("menu.xizmatlar.montaj"),
-          href: "/services/gazablokmantaji",
-        },
-        { label: t("menu.xizmatlar.hisoblash"), href: "/services/calculator" },
-      ],
-      sotuvlar: [
-        { label: t("menu.sotuvlar.buyurtma"), href: "/sotuvlar" },
-        { label: t("menu.sotuvlar.tolov"), href: "/sotuvlar/tolovUsullari" },
-        { label: t("menu.sotuvlar.manzillar"), href: "/joylashuv" },
-      ],
-      gazobeton: [
-        { label: t("menu.gazobeton.haqida"), href: "/aboutGazabeton" },
-        {
-          label: t("menu.gazobeton.testlar"),
-          href: "/aboutGazabeton/aboutSinovtest",
-        },
-        {
-          label: t("menu.gazobeton.sertifikat"),
-          href: "/aboutGazabeton/aboutSertifikat",
-        },
-        {
-          label: t("menu.gazobeton.qollanilishi"),
-          href: "/aboutGazabeton/aboutQollanilishi",
-        },
-        {
-          label: t("menu.gazobeton.qollanma"),
-          href: "/aboutGazabeton/aboutIshlatilishi",
-        },
-        {
-          label: t("menu.gazobeton.farqi"),
-          href: "/aboutGazabeton/aboutMaterialardanFarqi",
-        },
-        { label: t("menu.gazobeton.faq"), href: "/aboutGazabeton/aboutFaq" },
-      ],
-      about: [
-        { label: t("menu.about.kompaniya"), href: "/about" },
-        { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
-        { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
-        { label: t("menu.about.oav"), href: "/about/aboutOAV" },
-        { label: t("menu.about.yangiliklar"), href: "/about/news" },
-        { label: t("menu.about.vakansiyalar"), href: "/about/vakansiyalar" },
-      ],
-    }),
-    [katalogFromApi, categoryLoading, categoryError, t]
+    () => buildNavigationGroups(t, categoryLoading ? [] : katalogFromApi),
+    [katalogFromApi, categoryLoading, t]
   );
 
-  const navLinks = [
-    { href: "/katalog", label: t("header.catalog"), key: "katalog" },
-    { href: "/services", label: t("header.services"), key: "xizmatlar" },
-    { href: "/sotuvlar", label: t("header.sales"), key: "sotuvlar" },
-    {
-      href: "/aboutGazabeton",
-      label: t("header.gazabetonabout"),
-      key: "gazobeton",
-    },
-    { href: "/about", label: t("header.about"), key: "about" },
-    { href: "/joylashuv", label: t("header.contact") },
-  ];
+  const navLinks = useMemo(() => buildHeaderLinks(t), [t]);
 
   return (
     <>
@@ -322,7 +221,7 @@ const Header = () => {
               </button>
 
               <Link
-                href="/karzinka"
+                href="/cart"
                 className={`circle-btns ${bump ? "badge-bump" : ""}`}
               >
                 <div className="iconWrapper">

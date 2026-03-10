@@ -13,6 +13,7 @@ import "./profile.scss";
 import Loading from "../../components/loading/Loading";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { toApiEndpoint, toApiUrl } from "../../config/api";
 
 // export const metadata = {
 //   title: "Profile | BS Gazobeton",
@@ -127,7 +128,7 @@ export default function ProfilePage() {
         form.append("File", formData.avatar);
 
         const uploadResponse = await fetch(
-          "https://api.bsgazobeton.uz/api/upload/file",
+          toApiEndpoint("/upload/file"),
           {
             method: "POST",
             headers: {
@@ -151,7 +152,7 @@ export default function ProfilePage() {
 
       // 🔹 Profil ma'lumotlarini PUT orqali yangilash
       const response = await fetch(
-        "https://api.bsgazobeton.uz/api/users/profile",
+        toApiEndpoint("/users/profile"),
         {
           method: "PUT",
           headers: {
@@ -254,7 +255,7 @@ export default function ProfilePage() {
                 src={
                   formData.profileImageUrl.startsWith("http")
                     ? formData.profileImageUrl
-                    : `https://api.bsgazobeton.uz${formData.profileImageUrl}`
+                    : toApiUrl(formData.profileImageUrl)
                 }
                 alt="avatar"
               />

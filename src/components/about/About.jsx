@@ -36,7 +36,7 @@ const About = () => {
             <Image src={aboutLaboratory} alt="about" />
           </div>
           <div>
-            <h3>{t("menu.about.sifat")}</h3>
+            <h3>{t("menu.about.quality")}</h3>
             <p>{t("aboutsection.desc2")}</p>
           </div>
         </div>

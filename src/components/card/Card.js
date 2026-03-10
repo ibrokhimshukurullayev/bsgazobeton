@@ -9,6 +9,7 @@ import { useGetProductQuery } from "../../context/productApi";
 import CardProducts from "../card-products/CardProducts";
 import Loading from "../loading/Loading";
 import product1 from "../../assets/images/panel.png";
+import { toApiUrl } from "../../config/api";
 
 function getName(cat, language = "uz_Uz") {
   if (!cat) return "";
@@ -120,7 +121,7 @@ const Card = () => {
     setSelectedId(idStr);
     const params = new URLSearchParams(window.location.search);
     params.set("productcategoryid", idStr);
-    router.replace(`/katalog?${params.toString()}`, { scroll: false });
+    router.replace(`/catalog?${params.toString()}`, { scroll: false });
   };
 
   const handleSelectChild = (id) => {
@@ -128,7 +129,7 @@ const Card = () => {
     setSelectedId(idStr);
     const params = new URLSearchParams(window.location.search);
     params.set("productcategoryid", idStr);
-    router.replace(`/katalog?${params.toString()}`, { scroll: false });
+    router.replace(`/catalog?${params.toString()}`, { scroll: false });
   };
 
   if (productLoading || categoryLoading) {
@@ -163,7 +164,7 @@ const Card = () => {
               >
                 {el?.imageurl ? (
                   <Image
-                    src={`https://api.bsgazobeton.uz${el.imageurl}`}
+                    src={toApiUrl(el.imageurl)}
                     alt={getName(el, language)}
                     width={100}
                     height={70}

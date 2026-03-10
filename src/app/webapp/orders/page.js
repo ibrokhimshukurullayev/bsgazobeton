@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useGetAllOrdersQuery } from "../../../context/orderApi";
-import OrderDetailes from "./orderDetailes/OrderDetailes";
+import OrderDetails from "./_components/OrderDetails";
 import "./orders.scss";
 import { useTranslation } from "react-i18next";
 
@@ -77,7 +77,7 @@ export default function Orders() {
 
   if (selectedOrder) {
     return (
-      <OrderDetailes
+      <OrderDetails
         order={selectedOrder}
         onBack={() => setSelectedOrder(null)}
       />

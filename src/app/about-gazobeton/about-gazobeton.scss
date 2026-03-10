@@ -1,0 +1,26 @@
+#aboutGazobeton {
+  padding: 70px 0 120px 0;
+  .aboutGazobeton {
+    padding: 80px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @media (min-width: 1000px) {
+      flex-direction: row;
+    }
+    &__page {
+      &__title {
+        color: rgb(54, 65, 79);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 0%;
+        text-align: left;
+        max-width: 927px;
+        span {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

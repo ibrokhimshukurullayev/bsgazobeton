@@ -9,106 +9,17 @@ import yootube from "../../assets/images/social/youtube.svg";
 import telegram from "../../assets/images/social/telegram.svg";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { useGetCategoryQuery } from "../../context/categoryApi";
-
-function resolveLangKey(lng) {
-  const l = (lng || "").toLowerCase();
-  if (l.startsWith("uz")) return "uz_uz";
-  if (l.startsWith("ru")) return "ru_ru";
-  if (l.startsWith("en")) return "en_us";
-  return "uz_uz";
-}
+import useCatalogLinks from "../../hooks/useCatalogLinks";
+import { buildNavigationGroups } from "../../lib/navigation";
 
 const Footer = () => {
   const { t, i18n } = useTranslation("global");
 
-  // kategoriyalar API dan
-  const {
-    data: dataGetCategory,
-    isLoading,
-    error,
-  } = useGetCategoryQuery({
-    skip: 0,
-    take: 1000,
-  });
-
-  const katalogFromApi = useMemo(() => {
-    const list = dataGetCategory?.data?.list ?? [];
-    const langKey = resolveLangKey(i18n?.language);
-
-    const parents = list.filter((cat) => !cat.parentproductcategoryid);
-
-    const sorted = [...parents].sort((a, b) => {
-      const pa = a.position ?? a.order ?? 0;
-      const pb = b.position ?? b.order ?? 0;
-      return pa - pb;
-    });
-
-    return sorted.map((cat) => {
-      const id =
-        cat.productcategoryid ?? cat.id ?? cat.productCategoryId ?? null;
-
-      const trName = cat?.translations?.name;
-      let label =
-        typeof trName === "string"
-          ? trName
-          : trName?.[langKey] ??
-            Object.values(trName || {}).find(Boolean) ??
-            cat?.name ??
-            "";
-
-      return {
-        label: String(label),
-        href: id ? `/katalog?productcategoryid=${id}` : "/katalog",
-      };
-    });
-  }, [dataGetCategory, i18n?.language]);
-
-  const dropdownItems = {
-    katalog: katalogFromApi,
-    xizmatlar: [
-      { label: t("menu.xizmatlar.konsultatsiya"), href: "/services" },
-      { label: t("menu.xizmatlar.montaj"), href: "/services/gazablokmantaji" },
-      { label: t("menu.xizmatlar.hisoblash"), href: "/services/calculator" },
-    ],
-    sotuvlar: [
-      { label: t("menu.sotuvlar.buyurtma"), href: "/sotuvlar" },
-      { label: t("menu.sotuvlar.tolov"), href: "/sotuvlar/tolovUsullari" },
-      { label: t("menu.sotuvlar.manzillar"), href: "/joylashuv" },
-    ],
-    gazobeton: [
-      { label: t("menu.gazobeton.haqida"), href: "/aboutGazabeton" },
-      {
-        label: t("menu.gazobeton.testlar"),
-        href: "/aboutGazabeton/aboutSinovtest",
-      },
-      {
-        label: t("menu.gazobeton.sertifikat"),
-        href: "/aboutGazabeton/aboutSertifikat",
-      },
-      {
-        label: t("menu.gazobeton.qollanilishi"),
-        href: "/aboutGazabeton/aboutQollanilishi",
-      },
-      {
-        label: t("menu.gazobeton.qollanma"),
-        href: "/aboutGazabeton/aboutIshlatilishi",
-      },
-      {
-        label: t("menu.gazobeton.farqi"),
-        href: "/aboutGazabeton/aboutMaterialardanFarqi",
-      },
-      { label: t("menu.gazobeton.faq"), href: "/aboutGazabeton/aboutFaq" },
-    ],
-    about: [
-      { label: t("menu.about.kompaniya"), href: "/about" },
-      { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
-      { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
-      { label: t("menu.about.oav"), href: "/about/aboutOAV" },
-      { label: t("menu.about.yangiliklar"), href: "/about/news" },
-      { label: t("menu.about.vakansiyalar"), href: "/about/vakansiyalar" },
-    ],
-  };
+  const { links: katalogFromApi, isLoading } = useCatalogLinks(i18n?.language);
+  const dropdownItems = useMemo(
+    () => buildNavigationGroups(t, katalogFromApi),
+    [katalogFromApi, t]
+  );
 
   return (
     <footer className="footer">
@@ -122,7 +33,7 @@ const Footer = () => {
 
           <div>
             <p className="">{t("footer.manzil")}</p>
-            <p className="footer__list__text">{t("footer.manjil1")}</p>
+            <p className="footer__list__text">{t("footer.addressLine1")}</p>
           </div>
 
           <div>
@@ -168,7 +79,7 @@ const Footer = () => {
 
           <p className="">{t("header.services")}</p>
           <ul>
-            {dropdownItems.xizmatlar.map((item, i) => (
+            {dropdownItems.services.map((item, i) => (
               <li key={i}>
                 <Link href={item.href}>{item.label}</Link>
               </li>
@@ -188,7 +99,7 @@ const Footer = () => {
 
           <p className="">{t("header.sales")}</p>
           <ul>
-            {dropdownItems.sotuvlar.map((item, i) => (
+            {dropdownItems.sales.map((item, i) => (
               <li key={i}>
                 <Link href={item.href}>{item.label}</Link>
               </li>
@@ -197,7 +108,7 @@ const Footer = () => {
         </div>
 
         <div className="footer__column">
-          <p className="">{t("header.gazabetonabout")}</p>
+          <p className="">{t("header.gazobetonAbout")}</p>
           <ul>
             {dropdownItems.gazobeton.map((item, i) => (
               <li key={i}>

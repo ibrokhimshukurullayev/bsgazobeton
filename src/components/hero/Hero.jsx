@@ -22,11 +22,11 @@ const Hero = () => {
         </h1>
         <div className="hero__end">
           <div className="hero__left">
-            <Link href={"/katalog"} className="hero__left__button1">
+            <Link href={"/catalog"} className="hero__left__button1">
               {t("hero.titlebutton1")}
             </Link>
-            <Link href={"/aboutGazabeton"} className="hero__left__button2">
-              {t("menu.gazobeton.gazobeton")}
+            <Link href={"/about-gazobeton"} className="hero__left__button2">
+              {t("menu.gazobeton.title")}
             </Link>
           </div>
           <div className="hero__right">

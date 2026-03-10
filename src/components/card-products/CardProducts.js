@@ -21,6 +21,7 @@ import minus from "../../assets/images/minus.svg";
 import useDebouncedCartSaver from "../../hooks/useDebouncedCartSaver";
 import { useGetUserOrdersQuery } from "../../context/orderApi";
 import { toast, ToastContainer } from "react-toastify";
+import { toApiUrl } from "../../config/api";
 
 import "./cardproducts.scss";
 
@@ -116,7 +117,7 @@ const CardProducts = ({ el }) => {
       <div className="product__card">
         <Link href={`/products/${el.productid}`} prefetch={false}>
           <Image
-            src={`https://api.bsgazobeton.uz${el?.imageurl}`}
+            src={toApiUrl(el?.imageurl)}
             className="product__img"
             alt={el.name}
             width={202}

@@ -14,6 +14,7 @@ import { toggleToWishes } from "../../context/wishlistSlice";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { units } from "../../data/unit";
+import { toApiUrl } from "../../config/api";
 import "./productPicker.scss";
 import product1 from "../../assets/images/product1.svg";
 
@@ -154,7 +155,7 @@ export default function ProductPicker() {
           >
             {root?.imageurl ? (
               <Image
-                src={`https://api.bsgazobeton.uz${root.imageurl}`}
+                src={toApiUrl(root.imageurl)}
                 alt={getTranslatedName(root, lang)}
                 width={80}
                 height={50}
@@ -186,7 +187,7 @@ export default function ProductPicker() {
                   return (
                     <div key={prod.productid} className="product-card">
                       <Image
-                        src={`https://api.bsgazobeton.uz${prod.imageurl}`}
+                        src={toApiUrl(prod.imageurl)}
                         alt={prod.name}
                         width={200}
                         height={150}
@@ -260,7 +261,7 @@ export default function ProductPicker() {
                 return (
                   <div key={prod.productid} className="product-card">
                     <Image
-                      src={`https://api.bsgazobeton.uz${prod.imageurl}`}
+                      src={toApiUrl(prod.imageurl)}
                       alt={prod.name}
                       width={200}
                       height={150}

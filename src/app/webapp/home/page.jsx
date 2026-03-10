@@ -19,6 +19,7 @@ import product1 from "../../../assets/images/webappImages/card1.svg";
 
 import { useGetCategoryQuery } from "../../../context/categoryApi";
 import Loading from "../../../components/loading/Loading";
+import { toApiUrl } from "../../../config/api";
 
 function getName(cat, language = "uz_Uz") {
   if (!cat) return "";
@@ -103,7 +104,7 @@ const Home = () => {
                     className="home__card__img"
                     src={
                       el?.imageurl
-                        ? `https://api.bsgazobeton.uz${el.imageurl}`
+                        ? toApiUrl(el.imageurl)
                         : product1
                     }
                     alt={getName(el, language)}
