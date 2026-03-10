@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../lib/i18n";
@@ -8,9 +9,25 @@ import Header from "../components/header/Header";
 import { Provider } from "react-redux";
 import { store } from "../context/store";
 
+function toI18nLanguage(language) {
+  const value = String(language || "").toLowerCase();
+  if (value.startsWith("ru")) return "ru";
+  if (value.startsWith("en")) return "en";
+  return "uz";
+}
+
 export default function Providers({ children }) {
   const pathname = usePathname();
   const isWebApp = pathname?.startsWith("/webapp");
+
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem("language");
+    const nextLanguage = toI18nLanguage(storedLanguage);
+
+    if (i18n.language !== nextLanguage) {
+      i18n.changeLanguage(nextLanguage);
+    }
+  }, []);
 
   return (
     <Provider store={store}>

@@ -19,7 +19,7 @@ const Services = () => {
 
   const [t, i18n] = useTranslation("global");
   const handleButtonClick = () => {
-    router.push("/joylashuv");
+    router.push("/contact");
   };
 
   return (

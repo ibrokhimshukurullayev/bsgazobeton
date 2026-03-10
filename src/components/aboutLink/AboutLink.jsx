@@ -12,11 +12,11 @@ const AboutLink = () => {
 
   const links = [
     { href: "/about", label: t("menu.about.kompaniya") },
-    { href: "/about/aboutSifat", label: t("menu.about.sifat") },
-    { href: "/about/aboutMijoz", label: t("menu.about.mijoz") },
-    { href: "/about/aboutOAV", label: t("menu.about.oav") },
+    { href: "/about/quality-control", label: t("menu.about.sifat") },
+    { href: "/about/clients-partners", label: t("menu.about.mijoz") },
+    { href: "/about/media", label: t("menu.about.oav") },
     { href: "/about/news", label: t("menu.about.yangiliklar") },
-    { href: "/about/vakansiyalar", label: t("menu.about.vakansiyalar") },
+    { href: "/about/vacancies", label: t("menu.about.vakansiyalar") },
   ];
 
   return (

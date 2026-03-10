@@ -12,7 +12,7 @@ const CompareBar = () => {
     <div className="compare__bar">
       <div className="container bar">
         <p>{t("taqqoslash.title1")}</p>
-        <Link href="/taqqoslash" className="compare__btn">
+        <Link href="/compare" className="compare__btn">
           {t("taqqoslash.title2")} →
         </Link>
       </div>

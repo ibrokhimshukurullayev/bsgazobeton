@@ -4,6 +4,7 @@ import { useGetNewsSingleQuery } from "../../../../context/newsApi";
 import "../../news/news.scss";
 import Image from "next/image";
 import Carusel from "../../../../components/carusel/Carusel";
+import { toApiUrl } from "../../../../config/api";
 
 // export const metadata = {
 //   title: "Yangiliklar | BS Gazobeton",
@@ -32,7 +33,7 @@ export default function NewsDetail({ params }) {
 
       <div className="images">
         {/* <Image
-          src={`https://api.bsgazobeton.uz${news.thubnailimageurl}`}
+          src={toApiUrl(news.thubnailimageurl)}
           alt={news.title}
           width={600}
           height={400}

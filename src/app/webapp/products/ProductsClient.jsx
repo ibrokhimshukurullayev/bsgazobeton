@@ -12,6 +12,7 @@ import product1 from "../../../assets/images/webappImages/card1.svg";
 import productleft from "../../../assets/images/webappImages/productleft.svg";
 import { useTranslation } from "react-i18next";
 import { units } from "../../../data/unit";
+import { toApiUrl } from "../../../config/api";
 
 const Products = () => {
   const router = useRouter();
@@ -153,7 +154,7 @@ const Products = () => {
                     className="cart__item__img"
                     src={
                       el?.imageurl
-                        ? `https://api.bsgazobeton.uz${el.imageurl}`
+                        ? toApiUrl(el.imageurl)
                         : product1
                     }
                     alt={getLocalizedValue(el.name)}

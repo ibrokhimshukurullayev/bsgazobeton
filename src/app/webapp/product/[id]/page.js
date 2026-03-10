@@ -18,6 +18,7 @@ import { useGetUserOrdersQuery } from "../../../../context/orderApi";
 
 import plusIcon from "../../../../assets/images/webappImages/plus.svg";
 import minusIcon from "../../../../assets/images/webappImages/minus.svg";
+import { toApiUrl } from "../../../../config/api";
 
 import "./single.scss";
 
@@ -182,7 +183,7 @@ export default function ProductDetailPage() {
             <Image
               src={
                 product?.imageurl
-                  ? `https://api.bsgazobeton.uz${product.imageurl}`
+                  ? toApiUrl(product.imageurl)
                   : "/no-image.png"
               }
               alt={name}

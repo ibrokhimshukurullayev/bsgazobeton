@@ -9,8 +9,8 @@ const dropdownItems = {
     },
   ],
   xizmatlar: [
-    { label: "Mahsulot bo’yicha konsultatsiya", href: "/services" },
-    { label: "Gazoblok montaji", href: "/services/gazablokmantaji" },
+    { label: "Mahsulot boyicha konsultatsiya", href: "/services" },
+    { label: "Gazoblok montaji", href: "/services/gas-block-installation" },
     {
       label: "Gazobloklar miqdorini va narxini hisoblash",
       href: "/services/calculator",
@@ -19,42 +19,42 @@ const dropdownItems = {
   sotuvlar: [
     {
       label: "Buyurtma berish va yetkazib berish tartibi",
-      href: "/sotuvlar",
+      href: "/sales",
     },
-    { label: "To’lov usullari", href: "/sotuvlar/tolovUsullari" },
-    { label: "Manzillar", href: "/joylashuv" },
+    { label: "Tolov usullari", href: "/sales/payment-methods" },
+    { label: "Manzillar", href: "/contact" },
   ],
   gazobeton: [
-    { label: "Gazobeton haqida batafsil", href: "/aboutGazabeton" },
-    { label: "Sinov testlari", href: "/aboutGazabeton/aboutSinovtest" },
+    { label: "Gazobeton haqida batafsil", href: "/about-gazobeton" },
+    { label: "Sinov testlari", href: "/about-gazobeton/tests" },
     {
       label: "Sertifikat va litsenziyalar",
-      href: "/aboutGazabeton/aboutSertifikat",
+      href: "/about-gazobeton/certificates",
     },
     {
-      label: "Gazobetonning qo‘llanilish joylari",
-      href: "/aboutGazabeton/aboutQollanilishi",
+      label: "Gazobetonning qollanilish joylari",
+      href: "/about-gazobeton/applications",
     },
     {
-      label: "Gazoblok ishlatish bo’yicha qo’llanma",
-      href: "/aboutGazabeton/aboutIshlatilishi",
+      label: "Gazoblok ishlatish boyicha qollanma",
+      href: "/about-gazobeton/usage-guide",
     },
     {
       label: "Gazobetonning boshqa materiallardan farqi",
-      href: "/aboutGazabeton/aboutMaterialardanFarqi",
+      href: "/about-gazobeton/material-differences",
     },
     {
       label: "Tez-tez beriladigan savollar",
-      href: "/aboutGazabeton/aboutFaq",
+      href: "/about-gazobeton/faq",
     },
   ],
   about: [
     { label: "Kompaniya haqida", href: "/about" },
-    { label: "Sifat nazorati va laboratoriya", href: "/about/aboutSifat" },
-    { label: "Mijozlar va hamkorlar", href: "/about/aboutMijoz" },
-    { label: "Biz haqimizda OAV", href: "/about/aboutOAV" },
-    { label: "Yangiliklar", href: "#" },
-    { label: "Vakansiyalar", href: "#" },
+    { label: "Sifat nazorati va laboratoriya", href: "/about/quality-control" },
+    { label: "Mijozlar va hamkorlar", href: "/about/clients-partners" },
+    { label: "Biz haqimizda OAV", href: "/about/media" },
+    { label: "Yangiliklar", href: "/about/news" },
+    { label: "Vakansiyalar", href: "/about/vacancies" },
   ],
 };
 

@@ -1,9 +1,8 @@
-// src/app/profile/components/ProfileLayoutClient.jsx
 "use client";
 
 import React from "react";
-import ProfileHeaderLink from "./components/ProfileHeaderLink/ProfileHeaderLink";
-import ProfileLink from "./components/ProfileLink/ProfileLink";
+import ProfileHeaderLink from "./_components/profile-header-link/ProfileHeaderLink";
+import ProfileLink from "./_components/profile-link/ProfileLink";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
 import "./profile.scss";
@@ -14,7 +13,7 @@ const ProfileLayoutClient = ({ children }) => {
 
   const titles = {
     "/profile": t("profile.personal"),
-    "/profile/buyurtmalar": t("profile.orders"),
+    "/profile/orders": t("profile.orders"),
   };
 
   const title = titles[pathname] || "Profile";

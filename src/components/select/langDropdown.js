@@ -9,25 +9,32 @@ import enFlag from "../../assets/images/uk.svg";
 import ruFlag from "../../assets/images/russia.svg";
 
 const languages = [
-  { code: "uz_Uz", label: "O‘Z", flag: uzFlag },
+  { code: "uz_Uz", label: "O'Z", flag: uzFlag },
   { code: "ru_Ru", label: "RU", flag: ruFlag },
   { code: "en_Us", label: "EN", flag: enFlag },
 ];
+
+const toI18nLanguage = (language) => {
+  const value = String(language || "").toLowerCase();
+  if (value.startsWith("ru")) return "ru";
+  if (value.startsWith("en")) return "en";
+  return "uz";
+};
 
 export default function LangDropdown() {
   const { i18n } = useTranslation();
 
   const [open, setOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState("");
+  const [selectedLang, setSelectedLang] = useState("uz_Uz");
 
   useEffect(() => {
     const storedLang = localStorage.getItem("language") || "uz_Uz";
-    i18n.changeLanguage(storedLang);
+    i18n.changeLanguage(toI18nLanguage(storedLang));
     setSelectedLang(storedLang);
   }, [i18n]);
 
   const handleChangeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
+    i18n.changeLanguage(toI18nLanguage(lang));
     localStorage.setItem("language", lang);
     window.dispatchEvent(new CustomEvent("languageChanged", { detail: lang }));
     setSelectedLang(lang);

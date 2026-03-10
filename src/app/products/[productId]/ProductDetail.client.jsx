@@ -19,6 +19,7 @@ import {
   removeFromCart,
 } from "../../../context/cartSlice";
 import { units } from "../../../data/unit";
+import { toApiUrl } from "../../../config/api";
 
 import "./single.scss";
 
@@ -60,7 +61,7 @@ const safeImageUrl = (url) => {
   if (!url) return "";
   if (url.startsWith("http://") || url.startsWith("https://")) return url;
   // agar backend faqat path berayotgan bo‘lsa
-  return `https://api.bsgazobeton.uz${url}`;
+  return toApiUrl(url);
 };
 
 const ProductDetail = ({ productId }) => {

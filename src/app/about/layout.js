@@ -10,11 +10,11 @@ export default function AboutLayout({ children }) {
   const [t, i18n] = useTranslation("global");
   const titles = {
     "/about": t("menu.about.kompaniya"),
-    "/about/aboutSifat": t("menu.about.sifat"),
-    "/about/aboutMijoz": t("menu.about.mijoz"),
-    "/about/aboutOAV": t("menu.about.oav"),
+    "/about/quality-control": t("menu.about.sifat"),
+    "/about/clients-partners": t("menu.about.mijoz"),
+    "/about/media": t("menu.about.oav"),
     "/about/news": t("menu.about.yangiliklar"),
-    "/about/vakansiyalar": t("menu.about.vakansiyalar"),
+    "/about/vacancies": t("menu.about.vakansiyalar"),
   };
 
   const title = titles[pathname] || "Kompaniya haqida";

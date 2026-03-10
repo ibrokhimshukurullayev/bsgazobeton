@@ -16,6 +16,7 @@ import logout from "../../../assets/images/webappImages/logout.svg";
 import defaultAvatar from "../../../assets/images/webappImages/profiles.svg";
 
 import { useGetUserInfoQuery } from "../../../context/userApi";
+import { toApiUrl } from "../../../config/api";
 
 export default function Profile() {
   const { t } = useTranslation("global");
@@ -35,7 +36,7 @@ export default function Profile() {
   const avatar = user?.profileimageurl
     ? user.profileimageurl.startsWith("http")
       ? user.profileimageurl
-      : `https://api.bsgazobeton.uz${user.profileimageurl}`
+      : toApiUrl(user.profileimageurl)
     : defaultAvatar;
 
   if (isLoading) {
@@ -85,12 +86,12 @@ export default function Profile() {
           <div className="menu__hero">
             <Link
               className="menu__hero__link"
-              href="/webapp/personalinformation"
+              href="/webapp/personal-information"
             >
               <Image src={person} alt="" width={40} height={40} />
               {t("profiless.personal_info")}
             </Link>
-            <Link href="/webapp/personalinformation">
+            <Link href="/webapp/personal-information">
               <Image src={right} alt="" width={18} height={18} />
             </Link>
           </div>

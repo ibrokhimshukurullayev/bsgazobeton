@@ -189,7 +189,7 @@ const Header = () => {
 
       return {
         label: String(label),
-        href: id ? `/katalog?productcategoryid=${id}` : "/katalog",
+        href: id ? `/catalog?productcategoryid=${id}` : "/catalog",
       };
     });
   }, [dataGetCategory, i18n?.language]);
@@ -205,62 +205,62 @@ const Header = () => {
         { label: t("menu.xizmatlar.konsultatsiya"), href: "/services" },
         {
           label: t("menu.xizmatlar.montaj"),
-          href: "/services/gazablokmantaji",
+          href: "/services/gas-block-installation",
         },
         { label: t("menu.xizmatlar.hisoblash"), href: "/services/calculator" },
       ],
       sotuvlar: [
-        { label: t("menu.sotuvlar.buyurtma"), href: "/sotuvlar" },
-        { label: t("menu.sotuvlar.tolov"), href: "/sotuvlar/tolovUsullari" },
-        { label: t("menu.sotuvlar.manzillar"), href: "/joylashuv" },
+        { label: t("menu.sotuvlar.buyurtma"), href: "/sales" },
+        { label: t("menu.sotuvlar.tolov"), href: "/sales/payment-methods" },
+        { label: t("menu.sotuvlar.manzillar"), href: "/contact" },
       ],
       gazobeton: [
-        { label: t("menu.gazobeton.haqida"), href: "/aboutGazabeton" },
+        { label: t("menu.gazobeton.haqida"), href: "/about-gazobeton" },
         {
           label: t("menu.gazobeton.testlar"),
-          href: "/aboutGazabeton/aboutSinovtest",
+          href: "/about-gazobeton/tests",
         },
         {
           label: t("menu.gazobeton.sertifikat"),
-          href: "/aboutGazabeton/aboutSertifikat",
+          href: "/about-gazobeton/certificates",
         },
         {
           label: t("menu.gazobeton.qollanilishi"),
-          href: "/aboutGazabeton/aboutQollanilishi",
+          href: "/about-gazobeton/applications",
         },
         {
           label: t("menu.gazobeton.qollanma"),
-          href: "/aboutGazabeton/aboutIshlatilishi",
+          href: "/about-gazobeton/usage-guide",
         },
         {
           label: t("menu.gazobeton.farqi"),
-          href: "/aboutGazabeton/aboutMaterialardanFarqi",
+          href: "/about-gazobeton/material-differences",
         },
-        { label: t("menu.gazobeton.faq"), href: "/aboutGazabeton/aboutFaq" },
+        { label: t("menu.gazobeton.faq"), href: "/about-gazobeton/faq" },
       ],
       about: [
         { label: t("menu.about.kompaniya"), href: "/about" },
-        { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
-        { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
-        { label: t("menu.about.oav"), href: "/about/aboutOAV" },
+        { label: t("menu.about.sifat"), href: "/about/quality-control" },
+        { label: t("menu.about.mijoz"), href: "/about/clients-partners" },
+        { label: t("menu.about.oav"), href: "/about/media" },
         { label: t("menu.about.yangiliklar"), href: "/about/news" },
-        { label: t("menu.about.vakansiyalar"), href: "/about/vakansiyalar" },
+        { label: t("menu.about.vakansiyalar"), href: "/about/vacancies" },
       ],
     }),
     [katalogFromApi, categoryLoading, categoryError, t]
   );
 
   const navLinks = [
-    { href: "/katalog", label: t("header.catalog"), key: "katalog" },
+    { href: "/catalog", label: t("header.catalog"), key: "katalog" },
     { href: "/services", label: t("header.services"), key: "xizmatlar" },
-    { href: "/sotuvlar", label: t("header.sales"), key: "sotuvlar" },
+    { href: "/sales", label: t("header.sales"), key: "sotuvlar" },
     {
-      href: "/aboutGazabeton",
+      href: "/about-gazobeton",
       label: t("header.gazabetonabout"),
       key: "gazobeton",
     },
     { href: "/about", label: t("header.about"), key: "about" },
-    { href: "/joylashuv", label: t("header.contact") },
+    { href: "/contact", label: t("header.contact") },
   ];
 
   return (
@@ -322,7 +322,7 @@ const Header = () => {
               </button>
 
               <Link
-                href="/karzinka"
+                href="/cart"
                 className={`circle-btns ${bump ? "badge-bump" : ""}`}
               >
                 <div className="iconWrapper">

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 import { useGetCategoryQuery } from "../../context/categoryApi";
+import { toApiUrl } from "../../config/api";
 
 import product1 from "../../assets/images/product1.svg";
 import "./product.scss";
@@ -46,7 +47,7 @@ const Product = () => {
   const handleButtonClick = async (categoryId) => {
     setLoadingId(categoryId);
     try {
-      router.push(`/katalog?productcategoryid=${categoryId}`);
+      router.push(`/catalog?productcategoryid=${categoryId}`);
     } finally {
       setLoadingId(null);
     }
@@ -111,7 +112,7 @@ const Product = () => {
 
                 {item?.imageurl ? (
                   <Image
-                    src={`https://api.bsgazobeton.uz${item.imageurl}`}
+                    src={toApiUrl(item.imageurl)}
                     alt={label}
                     width={300}
                     height={200}

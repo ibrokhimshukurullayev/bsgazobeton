@@ -7,6 +7,7 @@ import { store } from "../../context/store"; // ✅ aynan shu import kerak
 import WebappFooter from "../../components/WebappFooter/WebappFooter";
 import "./page.scss";
 import Loading from "../../components/loading/Loading";
+import { toApiEndpoint } from "../../config/api";
 
 export default function WebappLayout({ children }) {
   const [loading, setLoading] = useState(true);
@@ -58,7 +59,7 @@ export default function WebappLayout({ children }) {
       if (initData) {
         try {
           const res = await fetch(
-            "https://api.bsgazobeton.uz/api/identity/telegram/login",
+            toApiEndpoint("/identity/telegram/login"),
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },

@@ -59,7 +59,7 @@ const Footer = () => {
 
       return {
         label: String(label),
-        href: id ? `/katalog?productcategoryid=${id}` : "/katalog",
+        href: id ? `/catalog?productcategoryid=${id}` : "/catalog",
       };
     });
   }, [dataGetCategory, i18n?.language]);
@@ -68,45 +68,45 @@ const Footer = () => {
     katalog: katalogFromApi,
     xizmatlar: [
       { label: t("menu.xizmatlar.konsultatsiya"), href: "/services" },
-      { label: t("menu.xizmatlar.montaj"), href: "/services/gazablokmantaji" },
+      { label: t("menu.xizmatlar.montaj"), href: "/services/gas-block-installation" },
       { label: t("menu.xizmatlar.hisoblash"), href: "/services/calculator" },
     ],
     sotuvlar: [
-      { label: t("menu.sotuvlar.buyurtma"), href: "/sotuvlar" },
-      { label: t("menu.sotuvlar.tolov"), href: "/sotuvlar/tolovUsullari" },
-      { label: t("menu.sotuvlar.manzillar"), href: "/joylashuv" },
+      { label: t("menu.sotuvlar.buyurtma"), href: "/sales" },
+      { label: t("menu.sotuvlar.tolov"), href: "/sales/payment-methods" },
+      { label: t("menu.sotuvlar.manzillar"), href: "/contact" },
     ],
     gazobeton: [
-      { label: t("menu.gazobeton.haqida"), href: "/aboutGazabeton" },
+      { label: t("menu.gazobeton.haqida"), href: "/about-gazobeton" },
       {
         label: t("menu.gazobeton.testlar"),
-        href: "/aboutGazabeton/aboutSinovtest",
+        href: "/about-gazobeton/tests",
       },
       {
         label: t("menu.gazobeton.sertifikat"),
-        href: "/aboutGazabeton/aboutSertifikat",
+        href: "/about-gazobeton/certificates",
       },
       {
         label: t("menu.gazobeton.qollanilishi"),
-        href: "/aboutGazabeton/aboutQollanilishi",
+        href: "/about-gazobeton/applications",
       },
       {
         label: t("menu.gazobeton.qollanma"),
-        href: "/aboutGazabeton/aboutIshlatilishi",
+        href: "/about-gazobeton/usage-guide",
       },
       {
         label: t("menu.gazobeton.farqi"),
-        href: "/aboutGazabeton/aboutMaterialardanFarqi",
+        href: "/about-gazobeton/material-differences",
       },
-      { label: t("menu.gazobeton.faq"), href: "/aboutGazabeton/aboutFaq" },
+      { label: t("menu.gazobeton.faq"), href: "/about-gazobeton/faq" },
     ],
     about: [
       { label: t("menu.about.kompaniya"), href: "/about" },
-      { label: t("menu.about.sifat"), href: "/about/aboutSifat" },
-      { label: t("menu.about.mijoz"), href: "/about/aboutMijoz" },
-      { label: t("menu.about.oav"), href: "/about/aboutOAV" },
+      { label: t("menu.about.sifat"), href: "/about/quality-control" },
+      { label: t("menu.about.mijoz"), href: "/about/clients-partners" },
+      { label: t("menu.about.oav"), href: "/about/media" },
       { label: t("menu.about.yangiliklar"), href: "/about/news" },
-      { label: t("menu.about.vakansiyalar"), href: "/about/vakansiyalar" },
+      { label: t("menu.about.vakansiyalar"), href: "/about/vacancies" },
     ],
   };
 
